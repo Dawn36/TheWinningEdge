@@ -63,7 +63,7 @@ class DashboardController extends Controller
         }
         else
         {
-            $affected = DB::table('opportunities_target')
+            $affected = DB::table('rpa_target')
               ->where('id', $request->rpa_target_id)
               ->update([
                 'phone_call' => $request->phone_call,
