@@ -19,7 +19,7 @@
                                 <span class="fw-bold text-muted fs-5">Admin</span>
                             </div>
                             @if (Auth::user()->profile_picture)
-                            <img src="{{ asset('/profile/' . Auth::user()->profile_picture) }}" class="align-self-end h-100px" onerror="this.onerror=null; this.src='/profile/blank.png'" alt="">
+                            <img src="{{ asset('/profile/' . Auth::user()->profile_picture) }}" style="border-radius: 50px" class="h-100px" onerror="this.onerror=null; this.src='/profile/blank.png'" alt="">
                             @endif
                         </div>
                         <!--end::Body-->
