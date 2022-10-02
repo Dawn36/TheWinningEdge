@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TalkTrack;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TalkTrackController extends Controller
 {
@@ -15,7 +16,11 @@ class TalkTrackController extends Controller
      */
     public function index()
     {
-        $talkTrack=TalkTrack::with('user')->get();
+        // $talkTrack=TalkTrack::with('user')->get();
+        $talkTrack= DB::table('talk_tracks AS tt')
+        ->join('users AS u', 'tt.user_id', '=', 'u.id')
+        ->whereNull('u.deleted_at')
+        ->orderBy('tt.id', 'desc')->get();
         return view('talk-track/talk_track_index',compact('talkTrack'));
     }
 
