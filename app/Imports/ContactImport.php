@@ -18,7 +18,7 @@ class ContactImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         $userId=Auth::user()->id;
-        if(!Contact::where('email', '=', $row['email_address'])->exists()) {
+        if(!Contact::where('email', '=', $row['email_address'])->where('user_id',$userId)->exists()) {
         return new Contact([
             "last_name" => $row['last_name'],
             "first_name" => $row['first_name'],
