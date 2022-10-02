@@ -68,6 +68,7 @@ class TalkTrackController extends Controller
         // $talkTrack=TalkTrack::with('user')->find($id)->get();
         $talkTrack= DB::table('talk_tracks AS tt')
         ->join('users AS u', 'tt.user_id', '=', 'u.id')
+        ->select(DB::raw('tt.*,u.first_name,u.last_name'))
         ->where('tt.id',$id)
         ->whereNull('u.deleted_at')
         ->get();
