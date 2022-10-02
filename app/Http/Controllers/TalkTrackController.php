@@ -19,6 +19,7 @@ class TalkTrackController extends Controller
         // $talkTrack=TalkTrack::with('user')->get();
         $talkTrack= DB::table('talk_tracks AS tt')
         ->join('users AS u', 'tt.user_id', '=', 'u.id')
+        ->select(DB::raw('tt.*,u.first_name,u.last_name'))
         ->whereNull('u.deleted_at')
         ->orderBy('tt.id', 'desc')->get();
         return view('talk-track/talk_track_index',compact('talkTrack'));
@@ -64,7 +65,12 @@ class TalkTrackController extends Controller
      */
     public function show(int $id)
     {
-        $talkTrack=TalkTrack::with('user')->find($id)->get();
+        // $talkTrack=TalkTrack::with('user')->find($id)->get();
+        $talkTrack= DB::table('talk_tracks AS tt')
+        ->join('users AS u', 'tt.user_id', '=', 'u.id')
+        ->where('tt.id',$id)
+        ->whereNull('u.deleted_at')
+        ->get();
         return view('talk-track/talk_track_show',compact('talkTrack'));
         
     }

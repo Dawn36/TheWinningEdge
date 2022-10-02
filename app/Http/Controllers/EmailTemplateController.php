@@ -18,6 +18,7 @@ class EmailTemplateController extends Controller
     {
         $emailTemplate= DB::table('email_templates AS et')
       ->join('users AS u', 'et.user_id', '=', 'u.id')
+      ->select(DB::raw('et.*,u.first_name,u.last_name'))
       ->whereNull('u.deleted_at')
       ->orderBy('et.id', 'desc')->get();
         // $emailTemplate=EmailTemplate::with('user')->get();
