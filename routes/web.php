@@ -18,6 +18,7 @@ use App\Http\Controllers\DashboardController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware(['auth'])->group(function () {
 Route::resource('email_template', EmailTemplateController::class);
 Route::resource('talk_track', TalkTrackController::class);
 Route::resource('user', UserController::class);
@@ -35,10 +36,14 @@ Route::get('contact_counter_delete/{id}', [ContactController::class, 'contactCou
 Route::resource('opportunities', OpportunitiesController::class);
 Route::get('opportunities_target', [OpportunitiesController::class, 'opportunitiesTarget'])->name('opportunities_target');
 Route::post('opportunities_target', [OpportunitiesController::class, 'opportunitiesTargetSubmit'])->name('opportunities_target');
-Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard')->middleware(['auth']);
-Route::get('rpa_target', [DashboardController::class, 'rpaTarget'])->name('rpa_target')->middleware(['auth']);
-Route::post('rpa_target', [DashboardController::class, 'rpaTargetSubmit'])->name('rpa_target')->middleware(['auth']);
+Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+Route::get('rpa_target', [DashboardController::class, 'rpaTarget'])->name('rpa_target');
+Route::post('rpa_target', [DashboardController::class, 'rpaTargetSubmit'])->name('rpa_target');
 
+Route::resource('settings', SettingsController::class);
+Route::post('/settings/{id}/updateEmail', [SettingsController::class, 'updateEmail'])->name('updateEmail');
+Route::post('/settings/{id}/updatePassword', [SettingsController::class, 'updatePassword'])->name('updatePassword');
+});
 
 Route::get('/', function () {
     return redirect('login');
@@ -48,7 +53,5 @@ Route::get('/', function () {
 //     return view('dashboard');
 // })->middleware(['auth'])->name('dashboard');
 
-Route::resource('settings', SettingsController::class);
-Route::post('/settings/{id}/updateEmail', [SettingsController::class, 'updateEmail'])->name('updateEmail');
-Route::post('/settings/{id}/updatePassword', [SettingsController::class, 'updatePassword'])->name('updatePassword');
+
 require __DIR__.'/auth.php';
