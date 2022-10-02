@@ -1,0 +1,37 @@
+composer create-project laravel/laravel:^8.0 example-app
+
+php artisan migrate
+
+composer require laravel/breeze --dev
+
+php artisan breeze:install
+
+npm install
+
+npm run dev
+
+composer require santigarcor/laratrust
+
+php artisan vendor:publish --tag="laratrust"
+
+php artisan laratrust:setup
+
+php artisan laratrust:seeder
+
+php artisan vendor:publish --tag="laratrust-seeder"
+
+composer dump-autoload
+
+$this->call(LaratrustSeeder::class);
+
+php artisan db:seed
+
+run only one migration 
+
+php artisan migrate --path=/database/migrations/2022_04_13_220743_add_profile_picture_to_users_table.php
+
+resource controller,model,migration
+
+php artisan make:model Products -mcr
+
+php artisan make:migration add_paid_to_users_table --table=users
