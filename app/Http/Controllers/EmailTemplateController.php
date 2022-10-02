@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EmailTemplate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class EmailTemplateController extends Controller
@@ -15,7 +16,11 @@ class EmailTemplateController extends Controller
      */
     public function index()
     {
-        $emailTemplate=EmailTemplate::with('user')->get();
+        $emailTemplate= DB::table('email_templates AS et')
+      ->join('users AS u', 'et.user_id', '=', 'u.id')
+      ->whereNull('u.deleted_at')
+      ->orderBy('et.id', 'desc')->get();
+        // $emailTemplate=EmailTemplate::with('user')->get();
         return view('email-template/email_template_index',compact('emailTemplate'));
     }
 

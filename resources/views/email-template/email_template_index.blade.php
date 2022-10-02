@@ -107,7 +107,7 @@
                                             <td><a href="{{route('email_template.show', $emailTemplate[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{$a}}</a></td>
                                             <td><a href="{{route('email_template.show', $emailTemplate[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($emailTemplate[$i]->template_name)}}</a></td>
                                             <td><a href="{{route('email_template.show', $emailTemplate[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($emailTemplate[$i]->subject)}}</a></td>
-                                            <td>{{ucwords($emailTemplate[$i]->user->first_name)}} {{ucwords($emailTemplate[$i]->user->last_name)}}</td>
+                                            <td>{{ucwords($emailTemplate[$i]->first_name)}} {{ucwords($emailTemplate[$i]->last_name)}}</td>
                                             <td>{{Date("Y-m-d",strtotime($emailTemplate[$i]->created_at))}}</td>
                                             <td>
                                                 <button class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" onclick="editEmailTemplate('{{$emailTemplate[$i]->id}}')">
