@@ -10,6 +10,7 @@ use App\Models\EmailTemplate;
 use App\Models\Opportunities;
 use Illuminate\Support\Facades\DB;
 
+
 class DashboardController extends Controller
 {
     public function dashboard()

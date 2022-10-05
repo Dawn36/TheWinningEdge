@@ -52,13 +52,7 @@ class OpportunitiesController extends Controller
     public function store(Request $request)
     {
         $userId=Auth::user()->id;
-        $request->validate([
-            'name' => ['required'],
-            'company_name' => ['required'],
-            'contract_amount' => ['required'],
-            'duration' => ['required'],
-            'file' => ['required'],
-        ]);
+       
 
         if ($request->hasFile('file')) {
             $destinationPath = base_path('public/uploads/opportunity/' . $userId);
@@ -118,12 +112,7 @@ class OpportunitiesController extends Controller
      */
     public function update(Request $request, int $id)
     {
-        $request->validate([
-            'name' => ['required'],
-            'company_name' => ['required'],
-            'contract_amount' => ['required'],
-            'duration' => ['required'],
-        ]);
+        
         $userId=Auth::user()->id;
         $opportunities = Opportunities::find($id);
         if ($request->hasFile('file')) {

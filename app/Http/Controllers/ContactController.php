@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
 use App\Imports\ContactImport;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon;
 
 class ContactController extends Controller
 {
@@ -62,14 +63,7 @@ class ContactController extends Controller
     {
         $userId=Auth::user()->id;
         $request->validate([
-            'first_name' => ['required'],
-            'last_name' => ['required'],
-            'job' => ['required'],
-            'phone_number' => ['required'],
-            'email' => ['required'],
-            'mobile_phone' => ['required'],
-            'company_name' => ['required'],
-            'linked_in_url' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:contacts'],
         ]);
         $path='';
         if ($request->hasFile('file')) {
@@ -140,16 +134,11 @@ class ContactController extends Controller
     {
         $userId=Auth::user()->id;
         $request->validate([
-            'first_name' => ['required'],
-            'last_name' => ['required'],
-            'job' => ['required'],
-            'phone_number' => ['required'],
-            'email' => ['required'],
-            'mobile_phone' => ['required'],
-            'company_name' => ['required'],
-            'linked_in_url' => ['required'],
-            'status' => ['required'],
+            'email' => 'required|email|unique:contacts,email,'.$id,
         ]);
+        // $request->validate([
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:contacts'],
+        // ]);
         $contact = Contact::find($id);
         if ($request->hasFile('file')) {
             $previousPic = $contact->profile_img;
@@ -199,7 +188,9 @@ class ContactController extends Controller
     {
         $userId=Auth::user()->id;
         $status=$request->status;
-        $date=Date("Y-m-d H:i:s");
+        // $date=Date("Y-m-d H:i:s");
+        $mytime = Carbon\Carbon::now();
+        $date=$mytime->toDateTimeString();
         $contactsId=$request->contacts_id;
         DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$userId,$contactsId,$status,$date]);
     }
