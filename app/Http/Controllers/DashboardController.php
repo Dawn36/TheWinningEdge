@@ -22,7 +22,15 @@ class DashboardController extends Controller
         $month=Date("m");
         $userCount=User::count();
         $contactCount=Contact::where('user_id',$userId)->count();
+
+        $phoneCallMonth= DB::table('contact_history')->where('user_id',$userId)->where('status','phone_call')->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->count();
+        $liveConversationMonth= DB::table('contact_history')->where('user_id',$userId)->where('status','live_conversation')->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->count();
+        $voiceMailCount= DB::table('contact_history')->where('user_id',$userId)->where('status','voice_mail')->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->count();
+        $emailCount= DB::table('contact_history')->where('user_id',$userId)->where('status','email')->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->count();
+        $meetingCount= DB::table('contact_history')->where('user_id',$userId)->where('status','meeting')->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->count();
+
         $emailTemplateCount=EmailTemplate::count();
+        $opportunitiesCount=Opportunities::whereYear('created_at', '=', $year)->count();
         $opportunitiesTarget= DB::table('opportunities_target')->where('user_id',$userId)->whereYear('created_at', '=', $year)->get();
         $amount=DB::select(DB::raw("SELECT SUM(contract_amount) AS amount FROM `opportunities` WHERE user_id='$userId' AND YEAR(created_at)='$year'"));
         if(count($opportunitiesTarget) > 0)
@@ -42,7 +50,57 @@ class DashboardController extends Controller
         {
             $rpaTarget=0;
         }
-        return view('dashboard',compact('userCount','contactCount','emailTemplateCount','opportunitiesTarget','percentage','rpaPercentage'));
+        // graph
+        $phoneCallData=DB::select(DB::raw("SELECT MONTH(created_at) AS `month`,COUNT(`status`) AS phone_call
+        FROM `contact_history` WHERE `status`='phone_call' AND user_id='$userId' AND YEAR(created_at)='$year' GROUP BY MONTH(created_at)"));
+        $liveConversationData=DB::select(DB::raw("SELECT MONTH(created_at) AS `month`,COUNT(`status`) AS live_conversation
+        FROM `contact_history` WHERE `status`='live_conversation' and user_id='$userId' AND YEAR(created_at)='$year' GROUP BY MONTH(created_at)"));
+        $voiceMailData=DB::select(DB::raw("SELECT MONTH(created_at) AS `month`,COUNT(`status`) AS voice_mail
+        FROM `contact_history` WHERE `status`='voice_mail' AND user_id='$userId' AND YEAR(created_at)='$year' GROUP BY MONTH(created_at)"));
+        $emailData=DB::select(DB::raw("SELECT MONTH(created_at) AS `month`,COUNT(`status`) AS email
+        FROM `contact_history` WHERE `status`='email' AND user_id='$userId' AND YEAR(created_at)='$year' GROUP BY MONTH(created_at)"));
+        $meetingData=DB::select(DB::raw(" SELECT MONTH(created_at) AS `month`,COUNT(`status`) AS meeting
+        FROM `contact_history` WHERE `status`='meeting' and user_id='$userId' AND YEAR(created_at)='$year' GROUP BY MONTH(created_at)"));
+        
+        $phoneCallArr=array();
+        $liveConversationArr=array();
+        $voiceMailArr=array();
+        $emailArr=array();
+        $meetingArr=array();
+        for($i=1; $i <= 12; $i++)
+        {
+            $phoneCallArr[$i]=0;
+            $liveConversationArr[$i]=0;
+            $voiceMailArr[$i]=0;
+            $emailArr[$i]=0;
+            $meetingArr[$i]=0;
+        }
+        for($i=0; $i < count($phoneCallData); $i++)
+        {
+            $phoneCallArr[$phoneCallData[$i]->month]=$phoneCallData[$i]->phone_call;
+        }
+        for($i=0; $i < count($liveConversationData); $i++)
+        {
+            $liveConversationArr[$liveConversationData[$i]->month]=$liveConversationData[$i]->live_conversation;
+        }
+        for($i=0; $i < count($voiceMailData); $i++)
+        {
+            $voiceMailArr[$voiceMailData[$i]->month]=$voiceMailData[$i]->voice_mail;
+        }
+        for($i=0; $i < count($emailData); $i++)
+        {
+            $emailArr[$emailData[$i]->month]=$emailData[$i]->email;
+        }
+        for($i=0; $i < count($meetingData); $i++)
+        {
+            $meetingArr[$meetingData[$i]->month]=$meetingData[$i]->meeting;
+        }
+        $phoneCallArr=json_encode(array_values($phoneCallArr));
+        $liveConversationArr=json_encode(array_values($liveConversationArr));
+        $voiceMailArr=json_encode(array_values($voiceMailArr));
+        $emailArr=json_encode(array_values($emailArr));
+        $meetingArr=json_encode(array_values($meetingArr));
+        return view('dashboard',compact('phoneCallArr','liveConversationArr','voiceMailArr','emailArr','meetingArr','userCount','contactCount','opportunitiesCount','emailTemplateCount','opportunitiesTarget','percentage','rpaPercentage','amount','phoneCallMonth','liveConversationMonth','voiceMailCount','emailCount','meetingCount'));
     }
     public function rpaTarget()
     {

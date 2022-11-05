@@ -21,12 +21,11 @@ class OpportunitiesController extends Controller
         $userId=Auth::user()->id;
         $year=date("Y");
         $percentage=0;
-        $opportunities=Opportunities::where('user_id',$userId)->whereYear('created_at', '=', $year)->get();
+        $opportunities=Opportunities::where('user_id',$userId)->whereYear('created_at', '=', $year)->orderby('id','desc')->get();
         $opportunitiesTarget= DB::table('opportunities_target')->where('user_id',$userId)->whereYear('created_at', '=', $year)->get();
         $amount=DB::select(DB::raw("SELECT SUM(contract_amount) AS amount FROM `opportunities` WHERE user_id='$userId' AND YEAR(created_at)='$year'"));
         if(count($opportunitiesTarget) > 0)
         {
-
             $percentage=((count($amount) == 0 ? '0' : $amount[0]->amount) / (count($opportunitiesTarget) == 0 ? '0' : $opportunitiesTarget[0]->target))*100;
         }
         return view('opportunities/opportunities_index' ,compact('opportunities','opportunitiesTarget','amount','percentage'));
@@ -52,7 +51,9 @@ class OpportunitiesController extends Controller
     public function store(Request $request)
     {
         $userId=Auth::user()->id;
-       
+        $fileNameDb='';
+        $size='';
+        $path='';
 
         if ($request->hasFile('file')) {
             $destinationPath = base_path('public/uploads/opportunity/' . $userId);
@@ -67,6 +68,7 @@ class OpportunitiesController extends Controller
             'name' => $request->name,
             'company_name' => $request->company_name,
             'contract_amount'=>$request->contract_amount,
+            'note'=>$request->note,
             'duration'=>$request->duration,
             'file_name'=>$fileNameDb,
             'size'=>$size,
@@ -129,7 +131,9 @@ class OpportunitiesController extends Controller
             $opportunities['size'] = $size;
             $opportunities['path'] = $path;
         }
+        
         $opportunities['name'] = $request->name;
+        $opportunities['note'] = $request->note;
         $opportunities['company_name'] = $request->company_name;
         $opportunities['contract_amount'] = $request->contract_amount;
         $opportunities['duration'] = $request->duration;

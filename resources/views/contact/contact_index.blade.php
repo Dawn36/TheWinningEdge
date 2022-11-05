@@ -86,6 +86,17 @@
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                                     <!--begin::Add Contact-->
+                                    <button type="button" id="send_email" class="btn btn-primary me-2" onclick="sendEmail()" style="display: none">
+                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                                        <span class="svg-icon svg-icon-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
+                                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->Send Email
+                                    </button>
+
                                     <button type="button" class="btn btn-primary me-2" onclick="addContact()">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                         <span class="svg-icon svg-icon-2">
@@ -125,27 +136,36 @@
                                 <table class="kt_datatable_example_1 table table-row-bordered gy-5">
                                     <thead>
                                         <tr class="fw-bold fs-6 text-muted">
+                                            <th ><input id="select_all" value="" type="checkbox"></th>
                                             <th class="min-w-30px">ID</th>
-                                            <th># Of Phone Calls</th>
-                                            <th># Of Live Conversations</th>
-                                            <th># Of Voicemails</th>
-                                            <th># Of Emails</th>
-                                            <th># Of Meetings</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
                                             <th>Mobile Phone</th>
                                             <th>Status</th>
                                             <th>Creation Date</th>
+                                            <th># Of Phone Calls</th>
+                                            <th># Of Live Conversations</th>
+                                            <th># Of Voicemails</th>
+                                            <th># Of Emails</th>
+                                            <th># Of Meetings</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-bold text-gray-600">
                                         @for ($i = 0; $i < count($contact); $i++) @php $a=$i; $a++; @endphp 
                                         <tr>
+                                            <td><input  id="checkbox" name="checkbox" value="{{$contact[$i]->id}}" type="checkbox" onclick="Check(this)"></td>
                                             <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{$a}}</a></td>
+                                           
+                                            <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->first_name)}}</a></td>
+                                            <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->last_name)}}</a></td>
+                                            <td>{{$contact[$i]->mobile_phone}}</td>
+                                            @php $status=explode('_',$contact[$i]->status) @endphp
+                                            <td>{{ ucwords($status[0]) }} {{ count($status) == "2" ? ucwords($status[1] ) : '' }}</td>
+                                            <td>{{Date("Y-m-d",strtotime($contact[$i]->created_at))}}</td>
                                             <td>
                                                 <center>
-                                                    <a href="" onclick="addContactCounter('phone_call','{{$contact[$i]->id}}')">
+                                                    <a  onclick="addContactCounter('phone_call','{{$contact[$i]->id}}',this)" style="cursor: pointer;">
                                                         <div class="border border-gray-300 border-dashed rounded py-1 px-1 text-center">
                                                             <div class="fs-5 fw-bolder text-gray-700">
                                                                 <span class="w-50px fs-5">{{$contact[$i]->phone_call}}</span>
@@ -163,7 +183,7 @@
                                             </td>
                                             <td>
                                                 <center>
-                                                    <a href="" onclick="addContactCounter('live_conversation','{{$contact[$i]->id}}')">
+                                                    <a  onclick="addContactCounter('live_conversation','{{$contact[$i]->id}}',this)" style="cursor: pointer;">
                                                         <div class="border border-gray-300 border-dashed rounded py-1 px-1 text-center">
                                                             <div class="fs-5 fw-bolder text-gray-700">
                                                                 <span class="w-50px fs-5">{{$contact[$i]->live_conversation}}</span>
@@ -181,7 +201,7 @@
                                             </td>
                                             <td>
                                                 <center>
-                                                    <a href="" onclick="addContactCounter('voice_mail','{{$contact[$i]->id}}')">
+                                                    <a  onclick="addContactCounter('voice_mail','{{$contact[$i]->id}}',this)" style="cursor: pointer;">
                                                         <div class="border border-gray-300 border-dashed rounded py-1 px-1 text-center">
                                                             <div class="fs-5 fw-bolder text-gray-700">
                                                                 <span class="w-50px fs-5">{{$contact[$i]->voic_mail}}</span>
@@ -199,7 +219,7 @@
                                             </td>
                                             <td>
                                                 <center>
-                                                    <a href="" onclick="addContactCounter('email','{{$contact[$i]->id}}')">
+                                                    <a  onclick="addContactCounter('email','{{$contact[$i]->id}}',this)" style="cursor: pointer;">
                                                         <div class="border border-gray-300 border-dashed rounded py-1 px-1 text-center">
                                                             <div class="fs-5 fw-bolder text-gray-700">
                                                                 <span class="w-50px fs-5">{{$contact[$i]->email}}</span>
@@ -217,7 +237,7 @@
                                             </td>
                                             <td>
                                                 <center>
-                                                    <a href="" onclick="addContactCounter('meeting','{{$contact[$i]->id}}')">
+                                                    <a  onclick="addContactCounter('meeting','{{$contact[$i]->id}}',this)" style="cursor: pointer;">
                                                         <div class="border border-gray-300 border-dashed rounded py-1 px-1 text-center">
                                                             <div class="fs-5 fw-bolder text-gray-700">
                                                                 <span class="w-50px fs-5">{{$contact[$i]->meeting}}</span>
@@ -233,13 +253,14 @@
                                                     </a>
                                                 </center>
                                             </td>
-                                            <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->first_name)}}</a></td>
-                                            <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->last_name)}}</a></td>
-                                            <td>{{$contact[$i]->mobile_phone}}</td>
-                                            @php $status=explode('_',$contact[$i]->status) @endphp
-                                            <td>{{ ucwords($status[0]) }} {{ count($status) == "2" ? ucwords($status[1] ) : '' }}</td>
-                                            <td>{{Date("Y-m-d",strtotime($contact[$i]->created_at))}}</td>
                                             <td>
+                                                <button  class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" data-bs-original-title="Add a Task" onclick="addTaskContact('{{$contact[$i]->id}}')">
+                                                    <span class="svg-icon svg-icon-2">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path opacity="0.3" d="M17.1 10.5H11.1C10.5 10.5 10.1 10.1 10.1 9.5V8.5C10.1 7.9 10.5 7.5 11.1 7.5H17.1C17.7 7.5 18.1 7.9 18.1 8.5V9.5C18.1 10.1 17.7 10.5 17.1 10.5ZM22.1 4.5V3.5C22.1 2.9 21.7 2.5 21.1 2.5H11.1C10.5 2.5 10.1 2.9 10.1 3.5V4.5C10.1 5.1 10.5 5.5 11.1 5.5H21.1C21.7 5.5 22.1 5.1 22.1 4.5ZM22.1 15.5V14.5C22.1 13.9 21.7 13.5 21.1 13.5H11.1C10.5 13.5 10.1 13.9 10.1 14.5V15.5C10.1 16.1 10.5 16.5 11.1 16.5H21.1C21.7 16.5 22.1 16.1 22.1 15.5ZM18.1 20.5V19.5C18.1 18.9 17.7 18.5 17.1 18.5H11.1C10.5 18.5 10.1 18.9 10.1 19.5V20.5C10.1 21.1 10.5 21.5 11.1 21.5H17.1C17.7 21.5 18.1 21.1 18.1 20.5Z" fill="black" />
+                                                            <path d="M5.60001 10.5C5.30001 10.5 5.00002 10.4 4.80002 10.2C4.60002 9.99995 4.5 9.70005 4.5 9.30005V5.40002C3.7 5.90002 3.40001 6 3.10001 6C2.90001 6 2.6 5.89995 2.5 5.69995C2.3 5.49995 2.20001 5.3 2.20001 5C2.20001 4.6 2.4 4.40005 2.5 4.30005C2.6 4.20005 2.80001 4.10002 3.10001 3.90002C3.50001 3.70002 3.8 3.50005 4 3.30005C4.2 3.10005 4.40001 2.89995 4.60001 2.69995C4.80001 2.39995 4.9 2.19995 5 2.19995C5.1 2.09995 5.30001 2 5.60001 2C5.90001 2 6.10002 2.10002 6.30002 2.40002C6.50002 2.60002 6.5 2.89995 6.5 3.19995V9C6.6 10.4 5.90001 10.5 5.60001 10.5ZM7.10001 21.5C7.40001 21.5 7.69999 21.4 7.89999 21.2C8.09999 21 8.20001 20.8 8.20001 20.5C8.20001 20.2 8.10002 19.9 7.80002 19.8C7.60002 19.6 7.3 19.6 7 19.6H5.10001C5.30001 19.4 5.50002 19.2 5.80002 19C6.30002 18.6 6.69999 18.3 6.89999 18.1C7.09999 17.9 7.40001 17.6 7.60001 17.2C7.80001 16.8 8 16.3 8 15.9C8 15.6 7.90002 15.3 7.80002 15C7.70002 14.7 7.50002 14.5 7.30002 14.2C7.10002 14 6.80001 13.8 6.60001 13.7C6.20001 13.5 5.70001 13.4 5.10001 13.4C4.60001 13.4 4.20002 13.5 3.80002 13.6C3.40002 13.7 3.09999 13.9 2.89999 14.2C2.69999 14.4 2.50002 14.7 2.30002 15C2.20002 15.3 2.10001 15.6 2.10001 15.9C2.10001 16.3 2.29999 16.5 2.39999 16.6C2.59999 16.8 2.80001 16.9 3.10001 16.9C3.50001 16.9 3.70002 16.7 3.80002 16.6C3.90002 16.4 4.00001 16.2 4.10001 16C4.20001 15.8 4.20001 15.7 4.20001 15.7C4.40001 15.4 4.59999 15.3 4.89999 15.3C4.99999 15.3 5.20002 15.3 5.30002 15.4C5.40002 15.5 5.50001 15.5 5.60001 15.7C5.70001 15.8 5.70001 15.9 5.70001 16.1C5.70001 16.2 5.70001 16.4 5.60001 16.6C5.50001 16.8 5.40001 16.9 5.20001 17.1C5.00001 17.3 4.80001 17.5 4.60001 17.6C4.40001 17.7 4.20002 17.9 3.80002 18.3C3.40002 18.6 3.00001 19 2.60001 19.5C2.50001 19.6 2.30001 19.8 2.20001 20.1C2.10001 20.4 2 20.6 2 20.7C2 21 2.10002 21.3 2.30002 21.5C2.50002 21.7 2.80001 21.8 3.20001 21.8H7.10001V21.5Z" fill="black" />
+                                                        </svg> </span>
+                                                </button>
                                                 <button onclick="editContact('{{$contact[$i]->id}}')" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2"  data-bs-original-title="Edit Contact">
                                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                                     <span class="svg-icon svg-icon-2">
@@ -285,6 +306,87 @@
 </div>
 <!--end::Content-->
 <script type="text/javascript">
+function sendEmail()
+{
+    if(contactArray.length == 0)
+    {
+        alert("Please select contact");
+        return false;
+    }
+    contactArray=JSON.stringify(contactArray);
+    var value = {
+            contactId:contactArray
+        };
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('contact_email_template') }}",
+            data: value,
+            success: function(result) {
+                $('#myModalLgHeading').html('Email Template');
+                $('#modalBodyLarge').html(result);
+                $('#myModalLg').modal('show');
+            }
+        });
+    
+}
+
+
+var contactArray = [];
+
+$('#select_all').click(function(event) {
+    if (this.checked) {
+    $("#send_email").css("display", "block");
+
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = true;
+        });
+    } else {
+    $("#send_email").css("display", "none");
+
+        $(':checkbox').each(function() {
+            this.checked = false;
+        });
+    }
+    Check();
+});
+
+function Check(obj) {
+    contactArray = [];
+    $.each($("input[name='checkbox']:checked"), function() {
+        if (!contactArray.includes($(this).val())) {
+            contactArray.push($(this).val());
+        }
+    });
+    if(contactArray.length == 0)
+    {
+        $("#send_email").css("display", "none");
+    }
+    else
+    {
+        $("#send_email").css("display", "block");
+    }
+
+    console.log(contactArray);
+
+}
+
+  function addTaskContact(contactsId) {
+    var value = {
+            contacts_id:contactsId
+        };
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('contact_task') }}",
+            data: value,
+            success: function(result) {
+                $('#myModalLgHeading').html('Add Task');
+                $('#modalBodyLarge').html(result);
+                $('#myModalLg').modal('show');
+            }
+        });
+    }
+
     function contactUploader() {
         $.ajax({
             type: 'GET',
@@ -321,7 +423,7 @@
             }
         });
     }
-    function addContactCounter(status,contactsId) {
+    function addContactCounter(status,contactsId,obj) {
         var value = {
             status: status,
             contacts_id:contactsId
@@ -331,12 +433,28 @@
             url: "{{ route('contact_counter') }}",
             data: value,
             success: function(result) {
-                // $('#myModalLgHeading').html('Add Contact');
-                // $('#modalBodyLarge').html(result);
-                // $('#myModalLg').modal('show');
+                value=obj.children[0].children[0].children[0].textContent;
+                value++;
+                obj.children[0].children[0].children[0].textContent=value;
+                const d = new Date();
+                month=d.getMonth() + 1;
+                obj.children[0].children[1].textContent=d.getFullYear()+"-"+month+"-"+d.getDate()+" "+" "+formatAMPM(new Date);
+               
             }
         });
     }
+
+    function formatAMPM(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + seconds +' '+ ampm;
+  return strTime;
+}
 
 </script>
 @endsection('content')

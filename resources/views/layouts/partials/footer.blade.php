@@ -44,11 +44,22 @@
     // $("#kt_datatable_example_1").DataTable();
     $(document).ready(function() {
         // Datatables
-        var table = $('.kt_datatable_example_1').DataTable();
+        var table = $('.kt_datatable_example_1').DataTable({
+    aLengthMenu: [
+        [25, 50, 100, 200, -1],
+        [25, 50, 100, 200, "All"]
+    ],
+});
         $('#search').on('keyup', function() {
             table.search(this.value).draw();
         });
-
+// Export buttons
+        // $('.kt_datatable_example_1').DataTable({
+        //     dom: 'Bfrtip',
+        //     buttons: [
+        //         'copy', 'csv', 'excel', 'pdf', 'print'
+        //     ]
+        // });
         
         var quill = new Quill('.kt_docs_quill_basic1', {
             modules: {

@@ -3,25 +3,6 @@
     @csrf
     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
         <div class="fv-row mb-7">
-            <label class="d-block fw-bold fs-6 mb-5">Avatar</label>
-            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('{{ asset( $contact->profile_img) }}')">
-                <div class="image-input-wrapper w-125px h-125px" style="background-image: url('{{ asset( $contact->profile_img) }}');">
-                </div>
-                <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-                    <i class="bi bi-pencil-fill fs-7"></i>
-                    <input type="file" name="file" accept=".png, .jpg, .jpeg" />
-                    <input type="hidden" name="avatar_remove" />
-                </label>
-                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-                    <i class="bi bi-x fs-2"></i>
-                </span>
-                <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-                    <i class="bi bi-x fs-2"></i>
-                </span>
-            </div>
-            <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
-        </div>
-        <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Status</label>
             <select name="status" class="form-control form-control-solid mb-3 mb-lg-0">
                 <option value="current_client" {{$contact->status == "current_client" ? 'Selected' : '' }}>Current Client</option>
@@ -58,11 +39,23 @@
         </div>
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Company Name</label>
-            <input type="text"  min="0" value="{{$contact->company_name}}" name="company_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Company Name here." />
+            <select name="company_id" class="form-control form-control-solid mb-3 mb-lg-0">
+                @for($i=0; $i < count($company); $i++)
+                <option value="{{$company[$i]->id}}" {{$company[$i]->id == $contact->companies_id ? 'Selected' : ''}}>{{$company[$i]->company_name}}</option>
+                @endfor
+            </select>
         </div>
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">LinkedIn Contact Profile URL</label>
             <input type="text"  name="linked_in_url" value="{{$contact->linked_in_url}}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter the LinkedIn Contact Profile URL here." />
+        </div>
+        <div class="fv-row mb-7">
+            <label class="required fw-bold fs-6 mb-2">Tags</label>
+            <input name="tags" value="{{$contact->tags}}" class="form-control form-control-solid mb-3 mb-lg-0 kt_tagify_2" value="" placeholder="Type the tags here" />
+        </div>
+        <div class="fv-row mb-7">
+            <label class="required fw-bold fs-6 mb-2">Note</label>
+            <textarea name="note" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please add the note for the contact">{{$contact->note}}</textarea>
         </div>
     </div>
     <!--end::Scroll-->
@@ -74,6 +67,10 @@
     <!--end::Actions-->
 </form>
 <script>
+     // Tagify
+     var input2 = document.querySelector(".kt_tagify_2");
+        new Tagify(input2);
+
     var KTImageInput = function(e, t) {
         var n = this;
         if (null != e) {

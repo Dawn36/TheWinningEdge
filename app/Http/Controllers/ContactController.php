@@ -7,10 +7,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
+use App\Models\EmailTemplate;
 use PhpParser\Node\Expr\FuncCall;
+use App\Models\Company;
+use App\Jobs\FileUploaderJob;
 use App\Imports\ContactImport;
+use App\Models\Task;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Jobs\ContactJob;
 use Carbon;
+use SebastianBergmann\Template\Template;
 
 class ContactController extends Controller
 {
@@ -37,7 +43,7 @@ class ContactController extends Controller
         (SELECT created_at FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_meeting
          
          FROM `contacts` c
-         WHERE user_id='$userId'
+         WHERE user_id='$userId' order by c.id desc
         "));
         return view('contact/contact_index' , compact('contact'));
     }
@@ -49,8 +55,11 @@ class ContactController extends Controller
      */
     public function create()
     {
+        $userId=Auth::user()->id;
 
-        return view('contact/contact_create');
+        $company=Company::where('user_id',$userId)->get();
+
+        return view('contact/contact_create',compact('company'));
     }
 
     /**
@@ -75,15 +84,23 @@ class ContactController extends Controller
             $file->move($destinationPath, $filename);
             $path = "uploads/contacts/" .$userId . "/". $filename;
         }
+        $tagsData=array();
+        $tags=json_decode($request->tags);
+        for ($i=0; $i < count($tags); $i++) { 
+            array_push($tagsData,$tags[$i]->value);
+        }
+        
         $user = Contact::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'profile_img'=>$path,
+            'tags'=>implode(',',$tagsData),
+            'note'=>$request->note,
             'job'=>$request->job,
             'phone_number'=>$request->phone_number,
             'email'=>$request->email,
             'mobile_phone'=>$request->mobile_phone,
-            'company_name'=>$request->company_name,
+            'companies_id'=>$request->company_id,
             'linked_in_url'=>$request->linked_in_url,
             'user_id'=>$userId,
             'created_at' => date("Y-m-d h:i:s"),
@@ -101,13 +118,16 @@ class ContactController extends Controller
     public function show(Contact $contact)
     {
         $contactId=$contact->id;
+        $companiesId=$contact->companies_id;
         $meeting= DB::select(DB::raw("SELECT * FROM `contact_history` WHERE `status`='meeting' AND contacts_id = '$contactId' ORDER BY id DESC"));
         $email= DB::select(DB::raw("SELECT * FROM `contact_history` WHERE `status`='email' AND contacts_id = '$contactId' ORDER BY id DESC"));
         $liveConversation= DB::select(DB::raw("SELECT * FROM `contact_history` WHERE `status`='live_conversation' AND contacts_id = '$contactId' ORDER BY id DESC"));
         $voiceMail= DB::select(DB::raw("SELECT * FROM `contact_history` WHERE `status`='voice_mail' AND contacts_id = '$contactId' ORDER BY id DESC"));
         $phoneCall= DB::select(DB::raw("SELECT * FROM `contact_history` WHERE `status`='phone_call' AND contacts_id = '$contactId' ORDER BY id DESC"));
         $note= DB::select(DB::raw("SELECT * FROM `contact_note` WHERE contact_id = '$contactId' ORDER BY id DESC"));
-        return view('contact/contact_show',compact('contact','meeting','email','liveConversation','voiceMail','phoneCall','note'));
+        $task= DB::select(DB::raw("SELECT * FROM `tasks` WHERE contact_id = '$contactId' ORDER BY id DESC"));
+        $company=Company::find($companiesId);
+        return view('contact/contact_show',compact('contact','meeting','email','liveConversation','voiceMail','phoneCall','note','task','company'));
         
     }
 
@@ -119,7 +139,10 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        return view('contact/contact_edit',compact('contact'));
+        $userId=Auth::user()->id;
+
+        $company=Company::where('user_id',$userId)->get();
+        return view('contact/contact_edit',compact('contact','company'));
         
     }
 
@@ -155,15 +178,21 @@ class ContactController extends Controller
         $contact->save();
 
         }
-
+        $tagsData=array();
+        $tags=json_decode($request->tags);
+        for ($i=0; $i < count($tags); $i++) { 
+            array_push($tagsData,$tags[$i]->value);
+        }
         $contact['first_name'] = $request->first_name;
         $contact['last_name'] = $request->last_name;
         $contact['job'] = $request->job;
         $contact['status'] = $request->status;
         $contact['phone_number'] = $request->phone_number;
+        $contact['tags'] = implode(',',$tagsData);
+        $contact['note'] = $request->note;
         $contact['email'] = $request->email;
         $contact['mobile_phone'] = $request->mobile_phone;
-        $contact['company_name'] = $request->company_name;
+        $contact['companies_id'] = $request->company_id;
         $contact['linked_in_url'] = $request->linked_in_url;
         $contact['updated_by'] = Auth::user()->id;
         $contact['updated_at'] = date("Y-m-d");
@@ -188,11 +217,11 @@ class ContactController extends Controller
     {
         $userId=Auth::user()->id;
         $status=$request->status;
-        // $date=Date("Y-m-d H:i:s");
         $mytime = Carbon\Carbon::now();
         $date=$mytime->toDateTimeString();
         $contactsId=$request->contacts_id;
         DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$userId,$contactsId,$status,$date]);
+        return true;
     }
     public function contactCounterDelete($id)
     {
@@ -231,8 +260,40 @@ class ContactController extends Controller
     }
     public function uploadContactSubmit(Request $request)
     {
-            Excel::import(new ContactImport, $request->file);
+        Excel::import(new ContactImport, $request->file);
 
             return redirect()->back();
+    }
+    public function contactTask(Request $request)
+    {
+        $contactId=$request->contacts_id;
+        return view('contact/contact_task',compact('contactId'));
+    }
+    public function contactTaskEdit(Request $request)
+    {
+        $contactId=$request->contacts_id;
+        $id=$request->id;
+        $task=Task::find($id);
+        return view('contact/contact_task_edit',compact('contactId','task'));
+    }
+    public function contactEmailTemplate(Request $request)
+    {
+        $userId=Auth::user()->id;
+        $contactId=$request->contactId;
+        $template=EmailTemplate::where('user_id',$userId)->get();
+        return view('contact/contact_email_template',compact('template','contactId'));
+    }
+    public function getEmailTemplater(Request $request)
+    {
+        $templateId=$request->template_id;
+        $template=EmailTemplate::find($templateId);
+        return $template;
+    }
+    public function contactEmailTemplateSend(Request $request)
+    {
+        $request->subject;
+        $request->contact_id;
+        $request->body;
+        dispatch(new ContactJob());
     }
 }

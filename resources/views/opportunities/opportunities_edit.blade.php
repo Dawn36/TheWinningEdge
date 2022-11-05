@@ -22,6 +22,10 @@
             <label class=" fw-bold fs-6 mb-2">Files</label>
             <input type="file" name="file" class="form-control form-control-solid mb-3 mb-lg-0" />
         </div>
+        <div class="fv-row mb-7">
+            <label class="required fw-bold fs-6 mb-2">Note</label>
+            <textarea name="note" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please add the note for the contact">{{$opportunities->note}}</textarea>
+        </div>
     </div>
     <!--end::Scroll-->
     <!--begin::Actions-->

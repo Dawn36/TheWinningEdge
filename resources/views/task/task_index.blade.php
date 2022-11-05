@@ -18,7 +18,7 @@
                         <div class="p-10">
                             <!--begin::Heading-->
                             <h1 class="anchor fw-bolder mb-5" id="zero-configuration">
-                                <a href="javascript:;"></a>Opportunities Listing
+                                <a href="javascript:;"></a>Tasks Listing
                             </h1>
 
                             <!--begin::Notice-->
@@ -35,44 +35,18 @@
                                     <!--begin::Svg Icon | path: icons/duotune/art/art006.svg-->
                                     <span class="svg-icon svg-icon-3x svg-icon-primary position-absolute">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path opacity="0.3" d="M14 3V20H2V3C2 2.4 2.4 2 3 2H13C13.6 2 14 2.4 14 3ZM11 13V11C11 9.7 10.2 8.59995 9 8.19995V7C9 6.4 8.6 6 8 6C7.4 6 7 6.4 7 7V8.19995C5.8 8.59995 5 9.7 5 11V13C5 13.6 4.6 14 4 14V15C4 15.6 4.4 16 5 16H11C11.6 16 12 15.6 12 15V14C11.4 14 11 13.6 11 13Z" fill="black" />
-                                            <path d="M2 20H14V21C14 21.6 13.6 22 13 22H3C2.4 22 2 21.6 2 21V20ZM9 3V2H7V3C7 3.6 7.4 4 8 4C8.6 4 9 3.6 9 3ZM6.5 16C6.5 16.8 7.2 17.5 8 17.5C8.8 17.5 9.5 16.8 9.5 16H6.5ZM21.7 12C21.7 11.4 21.3 11 20.7 11H17.6C17 11 16.6 11.4 16.6 12C16.6 12.6 17 13 17.6 13H20.7C21.2 13 21.7 12.6 21.7 12ZM17 8C16.6 8 16.2 7.80002 16.1 7.40002C15.9 6.90002 16.1 6.29998 16.6 6.09998L19.1 5C19.6 4.8 20.2 5 20.4 5.5C20.6 6 20.4 6.60005 19.9 6.80005L17.4 7.90002C17.3 8.00002 17.1 8 17 8ZM19.5 19.1C19.4 19.1 19.2 19.1 19.1 19L16.6 17.9C16.1 17.7 15.9 17.1 16.1 16.6C16.3 16.1 16.9 15.9 17.4 16.1L19.9 17.2C20.4 17.4 20.6 18 20.4 18.5C20.2 18.9 19.9 19.1 19.5 19.1Z" fill="black" />
+                                            <path opacity="0.3" d="M17.1 10.5H11.1C10.5 10.5 10.1 10.1 10.1 9.5V8.5C10.1 7.9 10.5 7.5 11.1 7.5H17.1C17.7 7.5 18.1 7.9 18.1 8.5V9.5C18.1 10.1 17.7 10.5 17.1 10.5ZM22.1 4.5V3.5C22.1 2.9 21.7 2.5 21.1 2.5H11.1C10.5 2.5 10.1 2.9 10.1 3.5V4.5C10.1 5.1 10.5 5.5 11.1 5.5H21.1C21.7 5.5 22.1 5.1 22.1 4.5ZM22.1 15.5V14.5C22.1 13.9 21.7 13.5 21.1 13.5H11.1C10.5 13.5 10.1 13.9 10.1 14.5V15.5C10.1 16.1 10.5 16.5 11.1 16.5H21.1C21.7 16.5 22.1 16.1 22.1 15.5ZM18.1 20.5V19.5C18.1 18.9 17.7 18.5 17.1 18.5H11.1C10.5 18.5 10.1 18.9 10.1 19.5V20.5C10.1 21.1 10.5 21.5 11.1 21.5H17.1C17.7 21.5 18.1 21.1 18.1 20.5Z" fill="black"></path>
+                                            <path d="M5.60001 10.5C5.30001 10.5 5.00002 10.4 4.80002 10.2C4.60002 9.99995 4.5 9.70005 4.5 9.30005V5.40002C3.7 5.90002 3.40001 6 3.10001 6C2.90001 6 2.6 5.89995 2.5 5.69995C2.3 5.49995 2.20001 5.3 2.20001 5C2.20001 4.6 2.4 4.40005 2.5 4.30005C2.6 4.20005 2.80001 4.10002 3.10001 3.90002C3.50001 3.70002 3.8 3.50005 4 3.30005C4.2 3.10005 4.40001 2.89995 4.60001 2.69995C4.80001 2.39995 4.9 2.19995 5 2.19995C5.1 2.09995 5.30001 2 5.60001 2C5.90001 2 6.10002 2.10002 6.30002 2.40002C6.50002 2.60002 6.5 2.89995 6.5 3.19995V9C6.6 10.4 5.90001 10.5 5.60001 10.5ZM7.10001 21.5C7.40001 21.5 7.69999 21.4 7.89999 21.2C8.09999 21 8.20001 20.8 8.20001 20.5C8.20001 20.2 8.10002 19.9 7.80002 19.8C7.60002 19.6 7.3 19.6 7 19.6H5.10001C5.30001 19.4 5.50002 19.2 5.80002 19C6.30002 18.6 6.69999 18.3 6.89999 18.1C7.09999 17.9 7.40001 17.6 7.60001 17.2C7.80001 16.8 8 16.3 8 15.9C8 15.6 7.90002 15.3 7.80002 15C7.70002 14.7 7.50002 14.5 7.30002 14.2C7.10002 14 6.80001 13.8 6.60001 13.7C6.20001 13.5 5.70001 13.4 5.10001 13.4C4.60001 13.4 4.20002 13.5 3.80002 13.6C3.40002 13.7 3.09999 13.9 2.89999 14.2C2.69999 14.4 2.50002 14.7 2.30002 15C2.20002 15.3 2.10001 15.6 2.10001 15.9C2.10001 16.3 2.29999 16.5 2.39999 16.6C2.59999 16.8 2.80001 16.9 3.10001 16.9C3.50001 16.9 3.70002 16.7 3.80002 16.6C3.90002 16.4 4.00001 16.2 4.10001 16C4.20001 15.8 4.20001 15.7 4.20001 15.7C4.40001 15.4 4.59999 15.3 4.89999 15.3C4.99999 15.3 5.20002 15.3 5.30002 15.4C5.40002 15.5 5.50001 15.5 5.60001 15.7C5.70001 15.8 5.70001 15.9 5.70001 16.1C5.70001 16.2 5.70001 16.4 5.60001 16.6C5.50001 16.8 5.40001 16.9 5.20001 17.1C5.00001 17.3 4.80001 17.5 4.60001 17.6C4.40001 17.7 4.20002 17.9 3.80002 18.3C3.40002 18.6 3.00001 19 2.60001 19.5C2.50001 19.6 2.30001 19.8 2.20001 20.1C2.10001 20.4 2 20.6 2 20.7C2 21 2.10002 21.3 2.30002 21.5C2.50002 21.7 2.80001 21.8 3.20001 21.8H7.10001V21.5Z" fill="black"></path>
                                         </svg>
                                     </span>
                                     <!--end::Svg Icon-->
                                 </div>
                                 <!--end::Icon-->
                                 <!--begin::Description-->
-                                <div class="text-gray-700 fw-bold fs-6 lh-lg">Here we have a list of all of the Opportunities that we have.</div>
+                                <div class="text-gray-700 fw-bold fs-6 lh-lg">Here we have a list of all of the Tasks that we have.</div>
                                 <!--end::Description-->
                             </div>
                             <!--end::Notice-->
-
-                            <div class="row mt-5 align-items-center justify-content-end">
-                                <div class="col-xl-4">
-                                    <div class="card-xl-stretch mb-xl-8">
-                                        <div class="card-body p-0">
-                                            <div class="d-flex flex-column w-100">
-                                                <span class="text-dark me-2 fw-bolder pb-3">Progress</span>
-                                                <div class="d-flex flex-column w-100 me-2">
-                                                    <div class="d-flex flex-stack mb-2">
-                                                        <span class="text-muted me-2 fs-7 fw-bold">{{$percentage >= 100 ? '100' : $percentage }}%</span>
-                                                        <span class="text-muted me-2 fs-7 fw-bold">${{number_format(count($amount) == 0 ? '0' : $amount[0]->amount)}}/${{number_format(count($opportunitiesTarget) == 0 ? '0' : $opportunitiesTarget[0]->target)}}</span>
-                                                    </div>
-                                                    <div class="progress h-6px w-100">
-                                                        <div class="progress-bar {{$percentage >= 100 ? 'bg-sucess' : 'bg-danger'  }} " role="progressbar" style="width: {{$percentage >= 100 ? '100' : $percentage }}%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-auto text-center mt-3 mt-lg-0">
-                                    <button type="button" class="btn btn-primary" onclick="setOpportunitiesTarget()">
-                                        Set Opportunities Target
-                                    </button>
-                                </div>
-                            </div>
                             <!--end::Heading-->
                         </div>
                         <!--begin::Card header-->
@@ -98,8 +72,8 @@
                             <div class="card-toolbar">
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                    <!--begin::Opportunities-->
-                                    <button type="button" class="btn btn-primary me-2" onclick="addOpportunities()">
+                                    <!--begin::Tasks-->
+                                    <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#kt_modal_add_tasks" onclick="addTask()">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                         <span class="svg-icon svg-icon-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -107,9 +81,9 @@
                                                 <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                                             </svg>
                                         </span>
-                                        <!--end::Svg Icon-->Add Opportunities
+                                        <!--end::Svg Icon-->Add Tasks
                                     </button>
-                                    <!--end::Opportunities-->
+                                    <!--end::Tasks-->
                                 </div>
                                 <!--end::Toolbar-->
                             </div>
@@ -124,52 +98,39 @@
                                 <table class="kt_datatable_example_1 table table-row-bordered gy-5">
                                     <thead>
                                         <tr class="fw-bold fs-6 text-muted">
-                                            <th class="min-w-30px">ID</th>
-                                            <th>Name</th>
-                                            <th>Company Name</th>
-                                            <th>Contract Amount</th>
-                                            <th>Duration</th>
-                                            <th>File</th>
-                                            <th>Creation Date</th>
+                                            <th>Task ID</th>
+                                            <th class="min-w-200px">Task</th>
+                                            <th>Status</th>
+                                            <th>Assigned to</th>
+                                            <th>Assigned by</th>
+                                            <th>Date Assigned</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-bold text-gray-600">
-                                        @for ($i = 0; $i < count($opportunities); $i++) @php $a=$i; $a++; @endphp 
+                                        @for ($i = 0; $i < count($task); $i++) @php $a=$i; $a++; @endphp 
                                         <tr>
                                             <td>{{$a}}</td>
-                                            <td>{{ucwords($opportunities[$i]->name)}}</td>
-                                            <td>{{ucwords($opportunities[$i]->company_name)}}</td>
-                                            <td>{{$opportunities[$i]->contract_amount}}</td>
-                                            <td>{{ucwords($opportunities[$i]->duration)}}</td>
+                                            <td>{{ucwords($task[$i]->description)}}</td>
                                             <td>
-                                                <div class="d-flex align-items-center">
-                                                    <span class="svg-icon svg-icon-2x svg-icon-primary me-4">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22Z" fill="black"></path>
-                                                            <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black"></path>
-                                                        </svg>
-                                                    </span>
-                                                    <a href="{{ asset($opportunities[$i]->path)}}" target="_blank" class="text-gray-800 text-hover-primary">{{ucwords($opportunities[$i]->file_name)}}</a>
-                                                </div>
+                                                <div class="badge badge-sm badge-light-info d-inline">{{ucwords($task[$i]->task_status)}}</div>
                                             </td>
-                                            <td>{{DATE("Y-m-d",strtotime($opportunities[$i]->created_at))}}</td>
+                                            <td>{{ucwords($task[$i]->first_name)}} {{ucwords($task[$i]->last_name)}}</td>
+                                            <td>{{ucwords(auth()->user()->first_name)}} {{ucwords(auth()->user()->last_name)}}</td>
+                                            <td>{{date("Y-m-d",strtotime($task[$i]->task_date))}}</td>
                                             <td>
-                                                <button  class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" onclick="editOpportunities('{{$opportunities[$i]->id}}')"  data-bs-original-title="Edit opportunities">
-                                                    <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                                <button onclick="editTask('{{$task[$i]->id}}')" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary"  data-bs-original-title="Edit Client">
                                                     <span class="svg-icon svg-icon-2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                             <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black"></path>
                                                             <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black"></path>
                                                         </svg>
                                                     </span>
-                                                    <!--end::Svg Icon-->
                                                 </button>
-                                                <form  style="display: inline-block" method="POST" action="{{ route('opportunities.destroy', $opportunities[$i]->id) }}">
+                                                <form  style="display: inline-block" method="POST" action="{{ route('task.destroy', $task[$i]->id) }}">
                                                     @method('DELETE')
                                                     @csrf
-                                                <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete opportunities">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
+                                                <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
                                                     <span class="svg-icon svg-icon-2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                             <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"></path>
@@ -177,10 +138,8 @@
                                                             <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"></path>
                                                         </svg>
                                                     </span>
-                                                    <!--end::Svg Icon-->
                                                 </button>
                                             </form>
-
                                             </td>
                                         </tr>
                                         @endfor
@@ -201,41 +160,31 @@
 </div>
 <!--end::Content-->
 <script type="text/javascript">
-    function addOpportunities() {
+    function addTask() {
         $.ajax({
             type: 'GET',
-            url: "{{ route('opportunities.create') }}",
+            url: "{{ route('task.create') }}",
             success: function(result) {
-                $('#myModalLgHeading').html('Add Opportunities');
+                $('#myModalLgHeading').html('Add Task');
                 $('#modalBodyLarge').html(result);
                 $('#myModalLg').modal('show');
             }
         });
     }
 
-    function editOpportunities(id) {
-        url = "{{route('opportunities.edit',':id')}}";
+    function editTask(id) {
+        url = "{{route('task.edit',':id')}}";
         url = url.replace(':id', id);
         $.ajax({
             type: 'GET',
             url: url,
             success: function(result) {
-                $('#myModalLgHeading').html('Edit Opportunities');
+                $('#myModalLgHeading').html('Edit Task');
                 $('#modalBodyLarge').html(result);
                 $('#myModalLg').modal('show');
             }
         });
     }
-    function setOpportunitiesTarget() {
-        $.ajax({
-            type: 'GET',
-            url: "{{ route('opportunities_target') }}",
-            success: function(result) {
-                $('#myModalLgHeading').html('Set Opportunities Target');
-                $('#modalBodyLarge').html(result);
-                $('#myModalLg').modal('show');
-            }
-        });
-    }
+ 
 </script>
 @endsection('content')

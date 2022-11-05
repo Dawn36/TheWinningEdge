@@ -5704,7 +5704,7 @@ fieldset:disabled .btn {
     color: #fff;
     text-align: center;
     white-space: nowrap;
-    background-color: #50cd89;
+    background-color: #c5ad60;
     transition: width .6s ease
 }
 
@@ -50065,4 +50065,20 @@ body {
 .card.card-docs {
     background-color: #fff;
     border: 0
+}
+
+.dashboard-hello-img {
+    border-radius: 50px;
+    box-shadow: 0px 4px 12px 1px #a3a3a3;
+    border: 2px solid #c5ad60;
+}
+
+.dashboard-quill-img {
+    border-radius: 50px;
+    box-shadow: 0px 4px 12px 1px #a3a3a3;
+    border: 2px solid #c5ad60;
+}
+
+.text-align-last-center {
+    text-align-last: center;
 }

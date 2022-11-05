@@ -75,6 +75,7 @@
                                         {{ Route::currentRouteName() == 'contact.show' || Route::currentRouteName() == 'contact.index'  ? 'Contact Listing' : '' }}
                                         {{ Route::currentRouteName() == 'dashboard'  ? 'Dashboard' : '' }}
                                         {{ Route::currentRouteName() == 'talk_track.show' || Route::currentRouteName() == 'talk_track.index'  ? 'Talk Track Listing' : '' }}
+                                        {{ Route::currentRouteName() == 'task.show' || Route::currentRouteName() == 'task.index'  ? 'Task Listing' : '' }}
                                         
                                     </h1>
                                     <!--end::Page Title-->
@@ -84,6 +85,24 @@
                             <!--begin::Toolbar wrapper-->
                             <div class="d-flex align-items-stretch flex-shrink-0">
                                 <!--begin::User menu-->
+                                <div id="kt_docs_search" class="d-flex align-items-center w-lg-250px me-2 me-lg-5">
+                                    <!--begin::Form-->
+                                    <form data-kt-search-element="form" class="d-block w-100 mb-lg-0 position-relative" autocomplete="off">
+                                        <input type="hidden">
+                                        <span class="svg-icon svg-icon-2 svg-icon-gray-700 position-absolute top-50 translate-middle-y ms-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+                                                <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"></path>
+                                            </svg>
+                                        </span>
+                                        <input type="text" class="form-control form-control-solid h-40px ps-13 fs-7" name="search" value="" placeholder="Search tags and companies ..." data-kt-search-element="input">
+                                        <span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5" data-kt-search-element="spinner">
+                                            <span class="spinner-border h-15px w-15px align-middle text-gray-400"></span>
+                                        </span>
+                                    </form>
+                                    <!--end::Form-->
+                                </div>
+                                
                                 <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
                                     <!--begin::Menu wrapper-->
                                     <div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
