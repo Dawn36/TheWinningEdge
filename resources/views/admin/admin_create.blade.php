@@ -6,6 +6,7 @@
             <label class="required fw-bold fs-6 mb-2">First Name</label>
             <input type="text"  name="first_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your First Name here." required />
         </div>
+        <input hidden name="role_id" value="1" />
         <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">Last Name</label>
             <input type="text" name="last_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Last Name here." required />

@@ -239,7 +239,7 @@
                                                 <div class="d-flex flex-column w-100 me-2">
                                                     <div class="d-flex flex-stack mb-2">
                                                         <span class="text-muted me-2 fs-7 fw-bold">{{$percentage >= 100 ? '100' : $percentage }}%</span>
-                                                        <span class="text-muted me-2 fs-7 fw-bold">${{number_format(count($amount) == 0 ? '0' : $amount[0]->amount)}}/${{number_format(count($opportunitiesTarget) == 0 ? '0' : $opportunitiesTarget[0]->target)}}</span>
+                                                        <span class="text-muted me-2 fs-7 fw-bold">${{number_format(isset($amount[0]->amount) == 0 ? '0' : $amount[0]->amount)}}/${{number_format(count($opportunitiesTarget) == 0 ? '0' : $opportunitiesTarget[0]->target)}}</span>
                                                     </div>
                                                     <div class="progress h-6px w-100">
                                                         <div class="progress-bar {{$percentage >= 100 ? 'bg-sucess' : 'bg-danger'  }}" role="progressbar" style="width: {{$percentage >= 100 ? '100' : $percentage }}%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
@@ -262,7 +262,7 @@
                                     </div>
                                     <div class="col-auto text-align-last-center mx-5">
                                         <div class="fs-9 fs-sm-7 text-gray-400">Average Opportunity Size</div>
-                                        <div class="fs-2 fw-bolder text-gray-800">{{number_format((count($amount) == 0 ? '0' : $amount[0]->amount/$opportunitiesCount),2)}}</div>
+                                        <div class="fs-2 fw-bolder text-gray-800">{{number_format((isset($amount[0]->amount) == 0 ? '0' : $amount[0]->amount/$opportunitiesCount),2)}}</div>
                                     </div>
                                 </div>
                             </div>

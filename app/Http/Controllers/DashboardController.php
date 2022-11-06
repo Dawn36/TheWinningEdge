@@ -30,13 +30,14 @@ class DashboardController extends Controller
         $meetingCount= DB::table('contact_history')->where('user_id',$userId)->where('status','meeting')->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->count();
 
         $emailTemplateCount=EmailTemplate::count();
-        $opportunitiesCount=Opportunities::whereYear('created_at', '=', $year)->count();
+        $opportunitiesCount=Opportunities::whereYear('created_at', '=', $year)->where('user_id',$userId)->count();
         $opportunitiesTarget= DB::table('opportunities_target')->where('user_id',$userId)->whereYear('created_at', '=', $year)->get();
         $amount=DB::select(DB::raw("SELECT SUM(contract_amount) AS amount FROM `opportunities` WHERE user_id='$userId' AND YEAR(created_at)='$year'"));
         if(count($opportunitiesTarget) > 0)
         {
             $percentage=((count($amount) == 0 ? '0' : $amount[0]->amount) / (count($opportunitiesTarget) == 0 ? '0' : $opportunitiesTarget[0]->target))*100;
         }
+        
         $opportunitiesTarget= DB::table('opportunities_target')->where('user_id',$userId)->whereYear('created_at', '=', $year)->get();
 
         $rpa= DB::table('rpa_target')->where('user_id',$userId)->whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $month)->get();

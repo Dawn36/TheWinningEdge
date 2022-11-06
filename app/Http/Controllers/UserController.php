@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         $userId=Auth::user()->id;
-        $user=User::where('id','!=',$userId)->get();
+        $user=User::where('id','!=',$userId)->where('user_type','1')->get();
         return view('admin/admin_index',compact('user'));
     }
 
@@ -53,13 +53,14 @@ class UserController extends Controller
             'last_name' => $request->last_name,
             'email'=>$request->email,
             'contact_no'=>$request->contact_no,
+            'user_type'=>$request->role_id,
             'company_name'=>$request->company_name,
             'password_show'=>$request->password,
             'password'=> Hash::make($request->password),
             'created_at' => date("Y-m-d h:i:s"),
             'created_by' => Auth::user()->id,
         ]);
-        $user->attachRole('1');
+        $user->attachRole($request->role_id);
         
         return redirect()->back();
     }
@@ -144,6 +145,17 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->back();
+
+    }
+    public function userIndex()
+    {
+        $userId=Auth::user()->id;
+        $users=User::where('id','!=',$userId)->where('user_type','2')->get();
+        return view('user/users_index',compact('users'));
+    }
+    public function userCreate()
+    {
+        return view('user/users_create');
 
     }
 }

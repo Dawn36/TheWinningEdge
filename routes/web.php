@@ -9,6 +9,7 @@ use App\Http\Controllers\OpportunitiesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\CompanyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,10 +22,13 @@ use App\Http\Controllers\TaskController;
 */
 Route::middleware(['auth'])->group(function () {
 Route::resource('email_template', EmailTemplateController::class);
+Route::resource('company', CompanyController::class);
 Route::resource('task', TaskController::class);
 Route::resource('talk_track', TalkTrackController::class);
 Route::resource('user', UserController::class);
 Route::post('user_note', [UserController::class, 'userNote'])->name('user_note');
+Route::get('user_index', [UserController::class, 'userIndex'])->name('user_index');
+Route::get('user_create', [UserController::class, 'userCreate'])->name('user_create');
 
 Route::resource('contact', ContactController::class);
 Route::get('contact_counter', [ContactController::class, 'contactCounter'])->name('contact_counter');

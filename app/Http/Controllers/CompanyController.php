@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -14,7 +15,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        $userId=Auth::user()->id;
+        $company=Company::where('user_id',$userId)->orderby('id','desc')->get();
+        return view('company/company_index' , compact('company'));
     }
 
     /**
@@ -24,7 +27,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return view('company/company_create');
     }
 
     /**
@@ -35,7 +38,26 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'company_name' => ['required'],
+            'street_address' => ['required'],
+            'city' => ['required'],
+            'state' => ['required'],
+            'zip_code' => ['required'],
+            'country' => ['required'],
+        ]);
+        $data = Company::create([
+            'company_name' => $request->company_name,
+            'street_address' => $request->street_address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zip_code' => $request->zip_code,
+            'country' => $request->country,
+            'user_id'=>Auth::user()->id,
+            'created_at' => date("Y-m-d h:i:s"),
+            'created_by' => Auth::user()->id,
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -55,9 +77,11 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function edit(Company $company)
+    public function edit(int $id)
     {
-        //
+        $company=Company::find($id);
+        return view('company/company_edit',compact('company'));
+        
     }
 
     /**
@@ -67,9 +91,28 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(Request $request, int $id)
     {
-        //
+        $request->validate([
+            'company_name' => ['required'],
+            'street_address' => ['required'],
+            'city' => ['required'],
+            'state' => ['required'],
+            'zip_code' => ['required'],
+            'country' => ['required'],
+        ]);
+        $company=Company::find($id);
+        $company['company_name']=$request->company_name;
+        $company['street_address']=$request->street_address;
+        $company['city']=$request->city;
+        $company['state']=$request->state;
+        $company['zip_code']=$request->zip_code;
+        $company['country']=$request->country;
+        $company['updated_at']=date("Y-m-d h:i:s");
+        $company['updated_by']=Auth::user()->id;
+        $company->save();
+        return redirect()->back();
+
     }
 
     /**
@@ -78,8 +121,10 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy(int $id)
     {
-        //
+        $data = Company::find($id);
+        $data->delete();
+        return redirect()->back();
     }
 }

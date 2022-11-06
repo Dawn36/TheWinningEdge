@@ -1,14 +1,12 @@
 @extends('layouts.main')
 
 @section('content')
-
-
-<!--begin::Content-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Post-->
     <div class="post d-flex flex-column-fluid" id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
+
             <!--begin::Row-->
             <div class="row gy-5 g-xl-10">
                 <div class="col-xl-12 mb-5 mb-xl-10">
@@ -17,8 +15,9 @@
                         <div class="p-10">
                             <!--begin::Heading-->
                             <h1 class="anchor fw-bolder mb-5" id="zero-configuration">
-                                <a href="javascript:;"></a>Users Listing
+                                <a href="javascript:;"></a>Company Listing
                             </h1>
+
                             <!--begin::Notice-->
                             <div class="d-flex align-items-center rounded py-5 px-4 bg-light-primary">
                                 <!--begin::Icon-->
@@ -33,17 +32,16 @@
                                     <!--begin::Svg Icon | path: icons/duotune/art/art006.svg-->
                                     <span class="svg-icon svg-icon-3x svg-icon-primary position-absolute">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M16.0173 9H15.3945C14.2833 9 13.263 9.61425 12.7431 10.5963L12.154 11.7091C12.0645 11.8781 12.1072 12.0868 12.2559 12.2071L12.6402 12.5183C13.2631 13.0225 13.7556 13.6691 14.0764 14.4035L14.2321 14.7601C14.2957 14.9058 14.4396 15 14.5987 15H18.6747C19.7297 15 20.4057 13.8774 19.912 12.945L18.6686 10.5963C18.1487 9.61425 17.1285 9 16.0173 9Z" fill="black" />
-                                            <rect opacity="0.3" x="14" y="4" width="4" height="4" rx="2" fill="black" />
-                                            <path d="M4.65486 14.8559C5.40389 13.1224 7.11161 12 9 12C10.8884 12 12.5961 13.1224 13.3451 14.8559L14.793 18.2067C15.3636 19.5271 14.3955 21 12.9571 21H5.04292C3.60453 21 2.63644 19.5271 3.20698 18.2067L4.65486 14.8559Z" fill="black" />
-                                            <rect opacity="0.3" x="6" y="5" width="6" height="6" rx="3" fill="black" />
+                                            <path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="black" />
+                                            <path d="M12.0006 11.1542C13.1434 11.1542 14.0777 10.22 14.0777 9.0771C14.0777 7.93424 13.1434 7 12.0006 7C10.8577 7 9.92348 7.93424 9.92348 9.0771C9.92348 10.22 10.8577 11.1542 12.0006 11.1542Z" fill="black" />
+                                            <path d="M15.5652 13.814C15.5108 13.6779 15.4382 13.551 15.3566 13.4331C14.9393 12.8163 14.2954 12.4081 13.5697 12.3083C13.479 12.2993 13.3793 12.3174 13.3067 12.3718C12.9257 12.653 12.4722 12.7981 12.0006 12.7981C11.5289 12.7981 11.0754 12.653 10.6944 12.3718C10.6219 12.3174 10.5221 12.2902 10.4314 12.3083C9.70578 12.4081 9.05272 12.8163 8.64456 13.4331C8.56293 13.551 8.49036 13.687 8.43595 13.814C8.40875 13.8684 8.41781 13.9319 8.44502 13.9864C8.51759 14.1133 8.60828 14.2403 8.68991 14.3492C8.81689 14.5215 8.95295 14.6757 9.10715 14.8208C9.23413 14.9478 9.37925 15.0657 9.52439 15.1836C10.2409 15.7188 11.1026 15.9999 11.9915 15.9999C12.8804 15.9999 13.7421 15.7188 14.4586 15.1836C14.6038 15.0748 14.7489 14.9478 14.8759 14.8208C15.021 14.6757 15.1661 14.5215 15.2931 14.3492C15.3838 14.2312 15.4655 14.1133 15.538 13.9864C15.5833 13.9319 15.5924 13.8684 15.5652 13.814Z" fill="black" />
                                         </svg>
                                     </span>
                                     <!--end::Svg Icon-->
                                 </div>
                                 <!--end::Icon-->
                                 <!--begin::Description-->
-                                <div class="text-gray-700 fw-bold fs-6 lh-lg">Here we have a list of all of the Users that we have.</div>
+                                <div class="text-gray-700 fw-bold fs-6 lh-lg">Here we have a list of all of the Company that we have.</div>
                                 <!--end::Description-->
                             </div>
                             <!--end::Notice-->
@@ -67,21 +65,28 @@
                                 </div>
                                 <!--end::Search-->
                             </div>
+                            <!--begin::Card title-->
+                            <!--begin::Card toolbar-->
                             <div class="card-toolbar">
+                                <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                    <button type="button" class="btn btn-primary" onclick="addUser()">
+                                    <!--begin::Admins-->
+                                    <button type="button" class="btn btn-primary me-2" onclick="addCompany()">
+                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                         <span class="svg-icon svg-icon-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
                                                 <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                                             </svg>
                                         </span>
-                                        Add User
+                                        <!--end::Svg Icon-->Add Company
                                     </button>
+                                    <!--end::Admins-->
                                 </div>
+                                <!--end::Toolbar-->
                             </div>
+                            <!--end::Card toolbar-->
                         </div>
-                        
                         <!--end::Card header-->
                         <!--begin::Card Body-->
                         <div class="card-body fs-6 py-lg-5 text-gray-700">
@@ -92,30 +97,29 @@
                                     <thead>
                                         <tr class="fw-bold fs-6 text-muted">
                                             <th class="min-w-30px">ID</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Email</th>
-                                            <th>Phone Number</th>
-                                            <th>Company</th>
-                                            <th>Role</th>
+                                            <th>Company Name</th>
+                                            <th>Street/Address</th>
+                                            <th>City</th>
+                                            <th>State</th>
+                                            <th>Zip Code</th>
+                                            <th>Country</th>
                                             <th>Creation Date</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody class="fw-bold text-gray-600">
-                                        @for ($i = 0; $i < count($users); $i++) @php $a=$i; $a++; @endphp <tr>
+                                        @for ($i = 0; $i < count($company); $i++) @php $a=$i; $a++; @endphp 
+                                        <tr>
                                             <td>{{$a}}</td>
-                                            <td>{{ucwords($users[$i]->first_name)}}</td>
-                                            <td>{{ucwords($users[$i]->last_name)}}</td>
-                                            <td>{{$users[$i]->email}}</td>
-                                            <td>{{ucwords($users[$i]->contact_no)}}</td>
-                                            <td>{{ucwords($users[$i]->company_name)}}</td>
+                                            <td>{{ucwords($company[$i]->company_name)}}</td>
+                                            <td>{{ucwords($company[$i]->street_address)}}</td>
+                                            <td>{{ucwords($company[$i]->city)}}</td>
+                                            <td>{{ucwords($company[$i]->state)}}</td>
+                                            <td>{{ucwords($company[$i]->zip_code)}}</td>
+                                            <td>{{ucwords($company[$i]->country)}}</td>
+                                            <td>{{date("Y-m-d",strtotime($company[$i]->created_at))}}</td>
                                             <td>
-                                                <span class="badge badge-light-success fw-bolder fs-7 px-2 py-1">User</span>
-                                            </td>
-                                            <td>{{Date('Y-m-d',strtotime($users[$i]->created_at))}}</td>
-                                            <td>
-                                                <a class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" data-bs-original-title="Edit User" onclick="editUser('{{ $users[$i]->id}}')">
+                                                <button class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" onclick="editCompany('{{$company[$i]->id}}')" data-bs-original-title="Edit Admin">
                                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                                     <span class="svg-icon svg-icon-2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -124,26 +128,25 @@
                                                         </svg>
                                                     </span>
                                                     <!--end::Svg Icon-->
-                                                </a>
-                                                <form  style="display: inline-block" method="POST" action="{{ route('user.destroy', $users[$i]->id) }}">
+                                                </button>
+                                                <form  style="display: inline-block" method="POST" action="{{ route('company.destroy', $company[$i]->id) }}">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete User">
-                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-                                                        <span class="svg-icon svg-icon-2">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"></path>
-                                                                <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"></path>
-                                                                <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"></path>
-                                                            </svg>
-                                                        </span>
-                                                        <!--end::Svg Icon-->
-                                                    </button>
-                                                </form>
+                                                <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Company">
+                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
+                                                    <span class="svg-icon svg-icon-2">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"></path>
+                                                            <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"></path>
+                                                            <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"></path>
+                                                        </svg>
+                                                    </span>
+                                                    <!--end::Svg Icon-->
+                                                </button>
+                                            </form>
                                             </td>
-                                            </tr>
-                                            @endfor
-
+                                        </tr>
+                                        @endfor
                                     </tbody>
                                 </table>
                             </div>
@@ -159,35 +162,32 @@
     </div>
     <!--end::Post-->
 </div>
-<script>
-   
 
-    function addUser() {
-
+<script type="text/javascript">
+    function addCompany() {
         $.ajax({
             type: 'GET',
-            url: "{{ route('user_create') }}",
+            url: "{{ route('company.create') }}",
             success: function(result) {
-                $('#myModalLgHeading').html('Add Users');
+                $('#myModalLgHeading').html('Add Company');
                 $('#modalBodyLarge').html(result);
                 $('#myModalLg').modal('show');
             }
         });
     }
 
-    function editUser(id) {
-        url = "{{ route('user.edit', ':id') }}";
+    function editCompany(id) {
+        url = "{{route('company.edit',':id')}}";
         url = url.replace(':id', id);
         $.ajax({
             type: 'GET',
             url: url,
             success: function(result) {
-                $('#myModalLgHeading').html('Edit Users');
+                $('#myModalLgHeading').html('Edit Company');
                 $('#modalBodyLarge').html(result);
                 $('#myModalLg').modal('show');
             }
         });
     }
 </script>
-
 @endsection('content')

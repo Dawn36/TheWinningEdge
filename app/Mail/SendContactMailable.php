@@ -10,15 +10,15 @@ use Illuminate\Queue\SerializesModels;
 class SendContactMailable extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $body='';
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($body)
     {
-        //
+        $this->body=$body;
     }
 
     /**
@@ -28,7 +28,8 @@ class SendContactMailable extends Mailable
      */
     public function build()
     {
+        $template=$this->body;
         return $this->subject('Test Mail using Queue in Larvel 8')            
-        ->view('contact/template');
+        ->view('contact/template',compact('template'));
     }
 }

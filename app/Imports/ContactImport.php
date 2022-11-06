@@ -44,7 +44,6 @@ class ContactImport implements ToModel, WithHeadingRow
             "last_name" => $row['last_name'],
             "first_name" => $row['first_name'],
             "job" => $row['job_title'],
-            "status" => 'current_client',
             "phone_number" => $row['direct_phone_number'],
             "email" => $row['email_address'],
             "mobile_phone" => $row['mobile_phone'],

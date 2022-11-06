@@ -76,6 +76,8 @@
                                         {{ Route::currentRouteName() == 'dashboard'  ? 'Dashboard' : '' }}
                                         {{ Route::currentRouteName() == 'talk_track.show' || Route::currentRouteName() == 'talk_track.index'  ? 'Talk Track Listing' : '' }}
                                         {{ Route::currentRouteName() == 'task.show' || Route::currentRouteName() == 'task.index'  ? 'Task Listing' : '' }}
+                                        {{ Route::currentRouteName() == 'company.show' || Route::currentRouteName() == 'company.index'  ? 'Company Listing' : '' }}
+                                        {{ Route::currentRouteName() == 'user_index'   ? 'Users Listing' : '' }}
                                         
                                     </h1>
                                     <!--end::Page Title-->
