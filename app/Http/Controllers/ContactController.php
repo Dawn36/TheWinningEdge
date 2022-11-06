@@ -294,8 +294,7 @@ class ContactController extends Controller
         $request->subject;
         $request->contact_id;
         $request->body;
-        $contactJob=new ContactJob();
-        $contactJob->handle($request->body);
-        dispatch($contactJob);
+        $contactJob=new ContactJob($request->body);
+        // dispatch($contactJob);
     }
 }

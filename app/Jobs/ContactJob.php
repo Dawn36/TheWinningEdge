@@ -15,15 +15,15 @@ class ContactJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
- 
-    /**
+    protected  $body;
+    /**body
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($body)
     {
-       
+        $this->body=$body;
     }
 
     /**
@@ -31,8 +31,9 @@ class ContactJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle($body)
+    public function handle()
     {
-        Mail::to('dawngill08@gmail.com')->send(new SendContactMailable($body));
+
+        Mail::to('dawngill08@gmail.com')->send(new SendContactMailable($this->body));
     }
 }
