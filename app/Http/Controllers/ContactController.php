@@ -295,7 +295,6 @@ class ContactController extends Controller
         $request->contact_id;
         $body=$request->body;
         $contactId=json_decode($request->contact_id);
-        dd($contactId);
         dispatch(new ContactJob($body,$subject,$contactId));
     }
 }
