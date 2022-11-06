@@ -180,9 +180,13 @@ class ContactController extends Controller
         }
         $tagsData=array();
         $tags=json_decode($request->tags);
-        for ($i=0; $i < count($tags); $i++) { 
-            array_push($tagsData,$tags[$i]->value);
+        if(isset($tags))
+        {
+            for ($i=0; $i < count($tags); $i++) { 
+                array_push($tagsData,$tags[$i]->value);
+            }
         }
+        
         $contact['first_name'] = $request->first_name;
         $contact['last_name'] = $request->last_name;
         $contact['job'] = $request->job;
