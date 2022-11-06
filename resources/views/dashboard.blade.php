@@ -317,23 +317,23 @@
     var options = {
         series: [{
                 name: "# Of Phone Calls",
-                data: {{$phoneCallArr}},
+                data: <?php echo $phoneCallArr ?>,
             },
             {
                 name: "# Of Live Conversations",
-                data: {{$liveConversationArr}},
+                data: <?php echo$liveConversationArr?>,
             },
             {
                 name: "# Of Voicemails",
-                data: {{$voiceMailArr}},
+                data: <?php echo$voiceMailArr?>,
             },
             {
                 name: "# Of Emails",
-                data: {{$emailArr}},
+                data: <?php echo$emailArr?>,
             },
             {
                 name: "# Of Meetings",
-                data: {{$meetingArr}},
+                data: <?php echo$meetingArr?>,
             },
         ],
         chart: {
