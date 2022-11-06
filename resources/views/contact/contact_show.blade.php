@@ -26,7 +26,7 @@
 								<!--end::Avatar-->
 								<!--begin::Name-->
 								<div class="fw-bolder mt-5 fs-9">Company Name</div>
-								<a class="fs-1 text-gray-800 text-hover-primary fw-bolder mb-3">{{ucwords($company->company_name == '' ? 'Company name is not added' : $company->company_name)}} </a>
+								<a class="fs-1 text-gray-800 text-hover-primary fw-bolder mb-3" style="text-align: center;">{{ucwords($company->company_name == '' ? 'Company name is not added' : $company->company_name)}} </a>
 								<!--end::Name-->
 								<!--begin::Position-->
 								<div class="mb-9">

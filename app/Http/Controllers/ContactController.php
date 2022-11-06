@@ -291,9 +291,11 @@ class ContactController extends Controller
     }
     public function contactEmailTemplateSend(Request $request)
     {
-        $request->subject;
+        $subject=$request->subject;
         $request->contact_id;
-        $request->body;
-        dispatch(new ContactJob($request->body));
+        $body=$request->body;
+        $contactId=json_decode($request->contact_id);
+        dd($contactId);
+        dispatch(new ContactJob($body,$subject,$contactId));
     }
 }
