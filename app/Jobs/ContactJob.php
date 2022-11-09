@@ -6,7 +6,6 @@ use Illuminate\Bus\Queueable;
 use App\Mail\SendContactMailable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -22,16 +21,18 @@ class ContactJob implements ShouldQueue
     protected  $body;
     protected  $subject;
     protected  $contactId;
+    protected  $userId;
     /**body
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($body,$subject,$contactId)
+    public function __construct($body,$subject,$contactId,$userId)
     {
         $this->body=$body;
         $this->subject=$subject;
         $this->contactId=$contactId;
+        $this->userId=$userId;
     }
 
     /**
@@ -47,7 +48,6 @@ class ContactJob implements ShouldQueue
         $contact=Contact::whereIn('id',$contactId)->get();
         $mytime = Carbon\Carbon::now();
         $date=$mytime->toDateTimeString();
-        $userId=Auth::user()->id;
         for ($i=0; $i < count($contact); $i++) { 
             $body=str_replace("[[FIRSTNAME]]",$contact[$i]->first_name,$body);
             $body=str_replace("[[LASTNAME]]",$contact[$i]->last_name,$body);
@@ -55,7 +55,7 @@ class ContactJob implements ShouldQueue
             $body=str_replace("[[MOBILEPHONE]]",$contact[$i]->mobile_phone,$body);
             $body=str_replace("[[LINKINURL]]",$contact[$i]->linked_in_url,$body);
             Mail::to($contact[$i]->email)->send(new SendContactMailable($body,$subject));
-            DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$userId,$contact[$i]->id,'email',$date]);
+            DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$this->userId,$contact[$i]->id,'email',$date]);
         }
 
     }
