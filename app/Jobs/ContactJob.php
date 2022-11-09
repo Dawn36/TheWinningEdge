@@ -42,19 +42,19 @@ class ContactJob implements ShouldQueue
      */
     public function handle()
     {
-        $body=$this->body;
+        $body1=$this->body;
         $subject=$this->subject;
         $contactId=$this->contactId;
         $contact=Contact::whereIn('id',$contactId)->get();
         $mytime = Carbon\Carbon::now();
         $date=$mytime->toDateTimeString();
         for ($i=0; $i < count($contact); $i++) { 
-            $body=str_replace("[[FIRSTNAME]]",$contact[$i]->first_name,$body);
-            $body=str_replace("[[LASTNAME]]",$contact[$i]->last_name,$body);
-            $body=str_replace("[[EMAIL]]",$contact[$i]->email,$body);
-            $body=str_replace("[[MOBILEPHONE]]",$contact[$i]->mobile_phone,$body);
-            $body=str_replace("[[LINKINURL]]",$contact[$i]->linked_in_url,$body);
-            Mail::to($contact[$i]->email)->send(new SendContactMailable($body,$subject));
+            $body1=str_replace("[[FIRSTNAME]]",$contact[$i]->first_name,$body1);
+            $body1=str_replace("[[LASTNAME]]",$contact[$i]->last_name,$body1);
+            $body1=str_replace("[[EMAIL]]",$contact[$i]->email,$body1);
+            $body1=str_replace("[[MOBILEPHONE]]",$contact[$i]->mobile_phone,$body1);
+            $body1=str_replace("[[LINKINURL]]",$contact[$i]->linked_in_url,$body1);
+            Mail::to($contact[$i]->email)->send(new SendContactMailable($body1,$subject));
             DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$this->userId,$contact[$i]->id,'email',$date]);
         }
 
