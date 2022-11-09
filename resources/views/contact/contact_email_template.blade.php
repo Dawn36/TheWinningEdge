@@ -35,10 +35,7 @@
 </form>
 <script>
      
-    // $("#kt_datatable_example_1").DataTable();
-    $(document).ready(function() {
-       
-        var quill = new Quill('.kt_docs_quill_basic', {
+     var quill = new Quill('.kt_docs_quill_basic', {
             modules: {
                 toolbar: [
                     [{
@@ -53,13 +50,13 @@
        
         quill.on('text-change', function() {
         document.getElementById("body").value = quill.root.innerHTML;
-
-        
     });
+    // $("#kt_datatable_example_1").DataTable();
+    // $(document).ready(function() {
+       
 
        
-   
-    });
+    // });
     function emailName(templateId) {
         console.log(templateId);
     var value = {
