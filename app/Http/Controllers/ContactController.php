@@ -304,7 +304,7 @@ class ContactController extends Controller
         $request->contact_id;
         $body=$request->body;
         $contactId=json_decode($request->contact_id);
-        dispatch(new ContactJob($body,$subject,$contactId));
+        dispatch(new ContactJob($body,$subject,$contactId))->delay(now()->addSecond(30));;
         return redirect()->back();
     }
 }
