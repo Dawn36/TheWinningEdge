@@ -305,7 +305,7 @@ class ContactController extends Controller
         $body=$request->body;
         $contactId=json_decode($request->contact_id);
         $userId=Auth::user()->id;
-        dispatch(new ContactJob($body,$subject,$contactId,$userId))->delay(now()->addSecond(3));;
+        dispatch(new ContactJob($body,$subject,$contactId,$userId))->delay(now()->addSecond(3));
         return redirect()->back();
     }
 }

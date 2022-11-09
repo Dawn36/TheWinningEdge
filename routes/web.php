@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\CompanyController;
+use Illuminate\Support\Facades\Artisan;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,6 +61,11 @@ Route::get('/', function () {
     return redirect('login');
 });
 
+Route::get('command', function () {
+    Artisan::call('queue:restart');
+    Artisan::call('queue:work');
+    dd("Done");
+});
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth'])->name('dashboard');
