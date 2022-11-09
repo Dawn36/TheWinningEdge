@@ -41,6 +41,21 @@
 <script src="{{ asset('theme/assets/js/custom/documentation/editors/quill/basic.js')}}"></script>
 <!--end::Page Custom Javascript-->
 <script>
+    function addTaskContact(contactsId) {
+    var value = {
+            contacts_id:contactsId
+        };
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('contact_task') }}",
+            data: value,
+            success: function(result) {
+                $('#myModalLgHeading').html('Add Task');
+                $('#modalBodyLarge').html(result);
+                $('#myModalLg').modal('show');
+            }
+        });
+    }
     // $("#kt_datatable_example_1").DataTable();
     $(document).ready(function() {
         // Datatables
@@ -49,6 +64,13 @@
         [25, 50, 100, 200, -1],
         [25, 50, 100, 200, "All"]
     ],
+});
+var input = document.getElementById("myInput");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("submitbutton").click();
+  }
 });
         $('#search').on('keyup', function() {
             table.search(this.value).draw();

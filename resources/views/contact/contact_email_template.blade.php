@@ -1,3 +1,4 @@
+<x-keyword></x-keyword>
 <form id="" class="form" method="POST" action="{{ route('contact_email_template') }}" enctype="multipart/form-data">
     @csrf
     <!--begin::Scroll-->

@@ -89,7 +89,7 @@
                                 <!--begin::User menu-->
                                 <div id="kt_docs_search" class="d-flex align-items-center w-lg-250px me-2 me-lg-5">
                                     <!--begin::Form-->
-                                    <form data-kt-search-element="form" class="d-block w-100 mb-lg-0 position-relative" autocomplete="off">
+                                    <form method="GET" action="{{ route('contact.index') }}" class="d-block w-100 mb-lg-0 position-relative" >
                                         <input type="hidden">
                                         <span class="svg-icon svg-icon-2 svg-icon-gray-700 position-absolute top-50 translate-middle-y ms-4">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -97,7 +97,8 @@
                                                 <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"></path>
                                             </svg>
                                         </span>
-                                        <input type="text" class="form-control form-control-solid h-40px ps-13 fs-7" name="search" value="" placeholder="Search tags and companies ..." data-kt-search-element="input">
+                                        <input type="text" class="form-control form-control-solid h-40px ps-13 fs-7" id="myInput" name="search" value="{{request()->search}}" placeholder="Search tags and companies ..." data-kt-search-element="input">
+                                        <input hidden type="submit" id="submitbutton"/>
                                         <span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5" data-kt-search-element="spinner">
                                             <span class="spinner-border h-15px w-15px align-middle text-gray-400"></span>
                                         </span>

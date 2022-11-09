@@ -25,10 +25,15 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $dbWhere='';
+        if(isset($request->search))
+        {
+            $dbWhere=" and CONCAT(c.`tags`,cc.`company_name`) like '%$request->search%'";
+        }
         $userId=Auth::user()->id;
-       $contact= DB::select(DB::raw("SELECT *,
+       $contact= DB::select(DB::raw("SELECT c.*,c.email as email_address,cc.company_name,
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='email' AND contacts_id = c.id ) AS email,
         (SELECT created_at FROM `contact_history` WHERE `status`='email' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_email,
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='live_conversation' AND contacts_id = c.id ) AS live_conversation,
@@ -42,8 +47,8 @@ class ContactController extends Controller
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ) AS meeting,
         (SELECT created_at FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_meeting
          
-         FROM `contacts` c
-         WHERE user_id='$userId' order by c.id desc
+         FROM `contacts` c left join companies cc on cc.id=c.companies_id
+         WHERE c.user_id='$userId' $dbWhere order by c.id desc
         "));
         return view('contact/contact_index' , compact('contact'));
     }
@@ -300,5 +305,6 @@ class ContactController extends Controller
         $body=$request->body;
         $contactId=json_decode($request->contact_id);
         dispatch(new ContactJob($body,$subject,$contactId));
+        return redirect()->back();
     }
 }

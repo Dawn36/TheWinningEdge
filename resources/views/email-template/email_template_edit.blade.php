@@ -1,3 +1,4 @@
+<x-keyword></x-keyword>
 <form id="" class="form" method="POST" action="{{ route('email_template.update',$emailTemplate->id) }}" enctype="multipart/form-data">
     @method("PUT")
     @csrf

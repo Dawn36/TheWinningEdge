@@ -69,7 +69,7 @@
 									<div class="text-gray-600 text-hover-primary">{{ucwords($contact->phone_number)}}</div>
 
 									<div class="fw-bolder mt-5">Email Address</div>
-									<div class="text-gray-600 text-hover-primary">{{$contact->email}}</div>
+									<div class="text-gray-600 text-hover-primary"><a href="mailto:{{$contact->email}}" class="fw-bolder text-gray-800 text-hover-primary mb-1" onclick="getEmailObj('email','{{$contact->id}}',this)">{{$contact->email}}</a></div>
 
 									<div class="fw-bolder mt-5">Mobile phone</div>
 									<div class="text-gray-600 text-hover-primary">{{ucwords($contact->mobile_phone)}}</div>
@@ -597,21 +597,7 @@
 
 <script type="text/javascript">
 
-function addTaskContact(contactsId) {
-    var value = {
-            contacts_id:contactsId
-        };
-        $.ajax({
-            type: 'GET',
-            url: "{{ route('contact_task') }}",
-            data: value,
-            success: function(result) {
-                $('#myModalLgHeading').html('Add Task');
-                $('#modalBodyLarge').html(result);
-                $('#myModalLg').modal('show');
-            }
-        });
-    }
+
 
 	function editTaskContact(id,contactsId) {
     var value = {
@@ -661,6 +647,11 @@ function addTaskContact(contactsId) {
             }
         });
     }
+	function getEmailObj(status,contactsId,obj)
+	{
+		obj=obj.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1].children[1].children[3];
+		addContactCounter(status,contactsId,obj) 
+	}
     function addContactCounter(status,contactsId,obj) {
         var value = {
             status: status,

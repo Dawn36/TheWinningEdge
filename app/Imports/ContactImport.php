@@ -36,6 +36,7 @@ class ContactImport implements ToModel, WithHeadingRow
                 'country'=>$row['company_country'],
                 'created_at' => date("Y-m-d h:i:s"),
                 'created_by' => Auth::user()->id,
+                'website'=>$row['website'],
             ]);
             $companyId=$company->id;
         }

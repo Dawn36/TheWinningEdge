@@ -138,11 +138,10 @@
                                         <tr class="fw-bold fs-6 text-muted">
                                             <th ><input id="select_all" value="" type="checkbox"></th>
                                             <th class="min-w-30px">ID</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Mobile Phone</th>
+                                            <th>Full Name</th>
+                                            <th>Email</th>
                                             <th>Status</th>
-                                            <th>Creation Date</th>
+                                            <th>Company Name</th>
                                             <th># Of Phone Calls</th>
                                             <th># Of Live Conversations</th>
                                             <th># Of Voicemails</th>
@@ -156,13 +155,11 @@
                                         <tr>
                                             <td><input  id="checkbox" name="checkbox" value="{{$contact[$i]->id}}" type="checkbox" onclick="Check(this)"></td>
                                             <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{$a}}</a></td>
-                                           
-                                            <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->first_name)}}</a></td>
-                                            <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->last_name)}}</a></td>
-                                            <td>{{$contact[$i]->mobile_phone}}</td>
+                                            <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->first_name)}} {{ucwords($contact[$i]->last_name)}}</a></td>
+                                            <td><a href="mailto:{{$contact[$i]->email_address}}" class="fw-bolder text-gray-800 text-hover-primary mb-1" onclick="getEmailObj('email','{{$contact[$i]->id}}',this)">{{$contact[$i]->email_address}}</a></td>
                                             @php $status=explode('_',$contact[$i]->status) @endphp
                                             <td>{{ ucwords($status[0]) }} {{ count($status) == "2" ? ucwords($status[1] ) : '' }}</td>
-                                            <td>{{Date("Y-m-d",strtotime($contact[$i]->created_at))}}</td>
+                                            <td>{{ucwords($contact[$i]->company_name)}}</td>
                                             <td>
                                                 <center>
                                                     <a  onclick="addContactCounter('phone_call','{{$contact[$i]->id}}',this)" style="cursor: pointer;">
@@ -371,21 +368,21 @@ function Check(obj) {
 
 }
 
-  function addTaskContact(contactsId) {
-    var value = {
-            contacts_id:contactsId
-        };
-        $.ajax({
-            type: 'GET',
-            url: "{{ route('contact_task') }}",
-            data: value,
-            success: function(result) {
-                $('#myModalLgHeading').html('Add Task');
-                $('#modalBodyLarge').html(result);
-                $('#myModalLg').modal('show');
-            }
-        });
-    }
+//   function addTaskContact(contactsId) {
+//     var value = {
+//             contacts_id:contactsId
+//         };
+//         $.ajax({
+//             type: 'GET',
+//             url: "{{ route('contact_task') }}",
+//             data: value,
+//             success: function(result) {
+//                 $('#myModalLgHeading').html('Add Task');
+//                 $('#modalBodyLarge').html(result);
+//                 $('#myModalLg').modal('show');
+//             }
+//         });
+//     }
 
     function contactUploader() {
         $.ajax({
@@ -422,6 +419,11 @@ function Check(obj) {
                 $('#myModalLg').modal('show');
             }
         });
+    }
+    function getEmailObj(status,contactsId,obj)
+    {
+        obj=obj.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.children[0].children[0];
+        addContactCounter(status,contactsId,obj);
     }
     function addContactCounter(status,contactsId,obj) {
         var value = {

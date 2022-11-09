@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -68,7 +69,10 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        $companyId=$company->id;
+        $contact=Contact::where('companies_id',$companyId)->get();
+        return view('company/company_show',compact('company','contact'));
+        
     }
 
     /**
