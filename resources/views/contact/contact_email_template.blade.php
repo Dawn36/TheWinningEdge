@@ -67,11 +67,9 @@
             url: "{{ route('get_email_templater') }}",
             data: value,
             success: function(result) {
-                var quill = new Quill('.kt_docs_quill_basic', {});
                 document.getElementById("subject").value=result.subject
                 var value1 = document.getElementById("body").value=result.body;
                 var delta1 = quill.clipboard.convert(value1);
-
                 quill.setContents(delta1, 'silent');
             }
         });
