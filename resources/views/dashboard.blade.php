@@ -131,7 +131,7 @@
                     <div class="card card-xl-stretch mb-xl-8 mb-5">
                         <div class="card-header border-0 pt-5">
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bolder fs-3 mb-1">Revenue Producing Target Overview</span>
+                                <span class="card-label fw-bolder fs-3 mb-1">Revenue Producing Activity - Monthly Target</span>
                                 <span class="text-muted fw-bold fs-7">Revenue Producing Activities Target</span>
                             </h3>
                         </div>
@@ -207,7 +207,7 @@
                     <div class="card card-xl-stretch mb-xl-8 mb-5">
                         <div class="card-header border-0 pt-5">
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bolder fs-3 mb-1">Opportunities Target Overview</span>
+                                <span class="card-label fw-bolder fs-3 mb-1">Opportunities - Annual Target</span>
                                 <span class="text-muted fw-bold fs-7">Opportunities Target</span>
                             </h3>
                         </div>

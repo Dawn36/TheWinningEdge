@@ -269,7 +269,7 @@ class ContactController extends Controller
     }
     public function uploadContactSubmit(Request $request)
     {
-        Excel::import(new ContactImport, $request->file);
+        Excel::import(new ContactImport($request->tags), $request->file);
 
             return redirect()->back();
     }

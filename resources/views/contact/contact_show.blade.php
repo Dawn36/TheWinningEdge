@@ -57,10 +57,21 @@
 							<!--begin::Details content-->
 							<div id="kt_user_view_details" class="collapse show">
 								<div class="pb-5 fs-6">
+									<div class="fw-bolder mt-5">Contact Name</div>
+									<div class="text-gray-600 text-hover-primary">{{ucwords($contact->first_name)}} {{ucwords($contact->last_name)}}</div>
+
+									<div class="fw-bolder mt-5">Mobile phone</div>
+									<div class="text-gray-600 text-hover-primary">{{ucwords($contact->mobile_phone)}}</div>
+
+									<div class="fw-bolder mt-5">Email Address</div>
+									<div class="text-gray-600 text-hover-primary"><a class=" text-gray-600 text-hover-primary mb-1" href="mailto:{{$contact->email}}"  onclick="getEmailObj('email','{{$contact->id}}',this)">{{$contact->email}}</a></div>
 
 									<div class="fw-bolder mt-5">Contact Status</div>
                                     @php $status=explode('_',$contact->status) @endphp
 									<div class="text-gray-600 text-hover-primary">{{ ucwords($status[0]) }} {{ count($status) == "2" ? ucwords($status[1] ) : '' }}</div>
+
+									<div class="fw-bolder mt-5">Company Name</div>
+									<div class="text-gray-600 text-hover-primary">{{ucwords($contact->company_name)}}</div>
 
 									<div class="fw-bolder mt-5">Job Title</div>
 									<div class="text-gray-600 text-hover-primary">{{ucwords($contact->job)}}</div>
@@ -68,14 +79,7 @@
 									<div class="fw-bolder mt-5">Direct Phone Number</div>
 									<div class="text-gray-600 text-hover-primary">{{ucwords($contact->phone_number)}}</div>
 
-									<div class="fw-bolder mt-5">Email Address</div>
-									<div class="text-gray-600 text-hover-primary"><a href="mailto:{{$contact->email}}" class="fw-bolder text-gray-800 text-hover-primary mb-1" onclick="getEmailObj('email','{{$contact->id}}',this)">{{$contact->email}}</a></div>
-
-									<div class="fw-bolder mt-5">Mobile phone</div>
-									<div class="text-gray-600 text-hover-primary">{{ucwords($contact->mobile_phone)}}</div>
-
-									<div class="fw-bolder mt-5">Company Name</div>
-									<div class="text-gray-600 text-hover-primary">{{ucwords($contact->company_name)}}</div>
+									
 
 									<div class="fw-bolder mt-5">LinkedIn Contact Profile URL</div>
 									<div class="text-gray-600">

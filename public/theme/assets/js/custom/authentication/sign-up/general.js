@@ -95,7 +95,7 @@ var KTSignupGeneral = (function() {
                                         t.removeAttribute("data-kt-indicator"),
                                             (t.disabled = !1),
                                             Swal.fire({
-                                                text: "You have successfully Register",
+                                                text: "Successfully Registered",
                                                 icon: "success",
                                                 buttonsStyling: !1,
                                                 confirmButtonText: "Ok, got it!",
@@ -103,7 +103,6 @@ var KTSignupGeneral = (function() {
                                                     confirmButton: "btn btn-primary",
                                                 },
                                             }).then(function(t) {
-                                                console.log("adsad");
                                                 $("#kt_sign_up_form").submit();
                                             });
                                     }, 1500)) :

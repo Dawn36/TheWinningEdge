@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ContactImport implements ToModel, WithHeadingRow
 {
+    protected $tag;
+
+    public function __construct($tag) 
+    {
+        $this->tag = $tag;
+    }
     /**
     * @param array $row
     *
@@ -18,6 +24,16 @@ class ContactImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
+        $tags=$this->tag;
+        $tagsData=array();
+        $tags=json_decode($tags);
+        if(isset($tags))
+        {
+            for ($i=0; $i < count($tags); $i++) { 
+                array_push($tagsData,$tags[$i]->value);
+            }
+        }
+        $tagsData=implode(',',$tagsData);
         $userId=Auth::user()->id;
         $company=Company::where('company_name',$row['company_name'])->where('user_id',$userId)->get();
         if(count($company) > 0)
@@ -51,6 +67,7 @@ class ContactImport implements ToModel, WithHeadingRow
             "companies_id" => $companyId,
             "linked_in_url" => $row['linkedin_contact_profile_url'],
             "user_id" => $userId,
+            "tags" =>$tagsData,
         ]);
 
         return $contact;

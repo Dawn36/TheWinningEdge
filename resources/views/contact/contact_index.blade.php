@@ -121,6 +121,7 @@
                                         </span>
                                         <!--end::Svg Icon-->Upload Contact
                                     </button>
+                                    
                                     <!--end::Upload Contact-->
                                 </div>
                                 <!--end::Toolbar-->
@@ -139,9 +140,10 @@
                                             <th ><input id="select_all" value="" type="checkbox"></th>
                                             <th class="min-w-30px">ID</th>
                                             <th>Full Name</th>
+                                            <th>phone number</th>
                                             <th>Email</th>
-                                            <th>Status</th>
                                             <th>Company Name</th>
+                                            <th>Status</th>
                                             <th># Of Phone Calls</th>
                                             <th># Of Live Conversations</th>
                                             <th># Of Voicemails</th>
@@ -156,10 +158,11 @@
                                             <td><input  id="checkbox" name="checkbox" value="{{$contact[$i]->id}}" type="checkbox" onclick="Check(this)"></td>
                                             <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{$a}}</a></td>
                                             <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->first_name)}} {{ucwords($contact[$i]->last_name)}}</a></td>
+                                            <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->phone_number)}} </a></td>
                                             <td><a href="mailto:{{$contact[$i]->email_address}}" class="fw-bolder text-gray-800 text-hover-primary mb-1" onclick="getEmailObj('email','{{$contact[$i]->id}}',this)">{{$contact[$i]->email_address}}</a></td>
                                             @php $status=explode('_',$contact[$i]->status) @endphp
-                                            <td>{{ ucwords($status[0]) }} {{ count($status) == "2" ? ucwords($status[1] ) : '' }}</td>
                                             <td>{{ucwords($contact[$i]->company_name)}}</td>
+                                            <td>{{ ucwords($status[0]) }} {{ count($status) == "2" ? ucwords($status[1] ) : '' }}</td>
                                             <td>
                                                 <center>
                                                     <a  onclick="addContactCounter('phone_call','{{$contact[$i]->id}}',this)" style="cursor: pointer;">
