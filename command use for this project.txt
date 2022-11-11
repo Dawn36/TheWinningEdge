@@ -35,3 +35,11 @@ resource controller,model,migration
 php artisan make:model Products -mcr
 
 php artisan make:migration add_paid_to_users_table --table=users
+
+php artisan queue:work
+php artisan queue:restart
+php artisan route:cache
+php artisan cache:clear
+php artisan config:clear
+php artisan view:clear
+php artisan optimize:clear

@@ -7,7 +7,7 @@
         <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">Email Name</label>
             <select name="template_id"  class="form-control form-control-solid mb-3 mb-lg-0" onchange="emailName(this.value)" required>
-            <option value="0"></option>
+            <option value="0">Select Email Template</option>
             @for($i=0; $i < count($template); $i++)
             <option value="{{$template[$i]->id}}" >{{$template[$i]->template_name}}</option>
             @endfor
