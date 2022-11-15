@@ -6,7 +6,7 @@
             <input type="file" name="file" class="form-control form-control-solid mb-3 mb-lg-0" required>
         </div>
         <div class="fv-row mb-7">
-            <label class="required fw-bold fs-6 mb-2">Tags</label>
+            <label class=" fw-bold fs-6 mb-2">Tags</label>
             <input name="tags" class="form-control form-control-solid mb-3 mb-lg-0 kt_tagify_2" value="" placeholder="Type the tags here" />
         </div>
     </div>

@@ -41,12 +41,13 @@ class CompanyController extends Controller
     {
         $request->validate([
             'company_name' => ['required'],
-            'street_address' => ['required'],
-            'city' => ['required'],
-            'state' => ['required'],
-            'zip_code' => ['required'],
-            'country' => ['required'],
+            
         ]);
+        // 'street_address' => ['required'],
+        //     'city' => ['required'],
+        //     'state' => ['required'],
+        //     'zip_code' => ['required'],
+        //     'country' => ['required'],
         $data = Company::create([
             'company_name' => $request->company_name,
             'street_address' => $request->street_address,
@@ -99,12 +100,13 @@ class CompanyController extends Controller
     {
         $request->validate([
             'company_name' => ['required'],
-            'street_address' => ['required'],
-            'city' => ['required'],
-            'state' => ['required'],
-            'zip_code' => ['required'],
-            'country' => ['required'],
+          
         ]);
+        // 'street_address' => ['required'],
+        // 'city' => ['required'],
+        // 'state' => ['required'],
+        // 'zip_code' => ['required'],
+        // 'country' => ['required'],
         $company=Company::find($id);
         $company['company_name']=$request->company_name;
         $company['street_address']=$request->street_address;

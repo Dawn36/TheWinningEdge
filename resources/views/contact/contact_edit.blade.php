@@ -30,8 +30,8 @@
             <input type="number"  min="0" value="{{$contact->phone_number}}" name="phone_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Direct Phone Number here." />
         </div>
         <div class="fv-row mb-7">
-            <label class=" fw-bold fs-6 mb-2">Email Address</label>
-            <input type="email"  min="0" value="{{$contact->email}}" name="email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Email Address here." />
+            <label class="required fw-bold fs-6 mb-2">Email Address</label>
+            <input type="email"  min="0" value="{{$contact->email}}" name="email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Email Address here." required/>
         </div>
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Mobile phone</label>
@@ -50,11 +50,11 @@
             <input type="text"  name="linked_in_url" value="{{$contact->linked_in_url}}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter the LinkedIn Contact Profile URL here." />
         </div>
         <div class="fv-row mb-7">
-            <label class="required fw-bold fs-6 mb-2">Tags</label>
+            <label class=" fw-bold fs-6 mb-2">Tags</label>
             <input name="tags" value="{{$contact->tags}}" class="form-control form-control-solid mb-3 mb-lg-0 kt_tagify_2" value="" placeholder="Type the tags here" />
         </div>
         <div class="fv-row mb-7">
-            <label class="required fw-bold fs-6 mb-2">Note</label>
+            <label class=" fw-bold fs-6 mb-2">Note</label>
             <textarea name="note" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please add the note for the contact">{{$contact->note}}</textarea>
         </div>
     </div>
