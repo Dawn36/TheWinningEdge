@@ -50,6 +50,7 @@ class CompanyController extends Controller
         //     'country' => ['required'],
         $data = Company::create([
             'company_name' => $request->company_name,
+            'website' => $request->website,
             'street_address' => $request->street_address,
             'city' => $request->city,
             'state' => $request->state,
@@ -111,13 +112,14 @@ class CompanyController extends Controller
         $company['company_name']=$request->company_name;
         $company['street_address']=$request->street_address;
         $company['city']=$request->city;
+        $company['website']=$request->website;
         $company['state']=$request->state;
         $company['zip_code']=$request->zip_code;
         $company['country']=$request->country;
         $company['updated_at']=date("Y-m-d h:i:s");
         $company['updated_by']=Auth::user()->id;
         $company->save();
-        return redirect()->back();
+        return $company;
 
     }
 

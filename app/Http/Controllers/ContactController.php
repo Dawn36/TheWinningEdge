@@ -206,7 +206,15 @@ class ContactController extends Controller
         $contact['updated_by'] = Auth::user()->id;
         $contact['updated_at'] = date("Y-m-d");
         $contact->save();
-        return redirect()->back();
+        $companiesId=$contact->companies_id;
+        $companies=Company::find($companiesId);
+        $contact['companies_id']=$companies->company_name;
+         $status=explode('_',$contact['status']) ;
+         $statusnew= ucwords($status[0]);
+         $statusnew .=' ';
+         $statusnew .=count($status) == "2" ? ucwords($status[1] ) : '';
+         $contact['status'] =$statusnew;
+        return $contact;
     }
 
     /**

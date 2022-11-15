@@ -26,7 +26,7 @@
             <!--begin::Content-->
             <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
                 <!--begin::Logo-->
-                <a href="#" class="mb-12">
+                <a href="{{route('login')}}" class="mb-12">
                     <img alt="Logo" src="{{ asset('theme/assets/media/logos/logo.png')}}" class="h-150px" />
                 </a>
                 <!--end::Logo-->
@@ -42,7 +42,7 @@
                             <!--end::Title-->
                             <!--begin::Link-->
                             <div class="text-gray-400 fw-bold fs-4">Already have an account?
-                                <a href="sign-in.php" class="link-primary fw-bolder">Sign in here</a>
+                                <a href="{{route('login')}}" class="link-primary fw-bolder">Sign in here</a>
                             </div>
                             <!--end::Link-->
                         </div>

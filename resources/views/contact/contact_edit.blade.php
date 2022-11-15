@@ -1,4 +1,4 @@
-<form id="" class="form" method="POST" action="{{ route('contact.update',$contact->id) }}" enctype="multipart/form-data">
+<form id="contact_update" class="form" method="POST" action="{{ route('contact.update',$contact->id) }}" enctype="multipart/form-data">
     @method("PUT")
     @csrf
     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
@@ -62,7 +62,7 @@
     <!--begin::Actions-->
     <div class="text-center pt-15">
         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close">Discard</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="contactUpdate()">Submit</button>
     </div>
     <!--end::Actions-->
 </form>
@@ -71,167 +71,29 @@
      var input2 = document.querySelector(".kt_tagify_2");
         new Tagify(input2);
 
-    var KTImageInput = function(e, t) {
-        var n = this;
-        if (null != e) {
-            var i = {},
-                r = function() {
-                    (n.options = KTUtil.deepExtend({}, i, t)),
-                    (n.uid = KTUtil.getUniqueId("image-input")),
-                    (n.element = e),
-                    (n.inputElement = KTUtil.find(e, 'input[type="file"]')),
-                    (n.wrapperElement = KTUtil.find(e, ".image-input-wrapper")),
-                    (n.cancelElement = KTUtil.find(
-                        e,
-                        '[data-kt-image-input-action="cancel"]'
-                    )),
-                    (n.removeElement = KTUtil.find(
-                        e,
-                        '[data-kt-image-input-action="remove"]'
-                    )),
-                    (n.hiddenElement = KTUtil.find(e, 'input[type="hidden"]')),
-                    (n.src = KTUtil.css(n.wrapperElement, "backgroundImage")),
-                    n.element.setAttribute("data-kt-image-input", "true"),
-                        o(),
-                        KTUtil.data(n.element).set("image-input", n);
+        function contactUpdate() {
+        $.ajax({
+                url: $("#contact_update").attr('action'),
+                method: 'POST',
+                data: $('#contact_update').serialize(),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                 },
-                o = function() {
-                    KTUtil.addEvent(n.inputElement, "change", a),
-                        KTUtil.addEvent(n.cancelElement, "click", l),
-                        KTUtil.addEvent(n.removeElement, "click", s);
-                },
-                a = function(e) {
-                    if (
-                        (e.preventDefault(),
-                            null !== n.inputElement &&
-                            n.inputElement.files &&
-                            n.inputElement.files[0])
-                    ) {
-                        if (
-                            !1 ===
-                            KTEventHandler.trigger(
-                                n.element,
-                                "kt.imageinput.change",
-                                n
-                            )
-                        )
-                            return;
-                        var t = new FileReader();
-                        (t.onload = function(e) {
-                            KTUtil.css(
-                                n.wrapperElement,
-                                "background-image",
-                                "url(" + e.target.result + ")"
-                            );
-                        }),
-                        t.readAsDataURL(n.inputElement.files[0]),
-                            n.element.classList.add("image-input-changed"),
-                            n.element.classList.remove("image-input-empty"),
-                            KTEventHandler.trigger(
-                                n.element,
-                                "kt.imageinput.changed",
-                                n
-                            );
-                    }
-                },
-                l = function(e) {
-                    e.preventDefault(),
-                        !1 !==
-                        KTEventHandler.trigger(
-                            n.element,
-                            "kt.imageinput.cancel",
-                            n
-                        ) &&
-                        (n.element.classList.remove("image-input-changed"),
-                            n.element.classList.remove("image-input-empty"),
-                            "none" === n.src ?
-                            (KTUtil.css(
-                                    n.wrapperElement,
-                                    "background-image",
-                                    ""
-                                ),
-                                n.element.classList.add("image-input-empty")) :
-                            KTUtil.css(
-                                n.wrapperElement,
-                                "background-image",
-                                n.src
-                            ),
-                            (n.inputElement.value = ""),
-                            null !== n.hiddenElement &&
-                            (n.hiddenElement.value = "0"),
-                            KTEventHandler.trigger(
-                                n.element,
-                                "kt.imageinput.canceled",
-                                n
-                            ));
-                },
-                s = function(e) {
-                    e.preventDefault(),
-                        !1 !==
-                        KTEventHandler.trigger(
-                            n.element,
-                            "kt.imageinput.remove",
-                            n
-                        ) &&
-                        (n.element.classList.remove("image-input-changed"),
-                            n.element.classList.add("image-input-empty"),
-                            KTUtil.css(
-                                n.wrapperElement,
-                                "background-image",
-                                "none"
-                            ),
-                            (n.inputElement.value = ""),
-                            null !== n.hiddenElement &&
-                            (n.hiddenElement.value = "1"),
-                            KTEventHandler.trigger(
-                                n.element,
-                                "kt.imageinput.removed",
-                                n
-                            ));
-                };
-            !0 === KTUtil.data(e).has("image-input") ?
-                (n = KTUtil.data(e).get("image-input")) :
-                r(),
-                (n.getInputElement = function() {
-                    return n.inputElement;
-                }),
-                (n.goElement = function() {
-                    return n.element;
-                }),
-                (n.destroy = function() {
-                    KTUtil.data(n.element).remove("image-input");
-                }),
-                (n.on = function(e, t) {
-                    return KTEventHandler.on(n.element, e, t);
-                }),
-                (n.one = function(e, t) {
-                    return KTEventHandler.one(n.element, e, t);
-                }),
-                (n.off = function(e) {
-                    return KTEventHandler.off(n.element, e);
-                }),
-                (n.trigger = function(e, t) {
-                    return KTEventHandler.trigger(n.element, e, t, n, t);
-                });
-        }
-    };
-    (KTImageInput.getInstance = function(e) {
-        return null !== e && KTUtil.data(e).has("image-input") ?
-            KTUtil.data(e).get("image-input") :
-            null;
-    }),
-    (KTImageInput.createInstances = function(e = "[data-kt-image-input]") {
-        var t = document.querySelectorAll(e);
-        if (t && t.length > 0)
-            for (var n = 0, i = t.length; n < i; n++) new KTImageInput(t[n]);
-    }),
-    (KTImageInput.init = function() {
-        KTImageInput.createInstances();
-    }),
-    "loading" === document.readyState ?
-        document.addEventListener("DOMContentLoaded", KTImageInput.init) :
-        KTImageInput.init(),
-        "undefined" != typeof module &&
-        void 0 !== module.exports &&
-        (module.exports = KTImageInput);
+            success: function(result) {
+                console.log(result);
+                updateText2(result);
+            }
+        });
+    }
+    function updateText2(result)
+    {
+        obj2.parentElement.parentElement.children[2].children[0].textContent=result.first_name+" "+result.last_name;
+        obj2.parentElement.parentElement.children[3].children[0].textContent=result.phone_number;
+        obj2.parentElement.parentElement.children[4].children[0].textContent=result.email;
+        obj2.parentElement.parentElement.children[5].textContent=result.companies_id;
+        obj2.parentElement.parentElement.children[6].textContent=result.status;
+        obj2='';
+        $('#myModalLg').modal('hide');
+
+    }
 </script>

@@ -26,6 +26,10 @@
             <label class=" fw-bold fs-6 mb-2">Country</label>
             <input type="text"  name="country" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter Country here."  />
         </div>
+        <div class="fv-row mb-7">
+            <label class=" fw-bold fs-6 mb-2">Website</label>
+            <input type="text"  name="website" value="" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter website."  />
+        </div>
     </div>
     <!--end::Scroll-->
     <!--begin::Actions-->

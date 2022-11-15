@@ -1,4 +1,4 @@
-<form id="" class="form" method="POST" action="{{ route('company.update',$company->id) }}" enctype="multipart/form-data">
+<form id="company_update" class="form" method="POST" action="{{ route('company.update',$company->id) }}" enctype="multipart/form-data">
     @method("PUT")
     @csrf
     <!--begin::Scroll-->
@@ -27,12 +27,48 @@
             <label class=" fw-bold fs-6 mb-2">Country</label>
             <input type="text"  name="country" value="{{$company->country}}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter Country here."  />
         </div>
+        <div class="fv-row mb-7">
+            <label class=" fw-bold fs-6 mb-2">Website</label>
+            <input type="text"  name="website" value="{{$company->website}}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter website."  />
+        </div>
     </div>
     <!--end::Scroll-->
     <!--begin::Actions-->
     <div class="text-center pt-15">
         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close">Discard</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="companyUpdate()">Submit</button>
     </div>
     <!--end::Actions-->
 </form>
+<script>
+ function companyUpdate() {
+        $.ajax({
+                url: $("#company_update").attr('action'),
+                method: 'POST',
+                data: $('#company_update').serialize(),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+            success: function(result) {
+                console.log(result);
+                updateText2(result)
+            }
+        });
+    }
+
+function updateText2(result)
+{
+    obj2.parentElement.parentElement.children[1].children[0].textContent=result.company_name;
+    obj2.parentElement.parentElement.children[2].textContent=result.street_address;
+    obj2.parentElement.parentElement.children[3].textContent=result.city;
+    obj2.parentElement.parentElement.children[4].textContent=result.state;
+    obj2.parentElement.parentElement.children[5].textContent=result.zip_code;
+    obj2.parentElement.parentElement.children[6].textContent=result.country;
+    obj2.parentElement.parentElement.children[7].children[0].textContent=result.website;
+    obj2.parentElement.parentElement.children[7].children[0].href=result.website;
+    obj2='';
+    $('#myModalLg').modal('hide');
+
+}
+
+</script>

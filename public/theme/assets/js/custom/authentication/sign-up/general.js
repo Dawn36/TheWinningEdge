@@ -107,7 +107,7 @@ var KTSignupGeneral = (function() {
                                             });
                                     }, 1500)) :
                                 Swal.fire({
-                                    text: "Sorry, looks like there are some errors detected, please try again.",
+                                    text: "The passwords don't match.",
                                     icon: "error",
                                     buttonsStyling: !1,
                                     confirmButtonText: "Ok, got it!",

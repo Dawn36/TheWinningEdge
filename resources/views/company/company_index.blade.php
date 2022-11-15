@@ -118,7 +118,7 @@
                                             <td><a href="{{$company[$i]->website}}" target="_blank" class="fw-bolder text-gray-800 text-hover-primary mb-1" >{{$company[$i]->website}}</a></td>
                                             <td>{{date("Y-m-d",strtotime($company[$i]->created_at))}}</td>
                                             <td>
-                                                <button class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" onclick="editCompany('{{$company[$i]->id}}')" data-bs-original-title="Edit Admin">
+                                                <button class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" onclick="editCompany('{{$company[$i]->id}}',this);" data-bs-original-title="Edit Admin">
                                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                                                     <span class="svg-icon svg-icon-2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -174,8 +174,9 @@
             }
         });
     }
-
-    function editCompany(id) {
+    var obj2='';
+    function editCompany(id,obj) {
+        obj2=obj;
         url = "{{route('company.edit',':id')}}";
         url = url.replace(':id', id);
         $.ajax({
@@ -188,5 +189,6 @@
             }
         });
     }
+   
 </script>
 @endsection('content')
