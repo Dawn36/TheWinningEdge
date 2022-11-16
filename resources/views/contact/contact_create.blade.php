@@ -2,12 +2,12 @@
     @csrf
     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
         <div class="fv-row mb-7">
-            <label class=" fw-bold fs-6 mb-2">First Name</label>
-            <input type="text"  name="first_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your First Name here." />
+            <label class="required fw-bold fs-6 mb-2">First Name</label>
+            <input type="text"  name="first_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your First Name here." required/>
         </div>
         <div class="fv-row mb-7">
-            <label class=" fw-bold fs-6 mb-2">Last Name</label>
-            <input type="text"  name="last_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Last Name here." />
+            <label class="required fw-bold fs-6 mb-2">Last Name</label>
+            <input type="text"  name="last_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Last Name here." required/>
         </div>
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Job Title</label>
@@ -18,8 +18,8 @@
             <input type="number"  min="0" name="phone_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Direct Phone Number here." />
         </div>
         <div class="fv-row mb-7">
-            <label class="required fw-bold fs-6 mb-2">Email Address</label>
-            <input type="email"  min="0" name="email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Email Address here." required/>
+            <label class=" fw-bold fs-6 mb-2">Email Address</label>
+            <input type="email"  min="0" name="email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Email Address here." />
         </div>
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Mobile phone</label>
@@ -27,7 +27,7 @@
         </div>
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Company Name</label>
-            <select name="company_id" class="form-control form-control-solid mb-3 mb-lg-0">
+            <select name="company_id"class="form-control form-control-solid rounded-3 js-example-tags" data-control="select2" data-dropdown-parent="#modalBodyLarge">
                 @for($i=0; $i < count($company); $i++)
                 <option value="{{$company[$i]->id}}" >{{$company[$i]->company_name}}</option>
                 @endfor
@@ -59,5 +59,7 @@
      var input2 = document.querySelector(".kt_tagify_2");
         new Tagify(input2);
 
-
+        $(".js-example-tags").select2({
+            tags: true
+        });
 </script>

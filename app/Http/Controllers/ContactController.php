@@ -76,8 +76,12 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $userId=Auth::user()->id;
+        // $request->validate([
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:contacts'],
+        // ]);
         $request->validate([
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:contacts'],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
         ]);
         $path='';
         if ($request->hasFile('file')) {
@@ -94,7 +98,17 @@ class ContactController extends Controller
         for ($i=0; $i < count($tags); $i++) { 
             array_push($tagsData,$tags[$i]->value);
         }
-        
+        $companyId=$request->company_id;
+        if(is_numeric($request->company_id) == false)
+        {
+            $data = Company::create([
+                'company_name' => $request->company_id,
+                'user_id'=>Auth::user()->id,
+                'created_at' => date("Y-m-d h:i:s"),
+                'created_by' => Auth::user()->id,
+            ]);
+            $companyId=$data->id;
+        }
         $user = Contact::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -105,7 +119,7 @@ class ContactController extends Controller
             'phone_number'=>$request->phone_number,
             'email'=>$request->email,
             'mobile_phone'=>$request->mobile_phone,
-            'companies_id'=>$request->company_id,
+            'companies_id'=>$companyId,
             'linked_in_url'=>$request->linked_in_url,
             'user_id'=>$userId,
             'created_at' => date("Y-m-d h:i:s"),
@@ -162,7 +176,8 @@ class ContactController extends Controller
     {
         $userId=Auth::user()->id;
         $request->validate([
-            'email' => 'required|email|unique:contacts,email,'.$id,
+            'first_name' => ['required'],
+            'last_name' => ['required'],
         ]);
         // $request->validate([
         //     'email' => ['required', 'string', 'email', 'max:255', 'unique:contacts'],

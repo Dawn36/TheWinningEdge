@@ -1,4 +1,4 @@
-<form id="" class="form" method="POST" action="{{ route('task.store') }}" enctype="multipart/form-data">
+<form id="task_add" class="form" method="POST" action="{{ route('task.store') }}" enctype="multipart/form-data">
     @csrf
     <input name="contact_id" value="{{$contactId}}"  type="hidden"/>
     <div class="fv-row mb-5">
@@ -22,10 +22,26 @@
     <!--begin::Actions-->
     <div class="text-center pt-15">
         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close">Discard</button>
-        <button type="submit" class="btn btn-primary" data-kt-users-modal-action="submit">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="addTask()">Submit</button>
     </div>
     <!--end::Actions-->
 </form>
 <script>
         $(".kt_datepicker_2").flatpickr();
+
+        function addTask() {
+        $.ajax({
+                url: $("#task_add").attr('action'),
+                method: 'POST',
+                data: $('#task_add').serialize(),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+            success: function(result) {
+                console.log(result);
+        $('#myModalLg').modal('hide');
+               
+            }
+        });
+    }
 </script>

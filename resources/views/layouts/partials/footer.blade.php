@@ -37,7 +37,7 @@
 <script src="{{ asset('theme/assets/plugins/custom/prismjs/prismjs.bundle.js')}}"></script>
 <script src="{{ asset('theme/assets/js/custom/documentation/documentation.js')}}"></script>
 <script src="{{ asset('theme/assets/js/custom/documentation/search.js')}}"></script>
-<script src="{{ asset('theme/assets/js/custom/select2.js')}}"></script>
+{{-- <script src="{{ asset('theme/assets/js/custom/select2.js')}}"></script> --}}
 <script src="{{ asset('theme/assets/js/custom/documentation/editors/quill/basic.js')}}"></script>
 <!--end::Page Custom Javascript-->
 <script>

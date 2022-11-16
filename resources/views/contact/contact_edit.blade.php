@@ -14,12 +14,12 @@
             </select>
         </div>
         <div class="fv-row mb-7">
-            <label class=" fw-bold fs-6 mb-2">First Name</label>
-            <input type="text"  name="first_name" value="{{$contact->first_name}}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your First Name here." />
+            <label class="required fw-bold fs-6 mb-2">First Name</label>
+            <input type="text"  name="first_name" value="{{$contact->first_name}}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your First Name here." required/>
         </div>
         <div class="fv-row mb-7">
-            <label class=" fw-bold fs-6 mb-2">Last Name</label>
-            <input type="text"  name="last_name" value="{{$contact->last_name}}"  class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Last Name here." />
+            <label class="required fw-bold fs-6 mb-2">Last Name</label>
+            <input type="text"  name="last_name" value="{{$contact->last_name}}"  class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Last Name here." required/>
         </div>
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Job Title</label>
@@ -30,8 +30,8 @@
             <input type="number"  min="0" value="{{$contact->phone_number}}" name="phone_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Direct Phone Number here." />
         </div>
         <div class="fv-row mb-7">
-            <label class="required fw-bold fs-6 mb-2">Email Address</label>
-            <input type="email"  min="0" value="{{$contact->email}}" name="email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Email Address here." required/>
+            <label class=" fw-bold fs-6 mb-2">Email Address</label>
+            <input type="email"  min="0" value="{{$contact->email}}" name="email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Email Address here." />
         </div>
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Mobile phone</label>

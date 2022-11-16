@@ -31,7 +31,7 @@ class TaskController extends Controller
     public function create()
     {
         $userId=Auth::user()->id;
-
+        
         $contact=Contact::where('user_id',$userId)->get();
         return view('task/task_create',compact('contact'));
     }
@@ -44,6 +44,9 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'description' => ['required'],
+        ]);
         $user = Task::create([
             'user_id' => Auth::user()->id,
             'contact_id' => $request->contact_id,
@@ -91,6 +94,9 @@ class TaskController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        $request->validate([
+            'description' => ['required'],
+        ]);
         $task=Task::find($id);
         $task['contact_id']=$request->contact_id;
         $task['description']=$request->description;
