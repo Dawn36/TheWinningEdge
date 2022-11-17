@@ -94,9 +94,12 @@ class ContactController extends Controller
             $path = "uploads/contacts/" .$userId . "/". $filename;
         }
         $tagsData=array();
-        $tags=json_decode($request->tags);
-        for ($i=0; $i < count($tags); $i++) { 
-            array_push($tagsData,$tags[$i]->value);
+        if(isset($request->tags))
+        {
+            $tags=json_decode($request->tags);
+            for ($i=0; $i < count($tags); $i++) { 
+                array_push($tagsData,$tags[$i]->value);
+            }
         }
         $companyId=$request->company_id;
         if(is_numeric($request->company_id) == false)
