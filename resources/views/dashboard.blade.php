@@ -20,7 +20,7 @@
                                     </div>
                                     <div class="d-flex flex-column">
                                         <a href="#" class="text-gray-900 text-hover-primary fs-6 fw-bolder">Hi, {{ucwords(Auth::user()->first_name)}} {{ucwords(Auth::user()->last_name)}}</a>
-                                        <span class="text-gray-400 fw-bold">Fintech, Banking, and Commercial Lending Specialist focused on AML Compliance, ID Verification, Adverse Media and Sanction Screening</span>
+                                        <span class="text-gray-400 fw-bold">here’s your to do list:</span>
                                     </div>
                                 </div>
                             </div>
