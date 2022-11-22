@@ -85,6 +85,19 @@
                             <div class="card-toolbar">
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                                    <form id="contact_export" method="GET" action="{{ route('contact_export') }}">
+                                        <input hidden id='contact_id' name="contact_id" value="" />
+                                    </form>
+                                    <button onclick="contactExport()" id="download_sheet" class="btn btn-primary me-2"  style="display: none">
+                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                                        <span class="svg-icon svg-icon-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
+                                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->Download
+                                    </button>
                                     <!--begin::Add Contact-->
                                     <button type="button" id="send_email" class="btn btn-primary me-2" onclick="sendEmail()" style="display: none">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
@@ -306,6 +319,23 @@
 </div>
 <!--end::Content-->
 <script type="text/javascript">
+var contactArray = [];
+function contactExport()
+{
+    if(contactArray.length == 0)
+    {
+        alert("Please select contact");
+        return false;
+    }
+    contactArraya=JSON.stringify(contactArray);
+    $('#contact_id').val(contactArraya);
+    if($('#contact_id').val())
+    {
+        $('#contact_export').submit();
+    }
+    
+}
+
 function sendEmail()
 {
     if(contactArray.length == 0)
@@ -331,11 +361,12 @@ function sendEmail()
 }
 
 
-var contactArray = [];
+
 
 $('#select_all').click(function(event) {
     if (this.checked) {
     $("#send_email").css("display", "block");
+    $("#download_sheet").css("display", "block");
 
         // Iterate each checkbox
         $(':checkbox').each(function() {
@@ -343,6 +374,7 @@ $('#select_all').click(function(event) {
         });
     } else {
     $("#send_email").css("display", "none");
+    $("#download_sheet").css("display", "none");
 
         $(':checkbox').each(function() {
             this.checked = false;
@@ -361,10 +393,12 @@ function Check(obj) {
     if(contactArray.length == 0)
     {
         $("#send_email").css("display", "none");
+        $("#download_sheet").css("display", "none");
     }
     else
     {
         $("#send_email").css("display", "block");
+        $("#download_sheet").css("display", "block");
     }
 
     console.log(contactArray);

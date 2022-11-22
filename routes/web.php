@@ -44,6 +44,7 @@ Route::get('contact_task_edit', [ContactController::class, 'contactTaskEdit'])->
 Route::get('contact_email_template', [ContactController::class, 'contactEmailTemplate'])->name('contact_email_template');
 Route::get('get_email_templater', [ContactController::class, 'getEmailTemplater'])->name('get_email_templater');
 Route::post('contact_email_template', [ContactController::class, 'contactEmailTemplateSend'])->name('contact_email_template');
+Route::get('contact_export',[ContactController::class,'contactExport'])->name('contact_export');
 
 Route::resource('opportunities', OpportunitiesController::class);
 Route::get('opportunities_target', [OpportunitiesController::class, 'opportunitiesTarget'])->name('opportunities_target');

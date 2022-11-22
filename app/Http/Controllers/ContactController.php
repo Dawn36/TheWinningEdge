@@ -16,6 +16,7 @@ use App\Models\Task;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Jobs\ContactJob;
 use Carbon;
+use App\Exports\ExportContact;
 use SebastianBergmann\Template\Template;
 
 class ContactController extends Controller
@@ -333,5 +334,10 @@ class ContactController extends Controller
         $userId=Auth::user()->id;
         dispatch(new ContactJob($body,$subject,$contactId,$userId))->delay(now()->addSecond(3));
         return redirect()->back();
+    }
+    public function contactExport(Request $request)
+    {
+        $contactId=json_decode($request->contact_id);
+        return Excel::download(new ExportContact($contactId), 'contact.xlsx');
     }
 }
