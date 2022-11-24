@@ -43,3 +43,5 @@ php artisan cache:clear
 php artisan config:clear
 php artisan view:clear
 php artisan optimize:clear
+run in background on server
+php artisan queue:work --daemon &
