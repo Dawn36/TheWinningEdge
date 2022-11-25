@@ -167,7 +167,7 @@
                         <span class="menu-title">Admins</span>
                     </a>
                 </div>
-                <div data-kt-menu-trigger="click" class="menu-item  menu-accordion {{ Route::currentRouteName() == 'register_log' || Route::currentRouteName() == 'login_log'  ? 'hover show' : '' }}">
+                <div data-kt-menu-trigger="click" class="menu-item  menu-accordion {{ Route::currentRouteName() == 'session_log'   ? 'hover show' : '' }}">
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/finance/fin002.svg-->
