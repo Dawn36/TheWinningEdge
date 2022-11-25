@@ -98,6 +98,16 @@
                                         </span>
                                         <!--end::Svg Icon-->Download
                                     </button>
+                                    <button type="button" id="update_status" class="btn btn-primary me-2" onclick="updateStatus()" style="display: none">
+                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
+                                        <span class="svg-icon svg-icon-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
+                                                <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->Update status
+                                    </button>
                                     <!--begin::Add Contact-->
                                     <button type="button" id="send_email" class="btn btn-primary me-2" onclick="sendEmail()" style="display: none">
                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
@@ -335,7 +345,29 @@ function contactExport()
     }
     
 }
-
+function updateStatus()
+{
+    if(contactArray.length == 0)
+    {
+        alert("Please select contact");
+        return false;
+    }
+    contactArray=JSON.stringify(contactArray);
+    var value = {
+            contactId:contactArray
+        };
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('contact_status_bulk') }}",
+            data: value,
+            success: function(result) {
+                $('#myModalLgHeading').html('Update Status Of Selected Contact');
+                $('#modalBodyLarge').html(result);
+                $('#myModalLg').modal('show');
+            }
+        });
+    
+}
 function sendEmail()
 {
     if(contactArray.length == 0)
@@ -367,6 +399,7 @@ $('#select_all').click(function(event) {
     if (this.checked) {
     $("#send_email").css("display", "block");
     $("#download_sheet").css("display", "block");
+    $("#update_status").css("display", "block");
 
         // Iterate each checkbox
         $(':checkbox').each(function() {
@@ -375,6 +408,7 @@ $('#select_all').click(function(event) {
     } else {
     $("#send_email").css("display", "none");
     $("#download_sheet").css("display", "none");
+    $("#update_status").css("display", "none");
 
         $(':checkbox').each(function() {
             this.checked = false;
@@ -394,11 +428,13 @@ function Check(obj) {
     {
         $("#send_email").css("display", "none");
         $("#download_sheet").css("display", "none");
+        $("#update_status").css("display", "none");
     }
     else
     {
         $("#send_email").css("display", "block");
         $("#download_sheet").css("display", "block");
+        $("#update_status").css("display", "block");
     }
 
     console.log(contactArray);

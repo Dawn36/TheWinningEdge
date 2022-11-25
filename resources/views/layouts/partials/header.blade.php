@@ -78,6 +78,7 @@
                                         {{ Route::currentRouteName() == 'task.show' || Route::currentRouteName() == 'task.index'  ? 'Task Listing' : '' }}
                                         {{ Route::currentRouteName() == 'company.show' || Route::currentRouteName() == 'company.index'  ? 'Company Listing' : '' }}
                                         {{ Route::currentRouteName() == 'user_index'   ? 'Users Listing' : '' }}
+                                        {{ Route::currentRouteName() == 'session_log'   ? 'Session Logs' : '' }}
                                         
                                     </h1>
                                     <!--end::Page Title-->

@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\LogsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +23,9 @@ use Illuminate\Support\Facades\Artisan;
 |
 */
 Route::middleware(['auth'])->group(function () {
+    Route::get('session_log', [LogsController::class, 'sessionLogs'])->name('session_log');
+
+
 Route::resource('email_template', EmailTemplateController::class);
 Route::resource('company', CompanyController::class);
 Route::resource('task', TaskController::class);
@@ -43,6 +47,8 @@ Route::get('contact_task', [ContactController::class, 'contactTask'])->name('con
 Route::get('contact_task_edit', [ContactController::class, 'contactTaskEdit'])->name('contact_task_edit');
 Route::get('contact_email_template', [ContactController::class, 'contactEmailTemplate'])->name('contact_email_template');
 Route::get('get_email_templater', [ContactController::class, 'getEmailTemplater'])->name('get_email_templater');
+Route::get('contact_status_bulk', [ContactController::class, 'contactStatusBulk'])->name('contact_status_bulk');
+Route::post('contact_status_bulk', [ContactController::class, 'contactStatusBulkUpdate'])->name('contact_status_bulk');
 Route::post('contact_email_template', [ContactController::class, 'contactEmailTemplateSend'])->name('contact_email_template');
 Route::get('contact_export',[ContactController::class,'contactExport'])->name('contact_export');
 

@@ -325,6 +325,23 @@ class ContactController extends Controller
         $template=EmailTemplate::find($templateId);
         return $template;
     }
+    public function contactStatusBulk(Request $request)
+    {
+        $userId=Auth::user()->id;
+        $contactId=$request->contactId;
+        return view('contact/contact_status_bulk',compact('contactId'));
+    }
+    public function contactStatusBulkUpdate(Request $request)
+    {
+        $contactId=json_decode($request->contact_id);
+        for ($i=0; $i < count($contactId); $i++) { 
+            $contact=Contact::find($contactId[$i]);
+            $contact->status=$request->status;
+            $contact->save();
+        }
+        return redirect()->back();
+
+    }
     public function contactEmailTemplateSend(Request $request)
     {
         $subject=$request->subject;

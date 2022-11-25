@@ -60,6 +60,10 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        $fullName= Auth::user()->first_name." ".Auth::user()->last_name;
+        $email=Auth::user()->email;
+        $this->SessionLoginLogs($fullName,$email, 'register');
+
         return redirect(RouteServiceProvider::HOME);
     }
 }
