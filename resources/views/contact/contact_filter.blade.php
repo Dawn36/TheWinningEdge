@@ -11,7 +11,7 @@
     </div>
     <div class="fv-row mb-5">
         <label class="fs-6 fw-bold form-label mb-2">Companies:</label>
-        <select class="form-select form-select-solid fw-bolder js-example-basic-single" name="company_id" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#right_modal">
+        <select class="form-select form-select-solid fw-bolder js-example-basic-single" name="company_id[]" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#right_modal" multiple>
             <option></option>
             @for($i=0; $i < count($company); $i++)
                 <option value="{{$company[$i]->id}}" >{{$company[$i]->company_name}}</option>

@@ -43,7 +43,8 @@ class ContactController extends Controller
         if(isset($request->company_id))
         {
             $companyId=$request->company_id;
-            $dbWhere2=" and c.`companies_id` = '$companyId'";
+            $companyId=implode(',',$companyId);
+            $dbWhere2=" and c.`companies_id` IN ($companyId)";
         }
         $userId=Auth::user()->id;
        $contact= DB::select(DB::raw("SELECT c.*,c.email as email_address,cc.company_name,

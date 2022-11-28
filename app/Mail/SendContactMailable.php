@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Models\User;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -12,15 +13,17 @@ class SendContactMailable extends Mailable
     use Queueable, SerializesModels;
     public $body;
     public $subject;
+    public $userId;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($body,$subject)
+    public function __construct($body,$subject,$userId)
     {
         $this->body=$body;
         $this->subject=$subject;
+        $this->userId=$userId;
     }
 
     /**
@@ -30,9 +33,10 @@ class SendContactMailable extends Mailable
      */
     public function build()
     {
+        $userDetails=User::find($this->userId);
         $template=$this->body;
         $subject=$this->subject;
-        return $this->subject($subject)            
+        return $this->subject($subject)->from('dawngill08@gmail.com')->replyTo('')          
         ->markdown('contact/template',compact('template'));
     }
 }

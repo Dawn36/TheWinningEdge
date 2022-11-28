@@ -64,6 +64,7 @@
 
             <!--begin::Row-->
             <div class="row gy-5 g-xl-10">
+                @if(Auth::user()->hasRole('admin'))
                 <div class="col-xl-3">
                     <div class="card overflow-hidden mb-5 mb-xl-10">
                         <div class="card-body">
@@ -79,6 +80,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
                 <div class="col-xl-3">
                     <div class="card overflow-hidden mb-5 mb-xl-10">
                         <div class="card-body">
