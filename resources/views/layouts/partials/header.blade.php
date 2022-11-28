@@ -100,9 +100,9 @@
                                         </span>
                                         <input type="text" class="form-control form-control-solid h-40px ps-13 fs-7" id="myInput" name="search" value="{{request()->search}}" placeholder="Search tags and companies ..." data-kt-search-element="input">
                                         <input hidden type="submit" id="submitbutton"/>
-                                        <span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5" data-kt-search-element="spinner">
+                                        {{-- <span class="position-absolute top-50 end-0 translate-middle-y lh-0 d-none me-5" data-kt-search-element="spinner">
                                             <span class="spinner-border h-15px w-15px align-middle text-gray-400"></span>
-                                        </span>
+                                        </span> --}}
                                     </form>
                                     <!--end::Form-->
                                 </div>
@@ -230,3 +230,35 @@
                         </div>
                     </div>
                 </div>
+                <!-- begin::Modal - Filter -->
+                <div id="right_modal" class="bg-body" data-kt-drawer="true" data-kt-drawer-name="explore" data-kt-drawer-activate="true" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'350px', 'lg': '475px'}" data-kt-drawer-direction="end" data-kt-drawer-toggle="#search_by_filter_toggle" data-kt-drawer-close="#search_by_filter_close">
+                    <!--begin::Card-->
+                    <div class="card shadow-none rounded-0 w-100">
+                        <!--begin::Header-->
+                        <div class="card-header" >
+                            <h3 class="card-title fw-bolder" id="right_modal_header"></h3>
+                            <div class="card-toolbar">
+                                <button type="button" class="btn btn-sm btn-icon btn-active-color-primary h-40px w-40px me-n6" id="search_by_filter_close">
+                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                    <span class="svg-icon svg-icon-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </button>
+                            </div>
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Body-->
+                        <div class="card-body" id="right_modal_body">
+                            <!--begin::Content-->
+                        
+                            <!--end::Content-->
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                    <!--end::Card-->
+                </div>
+<!-- end::Modal - Filter -->

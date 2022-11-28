@@ -37,8 +37,10 @@
 <script src="{{ asset('theme/assets/plugins/custom/prismjs/prismjs.bundle.js')}}"></script>
 <script src="{{ asset('theme/assets/js/custom/documentation/documentation.js')}}"></script>
 <script src="{{ asset('theme/assets/js/custom/documentation/search.js')}}"></script>
-{{-- <script src="{{ asset('theme/assets/js/custom/select2.js')}}"></script> --}}
+
 <script src="{{ asset('theme/assets/js/custom/documentation/editors/quill/basic.js')}}"></script>
+<script src="{{ asset('theme/assets/plugins/custom/tinymce/tinymce.bundle.js')}}"></script>
+
 <!--end::Page Custom Javascript-->
 <script>
     function addTaskContact(contactsId) {
@@ -65,16 +67,17 @@
         [25, 50, 100, 200, "All"]
     ],
 });
-var input = document.getElementById("myInput");
-input.addEventListener("keypress", function(event) {
-  if (event.key === "Enter") {
-    event.preventDefault();
-    document.getElementById("submitbutton").click();
-  }
-});
+    var input = document.getElementById("myInput");
+    input.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("submitbutton").click();
+    }
+    });
         $('#search').on('keyup', function() {
             table.search(this.value).draw();
         });
+        
 // Export buttons
         // $('.kt_datatable_example_1').DataTable({
         //     dom: 'Bfrtip',
@@ -95,6 +98,16 @@ input.addEventListener("keypress", function(event) {
             },
             placeholder: 'Type your text here...',
             theme: 'snow' // or 'bubble'
+        });
+          // TinyMCE
+          tinymce.init({
+            selector: "#default",
+            menubar: false,
+            toolbar: ["styleselect fontselect fontsizeselect", "table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol",
+                "undo redo | cut copy paste | bold italic | link image | alignleft aligncenter alignright alignjustify",
+                "bullist numlist | outdent indent | blockquote subscript superscript | advlist | autolink | lists charmap | print preview |  code"
+            ],
+            plugins: "table advlist autolink link image lists charmap print preview code"
         });
 
         // Date and Time Picker

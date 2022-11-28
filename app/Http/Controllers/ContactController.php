@@ -29,9 +29,21 @@ class ContactController extends Controller
     public function index(Request $request)
     {
         $dbWhere='';
+        $dbWhere1='';
+        $dbWhere2='';
         if(isset($request->search))
         {
             $dbWhere=" and CONCAT(c.`tags`,cc.`company_name`) like '%$request->search%'";
+        }
+        if(isset($request->tags))
+        {
+            $tags=implode(',',$request->tags);
+            $dbWhere1=" and CONCAT(c.`tags`) like '%$tags%'";
+        }
+        if(isset($request->company_id))
+        {
+            $companyId=$request->company_id;
+            $dbWhere2=" and c.`companies_id` = '$companyId'";
         }
         $userId=Auth::user()->id;
        $contact= DB::select(DB::raw("SELECT c.*,c.email as email_address,cc.company_name,
@@ -49,7 +61,7 @@ class ContactController extends Controller
         (SELECT created_at FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_meeting
          
          FROM `contacts` c left join companies cc on cc.id=c.companies_id
-         WHERE c.user_id='$userId' $dbWhere order by c.id desc
+         WHERE c.user_id='$userId' $dbWhere $dbWhere1 $dbWhere2 order by c.id desc
         "));
         return view('contact/contact_index' , compact('contact'));
     }
@@ -356,5 +368,13 @@ class ContactController extends Controller
     {
         $contactId=json_decode($request->contact_id);
         return Excel::download(new ExportContact($contactId), 'contact.xlsx');
+    }
+    public function contactFilter()
+    {
+        $userId=Auth::user()->id;
+        $company=Company::where('user_id',$userId)->get();
+        $tags=Contact::select(DB::raw('GROUP_CONCAT(tags) as tags'))->where('user_id',$userId)->where('tags','!=','')->get();
+        $tagsArr=explode(',',$tags[0]->tags);
+        return view('contact/contact_filter',compact('company','tagsArr'));
     }
 }

@@ -88,10 +88,11 @@
     function updateText2(result)
     {
         obj2.parentElement.parentElement.children[2].children[0].textContent=result.first_name+" "+result.last_name;
-        obj2.parentElement.parentElement.children[3].children[0].textContent=result.phone_number;
-        obj2.parentElement.parentElement.children[4].children[0].textContent=result.email;
-        obj2.parentElement.parentElement.children[5].textContent=result.companies_id;
-        obj2.parentElement.parentElement.children[6].textContent=result.status;
+        obj2.parentElement.parentElement.children[2].children[2].textContent=result.job;
+        obj2.parentElement.parentElement.children[3].children[0].textContent=result.email;
+        obj2.parentElement.parentElement.children[3].children[2].textContent=result.phone_number;
+        obj2.parentElement.parentElement.children[4].textContent=result.companies_id;
+        obj2.parentElement.parentElement.children[5].textContent=result.status;
         obj2='';
         $('#myModalLg').modal('hide');
 

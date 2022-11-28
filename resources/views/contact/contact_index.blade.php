@@ -84,56 +84,150 @@
                             <!--begin::Card toolbar-->
                             <div class="card-toolbar">
                                 <!--begin::Toolbar-->
+                                <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base" >
+                                    <!-- Start::Update Status -->
+                                    <a href="#" class="btn btn-light-dark me-2" title="Update Status" data-bs-toggle="tooltip" data-bs-placement="top" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" id="update_status" style="display: none">
+                                        <span class="svg-icon svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+                                                <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+                                            </svg>
+                                            Update Status
+                                        </span>
+                                    </a>
+                                    <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px mt-2" data-kt-menu="true" id="kt-toolbar-filter">
+                                        <div class="px-7 py-5">
+                                            <div class="fs-4 text-dark fw-bolder">Update Status</div>
+                                        </div>
+                                        <div class="separator border-gray-200"></div>
+                                        <form id="contact_update" class="form" method="POST" action="{{ route('contact_status_bulk') }}" enctype="multipart/form-data">
+                                            @csrf
+                                        <input hidden id='contact_id_status' name="contact_id" value="" />
+
+                                            <div class="px-7 py-5">
+                                                <div class="mb-10">
+                                                    <label class="form-label fs-5 fw-bold mb-3">Status:</label>
+                                                    <select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" name="status" data-dropdown-parent="#kt-toolbar-filter">
+                                                        <option value="current_client" >Current Client</option>
+                                                        <option value="active_discussion" >Active Discussion</option>
+                                                        <option value="not_interested" >Not Interested</option>
+                                                        <option value="unsubscribed" >Unsubscribed</option>
+                                                        <option value="prospect" >Prospect</option>
+                                                        <option value="user" >User</option>
+                                                    </select>
+                                                </div>
+                                                <div class="d-flex justify-content-end">
+                                                    <button type="reset" class="btn btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true" data-kt-customer-table-filter="reset">Reset</button>
+                                                    <button type="button" class="btn btn-primary" data-kt-menu-dismiss="true" data-kt-customer-table-filter="filter" onclick="updateStatus()">Apply</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <!-- End::Update Status -->
+                                </div>
+                                <!--end::Toolbar-->
+
+                                <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                                    <!-- Start::Download CSV -->
                                     <form id="contact_export" method="GET" action="{{ route('contact_export') }}">
                                         <input hidden id='contact_id' name="contact_id" value="" />
                                     </form>
+                                    <button type="button" class="btn btn-light-dark me-2" title="Download CSV" data-bs-toggle="tooltip" data-bs-placement="top" onclick="contactExport()" id="download_sheet" style="display: none"> 
+                                        <span class="svg-icon svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path opacity="0.5" d="M19 15C20.7 15 22 13.7 22 12C22 10.3 20.7 9 19 9C18.9 9 18.9 9 18.8 9C18.9 8.7 19 8.3 19 8C19 6.3 17.7 5 16 5C15.4 5 14.8 5.2 14.3 5.5C13.4 4 11.8 3 10 3C7.2 3 5 5.2 5 8C5 8.3 5 8.7 5.1 9H5C3.3 9 2 10.3 2 12C2 13.7 3.3 15 5 15H19Z" fill="black" />
+                                                <path opacity="1" d="M13 17.4V12C13 11.4 12.6 11 12 11C11.4 11 11 11.4 11 12V17.4H13Z" fill="black" />
+                                                <path opacity="1" d="M8 17.4H16L12.7 20.7C12.3 21.1 11.7 21.1 11.3 20.7L8 17.4Z" fill="black" />
+                                            </svg>
+                                            CSV
+                                        </span>
+                                    </button>
+                                    <!-- End::Download CSV -->
+
+                                    <!-- Start::Send Email -->
+                                    <button type="button" class="btn btn-icon btn-light-dark me-2"  title="Send Email" data-bs-toggle="tooltip" data-bs-placement="top" id="send_email"  onclick="sendEmail()" style="display: none">
+                                        <span class="svg-icon svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path opacity="0.3" d="M21 19H3C2.4 19 2 18.6 2 18V6C2 5.4 2.4 5 3 5H21C21.6 5 22 5.4 22 6V18C22 18.6 21.6 19 21 19Z" fill="black" />
+                                                <path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="black" />
+                                            </svg>
+                                        </span>
+                                    </button>
+                                    <!-- End::Send Email -->
+
+                                    <!-- Start::Filter -->
+                                    <a href="#" class="btn btn-icon btn-light-dark me-2" title="Search by Filter" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-dismiss="click" data-bs-trigger="hover" onclick="filter()">
+                                        <span class="svg-icon svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    <!-- End::Filter -->
+
+                                    <!-- Start::Add Contact -->
+                                    <a href="#" class="btn btn-icon btn-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" title="Add Contact" data-bs-toggle="tooltip" data-bs-placement="top">
+                                        <span class="svg-icon svg-icon-2hx">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.6" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="black" />
+                                                <rect x="6" y="11" width="12" height="2" rx="1" fill="black" />
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-150px py-4 mt-2" data-kt-menu="true">
+                                        <div class="menu-item px-3">
+                                            <a type="button" onclick="addContact()" class="menu-link px-3">Add Contact</a>
+                                        </div>
+                                        <div class="menu-item px-3">
+                                            <a type="button" onclick="contactUploader()" class="menu-link px-3">Upload Contacts</a>
+                                        </div>
+                                    </div>
+                                    <!-- End::Add Contact -->
+                                </div>
+                                <!--end::Toolbar-->
+                            </div>
+                            {{-- <div class="card-toolbar">
+                                <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
+                                    
                                     <button onclick="contactExport()" id="download_sheet" class="btn btn-primary me-2"  style="display: none">
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                         <span class="svg-icon svg-icon-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
                                                 <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                                             </svg>
                                         </span>
-                                        <!--end::Svg Icon-->Download
+                                        Download
                                     </button>
                                     <button type="button" id="update_status" class="btn btn-primary me-2" onclick="updateStatus()" style="display: none">
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                         <span class="svg-icon svg-icon-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
                                                 <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                                             </svg>
                                         </span>
-                                        <!--end::Svg Icon-->Update status
+                                        Update status
                                     </button>
-                                    <!--begin::Add Contact-->
                                     <button type="button" id="send_email" class="btn btn-primary me-2" onclick="sendEmail()" style="display: none">
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                         <span class="svg-icon svg-icon-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
                                                 <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                                             </svg>
                                         </span>
-                                        <!--end::Svg Icon-->Send Email
+                                        Send Email
                                     </button>
 
                                     <button type="button" class="btn btn-primary me-2" onclick="addContact()">
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                         <span class="svg-icon svg-icon-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="black" />
                                                 <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                                             </svg>
                                         </span>
-                                        <!--end::Svg Icon-->Add Contact
+                                        Add Contact
                                     </button>
-                                    <!--end::Add Contact-->
-                                    <!--begin::Upload Contact-->
                                     <button type="button" class="btn btn-primary" onclick="contactUploader()">
-                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
                                         <span class="svg-icon svg-icon-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM14.5 12L12.7 9.3C12.3 8.9 11.7 8.9 11.3 9.3L10 12H11.5V17C11.5 17.6 11.4 18 12 18C12.6 18 12.5 17.6 12.5 17V12H14.5Z" fill="black" />
@@ -142,14 +236,11 @@
                                                 <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black" />
                                             </svg>
                                         </span>
-                                        <!--end::Svg Icon-->Upload Contact
+                                        Upload Contact
                                     </button>
                                     
-                                    <!--end::Upload Contact-->
                                 </div>
-                                <!--end::Toolbar-->
-                            </div>
-                            <!--end::Card toolbar-->
+                            </div> --}}
                         </div>
                         <!--end::Card header-->
                         <!--begin::Card Body-->
@@ -160,11 +251,14 @@
                                 <table class="kt_datatable_example_1 table table-row-bordered gy-5">
                                     <thead>
                                         <tr class="fw-bold fs-6 text-muted">
-                                            <th ><input id="select_all" value="" type="checkbox"></th>
+                                            <th >
+                                                <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <input id="select_all" class="form-check-input" value="" type="checkbox">
+                                                </div>
+                                            </th>
                                             <th class="min-w-30px">ID</th>
                                             <th>Full Name</th>
-                                            <th>phone number</th>
-                                            <th>Email</th>
+                                            <th>Email & phone number</th>
                                             <th>Company Name</th>
                                             <th>Status</th>
                                             <th># Of Phone Calls</th>
@@ -178,11 +272,19 @@
                                     <tbody class="fw-bold text-gray-600">
                                         @for ($i = 0; $i < count($contact); $i++) @php $a=$i; $a++; @endphp 
                                         <tr>
-                                            <td><input  id="checkbox" name="checkbox" value="{{$contact[$i]->id}}" type="checkbox" onclick="Check(this)"></td>
+                                            <td>
+                                                <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <input  id="checkbox" class="form-check-input" name="checkbox" value="{{$contact[$i]->id}}" type="checkbox" onclick="Check(this)">
+                                                </div>
+                                            </td>
                                             <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{$a}}</a></td>
-                                            <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->first_name)}} {{ucwords($contact[$i]->last_name)}}</a></td>
-                                            <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->phone_number)}} </a></td>
-                                            <td><a href="mailto:{{$contact[$i]->email_address}}" class="fw-bolder text-gray-800 text-hover-primary mb-1" onclick="getEmailObj('email','{{$contact[$i]->id}}',this)">{{$contact[$i]->email_address}}</a></td>
+                                            <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->first_name)}} {{ucwords($contact[$i]->last_name)}}</a>
+                                            <br>
+                                            <a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->job)}}</a></td>
+                                            <td><a href="mailto:{{$contact[$i]->email_address}}" class="fw-bolder text-gray-800 text-hover-primary mb-1" onclick="getEmailObj('email','{{$contact[$i]->id}}',this)">{{$contact[$i]->email_address}}</a>
+                                                <br>
+                                                <a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->phone_number)}} </a>
+                                            </td>
                                             @php $status=explode('_',$contact[$i]->status) @endphp
                                             <td>{{ucwords($contact[$i]->company_name)}}</td>
                                             <td>{{ ucwords($status[0]) }} {{ count($status) == "2" ? ucwords($status[1] ) : '' }}</td>
@@ -352,20 +454,31 @@ function updateStatus()
         alert("Please select contact");
         return false;
     }
-    contactArray=JSON.stringify(contactArray);
-    var value = {
-            contactId:contactArray
-        };
-        $.ajax({
-            type: 'GET',
-            url: "{{ route('contact_status_bulk') }}",
-            data: value,
-            success: function(result) {
-                $('#myModalLgHeading').html('Update Status Of Selected Contact');
-                $('#modalBodyLarge').html(result);
-                $('#myModalLg').modal('show');
-            }
-        });
+    contactArraya=JSON.stringify(contactArray);
+    $('#contact_id_status').val(contactArraya);
+    if($('#contact_id_status').val())
+    {
+        $('#contact_update').submit();
+    }
+    // if(contactArray.length == 0)
+    // {
+    //     alert("Please select contact");
+    //     return false;
+    // }
+    // contactArray=JSON.stringify(contactArray);
+    // var value = {
+    //         contactId:contactArray
+    //     };
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: "{{ route('contact_status_bulk') }}",
+    //         data: value,
+    //         success: function(result) {
+    //             $('#myModalLgHeading').html('Update Status Of Selected Contact');
+    //             $('#modalBodyLarge').html(result);
+    //             $('#myModalLg').modal('show');
+    //         }
+    //     });
     
 }
 function sendEmail()
@@ -391,7 +504,19 @@ function sendEmail()
         });
     
 }
-
+function filter() {
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('contact_filter') }}",
+            success: function(result) {
+                var drawerElement = document.querySelector("#right_modal");
+                var drawer = KTDrawer.getInstance(drawerElement);
+                $('#right_modal_header').html('Search by Filter');
+                $('#right_modal_body').html(result);
+                drawer.toggle();
+            }
+        });
+    }
 
 
 
