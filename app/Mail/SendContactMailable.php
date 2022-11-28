@@ -36,7 +36,7 @@ class SendContactMailable extends Mailable
         $userDetails=User::find($this->userId);
         $template=$this->body;
         $subject=$this->subject;
-        return $this->subject($subject)->from('dawngill08@gmail.com')->replyTo('dawngill08@gmail.com')          
+        return $this->subject($subject)->from('dawngill08@gmail.com','dawn gill')->replyTo('dawngill08@gmail.com')          
         ->markdown('contact/template',compact('template'));
     }
 }
