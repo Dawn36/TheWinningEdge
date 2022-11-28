@@ -34,9 +34,10 @@ class SendContactMailable extends Mailable
     public function build()
     {
         $userDetails=User::find($this->userId);
+        //->from('dawngill08@gmail.com','dawn gill')->replyTo('dawngill08@gmail.com')  
         $template=$this->body;
         $subject=$this->subject;
-        return $this->subject($subject)->from('dawngill08@gmail.com','dawn gill')->replyTo('dawngill08@gmail.com')          
+        return $this->subject($subject)        
         ->markdown('contact/template',compact('template'));
     }
 }
