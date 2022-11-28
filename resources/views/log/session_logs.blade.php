@@ -10,7 +10,7 @@
         .container-sm,
         .container-xl,
         .container-xxl {
-            max-width: 1620px
+            max-width: 1900px
         }
     }
 </style>

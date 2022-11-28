@@ -10,10 +10,11 @@
         .container-sm,
         .container-xl,
         .container-xxl {
-            max-width: 1620px
+            max-width: 1900px
         }
     }
 </style>
+
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Post-->
     <div class="post d-flex flex-column-fluid" id="kt_post">
