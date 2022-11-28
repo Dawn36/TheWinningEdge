@@ -63,9 +63,8 @@ class AuthenticatedSessionController extends Controller
             'email' => 'required|exists:users',
         ]);
         if ($validator->fails()) {
-            $request->session()->flash('message', 'Email Does Not Exists');
+            $request->session()->flash('error', 'Email Does Not Exists');
             return redirect()->back();
-
         }
         else
         {

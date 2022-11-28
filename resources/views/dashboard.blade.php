@@ -162,10 +162,10 @@
                                             <td>
                                                 <div class="d-flex flex-column w-100 me-2">
                                                     <div class="d-flex flex-stack mb-2">
-                                                        <span class="text-muted me-2 fs-7 fw-bold">{{$rpaPercentage >= 100 ? '100' : $rpaPercentage }}%</span>
+                                                        <span class="text-muted me-2 fs-7 fw-bold">{{round($rpaPercentage,2) >= 100 ? '100' : round($rpaPercentage,2) }}%</span>
                                                     </div>
                                                     <div class="progress h-6px w-100">
-                                                        <div class="progress-bar {{$rpaPercentage >= 100 ? 'bg-sucess' : 'bg-danger'  }}" role="progressbar" style="width: {{$rpaPercentage >= 100 ? '100' : $rpaPercentage }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div class="progress-bar {{round($rpaPercentage,2) >= 100 ? 'bg-sucess' : 'bg-danger'  }}" role="progressbar" style="width: {{round($rpaPercentage,2) >= 100 ? '100' : round($rpaPercentage,2) }}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                             </td>

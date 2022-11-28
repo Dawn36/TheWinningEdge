@@ -19,12 +19,7 @@
 <!--begin::Body-->
 <body id="kt_body" class="bg-dark">
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <!-- Validation Errors -->
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
-    <!--begin::Root-->
+   
     <div class="d-flex flex-column flex-root">
         <!--begin::Authentication - Sign-in -->
         <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed" style="background-image: url({{ asset('theme/assets/media/illustrations/sketchy-1/)')}})">
@@ -42,6 +37,20 @@
 						<!--begin::Card body-->
 						<div class="card-body p-10 p-lg-20">
 							<!--begin::Form-->
+                             <!-- Session Status -->
+                        <x-auth-session-status class="mb-4" :status="session('status')" />
+
+                        <!-- Validation Errors -->
+                        {{-- @php print_r(Session::has('error')) @endphp --}}
+                        @if(Session::has('error'))
+                            <div class="alert alert-danger" role="alert">
+                            <div class="font-medium text-red-600">
+                                {{ Session::get('error')}}
+                            </div>
+                        </div>
+                        @endif
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                        <!--begin::Root-->
 							<form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" method="POST" action="{{ route('rest_password') }}" >
                                 @csrf
 								<!--begin::Heading-->
