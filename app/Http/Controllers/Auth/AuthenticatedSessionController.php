@@ -99,7 +99,7 @@ class AuthenticatedSessionController extends Controller
                 $message->to($to_email)
                     ->subject($subject)
                     ->cc($cc);
-                $message->from('dawngill08@gmail.com','dawn gill');
+                $message->from($from_email);
         });    
     }
     function randomPassword() {
