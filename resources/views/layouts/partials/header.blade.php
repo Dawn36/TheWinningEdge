@@ -6,7 +6,7 @@
 
 <head>
     <base href="">
-    <title>Tony Sales CRM</title>
+    <title>The Winning Edge CRM</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="{{ asset('theme/assets/media/logos/favicon.png')}}" />

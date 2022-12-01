@@ -132,6 +132,7 @@
                                             <th class="min-w-30px">ID</th>
                                             <th>Company</th>
                                             <th>Contact</th>
+                                            <th>Email</th>
                                             <th>$ Amount</th>
                                             <th>Notes</th>
                                             <th>Tasks</th>
@@ -147,11 +148,36 @@
                                         <tr>
                                             <td>{{$a}}</td>
                                             <td>{{ucwords($opportunities[$i]->company_name)}}</td>
-                                            <td>{{ucwords($opportunities[$i]->first_name)}} {{ucwords($opportunities[$i]->last_name)}}</td>
+                                            <td><a href="{{route('contact.show',$opportunities[$i]->contact_id)}}" class="fw-bolder text-gray-800 text-hover-primary">{{ucwords($opportunities[$i]->first_name)}} {{ucwords($opportunities[$i]->last_name)}} </a> <br> <a href="{{route('contact.show',$opportunities[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary">{{ucwords($opportunities[$i]->job)}}</a></td>
+                                            <td><a href="{{route('contact.show',$opportunities[$i]->contact_id)}}" class="fw-bolder text-gray-800 text-hover-primary">{{$opportunities[$i]->email}}</a>
+                                                <br>
+                                                <a href="{{route('contact.show',$opportunities[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary"><span class="fw-bolder">{{$opportunities[$i]->phone_number == '' ? '' : "(D)"}}</span>{{$opportunities[$i]->phone_number == '' ? '' : $opportunities[$i]->phone_number}}</a>
+                                                <br>
+                                                <a href="{{route('contact.show',$opportunities[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary"><span class="fw-bolder">{{$opportunities[$i]->mobile_phone == '' ? '' : "(M)"}}</span>{{$opportunities[$i]->mobile_phone == '' ? '' : $opportunities[$i]->mobile_phone}}</a>
+                                            </td>
                                             <td>{{$opportunities[$i]->contract_amount}}</td>
                                             <td>{{$opportunities[$i]->contact_note}}</td>
                                             <td>{{$opportunities[$i]->description}}</td>
-                                            <td><div class="badge badge-sm badge-light-primary d-inline">{{ucwords($opportunities[$i]->status)}}</div></td>
+                                            <td>
+                                                <div class="badge badge-sm badge-light-primary d-inline cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" >{{ucwords($opportunities[$i]->status)}}</div>
+                                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
+                                                    <div class="menu-item px-3">
+                                                        <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Update Task Status</div>
+                                                    </div>
+                                                    <div class="menu-item px-3">
+                                                        <a class="menu-link px-3" onclick="opportunitiesStatusUpdate('{{$opportunities[$i]->id}}',this)">Open</a>
+                                                    </div>
+                                                    <div class="menu-item px-3">
+                                                        <a class="menu-link px-3" onclick="opportunitiesStatusUpdate('{{$opportunities[$i]->id}}',this)">Closed </a>
+                                                    </div>
+                                                    <div class="menu-item px-3">
+                                                        <a class="menu-link px-3" onclick="opportunitiesStatusUpdate('{{$opportunities[$i]->id}}',this)">Pricing Sent</a>
+                                                    </div>
+                                                    <div class="menu-item px-3">
+                                                        <a class="menu-link px-3" onclick="opportunitiesStatusUpdate('{{$opportunities[$i]->id}}',this)">Contract Sent</a>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             {{-- <td>{{ucwords($opportunities[$i]->duration)}}</td> --}}
                                             {{-- <td>
                                                 <div class="d-flex align-items-center">
@@ -212,6 +238,23 @@
 </div>
 <!--end::Content-->
 <script type="text/javascript">
+function opportunitiesStatusUpdate(id,obj)
+    {
+        var value = {
+            status: obj.textContent,
+            opportunities_id:id
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('opportunities_status_update') }}",
+            data: value,
+            success: function(result) {
+                obj.parentElement.parentElement.parentElement.children[0].textContent=obj.textContent;
+            }
+        });
+
+    }
     function addOpportunities() {
         $.ajax({
             type: 'GET',

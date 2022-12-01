@@ -24,7 +24,7 @@ class OpportunitiesController extends Controller
         $year=date("Y");
         $percentage=0;
        // $opportunities=Opportunities::where('user_id',$userId)->whereYear('created_at', '=', $year)->orderby('id','desc')->get();
-        $opportunities=DB::select(DB::raw("SELECT o.*,c.`first_name`,c.`last_name`,cc.`company_name`,
+        $opportunities=DB::select(DB::raw("SELECT o.*,c.`first_name`,c.`id` AS contact_id,c.`email`,c.`phone_number`,c.`mobile_phone`,c.`job`,c.`last_name`,cc.`company_name`,
         (SELECT note FROM `contact_note` WHERE contact_id= o.`contact_id` ORDER BY id DESC LIMIT 1 ) AS contact_note,
         (SELECT description FROM `tasks` WHERE contact_id= o.`contact_id` ORDER BY id DESC LIMIT 1 ) AS description
          FROM `opportunities` o 
@@ -210,5 +210,14 @@ class OpportunitiesController extends Controller
         $data['companies_id']=$companyId;
         $data['company_name']=$companyName;
         return $data;
+    }
+    public function opportunitiesStatusUpdate(Request $request)
+    {
+        $status=$request->status;
+        $id=$request->opportunities_id;
+        $opportunities=Opportunities::find($id);
+        $opportunities->status=strtolower($status);
+        $opportunities->save();
+        return true;
     }
 }

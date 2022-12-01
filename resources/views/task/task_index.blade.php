@@ -104,11 +104,11 @@
                                         <tr class="fw-bold fs-6 text-muted">
                                             <th>ID</th>
                                             <th class="min-w-200px">Task</th>
-                                            <th>Status</th>
                                             <th>Assigned to</th>
                                             <th>Email & Phone</th>
+                                            <th>Compnay Name</th>
+                                            <th>Status</th>
                                             <th>Contact Status</th>
-                                            <th>Assigned by</th>
                                             <th>Date Assigned</th>
                                             <th>Actions</th>
                                         </tr>
@@ -118,6 +118,14 @@
                                         <tr>
                                             <td>{{$a}}</td>
                                             <td>{{$task[$i]->description}}</td>
+                                            <td><a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-bolder text-gray-800 text-hover-primary">{{ucwords($task[$i]->first_name)}} {{ucwords($task[$i]->last_name)}} </a> <br> <a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary">{{ucwords($task[$i]->job)}}</a></td>
+                                            <td><a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-bolder text-gray-800 text-hover-primary">{{$task[$i]->email}}</a>
+                                                <br>
+                                                <a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary"><span class="fw-bolder">{{$task[$i]->phone_number == '' ? '' : "(D)"}}</span>{{$task[$i]->phone_number == '' ? '' : $task[$i]->phone_number}}</a>
+                                                <br>
+                                                <a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary"><span class="fw-bolder">{{$task[$i]->mobile_phone == '' ? '' : "(M)"}}</span>{{$task[$i]->mobile_phone == '' ? '' : $task[$i]->mobile_phone}}</a>
+                                            </td>
+                                            <td>{{ucwords($task[$i]->company_name)}}</td>
                                             <td>
                                                 <div class="badge badge-sm badge-light-primary d-inline cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" >{{ucwords($task[$i]->task_status)}}</div>
                                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
@@ -135,16 +143,8 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td><a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-bolder text-gray-800 text-hover-primary">{{ucwords($task[$i]->first_name)}} {{ucwords($task[$i]->last_name)}} </a> <br> <a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary">{{ucwords($task[$i]->job)}}</a></td>
-                                            <td><a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-bolder text-gray-800 text-hover-primary">{{$task[$i]->email}}</a>
-                                                <br>
-                                                <a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary"><span class="fw-bolder">{{$task[$i]->phone_number == '' ? '' : "(D)"}}</span>{{$task[$i]->phone_number == '' ? '' : $task[$i]->phone_number}}</a>
-                                                <br>
-                                                <a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary"><span class="fw-bolder">{{$task[$i]->mobile_phone == '' ? '' : "(M)"}}</span>{{$task[$i]->mobile_phone == '' ? '' : $task[$i]->mobile_phone}}</a>
-                                            </td>
                                             @php $status=explode('_',$task[$i]->contact_status) @endphp
                                             <td>{{ ucwords($status[0]) }} {{ count($status) == "2" ? ucwords($status[1] ) : '' }}</td>
-                                            <td>{{ucwords(auth()->user()->first_name)}} {{ucwords(auth()->user()->last_name)}}</td>
                                             <td>{{date("Y-m-d",strtotime($task[$i]->task_date))}}</td>
                                             <td>
                                                 <button onclick="editTask('{{$task[$i]->id}}')" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary"  data-bs-original-title="Edit Client">
