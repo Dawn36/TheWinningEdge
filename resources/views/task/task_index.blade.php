@@ -125,7 +125,7 @@
                                         @for ($i = 0; $i < count($task); $i++) @php $a=$i; $a++; @endphp 
                                         <tr>
                                             <td>{{$a}}</td>
-                                            <td>{{ucwords($task[$i]->description)}}</td>
+                                            <td>{{$task[$i]->description}}</td>
                                             <td>
                                                 <div class="badge badge-sm badge-light-info d-inline">{{ucwords($task[$i]->task_status)}}</div>
                                             </td>
