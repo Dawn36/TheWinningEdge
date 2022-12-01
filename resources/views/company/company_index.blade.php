@@ -29,33 +29,25 @@
                         <div class="p-10">
                             <!--begin::Heading-->
                             <h1 class="anchor fw-bolder mb-5" id="zero-configuration">
-                                <a href="javascript:;"></a>Company Listing
+                                <a href="javascript:;"></a>Company 
                             </h1>
 
                             <!--begin::Notice-->
-                            <div class="d-flex align-items-center rounded py-5 px-4 bg-light-primary">
-                                <!--begin::Icon-->
+                            {{-- <div class="d-flex align-items-center rounded py-5 px-4 bg-light-primary">
                                 <div class="d-flex h-80px w-80px flex-shrink-0 flex-center position-relative ms-3 me-6">
-                                    <!--begin::Svg Icon | path: icons/duotune/abstract/abs051.svg-->
                                     <span class="svg-icon svg-icon-primary position-absolute opacity-10">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="70px" height="70px" viewBox="0 0 70 70" fill="none" class="w-80px h-80px">
                                             <path d="M28 4.04145C32.3316 1.54059 37.6684 1.54059 42 4.04145L58.3109 13.4585C62.6425 15.9594 65.3109 20.5812 65.3109 25.5829V44.4171C65.3109 49.4188 62.6425 54.0406 58.3109 56.5415L42 65.9585C37.6684 68.4594 32.3316 68.4594 28 65.9585L11.6891 56.5415C7.3575 54.0406 4.68911 49.4188 4.68911 44.4171V25.5829C4.68911 20.5812 7.3575 15.9594 11.6891 13.4585L28 4.04145Z" fill="#000000" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->
-                                    <!--begin::Svg Icon | path: icons/duotune/art/art006.svg-->
                                     <span class="svg-icon svg-icon-3x svg-icon-primary position-absolute">
                                         <span class="svg-icon svg-icon-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path opacity="0.3" d="M20 15H4C2.9 15 2 14.1 2 13V7C2 6.4 2.4 6 3 6H21C21.6 6 22 6.4 22 7V13C22 14.1 21.1 15 20 15ZM13 12H11C10.5 12 10 12.4 10 13V16C10 16.5 10.4 17 11 17H13C13.6 17 14 16.6 14 16V13C14 12.4 13.6 12 13 12Z" fill="black" /><path d="M14 6V5H10V6H8V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V6H14ZM20 15H14V16C14 16.6 13.5 17 13 17H11C10.5 17 10 16.6 10 16V15H4C3.6 15 3.3 14.9 3 14.7V18C3 19.1 3.9 20 5 20H19C20.1 20 21 19.1 21 18V14.7C20.7 14.9 20.4 15 20 15Z" fill="black" /></svg>
                                         </span>
                                     </span>
-                                    <!--end::Svg Icon-->
                                 </div>
-                                <!--end::Icon-->
-                                <!--begin::Description-->
                                 <div class="text-gray-700 fw-bold fs-6 lh-lg">Here we have a list of all of the Company that we have.</div>
-                                <!--end::Description-->
-                            </div>
+                            </div> --}}
                             <!--end::Notice-->
                             <!--end::Heading-->
                         </div>

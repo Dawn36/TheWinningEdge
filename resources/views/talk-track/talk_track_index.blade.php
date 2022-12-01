@@ -28,20 +28,16 @@
                         <div class="p-10">
                             <!--begin::Heading-->
                             <h1 class="anchor fw-bolder mb-5" id="zero-configuration">
-                                <a href="javascript:;"></a>Talk Track Listing
+                                <a href="javascript:;"></a>Talk Track 
                             </h1>
                             <!--begin::Notice-->
-                            <div class="d-flex align-items-center rounded py-5 px-4 bg-light-primary">
-                                <!--begin::Icon-->
+                            {{-- <div class="d-flex align-items-center rounded py-5 px-4 bg-light-primary">
                                 <div class="d-flex h-80px w-80px flex-shrink-0 flex-center position-relative ms-3 me-6">
-                                    <!--begin::Svg Icon | path: icons/duotune/abstract/abs051.svg-->
                                     <span class="svg-icon svg-icon-primary position-absolute opacity-10">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="70px" height="70px" viewBox="0 0 70 70" fill="none" class="w-80px h-80px">
                                             <path d="M28 4.04145C32.3316 1.54059 37.6684 1.54059 42 4.04145L58.3109 13.4585C62.6425 15.9594 65.3109 20.5812 65.3109 25.5829V44.4171C65.3109 49.4188 62.6425 54.0406 58.3109 56.5415L42 65.9585C37.6684 68.4594 32.3316 68.4594 28 65.9585L11.6891 56.5415C7.3575 54.0406 4.68911 49.4188 4.68911 44.4171V25.5829C4.68911 20.5812 7.3575 15.9594 11.6891 13.4585L28 4.04145Z" fill="#000000" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->
-                                    <!--begin::Svg Icon | path: icons/duotune/art/art006.svg-->
                                     <span class="svg-icon svg-icon-3x svg-icon-primary position-absolute">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path opacity="0.3" d="M18 22C19.7 22 21 20.7 21 19C21 18.5 20.9 18.1 20.7 17.7L15.3 6.30005C15.1 5.90005 15 5.5 15 5C15 3.3 16.3 2 18 2H6C4.3 2 3 3.3 3 5C3 5.5 3.1 5.90005 3.3 6.30005L8.7 17.7C8.9 18.1 9 18.5 9 19C9 20.7 7.7 22 6 22H18Z" fill="black" />
@@ -49,13 +45,9 @@
                                             <path d="M9 19C9 20.7 7.7 22 6 22C4.3 22 3 20.7 3 19H9Z" fill="black" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->
                                 </div>
-                                <!--end::Icon-->
-                                <!--begin::Description-->
                                 <div class="text-gray-700 fw-bold fs-6 lh-lg">Here we have a list of all of the Talk Track that we have.</div>
-                                <!--end::Description-->
-                            </div>
+                            </div> --}}
                             <!--end::Notice-->
                             <!--end::Heading-->
                         </div>

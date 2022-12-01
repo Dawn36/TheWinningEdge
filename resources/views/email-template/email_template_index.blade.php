@@ -28,33 +28,25 @@
                         <div class="p-10">
                             <!--begin::Heading-->
                             <h1 class="anchor fw-bolder mb-5" id="zero-configuration">
-                                <a href="javascript:;"></a>Email Templates Listing
+                                <a href="javascript:;"></a>Email Templates 
                             </h1>
                             <!--begin::Notice-->
-                            <div class="d-flex align-items-center rounded py-5 px-4 bg-light-primary">
-                                <!--begin::Icon-->
+                            {{-- <div class="d-flex align-items-center rounded py-5 px-4 bg-light-primary">
                                 <div class="d-flex h-80px w-80px flex-shrink-0 flex-center position-relative ms-3 me-6">
-                                    <!--begin::Svg Icon | path: icons/duotune/abstract/abs051.svg-->
                                     <span class="svg-icon svg-icon-primary position-absolute opacity-10">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="70px" height="70px" viewBox="0 0 70 70" fill="none" class="w-80px h-80px">
                                             <path d="M28 4.04145C32.3316 1.54059 37.6684 1.54059 42 4.04145L58.3109 13.4585C62.6425 15.9594 65.3109 20.5812 65.3109 25.5829V44.4171C65.3109 49.4188 62.6425 54.0406 58.3109 56.5415L42 65.9585C37.6684 68.4594 32.3316 68.4594 28 65.9585L11.6891 56.5415C7.3575 54.0406 4.68911 49.4188 4.68911 44.4171V25.5829C4.68911 20.5812 7.3575 15.9594 11.6891 13.4585L28 4.04145Z" fill="#000000" />
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->
-                                    <!--begin::Svg Icon | path: icons/duotune/art/art006.svg-->
                                     <span class="svg-icon svg-icon-3x svg-icon-primary position-absolute">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M6 8.725C6 8.125 6.4 7.725 7 7.725H14L18 11.725V12.925L22 9.725L12.6 2.225C12.2 1.925 11.7 1.925 11.4 2.225L2 9.725L6 12.925V8.725Z" fill="black"></path>
                                             <path opacity="0.3" d="M22 9.72498V20.725C22 21.325 21.6 21.725 21 21.725H3C2.4 21.725 2 21.325 2 20.725V9.72498L11.4 17.225C11.8 17.525 12.3 17.525 12.6 17.225L22 9.72498ZM15 11.725H18L14 7.72498V10.725C14 11.325 14.4 11.725 15 11.725Z" fill="black"></path>
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->
                                 </div>
-                                <!--end::Icon-->
-                                <!--begin::Description-->
                                 <div class="text-gray-700 fw-bold fs-6 lh-lg">Here we have a list of all of the Email Templates that we have.</div>
-                                <!--end::Description-->
-                            </div>
+                            </div> --}}
                             <!--end::Notice-->
                             <!--end::Heading-->
                         </div>
