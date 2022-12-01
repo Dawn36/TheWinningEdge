@@ -127,7 +127,21 @@
                                             <td>{{$a}}</td>
                                             <td>{{$task[$i]->description}}</td>
                                             <td>
-                                                <div class="badge badge-sm badge-light-info d-inline">{{ucwords($task[$i]->task_status)}}</div>
+                                                <div class="badge badge-sm badge-light-info d-inline cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" >{{ucwords($task[$i]->task_status)}}</div>
+                                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
+                                                    <div class="menu-item px-3">
+                                                        <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Update Task Status</div>
+                                                    </div>
+                                                    <div class="menu-item px-3">
+                                                        <a class="menu-link px-3" onclick="taskStatusUpdate('{{$task[$i]->id}}',this)">Open</a>
+                                                    </div>
+                                                    <div class="menu-item px-3">
+                                                        <a class="menu-link px-3" onclick="taskStatusUpdate('{{$task[$i]->id}}',this)">In Progress</a>
+                                                    </div>
+                                                    <div class="menu-item px-3">
+                                                        <a class="menu-link px-3" onclick="taskStatusUpdate('{{$task[$i]->id}}',this)">Complete</a>
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td><a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-bolder text-gray-800 text-hover-primary">{{ucwords($task[$i]->first_name)}} {{ucwords($task[$i]->last_name)}} </a> <br> <a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary">{{ucwords($task[$i]->job)}}</a></td>
                                             <td><a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-bolder text-gray-800 text-hover-primary">{{$task[$i]->email}}</a>
@@ -182,6 +196,23 @@
 </div>
 <!--end::Content-->
 <script type="text/javascript">
+    function taskStatusUpdate(id,obj)
+    {
+        var value = {
+            status: obj.textContent,
+            contacts_id:id
+        };
+
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('task_status_update') }}",
+            data: value,
+            success: function(result) {
+                obj.parentElement.parentElement.parentElement.children[0].textContent=obj.textContent;
+            }
+        });
+
+    }
     function addTask() {
         $.ajax({
             type: 'GET',

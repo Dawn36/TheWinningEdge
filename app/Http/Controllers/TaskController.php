@@ -120,4 +120,13 @@ class TaskController extends Controller
         $data->delete();
         return redirect()->back();
     }
+    public function taskStatusUpdate(Request $request)
+    {
+        $status=$request->status;
+        $id=$request->contacts_id;
+        $task=Task::find($id);
+        $task->task_status=strtolower($status);
+        $task->save();
+        return true;
+    }
 }

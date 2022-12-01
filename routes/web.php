@@ -29,6 +29,8 @@ Route::middleware(['auth'])->group(function () {
 Route::resource('email_template', EmailTemplateController::class);
 Route::resource('company', CompanyController::class);
 Route::resource('task', TaskController::class);
+Route::get('task_status_update', [TaskController::class, 'taskStatusUpdate'])->name('task_status_update');
+
 Route::resource('talk_track', TalkTrackController::class);
 Route::resource('user', UserController::class);
 Route::post('user_note', [UserController::class, 'userNote'])->name('user_note');
