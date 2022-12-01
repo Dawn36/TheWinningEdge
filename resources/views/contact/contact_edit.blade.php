@@ -58,7 +58,6 @@
             <textarea name="note" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please add the note for the contact">{{$contact->note}}</textarea>
         </div>
     </div>
-    <input id="reload" name="reload" value="no" />
     <!--end::Scroll-->
     <!--begin::Actions-->
     <div class="text-center pt-15">
