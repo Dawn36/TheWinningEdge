@@ -224,8 +224,8 @@
     }
     function closeModal()
     {
+        window.location.reload();
         $('#myModalLg').modal('hide');
-        location.reload();
     }
 </script>
 @endsection('content')
