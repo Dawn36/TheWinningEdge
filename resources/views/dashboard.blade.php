@@ -464,7 +464,7 @@ var quill = new Quill("#kt_forms_widget_1_editor", {
                             container: "#kt_forms_widget_1_editor_toolbar",
                         },
                     },
-                    placeholder: "To do list ?",
+                    // placeholder: "To do list ?",
                     theme: "snow",
                 });
                 quill.on('text-change', function() {
