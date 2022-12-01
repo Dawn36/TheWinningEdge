@@ -127,7 +127,7 @@
                                             <td>{{$a}}</td>
                                             <td>{{$task[$i]->description}}</td>
                                             <td>
-                                                <div class="badge badge-sm badge-light-info d-inline cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" >{{ucwords($task[$i]->task_status)}}</div>
+                                                <div class="badge badge-sm badge-light-primary d-inline cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" >{{ucwords($task[$i]->task_status)}}</div>
                                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
                                                     <div class="menu-item px-3">
                                                         <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Update Task Status</div>
