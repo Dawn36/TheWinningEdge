@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="col-xl-auto text-center mt-3 mt-lg-0">
                                     <button type="button" class="btn btn-primary" onclick="setOpportunitiesTarget()">
-                                        Set Opportunities Target
+                                        Target Quota
                                     </button>
                                 </div>
                             </div>
