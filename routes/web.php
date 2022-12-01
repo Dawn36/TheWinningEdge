@@ -56,6 +56,7 @@ Route::get('contact_export',[ContactController::class,'contactExport'])->name('c
 Route::get('contact_filter',[ContactController::class,'contactFilter'])->name('contact_filter');
 
 Route::resource('opportunities', OpportunitiesController::class);
+Route::get('contact_company', [OpportunitiesController::class, 'getContactCompany'])->name('contact_company');
 Route::get('opportunities_target', [OpportunitiesController::class, 'opportunitiesTarget'])->name('opportunities_target');
 Route::post('opportunities_target', [OpportunitiesController::class, 'opportunitiesTargetSubmit'])->name('opportunities_target');
 Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');

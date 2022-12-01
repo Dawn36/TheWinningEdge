@@ -8,7 +8,7 @@
    
     <div class="fv-row mb-5">
         <label class="required fs-6 fw-bold form-label mb-2">Assigned to contact</label>
-        <select name="contact_id" class="form-control form-control-solid rounded-3" data-control="select2" data-dropdown-parent="#kt_modal_add_tasks" data-placeholder="Select an option" data-allow-clear="true" required>
+        <select name="contact_id" class="form-select form-select-solid fw-bolder js-example-basic-single" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#myModalLg" required>
             @for($i=0; $i< count($contact); $i++)
             <option value="{{$contact[$i]->id}}" {{$task->contact_id ==$contact[$i]->id ? 'Selected' : '' }}>{{ucwords($contact[$i]->first_name)}} {{ucwords($contact[$i]->last_name)}}</option>
             @endfor
@@ -35,5 +35,8 @@
     <!--end::Actions-->
 </form>
 <script>
+    $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
         $(".kt_datepicker_2").flatpickr();
 </script>

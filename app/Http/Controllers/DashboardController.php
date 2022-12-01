@@ -32,7 +32,7 @@ class DashboardController extends Controller
         $emailTemplateCount=EmailTemplate::count();
         $opportunitiesCount=Opportunities::whereYear('created_at', '=', $year)->where('user_id',$userId)->count();
         $opportunitiesTarget= DB::table('opportunities_target')->where('user_id',$userId)->whereYear('created_at', '=', $year)->get();
-        $amount=DB::select(DB::raw("SELECT SUM(contract_amount) AS amount FROM `opportunities` WHERE user_id='$userId' AND YEAR(created_at)='$year'"));
+        $amount=DB::select(DB::raw("SELECT SUM(contract_amount) AS amount FROM `opportunities` WHERE user_id='$userId' AND `status`='close' AND YEAR(created_at)='$year'"));
         if(count($opportunitiesTarget) > 0)
         {
             $percentage=((count($amount) == 0 ? '0' : $amount[0]->amount) / (count($opportunitiesTarget) == 0 ? '0' : $opportunitiesTarget[0]->target))*100;

@@ -138,12 +138,15 @@
                                     <thead>
                                         <tr class="fw-bold fs-6 text-muted">
                                             <th class="min-w-30px">ID</th>
-                                            <th>Name</th>
-                                            <th>Company Name</th>
-                                            <th>Contract Amount</th>
-                                            <th>Duration</th>
-                                            <th>File</th>
-                                            <th>Creation Date</th>
+                                            <th>Company</th>
+                                            <th>Contact</th>
+                                            <th>$ Amount</th>
+                                            <th>Notes</th>
+                                            <th>Tasks</th>
+                                            <th>Status</th>
+                                            {{-- <th>Duration</th> --}}
+                                            {{-- <th>File</th> --}}
+                                            {{-- <th>Creation Date</th> --}}
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -151,11 +154,14 @@
                                         @for ($i = 0; $i < count($opportunities); $i++) @php $a=$i; $a++; @endphp 
                                         <tr>
                                             <td>{{$a}}</td>
-                                            <td>{{ucwords($opportunities[$i]->name)}}</td>
                                             <td>{{ucwords($opportunities[$i]->company_name)}}</td>
+                                            <td>{{ucwords($opportunities[$i]->first_name)}} {{ucwords($opportunities[$i]->last_name)}}</td>
                                             <td>{{$opportunities[$i]->contract_amount}}</td>
-                                            <td>{{ucwords($opportunities[$i]->duration)}}</td>
-                                            <td>
+                                            <td>{{$opportunities[$i]->contact_note}}</td>
+                                            <td>{{$opportunities[$i]->description}}</td>
+                                            <td><div class="badge badge-sm badge-light-info d-inline">{{ucwords($opportunities[$i]->status)}}</div></td>
+                                            {{-- <td>{{ucwords($opportunities[$i]->duration)}}</td> --}}
+                                            {{-- <td>
                                                 <div class="d-flex align-items-center">
                                                     <span class="svg-icon svg-icon-2x svg-icon-primary me-4">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -165,8 +171,8 @@
                                                     </span>
                                                     <a href="{{ asset($opportunities[$i]->path)}}" target="_blank" class="text-gray-800 text-hover-primary">{{ucwords($opportunities[$i]->file_name)}}</a>
                                                 </div>
-                                            </td>
-                                            <td>{{DATE("Y-m-d",strtotime($opportunities[$i]->created_at))}}</td>
+                                            </td> --}}
+                                            {{-- <td>{{DATE("Y-m-d",strtotime($opportunities[$i]->created_at))}}</td> --}}
                                             <td>
                                                 <button  class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" onclick="editOpportunities('{{$opportunities[$i]->id}}')"  data-bs-original-title="Edit opportunities">
                                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->

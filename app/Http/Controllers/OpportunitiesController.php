@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Opportunities;
+use App\Models\Contact;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
@@ -21,9 +23,16 @@ class OpportunitiesController extends Controller
         $userId=Auth::user()->id;
         $year=date("Y");
         $percentage=0;
-        $opportunities=Opportunities::where('user_id',$userId)->whereYear('created_at', '=', $year)->orderby('id','desc')->get();
+       // $opportunities=Opportunities::where('user_id',$userId)->whereYear('created_at', '=', $year)->orderby('id','desc')->get();
+        $opportunities=DB::select(DB::raw("SELECT o.*,c.`first_name`,c.`last_name`,cc.`company_name`,
+        (SELECT note FROM `contact_note` WHERE contact_id= o.`contact_id` ORDER BY id DESC LIMIT 1 ) AS contact_note,
+        (SELECT description FROM `tasks` WHERE contact_id= o.`contact_id` ORDER BY id DESC LIMIT 1 ) AS description
+         FROM `opportunities` o 
+        INNER JOIN `contacts` c ON o.`contact_id` = c.`id`
+        INNER JOIN `companies` cc ON cc.`id`=o.`company_id` 
+        WHERE YEAR(o.created_at) = '$year'"));
         $opportunitiesTarget= DB::table('opportunities_target')->where('user_id',$userId)->whereYear('created_at', '=', $year)->get();
-        $amount=DB::select(DB::raw("SELECT SUM(contract_amount) AS amount FROM `opportunities` WHERE user_id='$userId' AND YEAR(created_at)='$year'"));
+        $amount=DB::select(DB::raw("SELECT SUM(contract_amount) AS amount FROM `opportunities` WHERE user_id='$userId' AND `status`='close' AND YEAR(created_at)='$year'"));
         if(count($opportunitiesTarget) > 0)
         {
             $percentage=((count($amount) == 0 ? '0' : $amount[0]->amount) / (count($opportunitiesTarget) == 0 ? '0' : $opportunitiesTarget[0]->target))*100;
@@ -38,7 +47,9 @@ class OpportunitiesController extends Controller
      */
     public function create()
     {
-        return view('opportunities/opportunities_create');
+        $userId=Auth::user()->id;
+        $contact=Contact::where('user_id',$userId)->get();
+        return view('opportunities/opportunities_create',compact('contact'));
         
     }
 
@@ -65,8 +76,9 @@ class OpportunitiesController extends Controller
             $path = "uploads/opportunity/" .$userId . "/". $filename;
         }
         $user = Opportunities::create([
-            'name' => $request->name,
-            'company_name' => $request->company_name,
+            'contact_id' => $request->contact_id,
+            'company_id' => $request->company_id,
+            'status' => $request->status,
             'contract_amount'=>$request->contract_amount,
             'note'=>$request->note,
             'duration'=>$request->duration,
@@ -100,8 +112,10 @@ class OpportunitiesController extends Controller
      */
     public function edit(int $id)
     {
+        $userId=Auth::user()->id;
         $opportunities=Opportunities::find($id);
-        return view('opportunities/opportunities_edit',compact('opportunities'));
+        $contact=Contact::where('user_id',$userId)->get();
+        return view('opportunities/opportunities_edit',compact('opportunities','contact'));
         
     }
 
@@ -131,10 +145,11 @@ class OpportunitiesController extends Controller
             $opportunities['size'] = $size;
             $opportunities['path'] = $path;
         }
-        
-        $opportunities['name'] = $request->name;
+       
+        $opportunities['contact_id'] = $request->contact_id;
+        $opportunities['status'] = $request->status;
         $opportunities['note'] = $request->note;
-        $opportunities['company_name'] = $request->company_name;
+        $opportunities['company_id'] = $request->company_id;
         $opportunities['contract_amount'] = $request->contract_amount;
         $opportunities['duration'] = $request->duration;
         $opportunities['updated_at'] = date("Y-m-d");
@@ -183,5 +198,17 @@ class OpportunitiesController extends Controller
         }
         return redirect()->back();
    
+    }
+    public function getContactCompany(Request $request)
+    {
+        $contactId=$request->contact_id;
+        $contactData=Contact::find($contactId);
+        $companyId=$contactData->companies_id;
+        $companyData=Company::find($companyId);
+        $companyName=$companyData->company_name;
+        $data=array();
+        $data['companies_id']=$companyId;
+        $data['company_name']=$companyName;
+        return $data;
     }
 }
