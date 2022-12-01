@@ -2,8 +2,8 @@
     @csrf
     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
         <div class="fv-row mb-7">
-            <label class=" fw-bold fs-6 mb-2">Contact Name</label>
-            <select id="contact_id" name="contact_id" class="form-select form-select-solid fw-bolder js-example-basic-single" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#myModalLg" onchange="getContactCompany()">
+            <label class=" fw-bold required fs-6 mb-2">Contact Name</label>
+            <select id="contact_id" name="contact_id" class="form-select form-select-solid fw-bolder js-example-basic-single" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#myModalLg" onchange="getContactCompany()" required>
                 @for($i=0; $i < count($contact); $i++)
                 <option value="{{$contact[$i]->id}}" >{{ucwords($contact[$i]->first_name)}} {{ucwords($contact[$i]->last_name)}}</option>
                 @endfor
