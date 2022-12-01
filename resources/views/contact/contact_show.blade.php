@@ -678,7 +678,11 @@
             }
         });
     }
-
+	function closeModal()
+    {
+        $('#myModalLg').modal('hide');
+        location.reload();
+    }
 
 </script>
 @endsection('content')

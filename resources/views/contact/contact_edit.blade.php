@@ -62,7 +62,7 @@
     <!--begin::Actions-->
     <div class="text-center pt-15">
         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close">Discard</button>
-        <button type="button" class="btn btn-primary" onclick="contactUpdate()">Submit</button>
+        <button type="button" class="btn btn-primary" onclick="contactUpdate();closeModal()">Submit</button>
     </div>
     <!--end::Actions-->
 </form>

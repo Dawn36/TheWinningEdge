@@ -105,7 +105,38 @@
                         <span class="menu-title">Opportunities</span>
                     </a>
                 </div>
-                <div data-kt-menu-trigger="click" class="menu-item  menu-accordion {{ Route::currentRouteName() == 'email_template.show' || Route::currentRouteName() == 'email_template.index'  || Route::currentRouteName() == 'talk_track.show' || Route::currentRouteName() == 'talk_track.index'  ? 'hover show' : '' }}">
+                <div class="menu-item">
+                    <a class="menu-link {{ Route::currentRouteName() == 'email_template.show' || Route::currentRouteName() == 'email_template.index'  ? 'active' : '' }}" href="{{route('email_template.index')}}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M6 8.725C6 8.125 6.4 7.725 7 7.725H14L18 11.725V12.925L22 9.725L12.6 2.225C12.2 1.925 11.7 1.925 11.4 2.225L2 9.725L6 12.925V8.725Z" fill="black"></path>
+                                    <path opacity="0.3" d="M22 9.72498V20.725C22 21.325 21.6 21.725 21 21.725H3C2.4 21.725 2 21.325 2 20.725V9.72498L11.4 17.225C11.8 17.525 12.3 17.525 12.6 17.225L22 9.72498ZM15 11.725H18L14 7.72498V10.725C14 11.325 14.4 11.725 15 11.725Z" fill="black"></path>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">Email Templates</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ Route::currentRouteName() == 'talk_track.show' || Route::currentRouteName() == 'talk_track.index'  ? 'active' : '' }}" href="{{route('talk_track.index')}}">
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path opacity="0.3" d="M18 22C19.7 22 21 20.7 21 19C21 18.5 20.9 18.1 20.7 17.7L15.3 6.30005C15.1 5.90005 15 5.5 15 5C15 3.3 16.3 2 18 2H6C4.3 2 3 3.3 3 5C3 5.5 3.1 5.90005 3.3 6.30005L8.7 17.7C8.9 18.1 9 18.5 9 19C9 20.7 7.7 22 6 22H18Z" fill="black" />
+                                    <path d="M18 2C19.7 2 21 3.3 21 5H9C9 3.3 7.7 2 6 2H18Z" fill="black" />
+                                    <path d="M9 19C9 20.7 7.7 22 6 22C4.3 22 3 20.7 3 19H9Z" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title">Best Practice</span>
+                    </a>
+                </div>
+                {{-- <div data-kt-menu-trigger="click" class="menu-item  menu-accordion {{  Route::currentRouteName() == 'talk_track.show' || Route::currentRouteName() == 'talk_track.index'  ? 'hover show' : '' }}">
                     <span class="menu-link">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/finance/fin002.svg-->
@@ -138,7 +169,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 @if(Auth::user()->hasRole('admin'))
                 <div class="menu-item">
                     <a class="menu-link {{  Route::currentRouteName() == 'user_index'  ? 'active' : '' }}" href="{{route('user_index')}}">
