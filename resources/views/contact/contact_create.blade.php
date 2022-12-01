@@ -26,15 +26,15 @@
         </div>
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Direct Phone Number</label>
-            <input type="number"  min="0" name="phone_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Direct Phone Number here." />
+            <input type="text"   name="phone_number" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Direct Phone Number here." />
         </div>
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Email Address</label>
-            <input type="email"  min="0" name="email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Email Address here." />
+            <input type="email"   name="email" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Email Address here." />
         </div>
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Mobile phone</label>
-            <input type="number"  min="0" name="mobile_phone" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Mobile phone here." />
+            <input type="text"   name="mobile_phone" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Mobile phone here." />
         </div>
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Company Name</label>
