@@ -159,7 +159,7 @@
                                             <td>{{$opportunities[$i]->contract_amount}}</td>
                                             <td>{{$opportunities[$i]->contact_note}}</td>
                                             <td>{{$opportunities[$i]->description}}</td>
-                                            <td><div class="badge badge-sm badge-light-info d-inline">{{ucwords($opportunities[$i]->status)}}</div></td>
+                                            <td><div class="badge badge-sm badge-light-primary d-inline">{{ucwords($opportunities[$i]->status)}}</div></td>
                                             {{-- <td>{{ucwords($opportunities[$i]->duration)}}</td> --}}
                                             {{-- <td>
                                                 <div class="d-flex align-items-center">
