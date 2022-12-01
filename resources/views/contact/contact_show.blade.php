@@ -70,8 +70,8 @@
                                     @php $status=explode('_',$contact->status) @endphp
 									<div class="text-gray-600 text-hover-primary">{{ ucwords($status[0]) }} {{ count($status) == "2" ? ucwords($status[1] ) : '' }}</div>
 
-									<div class="fw-bolder mt-5">Company Name</div>
-									<div class="text-gray-600 text-hover-primary">{{ucwords($contact->company_name)}}</div>
+									{{-- <div class="fw-bolder mt-5">Company Name</div>
+									<div class="text-gray-600 text-hover-primary">{{ucwords($contact->company_name)}}</div> --}}
 
 									<div class="fw-bolder mt-5">Job Title</div>
 									<div class="text-gray-600 text-hover-primary">{{ucwords($contact->job)}}</div>
