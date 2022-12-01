@@ -28,8 +28,8 @@ class OpportunitiesController extends Controller
         (SELECT note FROM `contact_note` WHERE contact_id= o.`contact_id` ORDER BY id DESC LIMIT 1 ) AS contact_note,
         (SELECT description FROM `tasks` WHERE contact_id= o.`contact_id` ORDER BY id DESC LIMIT 1 ) AS description
          FROM `opportunities` o 
-        INNER JOIN `contacts` c ON o.`contact_id` = c.`id`
-        INNER JOIN `companies` cc ON cc.`id`=o.`company_id` 
+        LEFT JOIN `contacts` c ON o.`contact_id` = c.`id`
+        LEFT JOIN `companies` cc ON cc.`id`=o.`company_id` 
         WHERE YEAR(o.created_at) = '$year'"));
         $opportunitiesTarget= DB::table('opportunities_target')->where('user_id',$userId)->whereYear('created_at', '=', $year)->get();
         $amount=DB::select(DB::raw("SELECT SUM(contract_amount) AS amount FROM `opportunities` WHERE user_id='$userId' AND `status`='close' AND YEAR(created_at)='$year'"));
