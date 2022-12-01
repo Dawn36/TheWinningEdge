@@ -133,7 +133,7 @@
                             </span>
                             <!--end::Svg Icon-->
                         </span>
-                        <span class="menu-title">Best Practice</span>
+                        <span class="menu-title">Best Practices</span>
                     </a>
                 </div>
                 {{-- <div data-kt-menu-trigger="click" class="menu-item  menu-accordion {{  Route::currentRouteName() == 'talk_track.show' || Route::currentRouteName() == 'talk_track.index'  ? 'hover show' : '' }}">
