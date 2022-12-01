@@ -28,7 +28,7 @@
             <label class=" fw-bold fs-6 mb-2">Status</label>
             <select name="status" class="form-control form-control-solid mb-3 mb-lg-0">
                 <option value="open" {{$opportunities->status == 'open' ? 'selected' : ''}}>Open</option>
-                <option value="close" {{$opportunities->status == 'close' ? 'selected' : ''}}>Close</option>
+                <option value="closed" {{$opportunities->status == 'close' ? 'selected' : ''}}>Closed</option>
                 <option value="pricing sent" {{$opportunities->status == 'pricing sent' ? 'selected' : ''}}>Pricing Sent</option>
                 <option value="contract sent" {{$opportunities->status == 'contract sent' ? 'selected' : ''}}>Contract Sent</option>
             </select>
