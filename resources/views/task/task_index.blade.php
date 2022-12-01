@@ -114,6 +114,8 @@
                                             <th class="min-w-200px">Task</th>
                                             <th>Status</th>
                                             <th>Assigned to</th>
+                                            <th>Email & Phone</th>
+                                            <th>Contact Status</th>
                                             <th>Assigned by</th>
                                             <th>Date Assigned</th>
                                             <th>Actions</th>
@@ -127,7 +129,15 @@
                                             <td>
                                                 <div class="badge badge-sm badge-light-info d-inline">{{ucwords($task[$i]->task_status)}}</div>
                                             </td>
-                                            <td>{{ucwords($task[$i]->first_name)}} {{ucwords($task[$i]->last_name)}}</td>
+                                            <td>{{ucwords($task[$i]->first_name)}} {{ucwords($task[$i]->last_name)}} <br> {{ucwords($task[$i]->job)}}</td>
+                                            <td>{{$task[$i]->email}}
+                                                <br>
+                                                <span class="fw-bolder">(d ) = </span>{{ucwords($task[$i]->phone_number)}}
+                                                <br>
+                                                <span class="fw-bolder">(m) = </span>{{ucwords($task[$i]->mobile_phone)}}
+                                            </td>
+                                            @php $status=explode('_',$task[$i]->contact_status) @endphp
+                                            <td>{{ ucwords($status[0]) }} {{ count($status) == "2" ? ucwords($status[1] ) : '' }}</td>
                                             <td>{{ucwords(auth()->user()->first_name)}} {{ucwords(auth()->user()->last_name)}}</td>
                                             <td>{{date("Y-m-d",strtotime($task[$i]->task_date))}}</td>
                                             <td>
