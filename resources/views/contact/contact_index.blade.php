@@ -283,9 +283,9 @@
                                             <a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-normal text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->job)}}</a></td>
                                             <td><a href="mailto:{{$contact[$i]->email_address}}" class="fw-bolder text-gray-800 text-hover-primary mb-1" onclick="getEmailObj('email','{{$contact[$i]->id}}',this)">{{$contact[$i]->email_address}}</a>
                                                 <br>
-                                                <a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-normal text-gray-800 text-hover-primary mb-1"><span class="fw-bolder">(D ) - </span>{{ucwords($contact[$i]->phone_number)}} </a>
+                                                <a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-normal text-gray-800 text-hover-primary mb-1"><span class="fw-bolder">{{$contact[$i]->phone_number == '' ? '' : "D -"}} </span>{{$contact[$i]->phone_number == '' ? '' : $contact[$i]->phone_number}} </a>
                                                 <br>
-                                                <a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-normal text-gray-800 text-hover-primary mb-1"><span class="fw-bolder">(M) - </span>{{ucwords($contact[$i]->mobile_phone)}} </a>
+                                                <a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-normal text-gray-800 text-hover-primary mb-1"><span class="fw-bolder">{{$contact[$i]->mobile_phone == '' ? '' : "M -"}}</span>{{$contact[$i]->mobile_phone == '' ? '' : $contact[$i]->mobile_phone}} </a>
                                             </td>
                                             @php $status=explode('_',$contact[$i]->status) @endphp
                                             <td>{{ucwords($contact[$i]->company_name)}}</td>
