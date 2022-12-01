@@ -110,7 +110,7 @@
                                 <table class="kt_datatable_example_1 table table-row-bordered gy-5">
                                     <thead>
                                         <tr class="fw-bold fs-6 text-muted">
-                                            <th>Task ID</th>
+                                            <th>ID</th>
                                             <th class="min-w-200px">Task</th>
                                             <th>Status</th>
                                             <th>Assigned to</th>

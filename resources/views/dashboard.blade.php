@@ -262,10 +262,10 @@
                                         <div class="fs-9 fs-sm-7 text-gray-400"># of Opportunities</div>
                                         <div class="fs-2 fw-bolder text-gray-800">{{number_format($opportunitiesCount)}}</div>
                                     </div>
-                                    <div class="col-auto text-align-last-center mx-5">
+                                    {{-- <div class="col-auto text-align-last-center mx-5">
                                         <div class="fs-9 fs-sm-7 text-gray-400">Average Opportunity Size</div>
                                         <div class="fs-2 fw-bolder text-gray-800">{{number_format((isset($amount[0]->amount) == 0 ? '0' : $amount[0]->amount/$opportunitiesCount),2)}}</div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
