@@ -609,6 +609,7 @@ function Check(obj) {
     var obj2='';
     function editContact(id,obj) {
         obj2=obj;
+        
         url = "{{route('contact.edit',':id')}}";
         url = url.replace(':id', id);
         $.ajax({
