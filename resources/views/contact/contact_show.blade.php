@@ -680,8 +680,8 @@
     }
 	function closeModal()
     {
-        $('#myModalLg').modal('hide');
         location.reload();
+        $('#myModalLg').modal('hide');
     }
 
 </script>
