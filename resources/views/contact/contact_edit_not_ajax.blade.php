@@ -1,4 +1,4 @@
-<form id="contact_update" class="form" method="POST" action="{{ route('contact.update',$contact->id) }}" enctype="multipart/form-data">
+<form  method="POST" action="{{ route('contact.update',$contact->id) }}" enctype="multipart/form-data">
     @method("PUT")
     @csrf
     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
@@ -62,40 +62,14 @@
     <!--begin::Actions-->
     <div class="text-center pt-15">
         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close">Discard</button>
-        <button type="button" class="btn btn-primary" onclick="contactUpdate()">Submit</button>
+        <button type="submit" class="btn btn-primary" >Submit</button>
     </div>
     <!--end::Actions-->
 </form>
 <script>
-     // Tagify
-     var input2 = document.querySelector(".kt_tagify_2");
-        new Tagify(input2);
+    // Tagify
+    var input2 = document.querySelector(".kt_tagify_2");
+       new Tagify(input2);
 
-        function contactUpdate() {
-        $.ajax({
-                url: $("#contact_update").attr('action'),
-                method: 'POST',
-                data: $('#contact_update').serialize(),
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                },
-            success: function(result) {
-                console.log(result);
-                updateText2(result);
-            }
-        });
-    }
-    function updateText2(result)
-    {
-        obj2.parentElement.parentElement.children[2].children[0].textContent=result.first_name+" "+result.last_name;
-        obj2.parentElement.parentElement.children[2].children[2].textContent=result.job;
-        obj2.parentElement.parentElement.children[3].children[0].textContent=result.email;
-        obj2.parentElement.parentElement.children[3].children[2].childNodes[1].textContent=result.phone_number;
-        obj2.parentElement.parentElement.children[3].children[4].childNodes[1].textContent=result.mobile_phone;
-        obj2.parentElement.parentElement.children[4].textContent=result.companies_id;
-        obj2.parentElement.parentElement.children[5].textContent=result.status;
-        obj2='';
-        $('#myModalLg').modal('hide');
-
-    }
+     
 </script>

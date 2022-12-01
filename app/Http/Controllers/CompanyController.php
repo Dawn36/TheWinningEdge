@@ -87,9 +87,12 @@ class CompanyController extends Controller
     {
         $company=Company::find($id);
         return view('company/company_edit',compact('company'));
-        
     }
-
+    public function companyEditNotAjax(int $id)
+    {
+        $company=Company::find($id);
+        return view('company/company_edit_not_ajax',compact('company'));
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -119,6 +122,10 @@ class CompanyController extends Controller
         $company['updated_at']=date("Y-m-d h:i:s");
         $company['updated_by']=Auth::user()->id;
         $company->save();
+        if(!$request->ajax())
+        {
+            return redirect()->back();
+        }
         return $company;
 
     }

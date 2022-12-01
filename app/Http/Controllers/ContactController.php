@@ -183,6 +183,14 @@ class ContactController extends Controller
         return view('contact/contact_edit',compact('contact','company'));
         
     }
+    public function contactEditNotAjax(int $id)
+    {
+        $userId=Auth::user()->id;
+
+        $company=Company::where('user_id',$userId)->get();
+        $contact=Contact::find($id);
+        return view('contact/contact_edit_not_ajax',compact('contact','company'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -248,6 +256,10 @@ class ContactController extends Controller
          $statusnew .=' ';
          $statusnew .=count($status) == "2" ? ucwords($status[1] ) : '';
          $contact['status'] =$statusnew;
+         if(!$request->ajax())
+         {
+             return redirect()->back();
+         }
         return $contact;
     }
 

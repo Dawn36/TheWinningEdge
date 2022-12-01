@@ -36,39 +36,7 @@
     <!--begin::Actions-->
     <div class="text-center pt-15">
         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close">Discard</button>
-        <button type="button" class="btn btn-primary" onclick="companyUpdate()">Submit</button>
+        <button type="submit"  class="btn btn-primary">Submit</button>
     </div>
     <!--end::Actions-->
 </form>
-<script>
- function companyUpdate() {
-        $.ajax({
-                url: $("#company_update").attr('action'),
-                method: 'POST',
-                data: $('#company_update').serialize(),
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                },
-            success: function(result) {
-                updateText2(result);
-               
-            }
-        });
-    }
-
-function updateText2(result)
-{
-    obj2.parentElement.parentElement.children[1].children[0].textContent=result.company_name;
-    obj2.parentElement.parentElement.children[2].textContent=result.street_address;
-    obj2.parentElement.parentElement.children[3].textContent=result.city;
-    obj2.parentElement.parentElement.children[4].textContent=result.state;
-    obj2.parentElement.parentElement.children[5].textContent=result.zip_code;
-    obj2.parentElement.parentElement.children[6].textContent=result.country;
-    obj2.parentElement.parentElement.children[7].children[0].textContent=result.website;
-    obj2.parentElement.parentElement.children[7].children[0].href=result.website;
-    obj2='';
-    $('#myModalLg').modal('hide');
-
-}
-
-</script>

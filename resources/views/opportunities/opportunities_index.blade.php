@@ -250,7 +250,7 @@
             type: 'GET',
             url: "{{ route('opportunities_target') }}",
             success: function(result) {
-                $('#myModalLgHeading').html('Set Opportunities Target');
+                $('#myModalLgHeading').html('Set Target Quota');
                 $('#modalBodyLarge').html(result);
                 $('#myModalLg').modal('show');
             }

@@ -49,7 +49,7 @@
 									</span>
 								</div>
 								<span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit customer details">
-									<button  class="btn btn-sm btn-light-primary" onclick="editContact('{{$contact->id}}')" >Edit</button>
+									<button  class="btn btn-sm btn-light-primary" onclick="editContactNot('{{$contact->id}}')" >Edit</button>
 								</span>
 							</div>
 							<!--end::Details toggle-->
@@ -638,8 +638,8 @@
         });
     }
 	
-    function editContact(id) {
-        url = "{{route('contact.edit',':id')}}";
+    function editContactNot(id) {
+        url = "{{route('contact_edit_not_ajax',':id')}}";
         url = url.replace(':id', id);
         $.ajax({
             type: 'GET',
@@ -678,11 +678,6 @@
             }
         });
     }
-	function closeModal()
-    {
-        window.location.reload();
-        // $('#myModalLg').modal('hide');
-    }
-
+	
 </script>
 @endsection('content')

@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::resource('email_template', EmailTemplateController::class);
 Route::resource('company', CompanyController::class);
+Route::get('company_edit_not_ajax/{id}', [CompanyController::class, 'companyEditNotAjax'])->name('company_edit_not_ajax');
+
 Route::resource('task', TaskController::class);
 Route::get('task_status_update', [TaskController::class, 'taskStatusUpdate'])->name('task_status_update');
 
@@ -38,6 +40,7 @@ Route::get('user_index', [UserController::class, 'userIndex'])->name('user_index
 Route::get('user_create', [UserController::class, 'userCreate'])->name('user_create');
 
 Route::resource('contact', ContactController::class);
+Route::get('contact_edit_not_ajax/{id}', [ContactController::class, 'contactEditNotAjax'])->name('contact_edit_not_ajax');
 Route::get('contact_counter', [ContactController::class, 'contactCounter'])->name('contact_counter');
 Route::get('contact_note', [ContactController::class, 'contactNote'])->name('contact_note');
 Route::get('contact_counter_delete/{id}', [ContactController::class, 'contactCounterDelete'])->name('contact_counter_delete');
