@@ -240,11 +240,11 @@
                                             <td>
                                                 <div class="d-flex flex-column w-100 me-2">
                                                     <div class="d-flex flex-stack mb-2">
-                                                        <span class="text-muted me-2 fs-7 fw-bold">{{$percentage >= 100 ? '100' : $percentage }}%</span>
+                                                        <span class="text-muted me-2 fs-7 fw-bold">{{round($percentage,2) >= 100 ? '100' : round($percentage,2) }}%</span>
                                                         <span class="text-muted me-2 fs-7 fw-bold">${{number_format(isset($amount[0]->amount) == 0 ? '0' : $amount[0]->amount)}}/${{number_format(count($opportunitiesTarget) == 0 ? '0' : $opportunitiesTarget[0]->target)}}</span>
                                                     </div>
                                                     <div class="progress h-6px w-100">
-                                                        <div class="progress-bar {{$percentage >= 100 ? 'bg-sucess' : 'bg-danger'  }}" role="progressbar" style="width: {{$percentage >= 100 ? '100' : $percentage }}%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div class="progress-bar {{round($percentage,2) >= 100 ? 'bg-sucess' : 'bg-danger'  }}" role="progressbar" style="width: {{round($percentage,2) >= 100 ? '100' : round($percentage,2) }}%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
 
                                                     </div>
                                                 </div>
