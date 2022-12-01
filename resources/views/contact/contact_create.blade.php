@@ -2,6 +2,17 @@
     @csrf
     <div class="d-flex flex-column scroll-y me-n7 pe-7" id="" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_user_header" data-kt-scroll-wrappers="#kt_modal_add_user_scroll" data-kt-scroll-offset="300px">
         <div class="fv-row mb-7">
+            <label class=" fw-bold fs-6 mb-2">Status</label>
+            <select name="status" class="form-control form-control-solid mb-3 mb-lg-0">
+                <option value="current_client" >Current Client</option>
+                <option value="active_discussion" >Active Discussion</option>
+                <option value="not_interested" >Not Interested</option>
+                <option value="unsubscribed" >Unsubscribed</option>
+                <option value="prospect" >Prospect</option>
+                <option value="user" >User</option>
+            </select>
+        </div>
+        <div class="fv-row mb-7">
             <label class="required fw-bold fs-6 mb-2">First Name</label>
             <input type="text"  name="first_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your First Name here." required/>
         </div>

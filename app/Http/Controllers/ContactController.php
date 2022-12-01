@@ -126,9 +126,11 @@ class ContactController extends Controller
             ]);
             $companyId=$data->id;
         }
+        
         $user = Contact::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
+            'status' => $request->status,
             'profile_img'=>$path,
             'tags'=>implode(',',$tagsData),
             'note'=>$request->note,
