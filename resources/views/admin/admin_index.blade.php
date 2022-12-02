@@ -29,7 +29,7 @@
                         <div class="p-10 pb-0">
                             <!--begin::Heading-->
                             <h1 class="anchor fw-bolder mb-5" id="zero-configuration">
-                                <a href="javascript:;"></a>Admins Listing
+                                <a href="javascript:;"></a>Admins 
                             </h1>
 
                             <!--begin::Notice-->
