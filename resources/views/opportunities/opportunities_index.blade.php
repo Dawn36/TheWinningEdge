@@ -28,7 +28,7 @@
                 <div class="col-xl-12 mb-5 mb-xl-10">
                     <!--begin::Card-->
                     <div class="card card-docs mb-2">
-                        <div class="p-10">
+                        <div class="p-10 pb-0">
                             <!--begin::Heading-->
                             <h1 class="anchor fw-bolder mb-5" id="zero-configuration">
                                 <a href="javascript:;"></a>Opportunities 
@@ -162,7 +162,7 @@
                                                 <div class="badge badge-sm badge-light-primary d-inline cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" >{{ucwords($opportunities[$i]->status)}}</div>
                                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
                                                     <div class="menu-item px-3">
-                                                        <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Update Task Status</div>
+                                                        <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Update Status</div>
                                                     </div>
                                                     <div class="menu-item px-3">
                                                         <a class="menu-link px-3" onclick="opportunitiesStatusUpdate('{{$opportunities[$i]->id}}',this)">Open</a>

@@ -25,7 +25,7 @@
                 <div class="col-xl-12 mb-5 mb-xl-10">
                     <!--begin::Card-->
                     <div class="card card-docs mb-2">
-                        <div class="p-10">
+                        <div class="p-10 pb-0">
                             <!--begin::Heading-->
                             <h1 class="anchor fw-bolder mb-5" id="zero-configuration">
                                 <a href="javascript:;"></a>Email Templates 
