@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Opportunities;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use App\Models\EmailTemplate;
@@ -155,6 +156,7 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
+        $year=date("Y");
         $contactId=$contact->id;
         $companiesId=$contact->companies_id;
         $meeting= DB::select(DB::raw("SELECT * FROM `contact_history` WHERE `status`='meeting' AND contacts_id = '$contactId' ORDER BY id DESC"));
@@ -164,8 +166,9 @@ class ContactController extends Controller
         $phoneCall= DB::select(DB::raw("SELECT * FROM `contact_history` WHERE `status`='phone_call' AND contacts_id = '$contactId' ORDER BY id DESC"));
         $note= DB::select(DB::raw("SELECT * FROM `contact_note` WHERE contact_id = '$contactId' ORDER BY id DESC"));
         $task= DB::select(DB::raw("SELECT * FROM `tasks` WHERE contact_id = '$contactId' ORDER BY id DESC"));
+        $opportunities= DB::select(DB::raw("SELECT * FROM `opportunities` WHERE YEAR(created_at) = '$year' AND contact_id='$contactId'  ORDER BY id DESC"));
         $company=Company::find($companiesId);
-        return view('contact/contact_show',compact('contact','meeting','email','liveConversation','voiceMail','phoneCall','note','task','company'));
+        return view('contact/contact_show',compact('contact','meeting','email','liveConversation','voiceMail','phoneCall','note','task','company','opportunities','companiesId'));
         
     }
 
@@ -391,5 +394,19 @@ class ContactController extends Controller
         $tags=Contact::select(DB::raw('GROUP_CONCAT(tags) as tags'))->where('user_id',$userId)->where('tags','!=','')->get();
         $tagsArr=explode(',',$tags[0]->tags);
         return view('contact/contact_filter',compact('company','tagsArr'));
+    }
+    public function contactOpportunitiesCreate(Request $request)
+    {
+        $companyId=$request->company_id;
+        $contactId=$request->contact_id;
+        return view('contact/contact_opportunities_create',compact('companyId','contactId'));
+
+    }
+    public function contactOpportunitiesEdit(int $id)
+    {
+        $userId=Auth::user()->id;
+        $opportunities=Opportunities::find($id);
+        return view('contact/contact_opportunities_edit',compact('opportunities'));
+
     }
 }

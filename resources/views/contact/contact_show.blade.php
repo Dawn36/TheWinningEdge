@@ -194,6 +194,9 @@
 							<a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_tasks">Tasks</a>
 						</li>
 						<li class="nav-item">
+							<a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_opportunities">Opportunities</a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_phone_calls_logs">Phone Calls</a>
 						</li>
 						<li class="nav-item">
@@ -353,6 +356,89 @@
 														</span>
 													</button>
 													<form  style="display: inline-block" method="POST" action="{{ route('task.destroy', $task[$i]->id) }}">
+														@method('DELETE')
+														@csrf
+													<button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+														<span class="svg-icon svg-icon-2">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																<path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"></path>
+																<path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"></path>
+																<path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"></path>
+															</svg>
+														</span>
+													</button>
+													</form>
+												</td>
+											</tr>
+										</tbody>
+										@endfor
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade " id="kt_opportunities" role="tabpanel">
+							<div class="card card-flush mb-6 mb-xl-9">
+								<div class="card-header mt-6">
+									<div class="card-title flex-column">
+										<h2 class="mb-1">Opportunities</h2>
+										<div class="fs-6 fw-bold text-muted">Total {{count($task)}} Opportunities in backlog</div>
+									</div>
+									<div class="card-toolbar">
+										<button type="button" class="btn btn-light-primary btn-sm" data-bs-toggle="modal" data-bs-target="#kt_modal_add_tasks" onclick="addOpportunities('{{$contact->id}}','{{$companiesId}}')">
+											<span class="svg-icon svg-icon-3">
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+													<path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM16 13.5L12.5 13V10C12.5 9.4 12.6 9.5 12 9.5C11.4 9.5 11.5 9.4 11.5 10L11 13L8 13.5C7.4 13.5 7 13.4 7 14C7 14.6 7.4 14.5 8 14.5H11V18C11 18.6 11.4 19 12 19C12.6 19 12.5 18.6 12.5 18V14.5L16 14C16.6 14 17 14.6 17 14C17 13.4 16.6 13.5 16 13.5Z" fill="black" />
+													<rect x="11" y="19" width="10" height="2" rx="1" transform="rotate(-90 11 19)" fill="black" />
+													<rect x="7" y="13" width="10" height="2" rx="1" fill="black" />
+													<path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black" />
+												</svg>
+											</span>
+											Add Opportunities
+										</button>
+									</div>
+								</div>
+								<div class="card-body d-flex flex-column">
+									<table class="kt_datatable_example_1 table table-row-bordered gy-5">
+										<thead>
+											<tr class="fw-bold fs-6 text-muted">
+												<th>ID</th>
+												<th>Amount</th>
+												<th>Duration</th>
+												<th>File</th>
+												<th>Status</th>
+												<th>Actions</th>
+											</tr>
+										</thead>
+										<tbody class="fw-bold text-gray-600">
+											@for ($i = 0; $i < count($opportunities); $i++) @php $a=$i; $a++; @endphp 
+											<tr>
+												<td>{{$a}}</td>
+												<td>{{ucwords($opportunities[$i]->contract_amount)}}</td>
+												<td>{{$opportunities[$i]->duration}}</td>
+												<td>
+													<div class="d-flex align-items-center">
+														<span class="svg-icon svg-icon-2x svg-icon-primary me-4">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																<path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22Z" fill="black"></path>
+																<path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="black"></path>
+															</svg>
+														</span>
+														<a href="{{ asset($opportunities[$i]->path)}}" target="_blank" class="text-gray-800 text-hover-primary">{{ucwords($opportunities[$i]->file_name)}}</a>
+													</div>
+												</td>
+												<td>
+													<div class="badge badge-sm badge-light-primary d-inline">{{ucwords($opportunities[$i]->status)}}</div>
+												</td>
+												<td>
+													<button  class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary"  data-bs-original-title="Edit Opportunities" onclick="editOpportunities('{{$opportunities[$i]->id}}')">
+														<span class="svg-icon svg-icon-2">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																<path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black"></path>
+																<path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black"></path>
+															</svg>
+														</span>
+													</button>
+													<form  style="display: inline-block" method="POST" action="{{ route('opportunities.destroy', $opportunities[$i]->id) }}">
 														@method('DELETE')
 														@csrf
 													<button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
@@ -678,6 +764,37 @@
             }
         });
     }
+	function addOpportunities(contactId,companyId)
+	{
+		var value={
+            contact_id:contactId,
+            company_id:companyId
+        };
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('contact_opportunities_create') }}",
+            data: value,
+            success: function(result) {
+                $('#myModalLgHeading').html('Add Opportunities');
+                $('#modalBodyLarge').html(result);
+                $('#myModalLg').modal('show');
+            }
+        });
+	}
+	function editOpportunities(id) {
+        url = "{{route('contact_opportunities_edit',':id')}}";
+        url = url.replace(':id', id);
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function(result) {
+                $('#myModalLgHeading').html('Edit Opportunities');
+                $('#modalBodyLarge').html(result);
+                $('#myModalLg').modal('show');
+            }
+        });
+    }
+
 	
 </script>
 @endsection('content')

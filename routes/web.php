@@ -42,6 +42,8 @@ Route::get('user_create', [UserController::class, 'userCreate'])->name('user_cre
 Route::resource('contact', ContactController::class);
 Route::get('contact_edit_not_ajax/{id}', [ContactController::class, 'contactEditNotAjax'])->name('contact_edit_not_ajax');
 Route::get('contact_counter', [ContactController::class, 'contactCounter'])->name('contact_counter');
+Route::get('contact_opportunities_create', [ContactController::class, 'contactOpportunitiesCreate'])->name('contact_opportunities_create');
+Route::get('contact_opportunities_edit/{id}', [ContactController::class, 'contactOpportunitiesEdit'])->name('contact_opportunities_edit');
 Route::get('contact_note', [ContactController::class, 'contactNote'])->name('contact_note');
 Route::get('contact_counter_delete/{id}', [ContactController::class, 'contactCounterDelete'])->name('contact_counter_delete');
 Route::post('contact_note', [ContactController::class, 'contactNoteSubmit'])->name('contact_note');
