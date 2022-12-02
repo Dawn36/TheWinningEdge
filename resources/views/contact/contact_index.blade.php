@@ -30,7 +30,7 @@
                         <div class="p-10 pb-0">
                             <!--begin::Heading-->
                             <h1 class="anchor fw-bolder mb-5" id="zero-configuration">
-                                <a href="javascript:;"></a>Contact 
+                                <a href="javascript:;"></a>Contacts 
                             </h1>
                             <!--begin::Notice-->
                             {{-- <div class="d-flex align-items-center rounded py-5 px-4 bg-light-primary">

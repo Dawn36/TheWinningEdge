@@ -70,14 +70,14 @@
                                     <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">
                                         {{ Route::currentRouteName() == 'settings.create' ? 'Setting' : '' }}  
                                         {{ Route::currentRouteName() == 'email_template.show' || Route::currentRouteName() == 'email_template.index'  ? 'Email Templates' : '' }}  
-                                        {{ Route::currentRouteName() == 'user.index'  ? 'Admin Listing' : '' }}  
-                                        {{ Route::currentRouteName() == 'opportunities.index'  ? 'Opportunities Listing' : '' }}  
-                                        {{ Route::currentRouteName() == 'contact.show' || Route::currentRouteName() == 'contact.index'  ? 'Contact Listing' : '' }}
+                                        {{ Route::currentRouteName() == 'user.index'  ? 'Admin' : '' }}  
+                                        {{ Route::currentRouteName() == 'opportunities.index'  ? 'Opportunities ' : '' }}  
+                                        {{ Route::currentRouteName() == 'contact.show' || Route::currentRouteName() == 'contact.index'  ? 'Contacts' : '' }}
                                         {{ Route::currentRouteName() == 'dashboard'  ? 'Dashboard' : '' }}
-                                        {{ Route::currentRouteName() == 'talk_track.show' || Route::currentRouteName() == 'talk_track.index'  ? 'Talk Track Listing' : '' }}
-                                        {{ Route::currentRouteName() == 'task.show' || Route::currentRouteName() == 'task.index'  ? 'Task Listing' : '' }}
-                                        {{ Route::currentRouteName() == 'company.show' || Route::currentRouteName() == 'company.index'  ? 'Company Listing' : '' }}
-                                        {{ Route::currentRouteName() == 'user_index'   ? 'Users Listing' : '' }}
+                                        {{ Route::currentRouteName() == 'talk_track.show' || Route::currentRouteName() == 'talk_track.index'  ? 'Best practices' : '' }}
+                                        {{ Route::currentRouteName() == 'task.show' || Route::currentRouteName() == 'task.index'  ? 'Tasks' : '' }}
+                                        {{ Route::currentRouteName() == 'company.show' || Route::currentRouteName() == 'company.index'  ? 'Companies' : '' }}
+                                        {{ Route::currentRouteName() == 'user_index'   ? 'Users' : '' }}
                                         {{ Route::currentRouteName() == 'session_log'   ? 'Session Logs' : '' }}
                                         
                                     </h1>

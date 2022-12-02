@@ -28,7 +28,7 @@
                         <div class="p-10 pb-0">
                             <!--begin::Heading-->
                             <h1 class="anchor fw-bolder mb-5" id="zero-configuration">
-                                <a href="javascript:;"></a>Talk Track 
+                                <a href="javascript:;"></a>Best practices 
                             </h1>
                             <!--begin::Notice-->
                             {{-- <div class="d-flex align-items-center rounded py-5 px-4 bg-light-primary">
@@ -84,7 +84,7 @@
                                                 <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="black" />
                                             </svg>
                                         </span>
-                                        <!--end::Svg Icon-->Add Talk Track
+                                        <!--end::Svg Icon-->Add Best practices
                                     </button>
                                     <!--end::Email Templates-->
                                 </div>
@@ -166,7 +166,7 @@
             type: 'GET',
             url: "{{ route('talk_track.create') }}",
             success: function(result) {
-                $('#myModalLgHeading').html('Add Talk Track');
+                $('#myModalLgHeading').html('Add Best practices');
                 $('#modalBodyLarge').html(result);
                 $('#myModalLg').modal('show');
             }
@@ -180,7 +180,7 @@
             type: 'GET',
             url: url,
             success: function(result) {
-                $('#myModalLgHeading').html('Edit Talk Track');
+                $('#myModalLgHeading').html('Edit Best practices');
                 $('#modalBodyLarge').html(result);
                 $('#myModalLg').modal('show');
             }
