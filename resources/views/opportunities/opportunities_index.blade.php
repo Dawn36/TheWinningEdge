@@ -135,7 +135,6 @@
                                             <th>Email</th>
                                             <th>$ Amount</th>
                                             <th>Notes</th>
-                                            <th>Tasks</th>
                                             <th>Status</th>
                                             {{-- <th>Duration</th> --}}
                                             {{-- <th>File</th> --}}
@@ -157,7 +156,6 @@
                                             </td>
                                             <td>{{$opportunities[$i]->contract_amount}}</td>
                                             <td>{{$opportunities[$i]->contact_note}}</td>
-                                            <td>{{$opportunities[$i]->description}}</td>
                                             <td>
                                                 <div class="badge badge-sm badge-light-primary d-inline cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" >{{ucwords($opportunities[$i]->status)}}</div>
                                                 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">

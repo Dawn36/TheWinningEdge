@@ -25,8 +25,7 @@ class OpportunitiesController extends Controller
         $percentage=0;
        // $opportunities=Opportunities::where('user_id',$userId)->whereYear('created_at', '=', $year)->orderby('id','desc')->get();
         $opportunities=DB::select(DB::raw("SELECT o.*,c.`first_name`,c.`id` AS contact_id,c.`email`,c.`phone_number`,c.`mobile_phone`,c.`job`,c.`last_name`,cc.`company_name`,
-        (SELECT note FROM `contact_note` WHERE contact_id= o.`contact_id` ORDER BY id DESC LIMIT 1 ) AS contact_note,
-        (SELECT description FROM `tasks` WHERE contact_id= o.`contact_id` ORDER BY id DESC LIMIT 1 ) AS description
+        (SELECT note FROM `contact_note` WHERE contact_id= o.`contact_id` ORDER BY id DESC LIMIT 1 ) AS contact_note
          FROM `opportunities` o 
         LEFT JOIN `contacts` c ON o.`contact_id` = c.`id`
         LEFT JOIN `companies` cc ON cc.`id`=o.`company_id` 

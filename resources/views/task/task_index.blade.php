@@ -139,7 +139,7 @@
                                                         <a class="menu-link px-3" onclick="taskStatusUpdate('{{$task[$i]->id}}',this)">In Progress</a>
                                                     </div>
                                                     <div class="menu-item px-3">
-                                                        <a class="menu-link px-3" onclick="taskStatusUpdate('{{$task[$i]->id}}',this)">Complete</a>
+                                                        <a class="menu-link px-3" onclick="taskStatusUpdate('{{$task[$i]->id}}',this)">Completed</a>
                                                     </div>
                                                 </div>
                                             </td>
