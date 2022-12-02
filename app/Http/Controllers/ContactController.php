@@ -363,11 +363,24 @@ class ContactController extends Controller
     }
     public function contactStatusBulkUpdate(Request $request)
     {
+        $userId=Auth::user()->id;
         $contactId=json_decode($request->contact_id);
         for ($i=0; $i < count($contactId); $i++) { 
-            $contact=Contact::find($contactId[$i]);
-            $contact->status=$request->status;
-            $contact->save();
+            if($request->status != '0')
+            {
+                $contact=Contact::find($contactId[$i]);
+                $contact->status=$request->status;
+                $contact->save();
+            }
+            if($request->contact_history != '0')
+            {
+                $status=$request->contact_history;
+                $mytime = Carbon\Carbon::now();
+                $date=$mytime->toDateTimeString();
+                $contactsId=$contactId[$i];
+                DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$userId,$contactsId,$status,$date]);
+            }
+            
         }
         return redirect()->back();
 

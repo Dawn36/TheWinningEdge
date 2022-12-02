@@ -87,6 +87,7 @@
                                             Update Status
                                         </span>
                                     </a>
+                                   
                                     <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px mt-2" data-kt-menu="true" id="kt-toolbar-filter">
                                         <div class="px-7 py-5">
                                             <div class="fs-4 text-dark fw-bolder">Update Status</div>
@@ -100,12 +101,24 @@
                                                 <div class="mb-10">
                                                     <label class="form-label fs-5 fw-bold mb-3">Status:</label>
                                                     <select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" name="status" data-dropdown-parent="#kt-toolbar-filter">
+                                                        <option value="0">Select Option</option>
                                                         <option value="current_client" >Current Client</option>
                                                         <option value="active_discussion" >Active Discussion</option>
                                                         <option value="not_interested" >Not Interested</option>
                                                         <option value="unsubscribed" >Unsubscribed</option>
                                                         <option value="prospect" >Prospect</option>
                                                         <option value="user" >User</option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-10">
+                                                    <label class="form-label fs-5 fw-bold mb-3">Outreach Logs:</label>
+                                                    <select class="form-select form-select-solid fw-bolder" name='contact_history' data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#kt-toolbar-filter">
+                                                        <option value="0">Select Option</option>
+                                                        <option value="phone_call">Phone Calls</option>
+                                                        <option value="live_conversation">Conversations</option>
+                                                        <option value="voice_mail">Voicemails</option>
+                                                        <option value="email">Emails</option>
+                                                        <option value="meeting">Meetings</option>
                                                     </select>
                                                 </div>
                                                 <div class="d-flex justify-content-end">
