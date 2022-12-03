@@ -78,19 +78,19 @@
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base" >
                                     <!-- Start::Update Status -->
-                                    <a href="#" class="btn btn-light-dark me-2" title="Update Status" data-bs-toggle="tooltip" data-bs-placement="top" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" id="update_status" style="display: none">
+                                    <a href="#" class="btn btn-light-dark me-2" title="Update Record" data-bs-toggle="tooltip" data-bs-placement="top" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" id="update_status" style="display: none">
                                         <span class="svg-icon svg-icon-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
                                                 <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
                                             </svg>
-                                            Update Status
+                                            Update Record
                                         </span>
                                     </a>
                                    
                                     <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px mt-2" data-kt-menu="true" id="kt-toolbar-filter">
                                         <div class="px-7 py-5">
-                                            <div class="fs-4 text-dark fw-bolder">Update Status</div>
+                                            <div class="fs-4 text-dark fw-bolder">Update Record</div>
                                         </div>
                                         <div class="separator border-gray-200"></div>
                                         <form id="contact_update" class="form" method="POST" action="{{ route('contact_status_bulk') }}" enctype="multipart/form-data">
