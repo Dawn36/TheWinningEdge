@@ -136,6 +136,7 @@
                                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
                                     <!-- Start::Download CSV -->
                                     <form id="contact_export" method="POST" action="{{ route('contact_export') }}">
+                                        @csrf
                                         <input hidden id='contact_id' name="contact_id" value="" />
                                     </form>
                                     <button type="button" class="btn btn-light-dark me-2" title="Download CSV" data-bs-toggle="tooltip" data-bs-placement="top" onclick="contactExport()" id="download_sheet" style="display: none"> 
