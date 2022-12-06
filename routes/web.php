@@ -57,7 +57,7 @@ Route::get('get_email_templater', [ContactController::class, 'getEmailTemplater'
 Route::get('contact_status_bulk', [ContactController::class, 'contactStatusBulk'])->name('contact_status_bulk');
 Route::post('contact_status_bulk', [ContactController::class, 'contactStatusBulkUpdate'])->name('contact_status_bulk');
 Route::post('contact_email_template', [ContactController::class, 'contactEmailTemplateSend'])->name('contact_email_template');
-Route::get('contact_export',[ContactController::class,'contactExport'])->name('contact_export');
+Route::post('contact_export',[ContactController::class,'contactExport'])->name('contact_export');
 Route::get('contact_filter',[ContactController::class,'contactFilter'])->name('contact_filter');
 
 Route::resource('opportunities', OpportunitiesController::class);
