@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $percentage=0;
         $year=date("Y");
         $month=Date("m");
-        $userCount=User::count();
+        $userCount=User::where('user_type','1')->count();
         $contactCount=Contact::where('user_id',$userId)->count();
 
         $phoneCallMonth= DB::table('contact_history')->where('user_id',$userId)->where('status','phone_call')->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->count();

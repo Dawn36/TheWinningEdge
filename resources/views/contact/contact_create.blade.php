@@ -21,6 +21,14 @@
             <input type="text"  name="last_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Last Name here." required/>
         </div>
         <div class="fv-row mb-7">
+            <label class=" fw-bold fs-6 mb-2">Company Name</label>
+            <select name="company_id"class="form-control form-control-solid rounded-3 js-example-tags" data-control="select2" data-dropdown-parent="#modalBodyLarge">
+                @for($i=0; $i < count($company); $i++)
+                <option value="{{$company[$i]->id}}" >{{$company[$i]->company_name}}</option>
+                @endfor
+            </select>
+        </div>
+        <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Job Title</label>
             <input type="text"  name="job" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Job Title here." />
         </div>
@@ -36,14 +44,7 @@
             <label class=" fw-bold fs-6 mb-2">Mobile phone</label>
             <input type="text"   name="mobile_phone" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Mobile phone here." />
         </div>
-        <div class="fv-row mb-7">
-            <label class=" fw-bold fs-6 mb-2">Company Name</label>
-            <select name="company_id"class="form-control form-control-solid rounded-3 js-example-tags" data-control="select2" data-dropdown-parent="#modalBodyLarge">
-                @for($i=0; $i < count($company); $i++)
-                <option value="{{$company[$i]->id}}" >{{$company[$i]->company_name}}</option>
-                @endfor
-            </select>
-        </div>
+        
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">LinkedIn Contact Profile URL</label>
             <input type="text"  name="linked_in_url" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter the LinkedIn Contact Profile URL here." />

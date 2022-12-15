@@ -125,7 +125,7 @@
                                             <td>
                                                 <span class="badge badge-light-primary fw-bolder fs-7 px-2 py-1">Admin</span>
                                             </td>
-                                            <td>{{date("Y-m-d",strtotime($user[$i]->created_at))}}</td>
+                                            <td>{{date("m/d/Y",strtotime($user[$i]->created_at))}}</td>
                                             <td>
                                                 <button class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" onclick="editAdmin('{{$user[$i]->id}}')" data-bs-original-title="Edit Admin">
                                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->

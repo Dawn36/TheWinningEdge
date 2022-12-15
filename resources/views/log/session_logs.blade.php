@@ -90,7 +90,7 @@
                                             <td>{{ucwords($logs[$i]->full_name)}}</td>
                                             <td>{{ucwords($logs[$i]->email)}}</td>
                                             <td>{{ucwords($logs[$i]->status)}}</td>
-                                            <td>{{Date("Y-m-d h:i:s",strtotime($logs[$i]->created_at))}}</td>
+                                            <td>{{Date("m/d/Y h:i:s",strtotime($logs[$i]->created_at))}}</td>
                                         </tr>
                                         @endfor
                                     </tbody>

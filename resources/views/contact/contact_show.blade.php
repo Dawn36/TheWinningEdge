@@ -86,7 +86,7 @@
 										<a href="{{$contact->linked_in_url}}" class="text-gray-600 text-hover-primary">{{$contact->linked_in_url}}</a>
 									</div>
 									<div class="fw-bolder mt-5">Creation Date</div>
-									<div class="text-gray-600 text-hover-primary">{{Date("Y-m-d",strtotime($contact->created_at))}}</div>
+									<div class="text-gray-600 text-hover-primary">{{Date("m/d/Y",strtotime($contact->created_at))}}</div>
 								</div>
 							</div>
 						</div>
@@ -243,7 +243,7 @@
 									<div class="d-flex align-items-center position-relative mb-7">
 										<div class="position-absolute top-0 start-0 rounded h-100 bg-secondary w-4px"></div>
 										<div class="fw-bold ms-5">
-                                            @php 
+                                            {{-- @php 
                                             if($note[$i]->status == 'open')
                                             {
                                                 $class='info';
@@ -256,18 +256,18 @@
                                             {
                                                 $class='primary';
                                             }
-                                            @endphp 
-											<a href="javascript:;" class="fs-5 fw-bolder text-dark text-hover-{{$class}}">{{ucwords($note[$i]->note)}}</a>
+                                            @endphp  --}}
+											<a href="javascript:;" class="fs-5 fw-bolder text-dark text-hover-primary">{{ucwords($note[$i]->note)}}</a>
                                           
-											<div class="badge badge-sm badge-light-{{$class}} d-inline">{{ucwords($note[$i]->status)}}</div>
+											{{-- <div class="badge badge-sm badge-light-{{$class}} d-inline">{{ucwords($note[$i]->status)}}</div> --}}
 											<div class="fs-7 text-muted">Created On
-												<a href="javascript:;">{{Date("Y-m-d",strtotime($note[$i]->created_at))}}</a>
+												<a href="javascript:;">{{Date("m/d/Y",strtotime($note[$i]->created_at))}}</a>
 											</div>
 											<div class="fs-7 text-muted">Added By
 												<a href="javascript:;">{{ucwords($note[$i]->user_name)}}</a>
 											</div>
 										</div>
-										<button type="button" class="btn btn-icon btn-active-light-{{$class}} w-30px h-30px ms-auto" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+										{{-- <button type="button" class="btn btn-icon btn-active-light-{{$class}} w-30px h-30px ms-auto" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
 											<span class="svg-icon svg-icon-3">
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 													<path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
@@ -296,7 +296,7 @@
 													<button type="submit" class="btn btn-sm btn-primary">Apply</button>
 												</div>
 											</form>
-										</div>
+										</div> --}}
 									</div>
                                     @endfor
 
@@ -403,7 +403,7 @@
 											<tr class="fw-bold fs-6 text-muted">
 												<th>ID</th>
 												<th>Amount</th>
-												<th>Duration</th>
+												{{-- <th>Duration</th> --}}
 												<th>File</th>
 												<th>Status</th>
 												<th>Actions</th>
@@ -414,7 +414,7 @@
 											<tr>
 												<td>{{$a}}</td>
 												<td>{{ucwords($opportunities[$i]->contract_amount)}}</td>
-												<td>{{$opportunities[$i]->duration}}</td>
+												{{-- <td>{{$opportunities[$i]->duration}}</td> --}}
 												<td>
 													<div class="d-flex align-items-center">
 														<span class="svg-icon svg-icon-2x svg-icon-primary me-4">
@@ -482,7 +482,7 @@
                                             @for ($i = 0; $i < count($phoneCall); $i++) @php $a=$i; $a++; @endphp 
 											<tr>
 												<td>{{$a}}</td>
-												<td>{{Date("Y-m-d h:i:s A",strtotime($phoneCall[$i]->created_at))}}</td>
+												<td>{{Date("m/d/Y h:i:s A",strtotime($phoneCall[$i]->created_at))}}</td>
 												<td>
 													<a href="{{route('contact_counter_delete',$phoneCall[$i]->id)}}" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Phone Call">
 														<span class="svg-icon svg-icon-2">
@@ -524,7 +524,7 @@
 											@for ($i = 0; $i < count($liveConversation); $i++) @php $a=$i; $a++; @endphp 
 											<tr>
 												<td>{{$a}}</td>
-												<td>{{Date("Y-m-d h:i:s A",strtotime($liveConversation[$i]->created_at))}}</td>
+												<td>{{Date("m/d/Y h:i:s A",strtotime($liveConversation[$i]->created_at))}}</td>
 												<td>
 													<a href="{{route('contact_counter_delete',$liveConversation[$i]->id)}}" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Live Conversation">
 														<span class="svg-icon svg-icon-2">
@@ -566,7 +566,7 @@
 											@for ($i = 0; $i < count($voiceMail); $i++) @php $a=$i; $a++; @endphp 
 											<tr>
 												<td>{{$a}}</td>
-												<td>{{Date("Y-m-d h:i:s A",strtotime($voiceMail[$i]->created_at))}}</td>
+												<td>{{Date("m/d/Y h:i:s A",strtotime($voiceMail[$i]->created_at))}}</td>
 												<td>
 													<a href="{{route('contact_counter_delete',$voiceMail[$i]->id)}}" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Voice Mail">
 														<span class="svg-icon svg-icon-2">
@@ -608,7 +608,7 @@
 											@for ($i = 0; $i < count($email); $i++) @php $a=$i; $a++; @endphp 
 											<tr>
 												<td>{{$a}}</td>
-												<td>{{Date("Y-m-d h:i:s A",strtotime($email[$i]->created_at))}}</td>
+												<td>{{Date("m/d/Y h:i:s A",strtotime($email[$i]->created_at))}}</td>
 												<td>
 													<a href="{{route('contact_counter_delete',$email[$i]->id)}}" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Email">
 														<span class="svg-icon svg-icon-2">
@@ -650,7 +650,7 @@
 											@for ($i = 0; $i < count($meeting); $i++) @php $a=$i; $a++; @endphp 
 											<tr>
 												<td>{{$a}}</td>
-												<td>{{Date("Y-m-d h:i:s A",strtotime($meeting[$i]->created_at))}}</td>
+												<td>{{Date("m/d/Y h:i:s A",strtotime($meeting[$i]->created_at))}}</td>
 												<td>
 													<a href="{{route('contact_counter_delete',$meeting[$i]->id)}}" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Meeting">
 														<span class="svg-icon svg-icon-2">

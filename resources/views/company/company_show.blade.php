@@ -76,7 +76,7 @@
                                     <div class="text-gray-600 text-hover-primary">{{ucwords($company->country)}}</div>
 
                                     <div class="fw-bolder mt-5">Creation Date</div>
-                                    <div class="text-gray-600 text-hover-primary">{{date("Y-m-d",strtotime($company->created_at))}}</div>
+                                    <div class="text-gray-600 text-hover-primary">{{date("m/d/Y",strtotime($company->created_at))}}</div>
                                 </div>
                             </div>
                             <!--end::Details content-->
@@ -141,7 +141,7 @@
                                                 <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->first_name)}} {{ucwords($contact[$i]->last_name)}}</a></td>
                                                 <td>{{$contact[$i]->phone_number}}</td>
                                                 <td>{{$contact[$i]->email}}</td>
-                                                <td>{{DATE("Y-m-d",strtotime($contact[$i]->created_at))}}</td>
+                                                <td>{{DATE("m/d/Y",strtotime($contact[$i]->created_at))}}</td>
                                                 <td>
                                                 <button  class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" data-bs-original-title="Add a Task" onclick="addTaskContact('{{$contact[$i]->id}}')">
                                                     <span class="svg-icon svg-icon-2">

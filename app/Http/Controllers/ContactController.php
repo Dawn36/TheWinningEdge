@@ -128,13 +128,12 @@ class ContactController extends Controller
             $companyId=$data->id;
         }
         
-        $user = Contact::create([
+        $contact = Contact::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'status' => $request->status,
             'profile_img'=>$path,
             'tags'=>implode(',',$tagsData),
-            'note'=>$request->note,
             'job'=>$request->job,
             'phone_number'=>$request->phone_number,
             'email'=>$request->email,
@@ -145,6 +144,16 @@ class ContactController extends Controller
             'created_at' => date("Y-m-d h:i:s"),
             'created_by' => Auth::user()->id,
         ]);
+        if(isset($request->note))
+        {
+            $contactId=$contact->id;
+            $note=$request->note;
+            $date=Date("Y-m-d H:i:s");
+            $firstName=Auth::user()->first_name;
+            $lastName=Auth::user()->last_name;
+            $fullName=$firstName." ".$lastName;
+            DB::insert('insert into contact_note (user_id,contact_id,user_name,note,created_at) values(?,?,?,?,?)',[$userId,$contactId,$fullName,$note,$date]);
+        }
         return redirect()->back();
     }
 
@@ -165,7 +174,7 @@ class ContactController extends Controller
         $voiceMail= DB::select(DB::raw("SELECT * FROM `contact_history` WHERE `status`='voice_mail' AND contacts_id = '$contactId' ORDER BY id DESC"));
         $phoneCall= DB::select(DB::raw("SELECT * FROM `contact_history` WHERE `status`='phone_call' AND contacts_id = '$contactId' ORDER BY id DESC"));
         $note= DB::select(DB::raw("SELECT * FROM `contact_note` WHERE contact_id = '$contactId' ORDER BY id DESC"));
-        $task= DB::select(DB::raw("SELECT * FROM `tasks` WHERE contact_id = '$contactId' ORDER BY id DESC"));
+        $task= DB::select(DB::raw("SELECT * FROM `tasks` WHERE contact_id = '$contactId' AND task_status != 'completed' ORDER BY id DESC"));
         $opportunities= DB::select(DB::raw("SELECT * FROM `opportunities` WHERE YEAR(created_at) = '$year' AND contact_id='$contactId'  ORDER BY id DESC"));
         $company=Company::find($companiesId);
         return view('contact/contact_show',compact('contact','meeting','email','liveConversation','voiceMail','phoneCall','note','task','company','opportunities','companiesId'));
@@ -181,9 +190,9 @@ class ContactController extends Controller
     public function edit(Contact $contact)
     {
         $userId=Auth::user()->id;
-
+        $latestNote=DB::table('contact_note')->where('contact_id',$contact->id)->orderByDesc('id')->limit('1')->get();
         $company=Company::where('user_id',$userId)->get();
-        return view('contact/contact_edit',compact('contact','company'));
+        return view('contact/contact_edit',compact('contact','company','latestNote'));
         
     }
     public function contactEditNotAjax(int $id)
@@ -253,12 +262,29 @@ class ContactController extends Controller
         $contact->save();
         $companiesId=$contact->companies_id;
         $companies=Company::find($companiesId);
+        Opportunities::where('contact_id',$contact->id)->update(['company_id' => $contact->companies_id]);
         $contact['companies_id']=$companies->company_name;
          $status=explode('_',$contact['status']) ;
          $statusnew= ucwords($status[0]);
          $statusnew .=' ';
          $statusnew .=count($status) == "2" ? ucwords($status[1] ) : '';
          $contact['status'] =$statusnew;
+         if($request->note_id == '0')
+        {
+            $contactId=$contact->id;
+            $note=$request->note;
+            $date=Date("Y-m-d H:i:s");
+            $firstName=Auth::user()->first_name;
+            $lastName=Auth::user()->last_name;
+            $fullName=$firstName." ".$lastName;
+            DB::insert('insert into contact_note (user_id,contact_id,user_name,note,created_at) values(?,?,?,?,?)',[$userId,$contactId,$fullName,$note,$date]);
+        }
+        else
+        {
+            DB::table('contact_note')
+                ->where('id', $request->note_id)
+                ->update(['note' => $request->note]);
+        }
          if(!$request->ajax())
          {
              return redirect()->back();
@@ -276,6 +302,8 @@ class ContactController extends Controller
     {
         $data = Contact::find($id);
         DB::table('contact_history')->where('contacts_id',$id)->delete();
+        DB::table('contact_note')->where('contact_id',$id)->delete();
+        Opportunities::where('contact_id',$id)->delete();
         $data->delete();
         return redirect()->back();
     }
@@ -419,7 +447,9 @@ class ContactController extends Controller
     {
         $userId=Auth::user()->id;
         $opportunities=Opportunities::find($id);
-        return view('contact/contact_opportunities_edit',compact('opportunities'));
+        $latestNote=DB::table('contact_note')->where('contact_id',$opportunities->contact_id)->orderByDesc('id')->limit('1')->get();
+
+        return view('contact/contact_opportunities_edit',compact('opportunities','latestNote'));
 
     }
 }

@@ -59,14 +59,14 @@
                             <!--begin::Col-->
                             <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-6">First Name</label>
-                                <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="first_name" autocomplete="off" />
+                                <input class="form-control form-control-lg form-control-solid" type="text" value="{{old('first_name')}}" placeholder="" name="first_name" autocomplete="off" />
                             </div>
                             <input hidden name="role_id" value="2" />
                             <!--end::Col-->
                             <!--begin::Col-->
                             <div class="col-xl-6">
                                 <label class="form-label fw-bolder text-dark fs-6">Last Name</label>
-                                <input class="form-control form-control-lg form-control-solid" type="text" placeholder="" name="last_name" autocomplete="off" />
+                                <input class="form-control form-control-lg form-control-solid" type="text" value="{{old('last_name')}}" placeholder="" name="last_name" autocomplete="off" />
                             </div>
                             <!--end::Col-->
                         </div>
@@ -74,7 +74,10 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <label class="form-label fw-bolder text-dark fs-6">Email</label>
-                            <input class="form-control form-control-lg form-control-solid" type="email" placeholder="" name="email" autocomplete="off" />
+                            <input class="form-control form-control-lg form-control-solid" type="email" value="{{old('email')}}" placeholder="" name="email" autocomplete="off" />
+                            @if($errors->has('email'))
+                            <div class="error" style="color: red"><b>{{ $errors->first('email') }}</b></div>
+                            @endif
                         </div>
                         <!--end::Input group-->
                         <!--begin::Input group-->

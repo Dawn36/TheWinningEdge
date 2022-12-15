@@ -134,22 +134,22 @@
 
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                    <!-- Start::Download CSV -->
+                                    <!-- Start::Download XLSX -->
                                     <form id="contact_export" method="POST" action="{{ route('contact_export') }}">
                                         @csrf
                                         <input hidden id='contact_id' name="contact_id" value="" />
                                     </form>
-                                    <button type="button" class="btn btn-light-dark me-2" title="Download CSV" data-bs-toggle="tooltip" data-bs-placement="top" onclick="contactExport()" id="download_sheet" style="display: none"> 
+                                    <button type="button" class="btn btn-light-dark me-2" title="Download XLSX" data-bs-toggle="tooltip" data-bs-placement="top" onclick="contactExport()" id="download_sheet" style="display: none"> 
                                         <span class="svg-icon svg-icon-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path opacity="0.5" d="M19 15C20.7 15 22 13.7 22 12C22 10.3 20.7 9 19 9C18.9 9 18.9 9 18.8 9C18.9 8.7 19 8.3 19 8C19 6.3 17.7 5 16 5C15.4 5 14.8 5.2 14.3 5.5C13.4 4 11.8 3 10 3C7.2 3 5 5.2 5 8C5 8.3 5 8.7 5.1 9H5C3.3 9 2 10.3 2 12C2 13.7 3.3 15 5 15H19Z" fill="black" />
                                                 <path opacity="1" d="M13 17.4V12C13 11.4 12.6 11 12 11C11.4 11 11 11.4 11 12V17.4H13Z" fill="black" />
                                                 <path opacity="1" d="M8 17.4H16L12.7 20.7C12.3 21.1 11.7 21.1 11.3 20.7L8 17.4Z" fill="black" />
                                             </svg>
-                                            CSV
+                                            XLSX
                                         </span>
                                     </button>
-                                    <!-- End::Download CSV -->
+                                    <!-- End::Download XLSX -->
 
                                     <!-- Start::Send Email -->
                                     <button type="button" class="btn btn-icon btn-light-dark me-2"  title="Send Email" data-bs-toggle="tooltip" data-bs-placement="top" id="send_email"  onclick="sendEmail()" style="display: none">
@@ -309,7 +309,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </div>
-                                                            <div class="fw-bold text-muted fs-8">{{$contact[$i]->last_phone_call == '' ? '' : Date("Y-m-d h:i A",strtotime($contact[$i]->last_phone_call))}}</div>
+                                                            <div class="fw-bold text-muted fs-8">{{$contact[$i]->last_phone_call == '' ? '' : Date("m/d/Y h:i A",strtotime($contact[$i]->last_phone_call))}}</div>
                                                         </div>
                                                     </a>
                                                 </center>
@@ -327,7 +327,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </div>
-                                                            <div class="fw-bold text-muted fs-8">{{$contact[$i]->last_live_conversation == '' ? '' : Date("Y-m-d h:i A",strtotime($contact[$i]->last_live_conversation))}}</div>
+                                                            <div class="fw-bold text-muted fs-8">{{$contact[$i]->last_live_conversation == '' ? '' : Date("m/d/Y h:i A",strtotime($contact[$i]->last_live_conversation))}}</div>
                                                         </div>
                                                     </a>
                                                 </center>
@@ -345,7 +345,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </div>
-                                                            <div class="fw-bold text-muted fs-8">{{$contact[$i]->last_voic_mail == '' ? '' : Date("Y-m-d h:i A",strtotime($contact[$i]->last_voic_mail))}}</div>
+                                                            <div class="fw-bold text-muted fs-8">{{$contact[$i]->last_voic_mail == '' ? '' : Date("m/d/Y h:i A",strtotime($contact[$i]->last_voic_mail))}}</div>
                                                         </div>
                                                     </a>
                                                 </center>
@@ -363,7 +363,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </div>
-                                                            <div class="fw-bold text-muted fs-8">{{$contact[$i]->last_email == '' ? '' : Date("Y-m-d h:i A",strtotime($contact[$i]->last_email))}}</div>
+                                                            <div class="fw-bold text-muted fs-8">{{$contact[$i]->last_email == '' ? '' : Date("m/d/Y h:i A",strtotime($contact[$i]->last_email))}}</div>
                                                         </div>
                                                     </a>
                                                 </center>
@@ -381,7 +381,7 @@
                                                                     </svg>
                                                                 </span>
                                                             </div>
-                                                            <div class="fw-bold text-muted fs-8">{{$contact[$i]->last_meeting == '' ? '' : Date("Y-m-d h:i A",strtotime($contact[$i]->last_meeting))}}</div>
+                                                            <div class="fw-bold text-muted fs-8">{{$contact[$i]->last_meeting == '' ? '' : Date("m/d/Y h:i A",strtotime($contact[$i]->last_meeting))}}</div>
                                                         </div>
                                                     </a>
                                                 </center>
@@ -649,7 +649,7 @@ function Check(obj) {
                 obj.children[0].children[0].children[0].textContent=value;
                 const d = new Date();
                 month=d.getMonth() + 1;
-                obj.children[0].children[1].textContent=d.getFullYear()+"-"+month+"-"+d.getDate()+" "+" "+formatAMPM(new Date);
+                obj.children[0].children[1].textContent=+month+"/"+d.getDate()+"/"+d.getFullYear()+" "+" "+formatAMPM(new Date);
                
             }
         });

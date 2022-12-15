@@ -188,7 +188,7 @@
                                                     <a href="{{ asset($opportunities[$i]->path)}}" target="_blank" class="text-gray-800 text-hover-primary">{{ucwords($opportunities[$i]->file_name)}}</a>
                                                 </div>
                                             </td> --}}
-                                            {{-- <td>{{DATE("Y-m-d",strtotime($opportunities[$i]->created_at))}}</td> --}}
+                                            {{-- <td>{{DATE("m/d/Y",strtotime($opportunities[$i]->created_at))}}</td> --}}
                                             <td>
                                                 <button  class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" onclick="editOpportunities('{{$opportunities[$i]->id}}')"  data-bs-original-title="Edit opportunities">
                                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->

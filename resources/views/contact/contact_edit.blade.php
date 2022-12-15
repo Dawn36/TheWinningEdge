@@ -22,6 +22,14 @@
             <input type="text"  name="last_name" value="{{$contact->last_name}}"  class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Last Name here." required/>
         </div>
         <div class="fv-row mb-7">
+            <label class=" fw-bold fs-6 mb-2">Company Name</label>
+            <select name="company_id" class="form-control form-control-solid mb-3 mb-lg-0">
+                @for($i=0; $i < count($company); $i++)
+                <option value="{{$company[$i]->id}}" {{$company[$i]->id == $contact->companies_id ? 'Selected' : ''}}>{{$company[$i]->company_name}}</option>
+                @endfor
+            </select>
+        </div>
+        <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Job Title</label>
             <input type="text"  name="job" value="{{$contact->job}}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Job Title here." />
         </div>
@@ -37,14 +45,7 @@
             <label class=" fw-bold fs-6 mb-2">Mobile phone</label>
             <input type="text"   value="{{$contact->mobile_phone}}" name="mobile_phone" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Mobile phone here." />
         </div>
-        <div class="fv-row mb-7">
-            <label class=" fw-bold fs-6 mb-2">Company Name</label>
-            <select name="company_id" class="form-control form-control-solid mb-3 mb-lg-0">
-                @for($i=0; $i < count($company); $i++)
-                <option value="{{$company[$i]->id}}" {{$company[$i]->id == $contact->companies_id ? 'Selected' : ''}}>{{$company[$i]->company_name}}</option>
-                @endfor
-            </select>
-        </div>
+        
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">LinkedIn Contact Profile URL</label>
             <input type="text"  name="linked_in_url" value="{{$contact->linked_in_url}}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter the LinkedIn Contact Profile URL here." />
@@ -53,10 +54,19 @@
             <label class=" fw-bold fs-6 mb-2">Tags</label>
             <input name="tags" value="{{$contact->tags}}" class="form-control form-control-solid mb-3 mb-lg-0 kt_tagify_2" value="" placeholder="Type the tags here" />
         </div>
+        @if(isset($latestNote[0]->id))
+        <input hidden name="note_id" value="{{$latestNote[0]->id}}" />
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Note</label>
-            <textarea name="note" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please add the note for the contact">{{$contact->note}}</textarea>
+            <textarea name="note" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please add the note for the contact">{{$latestNote[0]->note}}</textarea>
         </div>
+        @else
+        <input hidden name="note_id" value="0" />
+        <div class="fv-row mb-7">
+            <label class=" fw-bold fs-6 mb-2">Note</label>
+            <textarea name="note" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please add the note for the contact"></textarea>
+        </div>
+        @endif
     </div>
     <!--end::Scroll-->
     <!--begin::Actions-->

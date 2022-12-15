@@ -18,7 +18,7 @@ class TaskController extends Controller
     public function index()
     {
         $userId=Auth::user()->id;
-        $task=DB::select(DB::raw("SELECT t.*,cc.`company_name`,c.`first_name`,c.`last_name`,c.`job`,c.`email`,c.`phone_number`,c.`mobile_phone`,c.`status` AS contact_status,c.`id` AS contact_id FROM `tasks` t INNER JOIN `contacts` c ON t.`contact_id`=c.`id` LEFT JOIN `companies` cc ON cc.`id`=c.`companies_id` where t.user_id='$userId' Order by c.`id` desc"));
+        $task=DB::select(DB::raw("SELECT t.*,cc.`company_name`,c.`first_name`,c.`last_name`,c.`job`,c.`email`,c.`phone_number`,c.`mobile_phone`,c.`status` AS contact_status,c.`id` AS contact_id FROM `tasks` t INNER JOIN `contacts` c ON t.`contact_id`=c.`id` LEFT JOIN `companies` cc ON cc.`id`=c.`companies_id` where t.user_id='$userId' AND t.task_status != 'completed' Order by c.`id` desc"));
         
         return view('task/task_index',compact('task'));
     }

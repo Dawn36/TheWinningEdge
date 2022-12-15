@@ -114,7 +114,7 @@
                                             <td><a href="{{route('talk_track.show', $talkTrack[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{$a}}</a></td>
                                             <td><a href="{{route('talk_track.show', $talkTrack[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($talkTrack[$i]->talk_track_name)}}</a></td>
                                             <td>{{ucwords($talkTrack[$i]->first_name)}} {{ucwords($talkTrack[$i]->last_name)}}</td>
-                                            <td>{{Date("Y-m-d",strtotime($talkTrack[$i]->created_at))}}</td>
+                                            <td>{{Date("m/d/Y",strtotime($talkTrack[$i]->created_at))}}</td>
                                             <td>
                                                 <button class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" onclick="editTalkTrack('{{$talkTrack[$i]->id}}')">
                                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->

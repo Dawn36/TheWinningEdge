@@ -145,7 +145,7 @@
                                             </td>
                                             @php $status=explode('_',$task[$i]->contact_status) @endphp
                                             <td>{{ ucwords($status[0]) }} {{ count($status) == "2" ? ucwords($status[1] ) : '' }}</td>
-                                            <td>{{date("Y-m-d",strtotime($task[$i]->task_date))}}</td>
+                                            <td>{{date("m/d/Y",strtotime($task[$i]->task_date))}}</td>
                                             <td>
                                                 <button onclick="editTask('{{$task[$i]->id}}')" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary"  data-bs-original-title="Edit Client">
                                                     <span class="svg-icon svg-icon-2">

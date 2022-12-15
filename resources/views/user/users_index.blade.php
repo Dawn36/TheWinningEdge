@@ -115,7 +115,7 @@
                                             <td>
                                                 <span class="badge badge-light-success fw-bolder fs-7 px-2 py-1">User</span>
                                             </td>
-                                            <td>{{Date('Y-m-d',strtotime($users[$i]->created_at))}}</td>
+                                            <td>{{Date('m/d/Y',strtotime($users[$i]->created_at))}}</td>
                                             <td>
                                                 <a class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" data-bs-original-title="Edit User" onclick="editUser('{{ $users[$i]->id}}')">
                                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->

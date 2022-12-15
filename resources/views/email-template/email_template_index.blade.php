@@ -114,7 +114,7 @@
                                             <td><a href="{{route('email_template.show', $emailTemplate[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($emailTemplate[$i]->template_name)}}</a></td>
                                             <td><a href="{{route('email_template.show', $emailTemplate[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($emailTemplate[$i]->subject)}}</a></td>
                                             <td>{{ucwords($emailTemplate[$i]->first_name)}} {{ucwords($emailTemplate[$i]->last_name)}}</td>
-                                            <td>{{Date("Y-m-d",strtotime($emailTemplate[$i]->created_at))}}</td>
+                                            <td>{{Date("m/d/Y",strtotime($emailTemplate[$i]->created_at))}}</td>
                                             <td>
                                                 <button class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" onclick="editEmailTemplate('{{$emailTemplate[$i]->id}}')">
                                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
@@ -129,7 +129,7 @@
                                                 <form  style="display: inline-block" method="POST" action="{{ route('email_template.destroy', $emailTemplate[$i]->id) }}">
                                                     @method('DELETE')
                                                     @csrf
-                                                <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Client">
+                                                <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete email template">
                                                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                                     <span class="svg-icon svg-icon-2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

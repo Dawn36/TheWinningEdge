@@ -88,6 +88,16 @@ class OpportunitiesController extends Controller
             'created_at' => date("Y-m-d h:i:s"),
             'created_by' => Auth::user()->id,
         ]);
+        if(isset($request->note))
+        {
+            $contactId=$request->contact_id;
+            $note=$request->note;
+            $date=Date("Y-m-d H:i:s");
+            $firstName=Auth::user()->first_name;
+            $lastName=Auth::user()->last_name;
+            $fullName=$firstName." ".$lastName;
+            DB::insert('insert into contact_note (user_id,contact_id,user_name,note,created_at) values(?,?,?,?,?)',[$userId,$contactId,$fullName,$note,$date]);
+        }
         return redirect()->back();
 
     }
@@ -113,8 +123,9 @@ class OpportunitiesController extends Controller
     {
         $userId=Auth::user()->id;
         $opportunities=Opportunities::find($id);
+        $latestNote=DB::table('contact_note')->where('contact_id',$opportunities->contact_id)->orderByDesc('id')->limit('1')->get();
         $contact=Contact::where('user_id',$userId)->get();
-        return view('opportunities/opportunities_edit',compact('opportunities','contact'));
+        return view('opportunities/opportunities_edit',compact('opportunities','contact','latestNote'));
         
     }
 
@@ -153,7 +164,22 @@ class OpportunitiesController extends Controller
         $opportunities['duration'] = $request->duration;
         $opportunities['updated_at'] = date("Y-m-d");
         $opportunities->save();
-
+        if($request->note_id == '0')
+        {
+            $contactId=$request->contact_id;
+            $note=$request->note;
+            $date=Date("Y-m-d H:i:s");
+            $firstName=Auth::user()->first_name;
+            $lastName=Auth::user()->last_name;
+            $fullName=$firstName." ".$lastName;
+            DB::insert('insert into contact_note (user_id,contact_id,user_name,note,created_at) values(?,?,?,?,?)',[$userId,$contactId,$fullName,$note,$date]);
+        }
+        else
+        {
+            DB::table('contact_note')
+                ->where('id', $request->note_id)
+                ->update(['note' => $request->note]);
+        }
        
         return redirect()->back();
     }
