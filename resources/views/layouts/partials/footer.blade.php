@@ -26,6 +26,7 @@
     var hostUrl = "assets/";
 </script>
 <script src="{{ asset('theme/assets/js/scripts.bundle.js')}}"></script>
+<script src="{{ asset('theme/assets/js/main.js')}}"></script>
 <script src="{{ asset('theme/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 <!--begin::Page Custom Javascript(used by this page)-->
 <script src="{{ asset('theme/assets/js/widgets.bundle.js')}}"></script>
@@ -74,9 +75,9 @@
         document.getElementById("submitbutton").click();
     }
     });
-        $('#search').on('keyup', function() {
-            table.search(this.value).draw();
-        });
+        // $('#search').on('keyup', function() {
+        //     table.search(this.value).draw();
+        // });
         
 // Export buttons
         // $('.kt_datatable_example_1').DataTable({

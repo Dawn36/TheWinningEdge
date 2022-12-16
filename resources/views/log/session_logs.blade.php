@@ -13,6 +13,9 @@
             max-width: 1900px
         }
     }
+    .capitalize{
+        text-transform: capitalize;
+    }
 </style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Post-->
@@ -62,7 +65,7 @@
                                         </svg>
                                     </span>
                                     <!--end::Svg Icon-->
-                                    <input type="text" id="search" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search" />
+                                    <input type="text" id="search" data-kt-docs-table-filter="search" class="form-control form-control-solid w-250px ps-14" placeholder="Search" />
                                 </div>
                                 <!--end::Search-->
                             </div>
@@ -73,18 +76,18 @@
 
                             <!--begin::Block-->
                             <div class="py-5">
-                                <table class="kt_datatable_example_1 table table-row-bordered gy-5">
+                                <table class="table table-row-bordered gy-5" id="sessionLog">
                                     <thead>
                                         <tr class="fw-bold fs-6 text-muted">
-                                            <th class="min-w-30px">ID</th>
+                                            {{-- <th class="min-w-30px">ID</th> --}}
                                             <th>Full Name</th>
                                             <th>Email</th>
                                             <th>Action Performed</th>
                                             <th>Date & Time</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="fw-bold text-gray-600">
-                                        @for ($i = 0; $i < count($logs); $i++) @php $a=$i; $a++; @endphp 
+                                    <tbody class="fw-bold text-gray-600 capitalize">
+                                        {{-- @for ($i = 0; $i < count($logs); $i++) @php $a=$i; $a++; @endphp 
                                         <tr>
                                             <td>{{$a}}</td>
                                             <td>{{ucwords($logs[$i]->full_name)}}</td>
@@ -92,7 +95,7 @@
                                             <td>{{ucwords($logs[$i]->status)}}</td>
                                             <td>{{Date("m/d/Y h:i:s",strtotime($logs[$i]->created_at))}}</td>
                                         </tr>
-                                        @endfor
+                                        @endfor --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -108,5 +111,40 @@
     </div>
     <!--end::Post-->
 </div>
-
+<script type="text/javascript">
+    $(document).ready(function(){
+    // Initialize
+    dt =  $('#sessionLog').DataTable({
+        
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('get_session_log') }}",
+        columns: [
+            // { data: 'id', name: 'tt.id' ,searchable: false},
+            { data: 'full_name' , name: 'full_name' },
+            { data: 'email' , name: 'email' },
+            { data: 'status' , name: 'status' },
+            { data: 'created_at' , name: 'created_at' },
+        ],
+        columnDefs: [
+                    
+                    
+                ],
+        aLengthMenu: [
+            [10,25, 50, 100, 200, -1],
+            [10,25, 50, 100, 200, "All"]
+        ]
+    });
+    table = dt.$;  
+           
+    });
+    var handleSearchDatatable = function () {
+            const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
+            filterSearch.addEventListener('keyup', function (e) {
+                dt.search(e.target.value).draw();
+            });
+        }
+        handleSearchDatatable();
+    
+    </script>
 @endsection('content')

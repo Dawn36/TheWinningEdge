@@ -198,10 +198,10 @@ class ContactController extends Controller
     public function contactEditNotAjax(int $id)
     {
         $userId=Auth::user()->id;
-
+        $latestNote=DB::table('contact_note')->where('contact_id',$id)->orderByDesc('id')->limit('1')->get();
         $company=Company::where('user_id',$userId)->get();
         $contact=Contact::find($id);
-        return view('contact/contact_edit_not_ajax',compact('contact','company'));
+        return view('contact/contact_edit_not_ajax',compact('contact','company','latestNote'));
     }
 
     /**

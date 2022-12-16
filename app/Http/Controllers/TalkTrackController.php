@@ -6,6 +6,8 @@ use App\Models\TalkTrack;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Datatables;
+use Illuminate\Support\Facades\Log;
 
 class TalkTrackController extends Controller
 {
@@ -17,15 +19,33 @@ class TalkTrackController extends Controller
     public function index()
     {
         // $talkTrack=TalkTrack::with('user')->get();
+        // $talkTrack= DB::table('talk_tracks AS tt')
+        // ->join('users AS u', 'tt.user_id', '=', 'u.id')
+        // ->select(DB::raw('tt.*,u.first_name,u.last_name'))
+        // ->whereNull('u.deleted_at')
+        // ->orderBy('tt.id', 'desc')->get();
+        return view('talk-track/talk_track_index');
+    }
+    public function getTalkTrack(){
+
         $talkTrack= DB::table('talk_tracks AS tt')
         ->join('users AS u', 'tt.user_id', '=', 'u.id')
-        ->select(DB::raw('tt.*,u.first_name,u.last_name'))
+        ->select(DB::raw('tt.*,u.first_name,u.last_name,DATE_FORMAT(tt.created_at, "%c/%d/%Y") as created_at'))
         ->whereNull('u.deleted_at')
-        ->orderBy('tt.id', 'desc')->get();
-        return view('talk-track/talk_track_index',compact('talkTrack'));
-    }
-
-    /**
+        ;
+        return Datatables::of($talkTrack)
+             ->addIndexColumn()
+             ->make();
+     }
+    /**->addColumn('status', function($row){
+ 
+                 if($row->status == 1){
+                     return "Active";
+                 }else{
+                     return "Inactive";
+                 }
+ 
+             })
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

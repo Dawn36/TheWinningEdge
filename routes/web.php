@@ -24,6 +24,7 @@ use App\Http\Controllers\LogsController;
 */
 Route::middleware(['auth'])->group(function () {
     Route::get('session_log', [LogsController::class, 'sessionLogs'])->name('session_log');
+    Route::get('get_session_log', [LogsController::class, 'getSessionLog'])->name('get_session_log');
 
 
 Route::resource('email_template', EmailTemplateController::class);
@@ -34,6 +35,8 @@ Route::resource('task', TaskController::class);
 Route::get('task_status_update', [TaskController::class, 'taskStatusUpdate'])->name('task_status_update');
 
 Route::resource('talk_track', TalkTrackController::class);
+Route::get('get_talk_track', [TalkTrackController::class, 'getTalkTrack'])->name('get_talk_track');
+
 Route::resource('user', UserController::class);
 Route::post('user_note', [UserController::class, 'userNote'])->name('user_note');
 Route::get('user_index', [UserController::class, 'userIndex'])->name('user_index');

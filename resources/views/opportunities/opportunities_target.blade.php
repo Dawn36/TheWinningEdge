@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <label class="required fw-bold fs-6 mb-2">Set Target Quota</label>
-                <input type="number" name="opportunities_target" value="{{count($opportunitiesTarget) == 0 ? '' :  $opportunitiesTarget[0]->target}}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Set The Opportunities Target" />
+                <input type="number" name="opportunities_target" value="{{count($opportunitiesTarget) == 0 ? '' :  $opportunitiesTarget[0]->target}}" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Set The Opportunities Target" onkeypress="return validateNumbers(event)" required />
             </div>
         </div>
     </div>
