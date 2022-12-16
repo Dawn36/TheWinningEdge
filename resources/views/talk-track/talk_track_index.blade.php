@@ -170,6 +170,7 @@ dt =  $('#talkTrack').DataTable({
     
     processing: true,
     serverSide: true,
+    order: [[2, 'desc']],
     ajax: "{{ route('get_talk_track') }}",
     columns: [
         // { data: 'id', name: 'tt.id' ,searchable: false},

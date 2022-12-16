@@ -118,6 +118,7 @@
         
         processing: true,
         serverSide: true,
+        order: [[3, 'desc']],
         ajax: "{{ route('get_session_log') }}",
         columns: [
             // { data: 'id', name: 'tt.id' ,searchable: false},

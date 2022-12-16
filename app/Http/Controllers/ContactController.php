@@ -9,14 +9,13 @@ use App\Models\Opportunities;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use App\Models\EmailTemplate;
-use PhpParser\Node\Expr\FuncCall;
 use App\Models\Company;
-use App\Jobs\FileUploaderJob;
 use App\Imports\ContactImport;
 use App\Models\Task;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Jobs\ContactJob;
 use Carbon;
+use Datatables;
 use App\Exports\ExportContact;
 use SebastianBergmann\Template\Template;
 
@@ -27,14 +26,18 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
+    {
+        return view('contact/contact_index');
+    }
+    public function getContact(Request $request)
     {
         $dbWhere='';
         $dbWhere1='';
         $dbWhere2='';
-        if(isset($request->search))
+        if(isset($request->searchNew))
         {
-            $dbWhere=" and CONCAT(c.`tags`,cc.`company_name`) like '%$request->search%'";
+            $dbWhere=" and CONCAT(c.`tags`,cc.`company_name`) like '%$request->searchNew%'";
         }
         if(isset($request->tags))
         {
@@ -50,22 +53,25 @@ class ContactController extends Controller
         $userId=Auth::user()->id;
        $contact= DB::select(DB::raw("SELECT c.*,c.email as email_address,cc.company_name,
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='email' AND contacts_id = c.id ) AS email,
-        (SELECT created_at FROM `contact_history` WHERE `status`='email' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_email,
+        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %T') as created_at FROM `contact_history` WHERE `status`='email' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_email,
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='live_conversation' AND contacts_id = c.id ) AS live_conversation,
-        (SELECT created_at FROM `contact_history` WHERE `status`='live_conversation' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_live_conversation,
+        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %T') as created_at FROM `contact_history` WHERE `status`='live_conversation' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_live_conversation,
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='voice_mail' AND contacts_id = c.id ) AS voic_mail,
-        (SELECT created_at FROM `contact_history` WHERE `status`='voice_mail' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_voic_mail,
+        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %T') as created_at FROM `contact_history` WHERE `status`='voice_mail' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_voic_mail,
         
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='phone_call' AND contacts_id = c.id ) AS phone_call,
-        (SELECT created_at FROM `contact_history` WHERE `status`='phone_call' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_phone_call,
+        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %T') as created_at FROM `contact_history` WHERE `status`='phone_call' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_phone_call,
         
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ) AS meeting,
-        (SELECT created_at FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_meeting
+        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %T') as created_at FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_meeting
          
          FROM `contacts` c left join companies cc on cc.id=c.companies_id
          WHERE c.user_id='$userId' $dbWhere $dbWhere1 $dbWhere2 order by c.id desc
         "));
-        return view('contact/contact_index' , compact('contact'));
+
+        return Datatables::of($contact)
+        ->addIndexColumn()
+        ->make();
     }
 
     /**
@@ -311,8 +317,9 @@ class ContactController extends Controller
     {
         $userId=Auth::user()->id;
         $status=$request->status;
-        $mytime = Carbon\Carbon::now();
-        $date=$mytime->toDateTimeString();
+        // $mytime = Carbon\Carbon::now();
+        // $date=$mytime->toDateTimeString();
+        $date=Date("Y-m-d H:i:s");
         $contactsId=$request->contacts_id;
         DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$userId,$contactsId,$status,$date]);
         return true;
@@ -327,6 +334,23 @@ class ContactController extends Controller
     {
         $contactId=$request->contactId;
         return view('contact/contact_note',compact('contactId'));
+    }
+    public function contactNoteEdit(int $id)
+    {
+        $note=DB::table('contact_note')->where('id',$id)->get();
+        return view('contact/contact_note_edit',compact('note'));
+    }
+    public function contactNoteEditSubmit(Request $request)
+    {
+        DB::table('contact_note')->where('id',$request->note_id)->update(['note' => $request->note]);
+        return redirect()->back();
+
+    }
+    public function noteDestroy(int $id)
+    {
+        DB::table('contact_note')->where('id',$id)->delete();
+        return redirect()->back();
+
     }
     public function contactNoteSubmit(Request $request)
     {
@@ -403,8 +427,9 @@ class ContactController extends Controller
             if($request->contact_history != '0')
             {
                 $status=$request->contact_history;
-                $mytime = Carbon\Carbon::now();
-                $date=$mytime->toDateTimeString();
+                // $mytime = Carbon\Carbon::now();
+                // $date=$mytime->toDateTimeString();
+                $date=Date("Y-m-d H:i:s");
                 $contactsId=$contactId[$i];
                 DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$userId,$contactsId,$status,$date]);
             }

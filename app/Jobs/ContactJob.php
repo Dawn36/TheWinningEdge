@@ -46,8 +46,9 @@ class ContactJob implements ShouldQueue
         $subject=$this->subject;
         $contactId=$this->contactId;
         $contact=Contact::whereIn('id',$contactId)->get();
-        $mytime = Carbon\Carbon::now();
-        $date=$mytime->toDateTimeString();
+        // $mytime = Carbon\Carbon::now();
+        // $date=$mytime->toDateTimeString();
+        $date=Date("Y-m-d H:i:s");
         for ($i=0; $i < count($contact); $i++) { 
             $body=$this->body;
             $body=str_replace("[[FIRSTNAME]]",$contact[$i]->first_name,$body);

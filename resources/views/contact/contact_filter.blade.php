@@ -1,8 +1,8 @@
-<form  method="GET" action="{{ route('contact.index') }}">
+<form >
     <!--begin::Input group-->
     <div class="fv-row mb-5">
         <label class="fs-6 fw-bold form-label mb-2">Tags:</label>
-        <select class="form-select form-select-solid fw-bolder js-example-tags" name="tags[]" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#right_modal" multiple>
+        <select class="form-select form-select-solid fw-bolder js-example-tags" id="tags" name="tags[]" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#right_modal" multiple>
             <option></option>
             @for($i=0; $i < count($tagsArr); $i++)
                 <option value="{{$tagsArr[$i]}}" >{{$tagsArr[$i]}}</option>
@@ -11,7 +11,7 @@
     </div>
     <div class="fv-row mb-5">
         <label class="fs-6 fw-bold form-label mb-2">Companies:</label>
-        <select class="form-select form-select-solid fw-bolder js-example-basic-single" name="company_id[]" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#right_modal" multiple>
+        <select class="form-select form-select-solid fw-bolder js-example-basic-single" id="company_id" name="company_id[]" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#right_modal" multiple>
             <option></option>
             @for($i=0; $i < count($company); $i++)
                 <option value="{{$company[$i]->id}}" >{{$company[$i]->company_name}}</option>
@@ -21,7 +21,7 @@
     <!--end::Input group-->
     <!--begin::Actions-->
     <div class="pt-5">
-        <button type="submit" class="btn btn-primary">
+        <button type="button"  class="btn btn-primary" onclick="filterData()">
             <span class="svg-icon svg-icon-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M21.7 18.9L18.6 15.8C17.9 16.9 16.9 17.9 15.8 18.6L18.9 21.7C19.3 22.1 19.9 22.1 20.3 21.7L21.7 20.3C22.1 19.9 22.1 19.3 21.7 18.9Z" fill="black" />
@@ -41,5 +41,10 @@
             tags: true
         });
         });
+
+        function filterData()
+        {
+            dt.draw();
+        }
        
 </script>

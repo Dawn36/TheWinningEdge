@@ -5,9 +5,9 @@
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Status</label>
             <select name="status" class="form-control form-control-solid mb-3 mb-lg-0">
-                <option value="current_client" {{$contact->status == "current_client" ? 'Selected' : '' }}>Current Client</option>
-                <option value="active_discussion" {{$contact->status == "active_discussion" ? 'Selected' : '' }}>Active Discussion</option>
-                <option value="not_interested" {{$contact->status == "not_interested" ? 'Selected' : '' }}>Not Interested</option>
+                <option value="current client" {{$contact->status == "current client" ? 'Selected' : '' }}>Current Client</option>
+                <option value="active discussion" {{$contact->status == "active discussion" ? 'Selected' : '' }}>Active Discussion</option>
+                <option value="not interested" {{$contact->status == "not interested" ? 'Selected' : '' }}>Not Interested</option>
                 <option value="unsubscribed" {{$contact->status == "unsubscribed" ? 'Selected' : '' }}>Unsubscribed</option>
                 <option value="prospect" {{$contact->status == "prospect" ? 'Selected' : '' }}>Prospect</option>
                 <option value="user" {{$contact->status == "user" ? 'Selected' : '' }}>User</option>
@@ -97,13 +97,13 @@
     }
     function updateText2(result)
     {
-        obj2.parentElement.parentElement.children[2].children[0].textContent=result.first_name+" "+result.last_name;
-        obj2.parentElement.parentElement.children[2].children[2].textContent=result.job;
-        obj2.parentElement.parentElement.children[3].children[0].textContent=result.email;
-        obj2.parentElement.parentElement.children[3].children[2].childNodes[1].textContent=result.phone_number;
-        obj2.parentElement.parentElement.children[3].children[4].childNodes[1].textContent=result.mobile_phone;
-        obj2.parentElement.parentElement.children[4].textContent=result.companies_id;
-        obj2.parentElement.parentElement.children[5].textContent=result.status;
+        obj2.parentElement.parentElement.children[1].children[0].textContent=result.first_name+" "+result.last_name;
+        obj2.parentElement.parentElement.children[1].children[2].textContent=result.job;
+        obj2.parentElement.parentElement.children[2].children[0].textContent=result.email;
+        obj2.parentElement.parentElement.children[2].children[2].childNodes[1].textContent=result.phone_number;
+        obj2.parentElement.parentElement.children[2].children[4].childNodes[1].textContent=result.mobile_phone;
+        obj2.parentElement.parentElement.children[3].textContent=result.companies_id;
+        obj2.parentElement.parentElement.children[4].textContent=result.status;
         obj2='';
         $('#myModalLg').modal('hide');
 
