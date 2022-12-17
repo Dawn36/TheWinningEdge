@@ -35,6 +35,7 @@ class ContactController extends Controller
         $dbWhere='';
         $dbWhere1='';
         $dbWhere2='';
+        $dbWhere3='';
         if(isset($request->searchNew))
         {
             $dbWhere=" and CONCAT(c.`tags`,cc.`company_name`) like '%$request->searchNew%'";
@@ -43,6 +44,10 @@ class ContactController extends Controller
         {
             $tags=implode(',',$request->tags);
             $dbWhere1=" and CONCAT(c.`tags`) like '%$tags%'";
+        }
+        if(isset($request->contact_status))
+        {
+            $dbWhere3=" and c.`status` = '$request->contact_status'";
         }
         if(isset($request->company_id))
         {
@@ -66,7 +71,7 @@ class ContactController extends Controller
         (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %T') as created_at FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_meeting
          
          FROM `contacts` c left join companies cc on cc.id=c.companies_id
-         WHERE c.user_id='$userId' $dbWhere $dbWhere1 $dbWhere2 order by c.id desc
+         WHERE c.user_id='$userId' $dbWhere $dbWhere1 $dbWhere2 $dbWhere3 order by c.id desc
         "));
 
         return Datatables::of($contact)
@@ -180,7 +185,7 @@ class ContactController extends Controller
         $voiceMail= DB::select(DB::raw("SELECT * FROM `contact_history` WHERE `status`='voice_mail' AND contacts_id = '$contactId' ORDER BY id DESC"));
         $phoneCall= DB::select(DB::raw("SELECT * FROM `contact_history` WHERE `status`='phone_call' AND contacts_id = '$contactId' ORDER BY id DESC"));
         $note= DB::select(DB::raw("SELECT * FROM `contact_note` WHERE contact_id = '$contactId' ORDER BY id DESC"));
-        $task= DB::select(DB::raw("SELECT * FROM `tasks` WHERE contact_id = '$contactId' AND task_status != 'completed' ORDER BY id DESC"));
+        $task= DB::select(DB::raw("SELECT * FROM `tasks` WHERE contact_id = '$contactId' AND task_status != 'completed' ORDER BY created_at DESC"));
         $opportunities= DB::select(DB::raw("SELECT * FROM `opportunities` WHERE YEAR(created_at) = '$year' AND contact_id='$contactId'  ORDER BY id DESC"));
         $company=Company::find($companiesId);
         return view('contact/contact_show',compact('contact','meeting','email','liveConversation','voiceMail','phoneCall','note','task','company','opportunities','companiesId'));
@@ -311,7 +316,7 @@ class ContactController extends Controller
         DB::table('contact_note')->where('contact_id',$id)->delete();
         Opportunities::where('contact_id',$id)->delete();
         $data->delete();
-        return redirect()->back();
+        return true;
     }
     public function contactCounter(Request $request)
     {

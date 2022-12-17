@@ -139,6 +139,6 @@ class TalkTrackController extends Controller
     {
         $data = TalkTrack::find($id);
         $data->delete();
-        return redirect()->back();
+        return true;
     }
 }

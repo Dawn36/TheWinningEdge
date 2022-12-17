@@ -388,6 +388,10 @@ dt =  $('#contactTable').DataTable({
     
     processing: true,
     serverSide: true,
+    fixedHeader: {
+            header: true,
+            headerOffset: 65,
+            },
     // order: [[2, 'desc']],
     // ajax: "{{ route('get_contact') }}",
     ajax: {
@@ -395,6 +399,7 @@ dt =  $('#contactTable').DataTable({
           data: function (d) {
                 d.tags = $('#tags').val(),
                 d.company_id = $('#company_id').val()
+                d.contact_status = $('#contact_status').val()
             }
         },
     columns: [
@@ -575,10 +580,7 @@ dt =  $('#contactTable').DataTable({
                                     </span>
                                     <!--end::Svg Icon-->
                                 </button>
-                                <form  style="display: inline-block" method="POST" action="${url}">
-                                    @method('DELETE')
-                                    @csrf
-                                <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger" data-bs-toggle="tooltip" data-bs-original-title="Delete Contact" data-bs-placement="top">
+                                <button type="button" onclick=deleteContact('${url}',this) class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger" data-bs-toggle="tooltip" data-bs-original-title="Delete Contact" data-bs-placement="top">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -589,7 +591,7 @@ dt =  $('#contactTable').DataTable({
                                     </span>
                                     <!--end::Svg Icon-->
                                 </button>
-                                </form>`;
+                                `;
                     }
                 },
                 
@@ -809,6 +811,20 @@ function Check(obj) {
                
             }
         });
+    }
+    function deleteContact(url, obj)
+    {
+        $.ajax({
+                url: url,
+                type:'POST',
+                data:{ 
+                    _token:'{{ csrf_token() }}',
+                    _method:'DELETE',
+                },
+                success: function(result){
+                    obj.parentElement.parentElement.remove();
+                }
+            })
     }
 
     function formatAMPM(date) {

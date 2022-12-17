@@ -265,9 +265,8 @@
 															</svg>
 														</span>
 													</button>
-													<form  style="display: inline-block" method="POST" action="{{ route('note_destroy', $note[$i]->id) }}">
-														@csrf
-													<button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+													
+													<button type="button" onclick="deleteNote('{{$note[$i]->id}}',this)" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
 														<span class="svg-icon svg-icon-2">
 															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 																<path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"></path>
@@ -276,7 +275,7 @@
 															</svg>
 														</span>
 													</button>
-													</form>
+													
 												</td>
 											</tr>
 										</tbody>
@@ -389,7 +388,7 @@
 												<td>
 													<div class="badge badge-sm badge-light-primary d-inline">{{ucwords($task[$i]->task_status)}}</div>
 												</td>
-												<td>{{$task[$i]->task_date}}</td>
+												<td>{{date("m/d/Y",strtotime($task[$i]->task_date))}}</td>
 												<td>
 													<button  class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary"  data-bs-original-title="Edit Client" onclick="editTaskContact('{{$task[$i]->id}}','{{$contact->id}}')">
 														<span class="svg-icon svg-icon-2">
@@ -399,10 +398,7 @@
 															</svg>
 														</span>
 													</button>
-													<form  style="display: inline-block" method="POST" action="{{ route('task.destroy', $task[$i]->id) }}">
-														@method('DELETE')
-														@csrf
-													<button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+													<button type="button" onclick="deleteTask('{{$task[$i]->id}}',this)" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
 														<span class="svg-icon svg-icon-2">
 															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 																<path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"></path>
@@ -411,7 +407,6 @@
 															</svg>
 														</span>
 													</button>
-													</form>
 												</td>
 											</tr>
 										</tbody>
@@ -482,10 +477,7 @@
 															</svg>
 														</span>
 													</button>
-													<form  style="display: inline-block" method="POST" action="{{ route('opportunities.destroy', $opportunities[$i]->id) }}">
-														@method('DELETE')
-														@csrf
-													<button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+													<button type="button" onclick="deleteOpportunity('{{$opportunities[$i]->id}}',this)" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
 														<span class="svg-icon svg-icon-2">
 															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
 																<path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"></path>
@@ -494,7 +486,6 @@
 															</svg>
 														</span>
 													</button>
-													</form>
 												</td>
 											</tr>
 										</tbody>
@@ -526,7 +517,7 @@
                                             @for ($i = 0; $i < count($phoneCall); $i++) @php $a=$i; $a++; @endphp 
 											<tr>
 												<td>{{$a}}</td>
-												<td>{{Date("m/d/Y h:i:s A",strtotime($phoneCall[$i]->created_at))}}</td>
+												<td>{{Date("m/d/Y H:i:s",strtotime($phoneCall[$i]->created_at))}}</td>
 												<td>
 													<a href="{{route('contact_counter_delete',$phoneCall[$i]->id)}}" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Phone Call">
 														<span class="svg-icon svg-icon-2">
@@ -568,7 +559,7 @@
 											@for ($i = 0; $i < count($liveConversation); $i++) @php $a=$i; $a++; @endphp 
 											<tr>
 												<td>{{$a}}</td>
-												<td>{{Date("m/d/Y h:i:s A",strtotime($liveConversation[$i]->created_at))}}</td>
+												<td>{{Date("m/d/Y H:i:s",strtotime($liveConversation[$i]->created_at))}}</td>
 												<td>
 													<a href="{{route('contact_counter_delete',$liveConversation[$i]->id)}}" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Live Conversation">
 														<span class="svg-icon svg-icon-2">
@@ -610,7 +601,7 @@
 											@for ($i = 0; $i < count($voiceMail); $i++) @php $a=$i; $a++; @endphp 
 											<tr>
 												<td>{{$a}}</td>
-												<td>{{Date("m/d/Y h:i:s A",strtotime($voiceMail[$i]->created_at))}}</td>
+												<td>{{Date("m/d/Y H:i:s",strtotime($voiceMail[$i]->created_at))}}</td>
 												<td>
 													<a href="{{route('contact_counter_delete',$voiceMail[$i]->id)}}" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Voice Mail">
 														<span class="svg-icon svg-icon-2">
@@ -652,7 +643,7 @@
 											@for ($i = 0; $i < count($email); $i++) @php $a=$i; $a++; @endphp 
 											<tr>
 												<td>{{$a}}</td>
-												<td>{{Date("m/d/Y h:i:s A",strtotime($email[$i]->created_at))}}</td>
+												<td>{{Date("m/d/Y H:i:s",strtotime($email[$i]->created_at))}}</td>
 												<td>
 													<a href="{{route('contact_counter_delete',$email[$i]->id)}}" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Email">
 														<span class="svg-icon svg-icon-2">
@@ -694,7 +685,7 @@
 											@for ($i = 0; $i < count($meeting); $i++) @php $a=$i; $a++; @endphp 
 											<tr>
 												<td>{{$a}}</td>
-												<td>{{Date("m/d/Y h:i:s A",strtotime($meeting[$i]->created_at))}}</td>
+												<td>{{Date("m/d/Y H:i:s",strtotime($meeting[$i]->created_at))}}</td>
 												<td>
 													<a href="{{route('contact_counter_delete',$meeting[$i]->id)}}" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Meeting">
 														<span class="svg-icon svg-icon-2">
@@ -853,6 +844,54 @@
     }
 	
 
+	function deleteOpportunity(id, obj)
+    {
+        url = "{{route('opportunities.destroy',':id')}}";
+        url = url.replace(':id', id);
+        $.ajax({
+                url: url,
+                type:'POST',
+                data:{ 
+                    _token:'{{ csrf_token() }}',
+                    _method:'DELETE',
+                },
+                success: function(result){
+                    obj.parentElement.parentElement.remove();
+                }
+            })
+    }
+
+	function deleteTask(id, obj)
+    {
+        url = "{{route('task.destroy',':id')}}";
+        url = url.replace(':id', id);
+        $.ajax({
+                url: url,
+                type:'POST',
+                data:{ 
+                    _token:'{{ csrf_token() }}',
+                    _method:'DELETE',
+                },
+                success: function(result){
+                    obj.parentElement.parentElement.remove();
+                }
+            })
+    }
+	function deleteNote(id, obj)
+    {
+        url = "{{route('note_destroy',':id')}}";
+        url = url.replace(':id', id);
+        $.ajax({
+                url: url,
+                type:'POST',
+                data:{ 
+                    _token:'{{ csrf_token() }}',
+                },
+                success: function(result){
+                    obj.parentElement.parentElement.remove();
+                }
+            })
+    }
 	
 </script>
 @endsection('content')

@@ -171,6 +171,10 @@ dt =  $('#talkTrack').DataTable({
     processing: true,
     serverSide: true,
     order: [[2, 'desc']],
+    fixedHeader: {
+            header: true,
+            headerOffset: 65,
+            },
     ajax: "{{ route('get_talk_track') }}",
     columns: [
         // { data: 'id', name: 'tt.id' ,searchable: false},

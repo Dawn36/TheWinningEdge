@@ -63,6 +63,10 @@
     $(document).ready(function() {
         // Datatables
         var table = $('.kt_datatable_example_1').DataTable({
+            fixedHeader: {
+            header: true,
+            headerOffset: 65,
+            },
     aLengthMenu: [
         [25, 50, 100, 200, -1],
         [25, 50, 100, 200, "All"]

@@ -1,4 +1,16 @@
 <form >
+    <div class="fv-row mb-5">
+        <label class="fs-6 fw-bold form-label mb-2">Contact Status:</label>
+        <select name="contact_status" id="contact_status" class="form-control form-control-solid mb-3 mb-lg-0">
+            <option value="" >Select Status</option>
+            <option value="current client" >Current Client</option>
+            <option value="active discussion" >Active Discussion</option>
+            <option value="not interested" >Not Interested</option>
+            <option value="unsubscribed" >Unsubscribed</option>
+            <option value="prospect" >Prospect</option>
+            <option value="user" >User</option>
+        </select>
+    </div>
     <!--begin::Input group-->
     <div class="fv-row mb-5">
         <label class="fs-6 fw-bold form-label mb-2">Tags:</label>

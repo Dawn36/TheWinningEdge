@@ -155,10 +155,7 @@
                                                         </svg>
                                                     </span>
                                                 </button>
-                                                <form  style="display: inline-block" method="POST" action="{{ route('task.destroy', $task[$i]->id) }}">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+                                                <button type="button" onclick="deleteTask('{{$task[$i]->id}}',this)" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
                                                     <span class="svg-icon svg-icon-2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                             <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"></path>
@@ -167,7 +164,6 @@
                                                         </svg>
                                                     </span>
                                                 </button>
-                                            </form>
                                             </td>
                                         </tr>
                                         @endfor
@@ -188,6 +184,22 @@
 </div>
 <!--end::Content-->
 <script type="text/javascript">
+ function deleteTask(id, obj)
+    {
+        url = "{{route('task.destroy',':id')}}";
+        url = url.replace(':id', id);
+        $.ajax({
+                url: url,
+                type:'POST',
+                data:{ 
+                    _token:'{{ csrf_token() }}',
+                    _method:'DELETE',
+                },
+                success: function(result){
+                    obj.parentElement.parentElement.remove();
+                }
+            })
+    }
     function taskStatusUpdate(id,obj)
     {
         var value = {

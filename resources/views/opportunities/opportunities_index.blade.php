@@ -200,10 +200,8 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </button>
-                                                <form  style="display: inline-block" method="POST" action="{{ route('opportunities.destroy', $opportunities[$i]->id) }}">
-                                                    @method('DELETE')
-                                                    @csrf
-                                                <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete opportunities">
+                                               
+                                                <button type="button" onclick="deleteOpportunity('{{$opportunities[$i]->id}}',this)" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete opportunities">
                                                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                                     <span class="svg-icon svg-icon-2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -214,7 +212,6 @@
                                                     </span>
                                                     <!--end::Svg Icon-->
                                                 </button>
-                                            </form>
 
                                             </td>
                                         </tr>
@@ -236,6 +233,22 @@
 </div>
 <!--end::Content-->
 <script type="text/javascript">
+   function deleteOpportunity(id, obj)
+    {
+        url = "{{route('opportunities.destroy',':id')}}";
+        url = url.replace(':id', id);
+        $.ajax({
+                url: url,
+                type:'POST',
+                data:{ 
+                    _token:'{{ csrf_token() }}',
+                    _method:'DELETE',
+                },
+                success: function(result){
+                    obj.parentElement.parentElement.remove();
+                }
+            })
+    }
 function opportunitiesStatusUpdate(id,obj)
     {
         var value = {

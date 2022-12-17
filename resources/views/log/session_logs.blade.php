@@ -118,6 +118,10 @@
         
         processing: true,
         serverSide: true,
+        fixedHeader: {
+            header: true,
+            headerOffset: 65,
+            },
         order: [[3, 'desc']],
         ajax: "{{ route('get_session_log') }}",
         columns: [

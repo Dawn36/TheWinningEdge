@@ -197,7 +197,7 @@ class OpportunitiesController extends Controller
         $previousPicDest =  $previousPic;
         File::delete($previousPicDest);
         $data->delete();
-        return redirect()->back();
+        return true;
     }
 
     public function opportunitiesTarget()
