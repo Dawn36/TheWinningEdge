@@ -25,7 +25,7 @@
                     <path d="M8 12.6V18C8 18.6 8.4 19 9 19C9.6 19 10 18.6 10 18V12.6H8Z" fill="currentColor"/>
                     </svg>
             </span>
-            <!--end::Svg Icon-->Sample Sheet
+            <!--end::Svg Icon-->Sample XLSX Sheet
         </a>
     </div>
     <!--end::Actions-->

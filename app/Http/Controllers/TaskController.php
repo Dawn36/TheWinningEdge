@@ -19,7 +19,6 @@ class TaskController extends Controller
     {
         $userId=Auth::user()->id;
         $task=DB::select(DB::raw("SELECT t.*,cc.`company_name`,c.`first_name`,c.`last_name`,c.`job`,c.`email`,c.`phone_number`,c.`mobile_phone`,c.`status` AS contact_status,c.`id` AS contact_id FROM `tasks` t INNER JOIN `contacts` c ON t.`contact_id`=c.`id` LEFT JOIN `companies` cc ON cc.`id`=c.`companies_id` where t.user_id='$userId' AND t.task_status != 'completed' Order by t.`created_at` desc"));
-        
         return view('task/task_index',compact('task'));
     }
 
@@ -128,5 +127,9 @@ class TaskController extends Controller
         $task->task_status=strtolower($status);
         $task->save();
         return true;
+    }
+    public function openTaskCount()
+    {
+        return Task::where('task_status','open')->whereDate('created_at',DATE('Y-m-d'))->count();
     }
 }

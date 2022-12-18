@@ -78,22 +78,22 @@
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base" >
                                     <!-- Start::Update Status -->
-                                    <a href="#" class="btn btn-light-dark me-2" title="Update Record" data-bs-toggle="tooltip" data-bs-placement="top" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" id="update_status" style="display: none">
+                                    <a href="#" class="btn btn-light-dark me-2" title="Update Records" data-bs-toggle="tooltip" data-bs-placement="top" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" id="update_status" style="display: none">
                                         <span class="svg-icon svg-icon-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
                                                 <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
                                             </svg>
-                                            Update Record
+                                            Update Records
                                         </span>
                                     </a>
                                    
                                     <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px mt-2" data-kt-menu="true" id="kt-toolbar-filter">
                                         <div class="px-7 py-5">
-                                            <div class="fs-4 text-dark fw-bolder">Update Record</div>
+                                            <div class="fs-4 text-dark fw-bolder">Update Records</div>
                                         </div>
                                         <div class="separator border-gray-200"></div>
-                                        <form id="contact_update" class="form" method="POST" action="{{ route('contact_status_bulk') }}" enctype="multipart/form-data">
+                                        <form id="contact_update" class="form" method="POST" action="{{ route('contact_status_bulk') }}" >
                                             @csrf
                                             <input hidden id='contact_id_status' name="contact_id" value="" />
 
@@ -218,7 +218,7 @@
                                             <th># Of Live Conversations</th>
                                             <th># Of Voicemails</th>
                                             <th># Of Emails</th>
-                                            <th># Of Meetings</th>
+                                            <th># Of Meetings Scheduled</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -392,7 +392,7 @@ dt =  $('#contactTable').DataTable({
             header: true,
             headerOffset: 65,
             },
-    // order: [[2, 'desc']],
+    // order: [[0, 'desc']],
     // ajax: "{{ route('get_contact') }}",
     ajax: {
           url: "{{ route('get_contact') }}",
@@ -400,10 +400,11 @@ dt =  $('#contactTable').DataTable({
                 d.tags = $('#tags').val(),
                 d.company_id = $('#company_id').val()
                 d.contact_status = $('#contact_status').val()
+                d.search_new = $('#searchNew').val()
             }
         },
     columns: [
-        { data: 'id', name: 'id' ,searchable: false},
+        { data: 'id', name: 'id' ,searchable: false,},
         { data: 'first_name' , name: 'first_name' },
         { data: 'email_address' , name: 'email_address' },
         { data: 'company_name' , name: 'company_name' },
@@ -449,6 +450,37 @@ dt =  $('#contactTable').DataTable({
                         <a href="${url}" class="fw-normal text-gray-800 text-hover-primary mb-1"><span class="fw-bolder">${row.phone_number  == '' ? '' : "(D)"} </span>${row.phone_number  == '' ? '' : row.phone_number} </a>
                         <br>
                         <a href="${url}" class="fw-normal text-gray-800 text-hover-primary mb-1"><span class="fw-bolder">${row.mobile_phone == '' ? '' : "(M)" }</span>${row.mobile_phone  == '' ? '' : row.mobile_phone} </a>`;
+                    }
+                },
+                {
+                    targets: 4,
+                    render: function (data, type, row) {
+                        return `<td>
+                                    <div class="badge badge-sm badge-light-primary d-inline cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" onclick="showAndHid(this)">${row.status}</div>
+                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true" style="position: absolute;">
+                                        <div class="menu-item px-3">
+                                            <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Update Contact Status</div>
+                                        </div>
+                                        <div class="menu-item px-3">
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('current client',${row.id})">Current Client</a>
+                                        </div>
+                                        <div class="menu-item px-3">
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('active discussion',${row.id})">Active Discussion</a>
+                                        </div>
+                                        <div class="menu-item px-3">
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('not interested',${row.id})">Not Interested</a>
+                                        </div>
+                                        <div class="menu-item px-3">
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('unsubscribed',${row.id})">Unsubscribed</a>
+                                        </div>
+                                        <div class="menu-item px-3">
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('prospect',${row.id})">Prospect</a>
+                                        </div>
+                                        <div class="menu-item px-3">
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('user',${row.id})">User</a>
+                                        </div>
+                                    </div>
+                                </td>`;
                     }
                 },
                 {
@@ -639,7 +671,8 @@ function updateStatus()
     $('#contact_id_status').val(contactArraya);
     if($('#contact_id_status').val())
     {
-        $('#contact_update').submit();
+        // $('#contact_update').submit();
+        contactStatusAndOutreachUpdate();
     }
     // if(contactArray.length == 0)
     // {
@@ -828,17 +861,69 @@ function Check(obj) {
     }
 
     function formatAMPM(date) {
+        
   var hours = date.getHours();
   var minutes = date.getMinutes();
   var seconds = date.getSeconds();
   var ampm = hours >= 12 ? 'pm' : 'am';
-//   hours = hours % 12;
-//   hours = hours ? hours : 12; // the hour '0' should be '12'
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
   minutes = minutes < 10 ? '0'+minutes : minutes;
-//   var strTime = hours + ':' + minutes + ' ' + seconds +' '+ ampm;
-  var strTime = hours + ':' + minutes + ':' +  seconds;
+  var strTime = hours + ':' + minutes + ' ' + seconds +' '+ ampm;
+//   var strTime = hours + ':' + minutes + ':' +  seconds;
   return strTime;
 }
+function contactStatusAndOutreachUpdate()
+{
+    $.ajax({
+            url: $("#contact_update").attr('action'),
+            method: 'POST',
+            data: $('#contact_update').serialize(),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            },
+        success: function(result) {
+            $("#send_email").css("display", "none");
+            $("#download_sheet").css("display", "none");
+            $("#update_status").css("display", "none");
+             contactArray = [];
+            // console.log(result);
+            // updateText2(result);
+            dt.draw();
 
+        }
+    });
+}
+function contactStatusUpdate(status,id)
+{
+    var value = {
+            status: status,
+            contacts_id:id,
+            _token:'{{ csrf_token() }}',
+        };
+    $.ajax({
+            url: "{{route('contact_status_update')}}",
+            method: 'POST',
+            data: value,
+           
+        success: function(result) {
+            // $("#send_email").css("display", "none");
+            // $("#download_sheet").css("display", "none");
+            // $("#update_status").css("display", "none");
+            //  contactArray = [];
+            // console.log(result);
+            // updateText2(result);
+            dt.draw();
+
+        }
+    });
+}   
+function showAndHid(obj)
+{
+    obj.parentElement.children[1].classList.contains('show') == true ? obj.parentElement.children[1].classList.remove('show') : obj.parentElement.children[1].classList.add('show');
+}
+// $('body').click(function(e){
+//     // console.log('aaaa');
+// });
 </script>
 @endsection('content')

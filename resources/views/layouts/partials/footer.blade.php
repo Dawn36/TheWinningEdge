@@ -31,7 +31,7 @@
 <!--begin::Page Custom Javascript(used by this page)-->
 <script src="{{ asset('theme/assets/js/widgets.bundle.js')}}"></script>
 <script src="{{ asset('theme/assets/js/custom/widgets.js')}}"></script>
-<script src="{{ asset('theme/assets/js/custom/signin-methods.js')}}"></script> 
+{{-- <script src="{{ asset('theme/assets/js/custom/signin-methods.js')}}"></script>  --}}
 
 <!--end::Page Vendors Javascript-->
 <!--begin::Page Custom Javascript(used by this page)-->
@@ -72,7 +72,7 @@
         [25, 50, 100, 200, "All"]
     ],
 });
-    var input = document.getElementById("myInput");
+    var input = document.getElementById("searchNew");
     input.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
         event.preventDefault();

@@ -87,7 +87,7 @@
                                 </svg>
                             </span>
                         </span>
-                        <span class="menu-title">Tasks</span>
+                        <span class="menu-title">Tasks</span><span class="badge badge-circle badge-primary">{{ App\Http\Controllers\TaskController::openTaskCount(); }}</span>
                     </a>
                 </div>
                 <div class="menu-item">

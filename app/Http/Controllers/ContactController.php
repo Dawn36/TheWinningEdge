@@ -36,9 +36,9 @@ class ContactController extends Controller
         $dbWhere1='';
         $dbWhere2='';
         $dbWhere3='';
-        if(isset($request->searchNew))
+        if(isset($request->search_new))
         {
-            $dbWhere=" and CONCAT(c.`tags`,cc.`company_name`) like '%$request->searchNew%'";
+            $dbWhere=" and CONCAT(c.`tags`,cc.`company_name`) like '%$request->search_new%'";
         }
         if(isset($request->tags))
         {
@@ -412,12 +412,12 @@ class ContactController extends Controller
         $template=EmailTemplate::find($templateId);
         return $template;
     }
-    public function contactStatusBulk(Request $request)
-    {
-        $userId=Auth::user()->id;
-        $contactId=$request->contactId;
-        return view('contact/contact_status_bulk',compact('contactId'));
-    }
+    // public function contactStatusBulk(Request $request)
+    // {
+    //     $userId=Auth::user()->id;
+    //     $contactId=$request->contactId;
+    //     return view('contact/contact_status_bulk',compact('contactId'));
+    // }
     public function contactStatusBulkUpdate(Request $request)
     {
         $userId=Auth::user()->id;
@@ -480,6 +480,14 @@ class ContactController extends Controller
         $latestNote=DB::table('contact_note')->where('contact_id',$opportunities->contact_id)->orderByDesc('id')->limit('1')->get();
 
         return view('contact/contact_opportunities_edit',compact('opportunities','latestNote'));
+
+    }
+    public function contactStatusUpdate(Request $request)
+    {
+        $conatact=contact::find($request->contacts_id);
+        $conatact->status=$request->status;
+        $conatact->save();
+        return true;
 
     }
 }

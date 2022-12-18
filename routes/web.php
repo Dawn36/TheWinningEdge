@@ -12,6 +12,8 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\LogsController;
+use App\Http\Controllers\CompanyNoteController;
+use App\Http\Controllers\CompanyFileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,11 +24,15 @@ use App\Http\Controllers\LogsController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Route::middleware(['auth'])->group(function () {
     Route::get('session_log', [LogsController::class, 'sessionLogs'])->name('session_log');
     Route::get('get_session_log', [LogsController::class, 'getSessionLog'])->name('get_session_log');
-
-
+    
+    
+    Route::resource('company_files', CompanyFileController::class);
+    Route::resource('company_note', CompanyNoteController::class);
 Route::resource('email_template', EmailTemplateController::class);
 Route::resource('company', CompanyController::class);
 Route::get('company_edit_not_ajax/{id}', [CompanyController::class, 'companyEditNotAjax'])->name('company_edit_not_ajax');
@@ -61,7 +67,8 @@ Route::get('contact_task', [ContactController::class, 'contactTask'])->name('con
 Route::get('contact_task_edit', [ContactController::class, 'contactTaskEdit'])->name('contact_task_edit');
 Route::get('contact_email_template', [ContactController::class, 'contactEmailTemplate'])->name('contact_email_template');
 Route::get('get_email_templater', [ContactController::class, 'getEmailTemplater'])->name('get_email_templater');
-Route::get('contact_status_bulk', [ContactController::class, 'contactStatusBulk'])->name('contact_status_bulk');
+// Route::get('contact_status_bulk', [ContactController::class, 'contactStatusBulk'])->name('contact_status_bulk');
+Route::post('contact_status_update', [ContactController::class, 'contactStatusUpdate'])->name('contact_status_update');
 Route::post('contact_status_bulk', [ContactController::class, 'contactStatusBulkUpdate'])->name('contact_status_bulk');
 Route::post('contact_email_template', [ContactController::class, 'contactEmailTemplateSend'])->name('contact_email_template');
 Route::post('contact_export',[ContactController::class,'contactExport'])->name('contact_export');
