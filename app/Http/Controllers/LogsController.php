@@ -15,7 +15,7 @@ class LogsController extends Controller
     }
     public function getSessionLog()
     {
-        $logs=DB::table('logs')->select(DB::raw('full_name,email,status,DATE_FORMAT(created_at, "%c/%d/%Y %T") as created_at'))->get();
+        $logs=DB::table('logs')->select(DB::raw('full_name,email,status,DATE_FORMAT(created_at, "%c/%d/%Y %h:%i:%s %p") as created_at'))->get();
         return Datatables::of($logs)
         ->addIndexColumn()
         ->make();

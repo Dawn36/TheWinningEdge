@@ -28,7 +28,12 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('contact/contact_index');
+        $userId=Auth::user()->id;
+
+        $tags=Contact::select(DB::raw('GROUP_CONCAT(tags) as tags'))->where('user_id',$userId)->where('tags','!=','')->get();
+        $tagsArr=explode(',',$tags[0]->tags);
+        $tagsArr=array_values(array_unique($tagsArr));
+        return view('contact/contact_index',compact('tagsArr'));
     }
     public function getContact(Request $request)
     {
@@ -43,7 +48,7 @@ class ContactController extends Controller
         if(isset($request->tags))
         {
             $tags=implode(',',$request->tags);
-            $dbWhere1=" and CONCAT(c.`tags`) like '%$tags%'";
+            $dbWhere1=" and c.`tags` like '%$tags%'";
         }
         if(isset($request->contact_status))
         {
@@ -58,17 +63,17 @@ class ContactController extends Controller
         $userId=Auth::user()->id;
        $contact= DB::select(DB::raw("SELECT c.*,c.email as email_address,cc.company_name,
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='email' AND contacts_id = c.id ) AS email,
-        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %T') as created_at FROM `contact_history` WHERE `status`='email' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_email,
+        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %h:%i:%s %p') as created_at FROM `contact_history` WHERE `status`='email' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_email,
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='live_conversation' AND contacts_id = c.id ) AS live_conversation,
-        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %T') as created_at FROM `contact_history` WHERE `status`='live_conversation' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_live_conversation,
+        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %h:%i:%s %p') as created_at FROM `contact_history` WHERE `status`='live_conversation' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_live_conversation,
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='voice_mail' AND contacts_id = c.id ) AS voic_mail,
-        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %T') as created_at FROM `contact_history` WHERE `status`='voice_mail' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_voic_mail,
+        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %h:%i:%s %p') as created_at FROM `contact_history` WHERE `status`='voice_mail' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_voic_mail,
         
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='phone_call' AND contacts_id = c.id ) AS phone_call,
-        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %T') as created_at FROM `contact_history` WHERE `status`='phone_call' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_phone_call,
+        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %h:%i:%s %p') as created_at FROM `contact_history` WHERE `status`='phone_call' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_phone_call,
         
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ) AS meeting,
-        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %T') as created_at FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_meeting
+        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %h:%i:%s %p') as created_at FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_meeting
          
          FROM `contacts` c left join companies cc on cc.id=c.companies_id
          WHERE c.user_id='$userId' $dbWhere $dbWhere1 $dbWhere2 $dbWhere3 order by c.id desc
@@ -464,6 +469,7 @@ class ContactController extends Controller
         $company=Company::where('user_id',$userId)->get();
         $tags=Contact::select(DB::raw('GROUP_CONCAT(tags) as tags'))->where('user_id',$userId)->where('tags','!=','')->get();
         $tagsArr=explode(',',$tags[0]->tags);
+        $tagsArr=array_values(array_unique($tagsArr));
         return view('contact/contact_filter',compact('company','tagsArr'));
     }
     public function contactOpportunitiesCreate(Request $request)

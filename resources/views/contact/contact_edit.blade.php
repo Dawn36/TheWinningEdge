@@ -5,12 +5,12 @@
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Status</label>
             <select name="status" class="form-control form-control-solid mb-3 mb-lg-0">
-                <option value="current client" {{$contact->status == "current client" ? 'Selected' : '' }}>Current Client</option>
-                <option value="active discussion" {{$contact->status == "active discussion" ? 'Selected' : '' }}>Active Discussion</option>
-                <option value="not interested" {{$contact->status == "not interested" ? 'Selected' : '' }}>Not Interested</option>
-                <option value="unsubscribed" {{$contact->status == "unsubscribed" ? 'Selected' : '' }}>Unsubscribed</option>
-                <option value="prospect" {{$contact->status == "prospect" ? 'Selected' : '' }}>Prospect</option>
-                <option value="user" {{$contact->status == "user" ? 'Selected' : '' }}>User</option>
+                <option value="Current Client" {{$contact->status == "Current Client" ? 'Selected' : '' }}>Current Client</option>
+                <option value="Active Discussion" {{$contact->status == "Active Discussion" ? 'Selected' : '' }}>Active Discussion</option>
+                <option value="Not Interested" {{$contact->status == "Not Interested" ? 'Selected' : '' }}>Not Interested</option>
+                <option value="Unsubscribed" {{$contact->status == "Unsubscribed" ? 'Selected' : '' }}>Unsubscribed</option>
+                <option value="Prospect" {{$contact->status == "Prospect" ? 'Selected' : '' }}>Prospect</option>
+                <option value="User" {{$contact->status == "User" ? 'Selected' : '' }}>User</option>
             </select>
         </div>
         <div class="fv-row mb-7">

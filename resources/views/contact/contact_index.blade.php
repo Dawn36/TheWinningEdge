@@ -102,12 +102,12 @@
                                                     <label class="form-label fs-5 fw-bold mb-3">Status:</label>
                                                     <select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" name="status" data-dropdown-parent="#kt-toolbar-filter">
                                                         <option value="0">Select Option</option>
-                                                        <option value="current client" >Current Client</option>
-                                                        <option value="active discussion" >Active Discussion</option>
-                                                        <option value="not interested" >Not Interested</option>
-                                                        <option value="unsubscribed" >Unsubscribed</option>
-                                                        <option value="prospect" >Prospect</option>
-                                                        <option value="user" >User</option>
+                                                        <option value="Current Client" >Current Client</option>
+                                                        <option value="Active Discussion" >Active Discussion</option>
+                                                        <option value="Not Interested" >Not Interested</option>
+                                                        <option value="Unsubscribed" >Unsubscribed</option>
+                                                        <option value="Prospect" >Prospect</option>
+                                                        <option value="User" >User</option>
                                                     </select>
                                                 </div>
                                                 <div class="mb-10">
@@ -197,6 +197,23 @@
                         </div>
                         <!--end::Card header-->
                         <!--begin::Card Body-->
+                        <div class="card-body fs-6 text-gray-700 py-5" id="tags_filter" style="display: none">
+                            <div class="row align-items-center gap-2">
+                                <div class="d-flex col-lg col-12 pe-0 align-items-center">
+                                    <label class="fs-6 fw-bold form-label mb-0 me-2">Tags:</label>
+                                    <select class="form-select form-select-solid fw-bolder" id="tag2" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" multiple>
+                                        <option></option>
+                                        @for($i=0; $i < count($tagsArr); $i++)
+                                        <option value="{{$tagsArr[$i]}}" >{{$tagsArr[$i]}}</option>
+                                        @endfor
+                                    </select>
+                                </div>
+                                <div class="d-flex col-auto gap-2">
+                                    <button type="button" onclick="filterData2()" class="btn btn-sm btn-primary">Apply</button>
+                                    <button type="button" onclick="clearFilter()" class="btn btn-sm btn-light-dark" title="Clear Filter" data-bs-toggle="tooltip" data-bs-placement="top">Clear Filter</button>
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-body fs-6 py-lg-5 text-gray-700">
 
                             <!--begin::Block-->
@@ -397,7 +414,7 @@ dt =  $('#contactTable').DataTable({
     ajax: {
           url: "{{ route('get_contact') }}",
           data: function (d) {
-                d.tags = $('#tags').val(),
+                d.tags = $('#tag2').val(),
                 d.company_id = $('#company_id').val()
                 d.contact_status = $('#contact_status').val()
                 d.search_new = $('#searchNew').val()
@@ -462,22 +479,22 @@ dt =  $('#contactTable').DataTable({
                                             <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Update Contact Status</div>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="contactStatusUpdate('current client',${row.id})">Current Client</a>
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Current Client',${row.id})">Current Client</a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="contactStatusUpdate('active discussion',${row.id})">Active Discussion</a>
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Active Discussion',${row.id})">Active Discussion</a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="contactStatusUpdate('not interested',${row.id})">Not Interested</a>
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Not Interested',${row.id})">Not Interested</a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="contactStatusUpdate('unsubscribed',${row.id})">Unsubscribed</a>
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Unsubscribed',${row.id})">Unsubscribed</a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="contactStatusUpdate('prospect',${row.id})">Prospect</a>
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Prospect',${row.id})">Prospect</a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="contactStatusUpdate('user',${row.id})">User</a>
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('User',${row.id})">User</a>
                                         </div>
                                     </div>
                                 </td>`;
@@ -922,6 +939,22 @@ function showAndHid(obj)
 {
     obj.parentElement.children[1].classList.contains('show') == true ? obj.parentElement.children[1].classList.remove('show') : obj.parentElement.children[1].classList.add('show');
 }
+function filterData2()
+    {
+        dt.draw();
+    }
+    function clearFilter()
+    {
+        $('#contact_status').val('');
+        $('#company_id').val([]);
+        $('#company_id').trigger('change'); 
+        $('#tag2').val([]);
+        $('#tag2').trigger('change'); 
+        $('#tags').val([]);
+        $('#tags').trigger('change'); 
+        $('#tags_filter').hide();
+        dt.draw();
+    }
 // $('body').click(function(e){
 //     // console.log('aaaa');
 // });

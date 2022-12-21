@@ -4,6 +4,8 @@ namespace App\Traits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+
 
 trait Logs {
   
@@ -17,8 +19,30 @@ trait Logs {
 		}else{
 			return true;
 		}
-		
 	}
+	public function SendEmail($toEmail,$subject,$fileName,$data='')
+    {
+		$is_email_send=env('IS_EMAIL_SEND');
+		if($is_email_send == "1"){
+        $to_email=$toEmail;
+        $from_email = env('MAIL_FROM_ADDRESS');
+        $subject = $subject;
+        $cc = env('CCEMAIL');
+            Mail::send("mail-template/$fileName", ['data' => $data], function ($message) use ($to_email, $from_email, $subject, $cc) {
+                $message->to($to_email)
+                    ->subject($subject)
+                    ->cc($cc);
+                $message->from($from_email);
+        }); 
+		return true;
+
+	}
+	else
+	{
+		return true;
+
+	}
+    }
 	
 
 }

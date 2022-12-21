@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\File;
 
 
@@ -168,6 +168,12 @@ class SettingsController extends Controller
             ])->save();
 
             $request->session()->flash('success', 'Password changed');
+            $data['full_name']=$user->first_name." ".$user->last_name;
+            $subject='Change Password';
+            $fileName='password-reset-success';
+            $toEmail = $user->email;
+            $this->SendEmail($toEmail,$subject,$fileName,$data);
+
             return redirect()->back();
         } else {
             $request->session()->flash('error', 'Password does not match');

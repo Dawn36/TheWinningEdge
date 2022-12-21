@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\LogsController;
 use App\Http\Controllers\CompanyNoteController;
 use App\Http\Controllers\CompanyFileController;
+use App\Http\Controllers\ToDoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,8 +32,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('get_session_log', [LogsController::class, 'getSessionLog'])->name('get_session_log');
     
     
-    Route::resource('company_files', CompanyFileController::class);
-    Route::resource('company_note', CompanyNoteController::class);
+Route::resource('company_files', CompanyFileController::class);
+Route::resource('to_do', ToDoController::class);
+Route::get('to_do_status', [ToDoController::class, 'toDoStatus'])->name('to_do_status');
+Route::resource('company_note', CompanyNoteController::class);
 Route::resource('email_template', EmailTemplateController::class);
 Route::resource('company', CompanyController::class);
 Route::get('company_edit_not_ajax/{id}', [CompanyController::class, 'companyEditNotAjax'])->name('company_edit_not_ajax');

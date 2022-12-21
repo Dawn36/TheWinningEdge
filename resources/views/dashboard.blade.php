@@ -7,8 +7,8 @@
         <div id="kt_content_container" class="container-xxl">
 
             <!--begin::Row-->
-            <div class="row gy-5 g-xl-10">
-                <div class="col-xl-12">
+            <div class="row gy-5 g-xl-10 d-flex">
+                <div class="col-xl-8">
                     <div class="card mb-5 mb-xl-8 mb-5">
                         <div class="card-body pb-0">
                             <div class="d-flex align-items-center">
@@ -59,12 +59,120 @@
                             
                         </div>
                     </div>
+                    <div class="row gy-5 g-xl-10">
+                        @if(Auth::user()->hasRole('admin'))
+                        <div class="col-xl-3">
+                            <div class="card overflow-hidden mb-5 mb-xl-10">
+                                <div class="card-body">
+                                    <span class="svg-icon svg-icon-primary svg-icon-3x ms-n1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path opacity="0.3" d="M20.5543 4.37824L12.1798 2.02473C12.0626 1.99176 11.9376 1.99176 11.8203 2.02473L3.44572 4.37824C3.18118 4.45258 3 4.6807 3 4.93945V13.569C3 14.6914 3.48509 15.8404 4.4417 16.984C5.17231 17.8575 6.18314 18.7345 7.446 19.5909C9.56752 21.0295 11.6566 21.912 11.7445 21.9488C11.8258 21.9829 11.9129 22 12.0001 22C12.0872 22 12.1744 21.983 12.2557 21.9488C12.3435 21.912 14.4326 21.0295 16.5541 19.5909C17.8169 18.7345 18.8277 17.8575 19.5584 16.984C20.515 15.8404 21 14.6914 21 13.569V4.93945C21 4.6807 20.8189 4.45258 20.5543 4.37824Z" fill="black" />
+                                            <path d="M12.0006 11.1542C13.1434 11.1542 14.0777 10.22 14.0777 9.0771C14.0777 7.93424 13.1434 7 12.0006 7C10.8577 7 9.92348 7.93424 9.92348 9.0771C9.92348 10.22 10.8577 11.1542 12.0006 11.1542Z" fill="black" />
+                                            <path d="M15.5652 13.814C15.5108 13.6779 15.4382 13.551 15.3566 13.4331C14.9393 12.8163 14.2954 12.4081 13.5697 12.3083C13.479 12.2993 13.3793 12.3174 13.3067 12.3718C12.9257 12.653 12.4722 12.7981 12.0006 12.7981C11.5289 12.7981 11.0754 12.653 10.6944 12.3718C10.6219 12.3174 10.5221 12.2902 10.4314 12.3083C9.70578 12.4081 9.05272 12.8163 8.64456 13.4331C8.56293 13.551 8.49036 13.687 8.43595 13.814C8.40875 13.8684 8.41781 13.9319 8.44502 13.9864C8.51759 14.1133 8.60828 14.2403 8.68991 14.3492C8.81689 14.5215 8.95295 14.6757 9.10715 14.8208C9.23413 14.9478 9.37925 15.0657 9.52439 15.1836C10.2409 15.7188 11.1026 15.9999 11.9915 15.9999C12.8804 15.9999 13.7421 15.7188 14.4586 15.1836C14.6038 15.0748 14.7489 14.9478 14.8759 14.8208C15.021 14.6757 15.1661 14.5215 15.2931 14.3492C15.3838 14.2312 15.4655 14.1133 15.538 13.9864C15.5833 13.9319 15.5924 13.8684 15.5652 13.814Z" fill="black" />
+                                        </svg>
+                                    </span>
+                                    <div class="text-gray-900 fw-bolder fs-2 mb-2 mt-5">{{number_format($userCount)}}</div>
+                                    <div class="fw-bold text-gray-400">Total Admins</div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        <div class="col-xl-3">
+                            <div class="card overflow-hidden mb-5 mb-xl-10">
+                                <div class="card-body">
+                                    <span class="svg-icon svg-icon-primary svg-icon-3x ms-n1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M16.0173 9H15.3945C14.2833 9 13.263 9.61425 12.7431 10.5963L12.154 11.7091C12.0645 11.8781 12.1072 12.0868 12.2559 12.2071L12.6402 12.5183C13.2631 13.0225 13.7556 13.6691 14.0764 14.4035L14.2321 14.7601C14.2957 14.9058 14.4396 15 14.5987 15H18.6747C19.7297 15 20.4057 13.8774 19.912 12.945L18.6686 10.5963C18.1487 9.61425 17.1285 9 16.0173 9Z" fill="black" />
+                                            <rect opacity="0.3" x="14" y="4" width="4" height="4" rx="2" fill="black" />
+                                            <path d="M4.65486 14.8559C5.40389 13.1224 7.11161 12 9 12C10.8884 12 12.5961 13.1224 13.3451 14.8559L14.793 18.2067C15.3636 19.5271 14.3955 21 12.9571 21H5.04292C3.60453 21 2.63644 19.5271 3.20698 18.2067L4.65486 14.8559Z" fill="black" />
+                                            <rect opacity="0.3" x="6" y="5" width="6" height="6" rx="3" fill="black" />
+                                        </svg>
+                                    </span>
+                                    <div class="text-gray-900 fw-bolder fs-2 mb-2 mt-5">{{number_format($contactCount)}}</div>
+                                    <div class="fw-bold text-gray-400">Total Contacts</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="card overflow-hidden mb-5 mb-xl-10">
+                                <div class="card-body">
+                                    <span class="svg-icon svg-icon-primary svg-icon-3x ms-n1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path opacity="0.3" d="M14 3V20H2V3C2 2.4 2.4 2 3 2H13C13.6 2 14 2.4 14 3ZM11 13V11C11 9.7 10.2 8.59995 9 8.19995V7C9 6.4 8.6 6 8 6C7.4 6 7 6.4 7 7V8.19995C5.8 8.59995 5 9.7 5 11V13C5 13.6 4.6 14 4 14V15C4 15.6 4.4 16 5 16H11C11.6 16 12 15.6 12 15V14C11.4 14 11 13.6 11 13Z" fill="black"></path>
+                                            <path d="M2 20H14V21C14 21.6 13.6 22 13 22H3C2.4 22 2 21.6 2 21V20ZM9 3V2H7V3C7 3.6 7.4 4 8 4C8.6 4 9 3.6 9 3ZM6.5 16C6.5 16.8 7.2 17.5 8 17.5C8.8 17.5 9.5 16.8 9.5 16H6.5ZM21.7 12C21.7 11.4 21.3 11 20.7 11H17.6C17 11 16.6 11.4 16.6 12C16.6 12.6 17 13 17.6 13H20.7C21.2 13 21.7 12.6 21.7 12ZM17 8C16.6 8 16.2 7.80002 16.1 7.40002C15.9 6.90002 16.1 6.29998 16.6 6.09998L19.1 5C19.6 4.8 20.2 5 20.4 5.5C20.6 6 20.4 6.60005 19.9 6.80005L17.4 7.90002C17.3 8.00002 17.1 8 17 8ZM19.5 19.1C19.4 19.1 19.2 19.1 19.1 19L16.6 17.9C16.1 17.7 15.9 17.1 16.1 16.6C16.3 16.1 16.9 15.9 17.4 16.1L19.9 17.2C20.4 17.4 20.6 18 20.4 18.5C20.2 18.9 19.9 19.1 19.5 19.1Z" fill="black"></path>
+                                        </svg> </span>
+                                    <div class="text-gray-900 fw-bolder fs-2 mb-2 mt-5">{{number_format($opportunitiesCount)}}</div>
+                                    <div class="fw-bold text-gray-400">Total Opportunities</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="card overflow-hidden mb-10 mb-xl-10">
+                                <div class="card-body">
+                                    <span class="svg-icon svg-icon-primary svg-icon-3x ms-n1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M6 8.725C6 8.125 6.4 7.725 7 7.725H14L18 11.725V12.925L22 9.725L12.6 2.225C12.2 1.925 11.7 1.925 11.4 2.225L2 9.725L6 12.925V8.725Z" fill="black" />
+                                            <path opacity="0.3" d="M22 9.72498V20.725C22 21.325 21.6 21.725 21 21.725H3C2.4 21.725 2 21.325 2 20.725V9.72498L11.4 17.225C11.8 17.525 12.3 17.525 12.6 17.225L22 9.72498ZM15 11.725H18L14 7.72498V10.725C14 11.325 14.4 11.725 15 11.725Z" fill="black" />
+                                        </svg>
+                                    </span>
+                                    <div class="text-gray-900 fw-bolder fs-2 mb-2 mt-5">{{number_format($emailTemplateCount)}}</div>
+                                    <div class="fw-bold text-gray-400">Total Email Templates</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4">
+                    <!--begin::List Widget 3-->
+                    <div class="card card-xl-stretch mb-xl-8">
+                        <!--begin::Header-->
+                        <div class="card-header border-0">
+                            <h3 class="card-title fw-bolder text-dark">Todo</h3>
+                            <div class="card-toolbar">
+                                <button type="button" class="btn btn-sm btn-icon btn-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" title="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Add new Todo" onclick="addToDo()">
+                                    <span class="svg-icon svg-icon-2hx">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.6" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="black"></rect>
+                                            <rect x="6" y="11" width="12" height="2" rx="1" fill="black"></rect>
+                                        </svg>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Body-->
+                        <div class="card-body pt-2">
+                            <div class="pe-3" style="height: 300px; overflow: auto;">
+                                @for($i=0; $i < count($toDo); $i++)
+                                <div class="d-flex align-items-center mb-6">
+                                    <span class="bullet bullet-vertical h-40px" style="background-color: #c5ad60;"></span>
+                                    <div class="form-check form-check-custom form-check-solid mx-5">
+                                        <input class="form-check-input" type="checkbox" value="" onclick="changeToDoStatus('{{$toDo[$i]->id}}',this)" />
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <a href="#" class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ucfirst($toDo[$i]->description)}}</a>
+                                        <span class="text-muted fw-bold d-block">{{Date('m/d/Y' , strtotime($toDo[$i]->created_at))}}</span>
+                                    </div>
+                                    @php 
+                                    $now = time(); // or your date as well
+                                    $your_date = strtotime($toDo[$i]->created_at);
+                                    $datediff = $now - $your_date;
+                                    @endphp
+                                    @if(round($datediff / (60 * 60 * 24)) <= 2)
+                                    <span class="badge badge-light-primary fs-8 fw-bolder">New</span>
+                                    @endif
+                                </div>
+                              @endfor
+                            </div>
+                        </div>
+                    </div>
+                    <!--end:List Widget 3-->
                 </div>
             </div>
             <!--end::Row-->
 
             <!--begin::Row-->
-            <div class="row gy-5 g-xl-10">
+            {{-- <div class="row gy-5 g-xl-10">
                 @if(Auth::user()->hasRole('admin'))
                 <div class="col-xl-3">
                     <div class="card overflow-hidden mb-5 mb-xl-10">
@@ -125,7 +233,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!--end::Row-->
 
             <!--begin::Row-->
@@ -183,23 +291,23 @@
                                 <div class="row g-0 justify-content-center">
                                     <div class="col-auto text-align-last-center mx-5">
                                         <div class="fs-9 fs-sm-7 text-gray-400">Phone Calls</div>
-                                        <div class="fs-2 fw-bolder text-gray-800">{{number_format($phoneCallMonth)}}</div>
+                                        <div class="text-gray-800 fw-boldest fs-3 my-2">{{number_format($phoneCallMonth)}}</div>
                                     </div>
                                     <div class="col-auto text-align-last-center mx-5">
                                         <div class="fs-9 fs-sm-7 text-gray-400">Live Conversations</div>
-                                        <div class="fs-2 fw-bolder text-gray-800">{{number_format($liveConversationMonth)}}</div>
+                                        <div class="text-gray-800 fw-boldest fs-3 my-2">{{number_format($liveConversationMonth)}}</div>
                                     </div>
                                     <div class="col-auto text-align-last-center mx-5">
                                         <div class="fs-9 fs-sm-7 text-gray-400">Voicemails</div>
-                                        <div class="fs-2 fw-bolder text-gray-800">{{number_format($voiceMailCount)}}</div>
+                                        <div class="text-gray-800 fw-boldest fs-3 my-2">{{number_format($voiceMailCount)}}</div>
                                     </div>
                                     <div class="col-auto text-align-last-center mx-5">
                                         <div class="fs-9 fs-sm-7 text-gray-400">Emails</div>
-                                        <div class="fs-2 fw-bolder text-gray-800">{{number_format($emailCount)}}</div>
+                                        <div class="text-gray-800 fw-boldest fs-3 my-2">{{number_format($emailCount)}}</div>
                                     </div>
                                     <div class="col-auto text-align-last-center mx-5">
                                         <div class="fs-9 fs-sm-7 text-gray-400">Meetings</div>
-                                        <div class="fs-2 fw-bolder text-gray-800">{{number_format($meetingCount)}}</div>
+                                        <div class="text-gray-800 fw-boldest fs-3 my-2">{{number_format($meetingCount)}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -261,11 +369,11 @@
                                 <div class="row g-0 justify-content-center">
                                     <div class="col-auto text-align-last-center mx-5">
                                         <div class="fs-9 fs-sm-7 text-gray-400"># of Opportunities</div>
-                                        <div class="fs-2 fw-bolder text-gray-800">{{number_format($opportunitiesCount)}}</div>
+                                        <div class="text-gray-800 fw-boldest fs-3 my-2">{{number_format($opportunitiesCount)}}</div>
                                     </div>
                                     <div class="col-auto text-align-last-center mx-5">
                                         <div class="fs-9 fs-sm-7 text-gray-400">$ Amount </div>
-                                        <div class="fs-2 fw-bolder text-gray-800">{{number_format($amountAllOver[0]->amount,2)}}</div>
+                                        <div class="text-gray-800 fw-boldest fs-3 my-2">{{number_format($amountAllOver[0]->amount,2)}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -524,6 +632,31 @@ function setRpaTarget() {
             $('#myModalLg').modal('show');
         }
     });
+}
+function addToDo() {
+    $.ajax({
+        type: 'GET',
+        url: "{{ route('to_do.create') }}",
+        success: function(result) {
+            $('#myModalLgHeading').html('Add To Do');
+            $('#modalBodyLarge').html(result);
+            $('#myModalLg').modal('show');
+        }
+    });
+}
+function changeToDoStatus(id,obj)
+{
+    var value = {
+            to_do_id: id,
+        };
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('to_do_status') }}",
+            data: value,
+            success: function(result) {
+                obj.parentElement.parentElement.remove();
+            }
+        });
 }
 </script>
 @endsection('content')

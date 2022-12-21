@@ -81,27 +81,27 @@ class AuthenticatedSessionController extends Controller
               $data['full_name']=$userData->first_name." ".$userData->last_name;
               $data['new_password']=$newPassword;
               $data['email']=$toEmail;
-              $fileName='forgetpassword_template';
-              $this->sendEmail($toEmail,$subject,$fileName,$data);
+              $fileName='password-request';
+              $this->SendEmail($toEmail,$subject,$fileName,$data);
                
         }
        
         return redirect()->route('login');
 
     }
-    function sendEmail($toEmail,$subject,$fileName,$data='')
-    {
-        $to_email=$toEmail;
-        $from_email = env('MAIL_FROM_ADDRESS');
-        $subject = $subject;
-        $cc = env('CCEMAIL');
-            Mail::send("mail-template/$fileName", ['data' => $data], function ($message) use ($to_email, $from_email, $subject, $cc) {
-                $message->to($to_email)
-                    ->subject($subject)
-                    ->cc($cc);
-                $message->from($from_email);
-        });    
-    }
+    // function sendEmail($toEmail,$subject,$fileName,$data='')
+    // {
+    //     $to_email=$toEmail;
+    //     $from_email = env('MAIL_FROM_ADDRESS');
+    //     $subject = $subject;
+    //     $cc = env('CCEMAIL');
+    //         Mail::send("mail-template/$fileName", ['data' => $data], function ($message) use ($to_email, $from_email, $subject, $cc) {
+    //             $message->to($to_email)
+    //                 ->subject($subject)
+    //                 ->cc($cc);
+    //             $message->from($from_email);
+    //     });    
+    // }
     function randomPassword() {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         $pass = array(); //remember to declare $pass as an array

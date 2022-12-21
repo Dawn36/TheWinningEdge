@@ -3,12 +3,12 @@
         <label class="fs-6 fw-bold form-label mb-2">Contact Status:</label>
         <select name="contact_status" id="contact_status" class="form-control form-control-solid mb-3 mb-lg-0">
             <option value="" >Select Status</option>
-            <option value="current client" >Current Client</option>
-            <option value="active discussion" >Active Discussion</option>
-            <option value="not interested" >Not Interested</option>
-            <option value="unsubscribed" >Unsubscribed</option>
-            <option value="prospect" >Prospect</option>
-            <option value="user" >User</option>
+            <option value="Current Client" >Current Client</option>
+            <option value="Active Discussion" >Active Discussion</option>
+            <option value="Not Interested" >Not Interested</option>
+            <option value="Unsubscribed" >Unsubscribed</option>
+            <option value="Prospect" >Prospect</option>
+            <option value="User" >User</option>
         </select>
     </div>
     <!--begin::Input group-->
@@ -42,6 +42,7 @@
                 Filter
             </span>
         </button>
+        <button type="button" onclick="clearFilter()" class="btn btn-sm btn-light-dark" title="Clear Filter" data-bs-toggle="tooltip" data-bs-placement="top">Clear Filter</button>
     </div>
     <!--end::Actions-->
 </form>
@@ -50,12 +51,15 @@
   $(document).ready(function() {
             $('.js-example-basic-single').select2();
             $(".js-example-tags").select2({
-            tags: true
+            tags: false
         });
         });
 
         function filterData()
         {
+            $('#tag2').val($('#tags').val());
+            $('#tag2').trigger('change'); 
+            $('#tags_filter').show();
             dt.draw();
         }
        

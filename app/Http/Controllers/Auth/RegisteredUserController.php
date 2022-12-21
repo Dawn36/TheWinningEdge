@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Mail;
+
 
 class RegisteredUserController extends Controller
 {
@@ -64,6 +66,27 @@ class RegisteredUserController extends Controller
         $email=Auth::user()->email;
         $this->SessionLoginLogs($fullName,$email, 'register');
 
+        $data['full_name']=$request->first_name." ".$request->last_name;
+        $data['password']=$request->password;
+        $data['email']=$request->email;
+        $subject='Welcome To The Winning Edge Enterprises';
+        $fileName='email-confirm';
+        $toEmail = $request->email;
+        $this->SendEmail($toEmail,$subject,$fileName,$data);
+
         return redirect(RouteServiceProvider::HOME);
     }
+    // function sendEmail($toEmail,$subject,$fileName,$data='')
+    // {
+    //     $to_email=$toEmail;
+    //     $from_email = env('MAIL_FROM_ADDRESS');
+    //     $subject = $subject;
+    //     $cc = env('CCEMAIL');
+    //         Mail::send("mail-template/$fileName", ['data' => $data], function ($message) use ($to_email, $from_email, $subject, $cc) {
+    //             $message->to($to_email)
+    //                 ->subject($subject)
+    //                 ->cc($cc);
+    //             $message->from($from_email);
+    //     });    
+    // }
 }
