@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="x-apple-disable-message-reformatting">
-    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('theme/assets/email_images/logo.png')}}" type="image/x-icon">
     <title>Welcome Email</title>
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,600" rel="stylesheet" type="text/css">
@@ -76,6 +76,9 @@
         
         img {
             -ms-interpolation-mode: bicubic;
+        }
+        p{
+            color: #f5f6fa
         }
     </style>
 
