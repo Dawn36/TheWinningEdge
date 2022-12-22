@@ -4,7 +4,7 @@
 
 <head>
     <base href="">
-    <title>Pack Pal - Sign In</title>
+    <title>The Winning Edge Enterprises - Forgot Password</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="{{ asset('theme/assets/media/logos/logo-5.png')}}" />

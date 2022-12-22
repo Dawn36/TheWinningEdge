@@ -4,6 +4,7 @@
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Status</label>
             <select name="status" class="form-control form-control-solid mb-3 mb-lg-0">
+                <option value="" >Select Status</option>
                 <option value="Current Client" >Current Client</option>
                 <option value="Active Discussion" >Active Discussion</option>
                 <option value="Not Interested" >Not Interested</option>
