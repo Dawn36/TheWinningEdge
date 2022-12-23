@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\ToDo;
 use App\Models\User;
 use App\Models\Contact;
 use App\Models\EmailTemplate;
 use App\Models\Opportunities;
+use App\Models\Task;
 use Illuminate\Support\Facades\DB;
 
 
@@ -103,8 +103,8 @@ class DashboardController extends Controller
         $voiceMailArr=json_encode(array_values($voiceMailArr));
         $emailArr=json_encode(array_values($emailArr));
         $meetingArr=json_encode(array_values($meetingArr));
-        $toDo=ToDo::where('status','open')->get();
-        return view('dashboard',compact('phoneCallArr','liveConversationArr','toDo','voiceMailArr','emailArr','meetingArr','userCount','contactCount','opportunitiesCount','emailTemplateCount','opportunitiesTarget','percentage','rpaPercentage','amount','phoneCallMonth','liveConversationMonth','voiceMailCount','emailCount','meetingCount','amountAllOver'));
+        $task=Task::where('user_id',$userId)->where('task_status','open')->whereDate('created_at',date('Y-m-d'))->get();
+        return view('dashboard',compact('phoneCallArr','liveConversationArr','task','voiceMailArr','emailArr','meetingArr','userCount','contactCount','opportunitiesCount','emailTemplateCount','opportunitiesTarget','percentage','rpaPercentage','amount','phoneCallMonth','liveConversationMonth','voiceMailCount','emailCount','meetingCount','amountAllOver'));
     }
     public function rpaTarget()
     {

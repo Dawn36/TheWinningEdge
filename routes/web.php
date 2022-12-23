@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\LogsController;
 use App\Http\Controllers\CompanyNoteController;
 use App\Http\Controllers\CompanyFileController;
-use App\Http\Controllers\ToDoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,8 +32,6 @@ Route::middleware(['auth'])->group(function () {
     
     
 Route::resource('company_files', CompanyFileController::class);
-Route::resource('to_do', ToDoController::class);
-Route::get('to_do_status', [ToDoController::class, 'toDoStatus'])->name('to_do_status');
 Route::resource('company_note', CompanyNoteController::class);
 Route::resource('email_template', EmailTemplateController::class);
 Route::resource('company', CompanyController::class);

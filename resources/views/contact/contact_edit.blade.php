@@ -98,14 +98,15 @@
     }
     function updateText2(result)
     {
-        obj2.parentElement.parentElement.children[1].children[0].textContent=result.first_name+" "+result.last_name;
-        obj2.parentElement.parentElement.children[1].children[2].textContent=result.job;
-        obj2.parentElement.parentElement.children[2].children[0].textContent=result.email;
-        obj2.parentElement.parentElement.children[2].children[2].childNodes[1].textContent=result.phone_number;
-        obj2.parentElement.parentElement.children[2].children[4].childNodes[1].textContent=result.mobile_phone;
-        obj2.parentElement.parentElement.children[3].textContent=result.companies_id;
-        obj2.parentElement.parentElement.children[4].textContent=result.status;
-        obj2='';
+        // obj2.parentElement.parentElement.children[1].children[0].textContent=result.first_name+" "+result.last_name;
+        // obj2.parentElement.parentElement.children[1].children[2].textContent=result.job;
+        // obj2.parentElement.parentElement.children[2].children[0].textContent=result.email;
+        // obj2.parentElement.parentElement.children[2].children[2].childNodes[1].textContent=result.phone_number;
+        // obj2.parentElement.parentElement.children[2].children[4].childNodes[1].textContent=result.mobile_phone;
+        // obj2.parentElement.parentElement.children[3].textContent=result.companies_id;
+        // obj2.parentElement.parentElement.children[4].textContent=result.status;
+        // obj2='';
+        dt.draw();
         $('#myModalLg').modal('hide');
 
     }

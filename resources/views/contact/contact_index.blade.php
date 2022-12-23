@@ -32,27 +32,7 @@
                             <h1 class="anchor fw-bolder mb-5" id="zero-configuration">
                                 <a href="javascript:;"></a>Contacts 
                             </h1>
-                            <!--begin::Notice-->
-                            {{-- <div class="d-flex align-items-center rounded py-5 px-4 bg-light-primary">
-                                <div class="d-flex h-80px w-80px flex-shrink-0 flex-center position-relative ms-3 me-6">
-                                    <span class="svg-icon svg-icon-primary position-absolute opacity-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="70px" height="70px" viewBox="0 0 70 70" fill="none" class="w-80px h-80px">
-                                            <path d="M28 4.04145C32.3316 1.54059 37.6684 1.54059 42 4.04145L58.3109 13.4585C62.6425 15.9594 65.3109 20.5812 65.3109 25.5829V44.4171C65.3109 49.4188 62.6425 54.0406 58.3109 56.5415L42 65.9585C37.6684 68.4594 32.3316 68.4594 28 65.9585L11.6891 56.5415C7.3575 54.0406 4.68911 49.4188 4.68911 44.4171V25.5829C4.68911 20.5812 7.3575 15.9594 11.6891 13.4585L28 4.04145Z" fill="#000000" />
-                                        </svg>
-                                    </span>
-                                    <span class="svg-icon svg-icon-3x svg-icon-primary position-absolute">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M16.0173 9H15.3945C14.2833 9 13.263 9.61425 12.7431 10.5963L12.154 11.7091C12.0645 11.8781 12.1072 12.0868 12.2559 12.2071L12.6402 12.5183C13.2631 13.0225 13.7556 13.6691 14.0764 14.4035L14.2321 14.7601C14.2957 14.9058 14.4396 15 14.5987 15H18.6747C19.7297 15 20.4057 13.8774 19.912 12.945L18.6686 10.5963C18.1487 9.61425 17.1285 9 16.0173 9Z" fill="black" />
-                                            <rect opacity="0.3" x="14" y="4" width="4" height="4" rx="2" fill="black" />
-                                            <path d="M4.65486 14.8559C5.40389 13.1224 7.11161 12 9 12C10.8884 12 12.5961 13.1224 13.3451 14.8559L14.793 18.2067C15.3636 19.5271 14.3955 21 12.9571 21H5.04292C3.60453 21 2.63644 19.5271 3.20698 18.2067L4.65486 14.8559Z" fill="black" />
-                                            <rect opacity="0.3" x="6" y="5" width="6" height="6" rx="3" fill="black" />
-                                        </svg>
-                                    </span>
-                                </div>
-                                <div class="text-gray-700 fw-bold fs-6 lh-lg">Here we have a list of all of the Contacts that we have.</div>
-                            </div> --}}
-                            <!--end::Notice-->
-                            <!--end::Heading-->
+                          
                         </div>
                         <!--begin::Card header-->
                         <div class="card-header border-0">
@@ -77,6 +57,15 @@
                             <div class="card-toolbar">
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base" >
+                                    <button type="button" class="btn btn-icon btn-danger me-2"  title="Delete" data-bs-toggle="tooltip" data-bs-placement="top" id="delete_contact"  onclick="deleteContact()" style="display: none">
+                                        <span class="svg-icon svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
+                                                <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"/>
+                                                <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"/>
+                                                </svg>
+                                        </span>
+                                    </button>
                                     <!-- Start::Update Status -->
                                     <a href="#" class="btn btn-light-dark me-2" title="Update Records" data-bs-toggle="tooltip" data-bs-placement="top" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" id="update_status" style="display: none">
                                         <span class="svg-icon svg-icon-1">
@@ -87,7 +76,7 @@
                                             Update Records
                                         </span>
                                     </a>
-                                   
+                                    
                                     <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px mt-2" data-kt-menu="true" id="kt-toolbar-filter">
                                         <div class="px-7 py-5">
                                             <div class="fs-4 text-dark fw-bolder">Update Records</div>
@@ -161,7 +150,7 @@
                                         </span>
                                     </button>
                                     <!-- End::Send Email -->
-
+                                    
                                     <!-- Start::Filter -->
                                     <a href="#" class="btn btn-icon btn-light-dark me-2" title="Search by Filter" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-dismiss="click" data-bs-trigger="hover" onclick="filter()">
                                         <span class="svg-icon svg-icon-1">
@@ -405,6 +394,7 @@ dt =  $('#contactTable').DataTable({
     
     processing: true,
     serverSide: true,
+    scrollX:        true,
     fixedHeader: {
             header: true,
             headerOffset: 65,
@@ -463,10 +453,10 @@ dt =  $('#contactTable').DataTable({
                         var url = "{{route('contact.show',':id')}}";
                         url = url.replace(':id', row.id);
                         return `<a href="mailto:${row.email_address}" class="fw-bolder text-gray-800 text-hover-primary mb-1" onclick="getEmailObj('email','${row.id}',this)">${row.email_address}</a>
+                        <br ${row.phone_number  == null ? 'hidden' : ""}>
+                        <a href="${url}" class="fw-normal text-gray-800 text-hover-primary mb-1" ${row.phone_number  == null ? 'hidden' : ""}><span class="fw-bolder" >${row.phone_number  == null ? '' : "(D)"} </span>${row.phone_number  == null ? '' : row.phone_number} </a>
                         <br>
-                        <a href="${url}" class="fw-normal text-gray-800 text-hover-primary mb-1"><span class="fw-bolder">${row.phone_number  == '' ? '' : "(D)"} </span>${row.phone_number  == '' ? '' : row.phone_number} </a>
-                        <br>
-                        <a href="${url}" class="fw-normal text-gray-800 text-hover-primary mb-1"><span class="fw-bolder">${row.mobile_phone == '' ? '' : "(M)" }</span>${row.mobile_phone  == '' ? '' : row.mobile_phone} </a>`;
+                        <a href="${url}" class="fw-normal text-gray-800 text-hover-primary mb-1"><span class="fw-bolder">${row.mobile_phone == null ? '' : "(M)" }</span>${row.mobile_phone  == null ? '' : row.mobile_phone} </a>`;
                     }
                 },
                 {
@@ -754,15 +744,17 @@ function filter() {
 $('#select_all').click(function(event) {
     if (this.checked) {
     $("#send_email").css("display", "block");
+    $("#delete_contact").css("display", "block");
     $("#download_sheet").css("display", "block");
     $("#update_status").css("display", "block");
-
+    
         // Iterate each checkbox
         $(':checkbox').each(function() {
             this.checked = true;
         });
     } else {
     $("#send_email").css("display", "none");
+    $("#delete_contact").css("display", "none");
     $("#download_sheet").css("display", "none");
     $("#update_status").css("display", "none");
 
@@ -783,12 +775,14 @@ function Check(obj) {
     if(contactArray.length == 0)
     {
         $("#send_email").css("display", "none");
+        $("#delete_contact").css("display", "none");
         $("#download_sheet").css("display", "none");
         $("#update_status").css("display", "none");
     }
     else
     {
         $("#send_email").css("display", "block");
+        $("#delete_contact").css("display", "block");
         $("#download_sheet").css("display", "block");
         $("#update_status").css("display", "block");
     }
@@ -901,6 +895,7 @@ function contactStatusAndOutreachUpdate()
             },
         success: function(result) {
             $("#send_email").css("display", "none");
+            $("#delete_contact").css("display", "none");
             $("#download_sheet").css("display", "none");
             $("#update_status").css("display", "none");
              contactArray = [];

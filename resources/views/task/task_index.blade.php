@@ -118,12 +118,12 @@
                                         <tr>
                                             <td>{{$a}}</td>
                                             <td>{{$task[$i]->description}}</td>
-                                            <td><a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-bolder text-gray-800 text-hover-primary">{{ucwords($task[$i]->first_name)}} {{ucwords($task[$i]->last_name)}} </a> <br> <a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary">{{ucwords($task[$i]->job)}}</a></td>
-                                            <td><a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-bolder text-gray-800 text-hover-primary">{{$task[$i]->email}}</a>
+                                            <td><a href="{{route('contact.show',$task[$i]->contact_id == '' ? 0 : $task[$i]->contact_id)}}" class="fw-bolder text-gray-800 text-hover-primary">{{ucwords($task[$i]->first_name)}} {{ucwords($task[$i]->last_name)}} </a> <br> <a href="{{route('contact.show',$task[$i]->contact_id == '' ? 0 : $task[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary">{{ucwords($task[$i]->job)}}</a></td>
+                                            <td><a href="{{route('contact.show',$task[$i]->contact_id == '' ? 0 : $task[$i]->contact_id)}}" class="fw-bolder text-gray-800 text-hover-primary">{{$task[$i]->email}}</a>
                                                 <br>
-                                                <a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary"><span class="fw-bolder">{{$task[$i]->phone_number == '' ? '' : "(D)"}}</span>{{$task[$i]->phone_number == '' ? '' : $task[$i]->phone_number}}</a>
+                                                <a href="{{route('contact.show',$task[$i]->contact_id == '' ? 0 : $task[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary"><span class="fw-bolder">{{$task[$i]->phone_number == '' ? '' : "(D)"}}</span>{{$task[$i]->phone_number == '' ? '' : $task[$i]->phone_number}}</a>
                                                 <br>
-                                                <a href="{{route('contact.show',$task[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary"><span class="fw-bolder">{{$task[$i]->mobile_phone == '' ? '' : "(M)"}}</span>{{$task[$i]->mobile_phone == '' ? '' : $task[$i]->mobile_phone}}</a>
+                                                <a href="{{route('contact.show',$task[$i]->contact_id == '' ? 0 : $task[$i]->contact_id)}}" class="fw-normal text-gray-800 text-hover-primary"><span class="fw-bolder">{{$task[$i]->mobile_phone == '' ? '' : "(M)"}}</span>{{$task[$i]->mobile_phone == '' ? '' : $task[$i]->mobile_phone}}</a>
                                             </td>
                                             <td>{{ucwords($task[$i]->company_name)}}</td>
                                             <td>

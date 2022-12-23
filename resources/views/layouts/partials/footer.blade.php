@@ -72,6 +72,9 @@
         [25, 50, 100, 200, "All"]
     ],
 });
+// $('#search').on('keyup', function() {
+//             table.search(this.value).draw();
+//         });
     var input = document.getElementById("searchNew");
     input.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
@@ -79,9 +82,7 @@
         document.getElementById("submitbutton").click();
     }
     });
-        // $('#search').on('keyup', function() {
-        //     table.search(this.value).draw();
-        // });
+       
         
 // Export buttons
         // $('.kt_datatable_example_1').DataTable({

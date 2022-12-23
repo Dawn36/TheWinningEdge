@@ -292,6 +292,7 @@
             </div>
         </div>
     </div>
+    
     <script>
         function changeStatus(ele) {
             let element = ele.parentElement;
@@ -308,4 +309,5 @@
             }
         }
     </script>
+    
 @endsection('content')

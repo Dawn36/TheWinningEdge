@@ -61,7 +61,7 @@
                     </div>
                     <div class="row gy-5 g-xl-10">
                         @if(Auth::user()->hasRole('admin'))
-                        <div class="col-xl-3">
+                        <div class="col-md col-6">
                             <div class="card overflow-hidden mb-5 mb-xl-10">
                                 <div class="card-body">
                                     <span class="svg-icon svg-icon-primary svg-icon-3x ms-n1">
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         @endif
-                        <div class="col-xl-3">
+                        <div class="col-md col-6">
                             <div class="card overflow-hidden mb-5 mb-xl-10">
                                 <div class="card-body">
                                     <span class="svg-icon svg-icon-primary svg-icon-3x ms-n1">
@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3">
+                        <div class="col-md col-6">
                             <div class="card overflow-hidden mb-5 mb-xl-10">
                                 <div class="card-body">
                                     <span class="svg-icon svg-icon-primary svg-icon-3x ms-n1">
@@ -106,7 +106,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3">
+                        <div class="col-md col-6">
                             <div class="card overflow-hidden mb-10 mb-xl-10">
                                 <div class="card-body">
                                     <span class="svg-icon svg-icon-primary svg-icon-3x ms-n1">
@@ -127,9 +127,9 @@
                     <div class="card card-xl-stretch mb-xl-8">
                         <!--begin::Header-->
                         <div class="card-header border-0">
-                            <h3 class="card-title fw-bolder text-dark">Todo</h3>
+                            <h3 class="card-title fw-bolder text-dark">Tasks </h3>
                             <div class="card-toolbar">
-                                <button type="button" class="btn btn-sm btn-icon btn-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" title="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Add new Todo" onclick="addToDo()">
+                                <button type="button" class="btn btn-sm btn-icon btn-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" title="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Add new Task" onclick="addTask()">
                                     <span class="svg-icon svg-icon-2hx">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <rect opacity="0.6" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="black"></rect>
@@ -143,19 +143,19 @@
                         <!--begin::Body-->
                         <div class="card-body pt-2">
                             <div class="pe-3" style="height: 300px; overflow: auto;">
-                                @for($i=0; $i < count($toDo); $i++)
+                                @for($i=0; $i < count($task); $i++)
                                 <div class="d-flex align-items-center mb-6">
                                     <span class="bullet bullet-vertical h-40px" style="background-color: #c5ad60;"></span>
                                     <div class="form-check form-check-custom form-check-solid mx-5">
-                                        <input class="form-check-input" type="checkbox" value="" onclick="changeToDoStatus('{{$toDo[$i]->id}}',this)" />
+                                        <input class="form-check-input" type="checkbox" value="" onclick="taskStatusUpdate('{{$task[$i]->id}}',this,'Completed')" />
                                     </div>
                                     <div class="flex-grow-1">
-                                        <a href="#" class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ucfirst($toDo[$i]->description)}}</a>
-                                        <span class="text-muted fw-bold d-block">{{Date('m/d/Y' , strtotime($toDo[$i]->created_at))}}</span>
+                                        <a href="#" class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ucfirst($task[$i]->description)}}</a>
+                                        <span class="text-muted fw-bold d-block">{{Date('m/d/Y' , strtotime($task[$i]->created_at))}}</span>
                                     </div>
                                     @php 
                                     $now = time(); // or your date as well
-                                    $your_date = strtotime($toDo[$i]->created_at);
+                                    $your_date = strtotime($task[$i]->created_at);
                                     $datediff = $now - $your_date;
                                     @endphp
                                     @if(round($datediff / (60 * 60 * 24)) <= 2)
@@ -372,7 +372,7 @@
                                         <div class="text-gray-800 fw-boldest fs-3 my-2">{{number_format($opportunitiesCount)}}</div>
                                     </div>
                                     <div class="col-auto text-align-last-center mx-5">
-                                        <div class="fs-9 fs-sm-7 text-gray-400">$ Amount </div>
+                                        <div class="fs-9 fs-sm-7 text-gray-400">Total Pipeline</div>
                                         <div class="text-gray-800 fw-boldest fs-3 my-2">{{number_format($amountAllOver[0]->amount,2)}}</div>
                                     </div>
                                 </div>
@@ -633,30 +633,34 @@ function setRpaTarget() {
         }
     });
 }
-function addToDo() {
-    $.ajax({
-        type: 'GET',
-        url: "{{ route('to_do.create') }}",
-        success: function(result) {
-            $('#myModalLgHeading').html('Add To Do');
-            $('#modalBodyLarge').html(result);
-            $('#myModalLg').modal('show');
-        }
-    });
-}
-function changeToDoStatus(id,obj)
-{
-    var value = {
-            to_do_id: id,
+
+function taskStatusUpdate(id,obj,status)
+    {
+        var value = {
+            status: status,
+            contacts_id:id
         };
+
         $.ajax({
             type: 'GET',
-            url: "{{ route('to_do_status') }}",
+            url: "{{ route('task_status_update') }}",
             data: value,
             success: function(result) {
                 obj.parentElement.parentElement.remove();
             }
         });
-}
+
+    }
+    function addTask() {
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('task.create') }}",
+            success: function(result) {
+                $('#myModalLgHeading').html('Add Task');
+                $('#modalBodyLarge').html(result);
+                $('#myModalLg').modal('show');
+            }
+        });
+    }
 </script>
 @endsection('content')

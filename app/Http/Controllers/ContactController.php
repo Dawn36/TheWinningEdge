@@ -190,7 +190,7 @@ class ContactController extends Controller
         $voiceMail= DB::select(DB::raw("SELECT * FROM `contact_history` WHERE `status`='voice_mail' AND contacts_id = '$contactId' ORDER BY id DESC"));
         $phoneCall= DB::select(DB::raw("SELECT * FROM `contact_history` WHERE `status`='phone_call' AND contacts_id = '$contactId' ORDER BY id DESC"));
         $note= DB::select(DB::raw("SELECT * FROM `contact_note` WHERE contact_id = '$contactId' ORDER BY id DESC"));
-        $task= DB::select(DB::raw("SELECT * FROM `tasks` WHERE contact_id = '$contactId' AND task_status != 'completed' ORDER BY created_at DESC"));
+        $task= DB::select(DB::raw("SELECT * FROM `tasks` WHERE contact_id = '$contactId'  ORDER BY created_at DESC"));
         $opportunities= DB::select(DB::raw("SELECT * FROM `opportunities` WHERE YEAR(created_at) = '$year' AND contact_id='$contactId'  ORDER BY id DESC"));
         $company=Company::find($companiesId);
         return view('contact/contact_show',compact('contact','meeting','email','liveConversation','voiceMail','phoneCall','note','task','company','opportunities','companiesId'));

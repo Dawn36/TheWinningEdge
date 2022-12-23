@@ -209,6 +209,9 @@ class OpportunitiesController extends Controller
     }
     public function opportunitiesTargetSubmit(Request $request)
     {
+        $request->validate([
+            'opportunities_target' => ['required','gt:0'],
+        ]);
         $userId=Auth::user()->id;
         $date=date("Y-m-d");
         if($request->opportunities_target_id == '')
