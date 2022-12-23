@@ -17,8 +17,8 @@
         <select class="form-select form-select-solid fw-bolder js-example-tags" id="tags" name="tags[]" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#right_modal" multiple>
             <option></option>
             @for($i=0; $i < count($tagsArr); $i++)
-                <option value="{{$tagsArr[$i]}}" >{{$tagsArr[$i]}}</option>
-                @endfor
+            <option value="{{$tagsArr[$i]->id}}" >{{ucwords($tagsArr[$i]->name)}}</option>
+            @endfor
         </select>
     </div>
     <div class="fv-row mb-5">

@@ -197,7 +197,7 @@
                                     <select class="form-select form-select-solid fw-bolder" id="tag2" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" multiple>
                                         <option></option>
                                         @for($i=0; $i < count($tagsArr); $i++)
-                                        <option value="{{$tagsArr[$i]}}" >{{$tagsArr[$i]}}</option>
+                                        <option value="{{$tagsArr[$i]->id}}" >{{ucwords($tagsArr[$i]->name)}}</option>
                                         @endfor
                                     </select>
                                 </div>

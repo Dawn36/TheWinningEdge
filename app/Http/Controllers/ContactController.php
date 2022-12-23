@@ -29,10 +29,7 @@ class ContactController extends Controller
     public function index()
     {
         $userId=Auth::user()->id;
-
-        $tags=Contact::select(DB::raw('GROUP_CONCAT(tags) as tags'))->where('user_id',$userId)->where('tags','!=','')->get();
-        $tagsArr=explode(',',$tags[0]->tags);
-        $tagsArr=array_values(array_unique($tagsArr));
+        $tagsArr=DB::select(DB::raw("SELECT DISTINCT(t.`id`),t.`name` FROM `tags` t INNER JOIN `tags_contact` tc ON t.`id`=tc.`tags_id`"));
         return view('contact/contact_index',compact('tagsArr'));
     }
     public function getContact(Request $request)
@@ -41,14 +38,15 @@ class ContactController extends Controller
         $dbWhere1='';
         $dbWhere2='';
         $dbWhere3='';
+        $distant='';
         if(isset($request->search_new))
         {
-            $dbWhere=" and CONCAT(c.`tags`,cc.`company_name`) like '%$request->search_new%'";
+            $dbWhere=" and cc.`company_name` like '%$request->search_new%'";
         }
         if(isset($request->tags))
         {
             $tags=implode(',',$request->tags);
-            $dbWhere1=" and c.`tags` like '%$tags%'";
+            $dbWhere1="INNER JOIN `tags_contact` tc ON c.id = tc.contact_id AND tc.`tags_id` IN ($tags)";
         }
         if(isset($request->contact_status))
         {
@@ -61,7 +59,7 @@ class ContactController extends Controller
             $dbWhere2=" and c.`companies_id` IN ($companyId)";
         }
         $userId=Auth::user()->id;
-       $contact= DB::select(DB::raw("SELECT c.*,c.email as email_address,cc.company_name,
+       $contact= DB::select(DB::raw("SELECT DISTINCT(c.id),c.first_name,c.last_name,c.job,c.phone_number,c.mobile_phone,c.status,c.email as email_address,cc.company_name,
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='email' AND contacts_id = c.id ) AS email,
         (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %h:%i:%s %p') as created_at FROM `contact_history` WHERE `status`='email' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_email,
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='live_conversation' AND contacts_id = c.id ) AS live_conversation,
@@ -75,8 +73,8 @@ class ContactController extends Controller
         (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ) AS meeting,
         (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %h:%i:%s %p') as created_at FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_meeting
          
-         FROM `contacts` c left join companies cc on cc.id=c.companies_id
-         WHERE c.user_id='$userId' $dbWhere $dbWhere1 $dbWhere2 $dbWhere3 order by c.id desc
+         FROM `contacts` c left join companies cc on cc.id=c.companies_id $dbWhere1
+         WHERE c.user_id='$userId' $dbWhere  $dbWhere2 $dbWhere3 order by c.id desc
         "));
 
         return Datatables::of($contact)
@@ -124,14 +122,8 @@ class ContactController extends Controller
             $file->move($destinationPath, $filename);
             $path = "uploads/contacts/" .$userId . "/". $filename;
         }
-        $tagsData=array();
-        if(isset($request->tags))
-        {
-            $tags=json_decode($request->tags);
-            for ($i=0; $i < count($tags); $i++) { 
-                array_push($tagsData,$tags[$i]->value);
-            }
-        }
+       
+        
         $companyId=$request->company_id;
         if(is_numeric($request->company_id) == false)
         {
@@ -149,7 +141,6 @@ class ContactController extends Controller
             'last_name' => $request->last_name,
             'status' => $request->status,
             'profile_img'=>$path,
-            'tags'=>implode(',',$tagsData),
             'job'=>$request->job,
             'phone_number'=>$request->phone_number,
             'email'=>$request->email,
@@ -160,6 +151,32 @@ class ContactController extends Controller
             'created_at' => date("Y-m-d h:i:s"),
             'created_by' => Auth::user()->id,
         ]);
+        if(isset($request->tags))
+        {
+            $tags=json_decode($request->tags);
+            for ($i=0; $i < count($tags); $i++) { 
+                $tagsData=DB::table('tags')->where('user_id',$userId)->where('name',strtolower($tags[$i]->value))->get();
+                if(count($tagsData) == 0)
+                {
+                    $newTagId = DB::table('tags')->insertGetId([
+                        'user_id' => $userId,
+                        'name' => strtolower($tags[$i]->value),
+                        'created_at' => Date("Y-m-d"),
+                    ]);
+                    DB::table('tags_contact')->insertGetId([
+                        'contact_id' => $contact->id,
+                        'tags_id' => $newTagId,
+                    ]);
+                }
+                else
+                {
+                    DB::table('tags_contact')->insertGetId([
+                        'contact_id' => $contact->id,
+                        'tags_id' => $tagsData[0]->id,
+                    ]);
+                }
+            }
+        }
         if(isset($request->note))
         {
             $contactId=$contact->id;
@@ -208,7 +225,8 @@ class ContactController extends Controller
         $userId=Auth::user()->id;
         $latestNote=DB::table('contact_note')->where('contact_id',$contact->id)->orderByDesc('id')->limit('1')->get();
         $company=Company::where('user_id',$userId)->get();
-        return view('contact/contact_edit',compact('contact','company','latestNote'));
+        $tagsArr=DB::select(DB::raw("SELECT GROUP_CONCAT(t.`name`) as tags FROM `tags` t INNER JOIN `tags_contact` tc ON t.`id`=tc.`tags_id` WHERE tc.`contact_id`='$contact->id'"));
+        return view('contact/contact_edit',compact('contact','company','latestNote','tagsArr'));
         
     }
     public function contactEditNotAjax(int $id)
@@ -253,12 +271,31 @@ class ContactController extends Controller
         $contact->save();
 
         }
-        $tagsData=array();
         $tags=json_decode($request->tags);
         if(isset($tags))
         {
+            DB::table('tags_contact')->where('contact_id',$id)->delete();
             for ($i=0; $i < count($tags); $i++) { 
-                array_push($tagsData,$tags[$i]->value);
+                $tagsData=DB::table('tags')->where('user_id',$userId)->where('name',strtolower($tags[$i]->value))->get();
+                if(count($tagsData) == 0)
+                {
+                    $newTagId = DB::table('tags')->insertGetId([
+                        'user_id' => $userId,
+                        'name' => strtolower($tags[$i]->value),
+                        'created_at' => Date("Y-m-d"),
+                    ]);
+                    DB::table('tags_contact')->insertGetId([
+                        'contact_id' => $id,
+                        'tags_id' => $newTagId,
+                    ]);
+                }
+                else
+                {
+                    DB::table('tags_contact')->insertGetId([
+                        'contact_id' => $id,
+                        'tags_id' => $tagsData[0]->id,
+                    ]);
+                }
             }
         }
         
@@ -267,7 +304,6 @@ class ContactController extends Controller
         $contact['job'] = $request->job;
         $contact['status'] = $request->status;
         $contact['phone_number'] = $request->phone_number;
-        $contact['tags'] = implode(',',$tagsData);
         $contact['note'] = $request->note;
         $contact['email'] = $request->email;
         $contact['mobile_phone'] = $request->mobile_phone;
@@ -320,6 +356,7 @@ class ContactController extends Controller
         for ($i=0; $i < count($contactId); $i++) { 
             $data = Contact::find($contactId[$i]);
             DB::table('contact_history')->where('contacts_id',$contactId[$i])->delete();
+            DB::table('tags_contact')->where('contact_id',$contactId[$i])->delete();
             DB::table('contact_note')->where('contact_id',$contactId[$i])->delete();
             Opportunities::where('contact_id',$contactId[$i])->delete();
             $data->delete();
@@ -331,6 +368,7 @@ class ContactController extends Controller
         $data = Contact::find($id);
         DB::table('contact_history')->where('contacts_id',$id)->delete();
         DB::table('contact_note')->where('contact_id',$id)->delete();
+        DB::table('tags_contact')->where('contact_id',$id)->delete();
         Opportunities::where('contact_id',$id)->delete();
         $data->delete();
         return true;
@@ -479,9 +517,7 @@ class ContactController extends Controller
     {
         $userId=Auth::user()->id;
         $company=Company::where('user_id',$userId)->get();
-        $tags=Contact::select(DB::raw('GROUP_CONCAT(tags) as tags'))->where('user_id',$userId)->where('tags','!=','')->get();
-        $tagsArr=explode(',',$tags[0]->tags);
-        $tagsArr=array_values(array_unique($tagsArr));
+        $tagsArr=DB::select(DB::raw("SELECT DISTINCT(t.`id`),t.`name` FROM `tags` t INNER JOIN `tags_contact` tc ON t.`id`=tc.`tags_id`"));
         return view('contact/contact_filter',compact('company','tagsArr'));
     }
     public function contactOpportunitiesCreate(Request $request)
