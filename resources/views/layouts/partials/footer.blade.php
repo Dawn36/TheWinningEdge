@@ -72,9 +72,9 @@
         [25, 50, 100, 200, "All"]
     ],
 });
-// $('#search').on('keyup', function() {
-//             table.search(this.value).draw();
-//         });
+$('#search').on('keyup', function() {
+            table.search(this.value).draw();
+        });
     var input = document.getElementById("searchNew");
     input.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
