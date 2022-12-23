@@ -57,7 +57,11 @@
                             <div class="card-toolbar">
                                 <!--begin::Toolbar-->
                                 <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base" >
-                                    <button type="button" class="btn btn-icon btn-danger me-2"  title="Delete" data-bs-toggle="tooltip" data-bs-placement="top" id="delete_contact"  onclick="deleteContact()" style="display: none">
+                                    <form id="contact_delete_bulk" method="POST" action="{{ route('contact_delete_bulk') }}">
+                                        @csrf
+                                        <input hidden id='contact_id_delete_bulk' name="contact_id" value="" />
+                                    </form>
+                                    <button type="button" class="btn btn-icon btn-danger me-2"  title="Delete" data-bs-toggle="tooltip" data-bs-placement="top" id="delete_contact"  onclick="deleteContactBulk()" style="display: none">
                                         <span class="svg-icon svg-icon-1">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                 <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"/>
@@ -667,6 +671,43 @@ function contactExport()
     }
     
 }
+function deleteContactBulk()
+{
+    if(contactArray.length == 0)
+    {
+        alert("Please select contact");
+        return false;
+    }
+    contactArraya=JSON.stringify(contactArray);
+    $('#contact_id_delete_bulk').val(contactArraya);
+    if($('#contact_id_delete_bulk').val())
+    {
+        sweetAlertDelete()
+    }
+}
+function sweetAlertDelete()
+    {
+        Swal.fire({
+        title: "Are you sure you want to delete contacts?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        customClass: {
+            confirmButton: "btn btn-danger",
+            cancelButton: "btn btn-default"
+            }
+    }).then(function(result) {
+        if (result.value) {
+            Swal.fire(
+                "Deleted!",
+                "Your Contact has been deleted.",
+                "success"
+            )
+            $('#contact_delete_bulk').submit();
+        }
+    });
+    }
 function updateStatus()
 {
     if(contactArray.length == 0)
@@ -681,25 +722,7 @@ function updateStatus()
         // $('#contact_update').submit();
         contactStatusAndOutreachUpdate();
     }
-    // if(contactArray.length == 0)
-    // {
-    //     alert("Please select contact");
-    //     return false;
-    // }
-    // contactArray=JSON.stringify(contactArray);
-    // var value = {
-    //         contactId:contactArray
-    //     };
-    //     $.ajax({
-    //         type: 'GET',
-    //         url: "{{ route('contact_status_bulk') }}",
-    //         data: value,
-    //         success: function(result) {
-    //             $('#myModalLgHeading').html('Update Status Of Selected Contact');
-    //             $('#modalBodyLarge').html(result);
-    //             $('#myModalLg').modal('show');
-    //         }
-    //     });
+
     
 }
 function sendEmail()
@@ -950,8 +973,7 @@ function filterData2()
         $('#tags_filter').hide();
         dt.draw();
     }
-// $('body').click(function(e){
-//     // console.log('aaaa');
-// });
+
+   
 </script>
 @endsection('content')

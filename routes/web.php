@@ -63,6 +63,7 @@ Route::post('contact_note', [ContactController::class, 'contactNoteSubmit'])->na
 Route::get('contact_upload', [ContactController::class, 'uploadContact'])->name('contact_upload');
 Route::post('contact_upload', [ContactController::class, 'uploadContactSubmit'])->name('contact_upload');
 Route::post('contact_change_status', [ContactController::class, 'contactChangeStatus'])->name('contact_change_status');
+Route::post('contact_delete_bulk', [ContactController::class, 'contactDeleteBulk'])->name('contact_delete_bulk');
 Route::get('contact_task', [ContactController::class, 'contactTask'])->name('contact_task');
 Route::get('contact_task_edit', [ContactController::class, 'contactTaskEdit'])->name('contact_task_edit');
 Route::get('contact_email_template', [ContactController::class, 'contactEmailTemplate'])->name('contact_email_template');

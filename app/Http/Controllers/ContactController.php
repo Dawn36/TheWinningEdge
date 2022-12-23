@@ -314,6 +314,18 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
+    public function contactDeleteBulk(Request $request)
+    {
+        $contactId=json_decode($request->contact_id);
+        for ($i=0; $i < count($contactId); $i++) { 
+            $data = Contact::find($contactId[$i]);
+            DB::table('contact_history')->where('contacts_id',$contactId[$i])->delete();
+            DB::table('contact_note')->where('contact_id',$contactId[$i])->delete();
+            Opportunities::where('contact_id',$contactId[$i])->delete();
+            $data->delete();
+        }
+        return redirect()->back();
+    }
     public function destroy(int $id)
     {
         $data = Contact::find($id);
