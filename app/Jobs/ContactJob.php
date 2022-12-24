@@ -58,7 +58,17 @@ class ContactJob implements ShouldQueue
             $body=str_replace("[[LINKINURL]]",$contact[$i]->linked_in_url,$body);
             //Log::info('Showing the user profile for user: '.$body);
             //Log::info('Showing the user profile for user: '.$contact[$i]->first_name);
-            Mail::to($contact[$i]->email)->send(new SendContactMailable($body,$subject,$this->userId));
+            $to_email='dawngill08@gmail.com';
+            $from_email = env('MAIL_FROM_ADDRESS');
+            $subject = $subject;
+            $cc = env('CCEMAIL');
+                Mail::send("mail-template/template", ['template' => $body], function ($message) use ($to_email, $from_email, $subject, $cc) {
+                    $message->to($to_email)
+                        ->subject($subject)
+                        ->cc($cc);
+                    $message->from($from_email);
+            }); 
+            // Mail::to($contact[$i]->email)->send(new SendContactMailable($body,$subject,$this->userId));
             DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$this->userId,$contact[$i]->id,'email',$date]);
         }
 
