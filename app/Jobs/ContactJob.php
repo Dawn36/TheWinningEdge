@@ -61,8 +61,9 @@ class ContactJob implements ShouldQueue
             $to_email='dawngill08@gmail.com';
             $from_email = env('MAIL_FROM_ADDRESS');
             $subject = $subject;
+            $data['full_name']='aaaa';
             $cc = env('CCEMAIL');
-                Mail::send("contact/template", ['template' => $body], function ($message) use ($to_email, $from_email, $subject, $cc) {
+                Mail::send("mail-template/password-reset-success", ['data' => $data], function ($message) use ($to_email, $from_email, $subject, $cc) {
                     $message->to($to_email)
                         ->subject($subject)
                         ->cc($cc);
