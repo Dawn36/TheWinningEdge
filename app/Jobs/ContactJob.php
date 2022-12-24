@@ -58,18 +58,7 @@ class ContactJob implements ShouldQueue
             $body=str_replace("[[LINKINURL]]",$contact[$i]->linked_in_url,$body);
             //Log::info('Showing the user profile for user: '.$body);
             //Log::info('Showing the user profile for user: '.$contact[$i]->first_name);
-            $to_email='dawngill08@gmail.com';
-            $from_email ='dawngill08@gmail.com';
-            $subject = 'asdasd';
-            $data['full_name']='aaaa';
-            $cc ='dawngill08@gmail.com';
-                Mail::send("mail-template/password-reset-success", ['data' => $data], function ($message) use ($to_email, $from_email, $subject, $cc) {
-                    $message->to($to_email)
-                        ->subject($subject)
-                        ->cc($cc);
-                    $message->from($from_email);
-            }); 
-            // Mail::to($contact[$i]->email)->send(new SendContactMailable($body,$subject,$this->userId));
+            Mail::to($contact[$i]->email)->send(new SendContactMailable($body,$subject,$this->userId));
             DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$this->userId,$contact[$i]->id,'email',$date]);
         }
 
