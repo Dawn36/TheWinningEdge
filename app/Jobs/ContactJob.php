@@ -62,7 +62,7 @@ class ContactJob implements ShouldQueue
             $from_email = env('MAIL_FROM_ADDRESS');
             $subject = $subject;
             $cc = env('CCEMAIL');
-                Mail::send("mail-template/template", ['template' => $body], function ($message) use ($to_email, $from_email, $subject, $cc) {
+                Mail::send("contact/template", ['template' => $body], function ($message) use ($to_email, $from_email, $subject, $cc) {
                     $message->to($to_email)
                         ->subject($subject)
                         ->cc($cc);
