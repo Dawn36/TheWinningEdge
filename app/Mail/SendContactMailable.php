@@ -38,6 +38,6 @@ class SendContactMailable extends Mailable
         $template=$this->body;
         $subject=$this->subject;
         return $this->subject($subject)        
-        ->markdown('contact/template',compact('template'));
+        ->view('contact/template',compact('template'));
     }
 }
