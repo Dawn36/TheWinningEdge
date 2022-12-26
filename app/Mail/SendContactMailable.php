@@ -37,7 +37,7 @@ class SendContactMailable extends Mailable
         //->from('dawngill08@gmail.com','dawn gill')->replyTo('dawngill08@gmail.com')  
         $template=$this->body;
         $subject=$this->subject;
-        return $this->subject($subject)->from('dawngill08@gmail.com','dawn gill')->replyTo('dawngill08@gmail.com')         
+        return $this->subject($subject)->from('support@thewinningedgeenterprises.com')
         ->markdown('contact/template',compact('template'));
     }
 }
