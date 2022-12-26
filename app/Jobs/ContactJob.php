@@ -49,18 +49,17 @@ class ContactJob implements ShouldQueue
         // $mytime = Carbon\Carbon::now();
         // $date=$mytime->toDateTimeString();
         $date=Date("Y-m-d H:i:s");
-        // for ($i=0; $i < count($contact); $i++) { 
+        for ($i=0; $i < count($contact); $i++) { 
             $body=$this->body;
-            $body=str_replace("[[FIRSTNAME]]",$contact[0]->first_name,$body);
-            $body=str_replace("[[LASTNAME]]",$contact[0]->last_name,$body);
-            $body=str_replace("[[EMAIL]]",$contact[0]->email,$body);
-            $body=str_replace("[[MOBILEPHONE]]",$contact[0]->mobile_phone,$body);
-            $body=str_replace("[[LINKINURL]]",$contact[0]->linked_in_url,$body);
-            Log::info('Showing the user profile for user: '.$contact[0]->email);
-            $a=Mail::to($contact[0]->email)->send(new SendContactMailable($body,$subject,$this->userId));
-            Log::info('Showing the user profile for user: '.$a);
-            DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$this->userId,$contact[0]->id,'email',$date]);
-        // }
+            $body=str_replace("[[FIRSTNAME]]",$contact[$i]->first_name,$body);
+            $body=str_replace("[[LASTNAME]]",$contact[$i]->last_name,$body);
+            $body=str_replace("[[EMAIL]]",$contact[$i]->email,$body);
+            $body=str_replace("[[MOBILEPHONE]]",$contact[$i]->mobile_phone,$body);
+            $body=str_replace("[[LINKINURL]]",$contact[$i]->linked_in_url,$body);
+            Log::info('Showing the user profile for user: '.$contact[$i]->email);
+            Mail::to($contact[$i]->email)->send(new SendContactMailable($body,$subject,$this->userId));
+            DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$this->userId,$contact[$i]->id,'email',$date]);
+        }
 
     }
 }
