@@ -106,7 +106,7 @@
                                                         fill="black" />
                                                 </svg>
                                             </span>
-                                            <div class="text-gray-900 fw-bolder fs-2 mb-2 mt-5">
+                                            <div class="text-gray-800 fw-boldest fs-3 mb-2 mt-5">
                                                 {{ number_format($userCount) }}</div>
                                             <div class="fw-bold text-gray-400">Total Admins</div>
                                         </div>
@@ -131,7 +131,7 @@
                                                     height="6" rx="3" fill="black" />
                                             </svg>
                                         </span>
-                                        <div class="text-gray-900 fw-bolder fs-2 mb-2 mt-5">
+                                        <div class="text-gray-800 fw-boldest fs-3 mb-2 mt-5">
                                             {{ number_format($contactCount) }}
                                         </div>
                                         <div class="fw-bold text-gray-400">Total Contacts</div>
@@ -153,7 +153,7 @@
                                                     d="M2 20H14V21C14 21.6 13.6 22 13 22H3C2.4 22 2 21.6 2 21V20ZM9 3V2H7V3C7 3.6 7.4 4 8 4C8.6 4 9 3.6 9 3ZM6.5 16C6.5 16.8 7.2 17.5 8 17.5C8.8 17.5 9.5 16.8 9.5 16H6.5ZM21.7 12C21.7 11.4 21.3 11 20.7 11H17.6C17 11 16.6 11.4 16.6 12C16.6 12.6 17 13 17.6 13H20.7C21.2 13 21.7 12.6 21.7 12ZM17 8C16.6 8 16.2 7.80002 16.1 7.40002C15.9 6.90002 16.1 6.29998 16.6 6.09998L19.1 5C19.6 4.8 20.2 5 20.4 5.5C20.6 6 20.4 6.60005 19.9 6.80005L17.4 7.90002C17.3 8.00002 17.1 8 17 8ZM19.5 19.1C19.4 19.1 19.2 19.1 19.1 19L16.6 17.9C16.1 17.7 15.9 17.1 16.1 16.6C16.3 16.1 16.9 15.9 17.4 16.1L19.9 17.2C20.4 17.4 20.6 18 20.4 18.5C20.2 18.9 19.9 19.1 19.5 19.1Z"
                                                     fill="black"></path>
                                             </svg> </span>
-                                        <div class="text-gray-900 fw-bolder fs-2 mb-2 mt-5">
+                                        <div class="text-gray-800 fw-boldest fs-3 mb-2 mt-5">
                                             {{ number_format($opportunitiesCount) }}</div>
                                         <div class="fw-bold text-gray-400">Total Opportunities</div>
                                     </div>
@@ -173,7 +173,7 @@
                                                     fill="black" />
                                             </svg>
                                         </span>
-                                        <div class="text-gray-900 fw-bolder fs-2 mb-2 mt-5">
+                                        <div class="text-gray-800 fw-boldest fs-3 mb-2 mt-5">
                                             {{ number_format($emailTemplateCount) }}</div>
                                         <div class="fw-bold text-gray-400">Total Email Templates</div>
                                     </div>
@@ -224,7 +224,8 @@
                                                 <a href="#"
                                                     class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ ucfirst($task[$i]->description) }}
                                                     <span class="fw-normal"> {{ isset($task[$i]->first_name) ? '-' : '' }}
-                                                        {{ $task[$i]->first_name }} {{ $task[$i]->last_name }}</span></a>
+                                                        {{ $task[$i]->first_name }} {{ $task[$i]->last_name }}</span>
+                                                </a>
                                                 <span
                                                     class="text-muted fw-bold d-block">{{ Date('m/d/Y', strtotime($task[$i]->task_date)) }}</span>
                                             </div>
