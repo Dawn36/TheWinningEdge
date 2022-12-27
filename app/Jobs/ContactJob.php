@@ -56,9 +56,12 @@ class ContactJob implements ShouldQueue
             $body=str_replace("[[EMAIL]]",$contact[$i]->email,$body);
             $body=str_replace("[[MOBILEPHONE]]",$contact[$i]->mobile_phone,$body);
             $body=str_replace("[[LINKINURL]]",$contact[$i]->linked_in_url,$body);
+            $firstName=$contact[$i]->first_name;
+            $lastName=$contact[$i]->last_name;
+            $email=$contact[$i]->email;
             //Log::info('Showing the user profile for user: '.$body);
             //Log::info('Showing the user profile for user: '.$contact[$i]->first_name);
-            Mail::mailer('smtp2')->to($contact[$i]->email)->send(new SendContactMailable($body,$subject,$this->userId,$contact[$i]->first_name,$contact[$i]->last_name,$contact[$i]->email));
+            Mail::mailer('smtp2')->to($contact[$i]->email)->send(new SendContactMailable($body,$subject,$this->userId,$firstName,$lastName,$email));
             DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$this->userId,$contact[$i]->id,'email',$date]);
         }
 
