@@ -14,16 +14,22 @@ class SendContactMailable extends Mailable
     public $body;
     public $subject;
     public $userId;
+    public $firstName;
+    public $lastName;
+    public $email;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($body,$subject,$userId)
+    public function __construct($body,$subject,$userId,$firstName,$lastName,$email)
     {
         $this->body=$body;
         $this->subject=$subject;
         $this->userId=$userId;
+        $this->firstName=$firstName;
+        $this->lastName=$lastName;
+        $this->email=$email;
     }
 
     /**
@@ -34,10 +40,10 @@ class SendContactMailable extends Mailable
     public function build()
     {
         $userDetails=User::find($this->userId);
-        //->from('dawngill08@gmail.com','dawn gill')->replyTo('dawngill08@gmail.com')  
+        $fullName=$this->firstName." ".$this->lastName;
         $template=$this->body;
         $subject=$this->subject;
-        return $this->subject($subject)        
+        return $this->subject($subject)->from($this->email,$fullName)->replyTo($this->email)          
         ->markdown('contact/template',compact('template'));
     }
 }
