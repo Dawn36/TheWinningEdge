@@ -49,7 +49,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <div class="text-gray-700 fw-bold fs-6 lh-lg">Here we have a list of all of the Talk Track that we have.</div>
+                                <div class="text-gray-700 fw-bold fs-6 lh-lg">Here we have a list of all of the Best Practices that we have.</div>
                             </div> --}}
                             <!--end::Notice-->
                             <!--end::Heading-->
@@ -105,7 +105,7 @@
                                     <thead>
                                         <tr class="fw-bold fs-6 text-muted">
                                             {{-- <th class="min-w-30px">ID</th> --}}
-                                            <th>Talk Track Name</th>
+                                            <th>Best Practices Name</th>
                                             <th>Added By</th>
                                             <th>Creation Date</th>
                                             <th>Actions</th>
@@ -132,7 +132,7 @@
                                                 <form  style="display: inline-block" method="POST" action="{{ route('talk_track.destroy', $talkTrack[$i]->id) }}">
                                                     @method('DELETE')
                                                     @csrf
-                                                <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Talk Track">
+                                                <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Best Practices">
                                                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                                     <span class="svg-icon svg-icon-2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -188,7 +188,7 @@ dt =  $('#talkTrack').DataTable({
                    
                     targets: 0,
                     render: function (data, type, row) {
-                        var url = "{{route('talk_track.show',':id')}}";
+                        var url = "{{route('best_practices.show',':id')}}";
                         url = url.replace(':id', row.id);
                         return `<a href="${url}" class="fw-bolder text-gray-800 text-hover-primary mb-1">${row.talk_track_name}</a>`;
                     }
@@ -210,7 +210,7 @@ dt =  $('#talkTrack').DataTable({
                     targets: 3,
                     orderable: false,
                     render: function (data, type, row) {
-                        var url = "{{route('talk_track.destroy',':id')}}";
+                        var url = "{{route('best_practices.destroy',':id')}}";
                         url = url.replace(':id', row.id);
                         return `  <button class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-primary me-2" onclick="editTalkTrack(${row.id})">
                                     <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
@@ -225,7 +225,7 @@ dt =  $('#talkTrack').DataTable({
                                 <form  style="display: inline-block" method="POST" action="${url}">
                                     @method('DELETE')
                                     @csrf
-                                <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Talk Track">
+                                <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Best Practices">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -260,7 +260,7 @@ var handleSearchDatatable = function () {
     function addTalkTrack() {
         $.ajax({
             type: 'GET',
-            url: "{{ route('talk_track.create') }}",
+            url: "{{ route('best_practices.create') }}",
             success: function(result) {
                 $('#myModalLgHeading').html('Add Best Practices');
                 $('#modalBodyLarge').html(result);
@@ -270,7 +270,7 @@ var handleSearchDatatable = function () {
     }
 
     function editTalkTrack(id) {
-        url = "{{route('talk_track.edit',':id')}}";
+        url = "{{route('best_practices.edit',':id')}}";
         url = url.replace(':id', id);
         $.ajax({
             type: 'GET',

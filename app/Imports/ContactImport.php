@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\DB;
 class ContactImport implements ToModel, WithHeadingRow
 {
     protected $tag;
+    protected $status;
 
-    public function __construct($tag) 
+    public function __construct($tag,$status) 
     {
         $this->tag = $tag;
+        $this->status = $status;
     }
     /**
     * @param array $row
@@ -25,8 +27,10 @@ class ContactImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
+        
         $userId=Auth::user()->id;
         $tags=$this->tag;
+        $status=$this->status;
         $tags=json_decode($tags);
         
         $company=Company::where('company_name',$row['company_name'])->where('user_id',$userId)->get();
@@ -58,6 +62,7 @@ class ContactImport implements ToModel, WithHeadingRow
             "phone_number" => $row['direct_phone_number'],
             "email" => $row['email_address'],
             "mobile_phone" => $row['mobile_phone'],
+            "status"=>$status,
             "companies_id" => $companyId,
             "linked_in_url" => $row['linkedin_contact_profile_url'],
             "user_id" => $userId,

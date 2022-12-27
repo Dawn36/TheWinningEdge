@@ -447,7 +447,7 @@ dt =  $('#contactTable').DataTable({
                         return `
                         <a href="${url}" class="fw-bolder text-gray-800 text-hover-primary mb-1">${row.first_name} ${row.last_name}</a>
                         <br>
-                        <a href="${url}" class="fw-normal text-gray-800 text-hover-primary mb-1">${row.job}</a>
+                        <a href="${url}" class="fw-normal text-gray-800 text-hover-primary mb-1">${row.job == null ? "" : row.job}</a>
                         `;
                     }
                 },
@@ -456,7 +456,7 @@ dt =  $('#contactTable').DataTable({
                     render: function (data, type, row) {
                         var url = "{{route('contact.show',':id')}}";
                         url = url.replace(':id', row.id);
-                        return `<a href="mailto:${row.email_address}" class="fw-bolder text-gray-800 text-hover-primary mb-1" onclick="getEmailObj('email','${row.id}',this)">${row.email_address}</a>
+                        return `<a href="mailto:${row.email_address}" class="fw-bolder text-gray-800 text-hover-primary mb-1" onclick="getEmailObj('email','${row.id}',this)">${row.email_address == null ? "" : row.email_address}</a>
                         <br ${row.phone_number  == null ? 'hidden' : ""}>
                         <a href="${url}" class="fw-normal text-gray-800 text-hover-primary mb-1" ${row.phone_number  == null ? 'hidden' : ""}><span class="fw-bolder" >${row.phone_number  == null ? '' : "(D)"} </span>${row.phone_number  == null ? '' : row.phone_number} </a>
                         <br>
@@ -467,7 +467,7 @@ dt =  $('#contactTable').DataTable({
                     targets: 4,
                     render: function (data, type, row) {
                         return `<td>
-                                    <div class="badge badge-sm badge-light-primary d-inline cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" onclick="showAndHid(this)">${row.status}</div>
+                                    <div class="badge badge-sm badge-light-primary d-inline cursor-pointer" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" onclick="showAndHid(this)">${row.status == null ? "" : row.status}</div>
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true" style="position: absolute;">
                                         <div class="menu-item px-3">
                                             <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Update Contact Status</div>

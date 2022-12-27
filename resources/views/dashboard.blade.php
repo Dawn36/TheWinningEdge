@@ -150,12 +150,12 @@
                                         <input class="form-check-input" type="checkbox" value="" onclick="taskStatusUpdate('{{$task[$i]->id}}',this,'Completed')" />
                                     </div>
                                     <div class="flex-grow-1">
-                                        <a href="#" class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ucfirst($task[$i]->description)}}</a>
-                                        <span class="text-muted fw-bold d-block">{{Date('m/d/Y' , strtotime($task[$i]->created_at))}}</span>
+                                        <a href="#" class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ucfirst($task[$i]->description)}} <span class="fw-normal"> {{isset($task[$i]->first_name) ? '-' : ''}}  {{$task[$i]->first_name}} {{$task[$i]->last_name}}</span></a>
+                                        <span class="text-muted fw-bold d-block">{{Date('m/d/Y' , strtotime($task[$i]->task_date))}}</span>
                                     </div>
                                     @php 
                                     $now = time(); // or your date as well
-                                    $your_date = strtotime($task[$i]->created_at);
+                                    $your_date = strtotime($task[$i]->task_date);
                                     $datediff = $now - $your_date;
                                     @endphp
                                     @if(round($datediff / (60 * 60 * 24)) <= 2)

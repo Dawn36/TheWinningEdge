@@ -31,7 +31,7 @@ class TalkTrackController extends Controller
         $talkTrack= DB::table('talk_tracks AS tt')
         ->join('users AS u', 'tt.user_id', '=', 'u.id')
         ->select(DB::raw('tt.*,u.first_name,u.last_name,DATE_FORMAT(tt.created_at, "%c/%d/%Y") as created_at'))
-        ->whereNull('u.deleted_at')
+        ->whereNull('u.deleted_at')->where('tt.user_id',Auth::user()->id)
         ;
         return Datatables::of($talkTrack)
              ->addIndexColumn()
@@ -102,8 +102,9 @@ class TalkTrackController extends Controller
      * @param  \App\Models\TalkTrack  $talkTrack
      * @return \Illuminate\Http\Response
      */
-    public function edit(TalkTrack $talkTrack)
+    public function edit(int $id)
     {
+        $talkTrack = TalkTrack::find($id);
         return view('talk-track/talk_track_edit',compact('talkTrack'));
     }
 
@@ -139,6 +140,6 @@ class TalkTrackController extends Controller
     {
         $data = TalkTrack::find($id);
         $data->delete();
-        return true;
+        return redirect()->back();
     }
 }

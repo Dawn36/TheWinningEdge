@@ -53,7 +53,7 @@
         </div>
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Tags</label>
-            <input name="tags" value="{{$contact->tags}}" class="form-control form-control-solid mb-3 mb-lg-0 kt_tagify_2" value="" placeholder="Type the tags here" />
+            <input name="tags" value="{{$tagsArr[0]->tags}}" class="form-control form-control-solid mb-3 mb-lg-0 kt_tagify_2" value="" placeholder="Type the tags here" />
         </div>
         @if(isset($latestNote[0]->id))
         <input hidden name="note_id" value="{{$latestNote[0]->id}}" />
@@ -68,6 +68,23 @@
             <textarea name="note" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please add the note for the contact"></textarea>
         </div>
         @endif
+        <div class="fv-row mb-7">
+            <a href="#" class="btn btn-light-dark" title="" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Add new Note" onclick="cloneNewNote()">
+                <span class="svg-icon svg-icon-2x">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <rect opacity="0.6" x="11" y="18" width="12" height="2" rx="1" transform="rotate(-90 11 18)" fill="black"></rect>
+                        <rect x="6" y="11" width="12" height="2" rx="1" fill="black"></rect>
+                    </svg>
+                    Add new Note
+                </span>
+            </a>
+        </div>
+        <div class="fv-row mb-7" id="note_to_clone" style="display: none">
+            <label class=" fw-bold fs-6 mb-2">Note New</label>
+            <textarea name="note_new[]" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please add the note for the contact"></textarea>
+        </div>
+        <div id="cloneNew">
+        </div>
     </div>
     <!--end::Scroll-->
     <!--begin::Actions-->
@@ -79,8 +96,18 @@
 </form>
 <script>
     // Tagify
+    function cloneNewNote()
+    {
+        noteClone=$('#note_to_clone').clone();
+        noteClone[0].style.display='block';
+        noteClone[0].children[1].textContent='';
+        noteClone[0].children[1].value='';
+        noteClone.appendTo("#cloneNew")
+    }
+
     var input2 = document.querySelector(".kt_tagify_2");
        new Tagify(input2);
 
+    
      
 </script>

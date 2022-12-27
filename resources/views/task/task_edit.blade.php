@@ -7,8 +7,9 @@
     </div>
    
     <div class="fv-row mb-5">
-        <label class="required fs-6 fw-bold form-label mb-2">Assigned to contact</label>
-        <select name="contact_id" class="form-select form-select-solid fw-bolder js-example-basic-single" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#myModalLg" required>
+        <label class="fs-6 fw-bold form-label mb-2">Assigned to contact</label>
+        <select name="contact_id" class="form-select form-select-solid fw-bolder js-example-basic-single" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-dropdown-parent="#myModalLg" >
+            <option value="">-- Select Contact --</option>
             @for($i=0; $i< count($contact); $i++)
             <option value="{{$contact[$i]->id}}" {{$task->contact_id ==$contact[$i]->id ? 'Selected' : '' }}>{{ucwords($contact[$i]->first_name)}} {{ucwords($contact[$i]->last_name)}}</option>
             @endfor

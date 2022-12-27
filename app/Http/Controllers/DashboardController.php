@@ -103,7 +103,9 @@ class DashboardController extends Controller
         $voiceMailArr=json_encode(array_values($voiceMailArr));
         $emailArr=json_encode(array_values($emailArr));
         $meetingArr=json_encode(array_values($meetingArr));
-        $task=Task::where('user_id',$userId)->where('task_status','open')->whereDate('created_at',date('Y-m-d'))->get();
+        // $task=Task::where('user_id',$userId)->where('task_status','open')->whereDate('task_date',date('Y-m-d'))->get();
+        $date=date('Y-m-d');
+        $task=DB::select(DB::raw("SELECT t.*,c.`first_name`,c.`last_name`,c.`job`,c.`email`,c.`phone_number`,c.`mobile_phone`,c.`status` AS contact_status,c.`id` AS contact_id FROM `tasks` t LEFT JOIN `contacts` c ON t.`contact_id`=c.`id` where t.user_id='$userId' AND t.task_status = 'open' AND t.task_date='$date' Order by t.`task_date` ASC"));
         return view('dashboard',compact('phoneCallArr','liveConversationArr','task','voiceMailArr','emailArr','meetingArr','userCount','contactCount','opportunitiesCount','emailTemplateCount','opportunitiesTarget','percentage','rpaPercentage','amount','phoneCallMonth','liveConversationMonth','voiceMailCount','emailCount','meetingCount','amountAllOver'));
     }
     public function rpaTarget()

@@ -121,7 +121,7 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link {{ Route::currentRouteName() == 'talk_track.show' || Route::currentRouteName() == 'talk_track.index'  ? 'active' : '' }}" href="{{route('talk_track.index')}}">
+                    <a class="menu-link {{ Route::currentRouteName() == 'best_practices.show' || Route::currentRouteName() == 'best_practices.index'  ? 'active' : '' }}" href="{{route('best_practices.index')}}">
                         <span class="menu-icon">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
                             <span class="svg-icon svg-icon-2">
@@ -165,7 +165,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Talk Track</span>
+                                <span class="menu-title">Best Practices</span>
                             </a>
                         </div>
                     </div>

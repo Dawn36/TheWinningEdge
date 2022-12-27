@@ -74,7 +74,7 @@
                                         {{ Route::currentRouteName() == 'opportunities.index'  ? 'Opportunities ' : '' }}  
                                         {{ Route::currentRouteName() == 'contact.show' || Route::currentRouteName() == 'contact.index'  ? 'Contacts' : '' }}
                                         {{ Route::currentRouteName() == 'dashboard'  ? 'Dashboard' : '' }}
-                                        {{ Route::currentRouteName() == 'talk_track.show' || Route::currentRouteName() == 'talk_track.index'  ? 'Best Practices' : '' }}
+                                        {{ Route::currentRouteName() == 'best_practices.show' || Route::currentRouteName() == 'best_practices.index'  ? 'Best Practices' : '' }}
                                         {{ Route::currentRouteName() == 'task.show' || Route::currentRouteName() == 'task.index'  ? 'Tasks' : '' }}
                                         {{ Route::currentRouteName() == 'company.show' || Route::currentRouteName() == 'company.index'  ? 'Companies' : '' }}
                                         {{ Route::currentRouteName() == 'user_index'   ? 'Users' : '' }}

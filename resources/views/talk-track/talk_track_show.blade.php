@@ -51,7 +51,7 @@
                 <div class="card-header cursor-pointer">
                     <!--begin::Card title-->
                     <div class="card-title m-0">
-                        <h3 class="fw-bolder m-0">Talk Track Body</h3>
+                        <h3 class="fw-bolder m-0">Best Practices Body</h3>
                     </div>
                     <!--end::Card title-->
                 </div>
@@ -63,7 +63,7 @@
                     <div name="kt_ecommerce_add_product_description" class="min-h-200px mb-2 kt_docs_quill_basic"></div>
                     <div class="text-muted fs-7">Update the Notes above.</div>
                     <br>
-                    <button  class="btn btn-sm btn-light-primary" onclick="editTalkTrack('{{$talkTrack[0]->id}}')">Edit Talk Track</button>
+                    <button  class="btn btn-sm btn-light-primary" onclick="editTalkTrack('{{$talkTrack[0]->id}}')">Edit Best Practices</button>
                 </div>
                 <!--end::Card body-->
             </div>
@@ -105,13 +105,13 @@
    quill.setContents(delta1, 'silent');
    });
    function editTalkTrack(id) {
-        url = "{{route('talk_track.edit',':id')}}";
+        url = "{{route('best_practices.edit',':id')}}";
         url = url.replace(':id', id);
         $.ajax({
             type: 'GET',
             url: url,
             success: function(result) {
-                $('#myModalLgHeading').html('Edit Talk Track');
+                $('#myModalLgHeading').html('Edit Best Practices');
                 $('#modalBodyLarge').html(result);
                 $('#myModalLg').modal('show');
             }
