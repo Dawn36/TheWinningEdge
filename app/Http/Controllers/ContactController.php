@@ -187,6 +187,7 @@ class ContactController extends Controller
             $fullName=$firstName." ".$lastName;
             DB::insert('insert into contact_note (user_id,contact_id,user_name,note,created_at) values(?,?,?,?,?)',[$userId,$contactId,$fullName,$note,$date]);
         }
+        
         return redirect()->back();
     }
 
@@ -235,7 +236,8 @@ class ContactController extends Controller
         $latestNote=DB::table('contact_note')->where('contact_id',$id)->orderByDesc('id')->limit('1')->get();
         $company=Company::where('user_id',$userId)->get();
         $contact=Contact::find($id);
-        return view('contact/contact_edit_not_ajax',compact('contact','company','latestNote'));
+        $tagsArr=DB::select(DB::raw("SELECT GROUP_CONCAT(t.`name`) as tags FROM `tags` t INNER JOIN `tags_contact` tc ON t.`id`=tc.`tags_id` WHERE tc.`contact_id`='$contact->id'"));
+        return view('contact/contact_edit_not_ajax',compact('contact','company','latestNote','tagsArr'));
     }
 
     /**
@@ -336,6 +338,21 @@ class ContactController extends Controller
             DB::table('contact_note')
                 ->where('id', $request->note_id)
                 ->update(['note' => $request->note]);
+        }
+       
+        for($i=0; $i < count($request->note_new); $i++)
+        {
+            if(isset($request->note_new[$i]))
+            {
+                $contactId=$contact->id;
+                $note=$request->note_new[$i];
+                $date=Date("Y-m-d H:i:s");
+                $firstName=Auth::user()->first_name;
+                $lastName=Auth::user()->last_name;
+                $fullName=$firstName." ".$lastName;
+                DB::insert('insert into contact_note (user_id,contact_id,user_name,note,created_at) values(?,?,?,?,?)',[$userId,$contactId,$fullName,$note,$date]);
+            }
+        
         }
          if(!$request->ajax())
          {
@@ -438,7 +455,7 @@ class ContactController extends Controller
     }
     public function uploadContactSubmit(Request $request)
     {
-        Excel::import(new ContactImport($request->tags), $request->file);
+        Excel::import(new ContactImport($request->tags,$request->status), $request->file);
 
             return redirect()->back();
     }
@@ -517,7 +534,7 @@ class ContactController extends Controller
     {
         $userId=Auth::user()->id;
         $company=Company::where('user_id',$userId)->get();
-        $tagsArr=DB::select(DB::raw("SELECT DISTINCT(t.`id`),t.`name` FROM `tags` t INNER JOIN `tags_contact` tc ON t.`id`=tc.`tags_id`"));
+        $tagsArr=DB::select(DB::raw("SELECT DISTINCT(t.`id`),t.`name` FROM `tags` t INNER JOIN `tags_contact` tc ON t.`id`=tc.`tags_id` where t.user_id=$userId"));
         return view('contact/contact_filter',compact('company','tagsArr'));
     }
     public function contactOpportunitiesCreate(Request $request)
