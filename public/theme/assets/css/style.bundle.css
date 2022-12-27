@@ -8300,6 +8300,10 @@ fieldset:disabled .btn {
     height: 225px!important
 }
 
+.h-239px {
+    height: 239px!important
+}
+
 .h-250px {
     height: 250px!important
 }
@@ -18219,6 +18223,9 @@ fieldset:disabled .btn {
     .h-lg-250px {
         height: 250px!important
     }
+    .h-lg-239px {
+        height: 239px!important
+    }
     .h-lg-275px {
         height: 275px!important
     }
@@ -18236,6 +18243,9 @@ fieldset:disabled .btn {
     }
     .h-lg-400px {
         height: 400px!important
+    }
+    .h-lg-420px {
+        height: 420px!important
     }
     .h-lg-425px {
         height: 425px!important
@@ -20975,6 +20985,9 @@ fieldset:disabled .btn {
     }
     .h-xl-25 {
         height: 25%!important
+    }
+    .h-xl-239px {
+        height: 239px!important
     }
     .h-xl-50 {
         height: 50%!important
@@ -23843,6 +23856,9 @@ fieldset:disabled .btn {
     }
     .h-xxl-unset {
         height: unset!important
+    }
+    .h-xxl-239px {
+        height: 239px!important
     }
     .h-xxl-25 {
         height: 25%!important
