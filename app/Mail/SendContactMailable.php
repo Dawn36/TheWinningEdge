@@ -43,7 +43,7 @@ class SendContactMailable extends Mailable
         $fullName=$this->firstName." ".$this->lastName;
         $template=$this->body;
         $subject=$this->subject;
-        return $this->subject($subject)->from($this->email,$fullName)->replyTo($this->email)          
+        return $this->subject($subject)          
         ->markdown('contact/template',compact('template'));
     }
 }
