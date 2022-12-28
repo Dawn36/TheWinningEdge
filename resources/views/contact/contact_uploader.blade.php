@@ -27,7 +27,7 @@
     <div class="text-center pt-15">
         <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" aria-label="Close">Discard</button>
         <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="{{ asset('samplesheet/contact&companies.csv')}}" class="btn btn-primary">
+        <a href="{{ asset('samplesheet/contact&companies.xlsx')}}" class="btn btn-primary">
             <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
             <span class="svg-icon svg-icon-2">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
