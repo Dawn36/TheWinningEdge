@@ -380,7 +380,7 @@ class ContactController extends Controller
         }
         return redirect()->back();
     }
-    public function destroy(int $id)
+    public function destroy(int $id,Request $request)
     {
         $data = Contact::find($id);
         DB::table('contact_history')->where('contacts_id',$id)->delete();
@@ -388,6 +388,10 @@ class ContactController extends Controller
         DB::table('tags_contact')->where('contact_id',$id)->delete();
         Opportunities::where('contact_id',$id)->delete();
         $data->delete();
+        if(!$request->ajax())
+         {
+             return redirect()->back();
+         }
         return true;
     }
     public function contactCounter(Request $request)

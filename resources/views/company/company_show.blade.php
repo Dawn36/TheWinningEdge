@@ -158,7 +158,11 @@
                                             <tr>
                                                 <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{$a}}</a></td>
                                                 <td><a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-bolder text-gray-800 text-hover-primary mb-1">{{ucwords($contact[$i]->first_name)}} {{ucwords($contact[$i]->last_name)}}</a></td>
-                                                <td>{{$contact[$i]->phone_number}}</td>
+                                                <td>
+                                                    <a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-normal text-gray-800 text-hover-primary mb-1"><span class="fw-bolder">{{$contact[$i]->phone_number == '' ? '' : "(D)"}} </span>{{$contact[$i]->phone_number == '' ? '' : $contact[$i]->phone_number}} </a>
+                                                    <br>
+                                                    <a href="{{route('contact.show',$contact[$i]->id)}}" class="fw-normal text-gray-800 text-hover-primary mb-1"><span class="fw-bolder">{{$contact[$i]->mobile_phone == '' ? '' : "(M)"}}</span>{{$contact[$i]->mobile_phone == '' ? '' : $contact[$i]->mobile_phone}} </a>
+                                                </td>
                                                 <td>{{$contact[$i]->email}}</td>
                                                 <td>{{DATE("m/d/Y",strtotime($contact[$i]->created_at))}}</td>
                                                 <td>
@@ -401,7 +405,7 @@
         });
     }
     function editContact(id) {
-        url = "{{route('contact.edit',':id')}}";
+        url = "{{route('contact_edit_not_ajax',':id')}}";
         url = url.replace(':id', id);
         $.ajax({
             type: 'GET',
