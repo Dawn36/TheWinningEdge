@@ -21,6 +21,8 @@
             <label class="required fw-bold fs-6 mb-2">Last Name</label>
             <input type="text"  name="last_name" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Last Name here." required/>
         </div>
+        <input name="company_id" value="{{$companyId}}" hidden/>
+        @if(!isset($companyId))
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Company Name</label>
             <select name="company_id"class="form-control form-control-solid rounded-3 js-example-tags" data-control="select2" data-dropdown-parent="#modalBodyLarge">
@@ -29,6 +31,7 @@
                 @endfor
             </select>
         </div>
+        @endif
         <div class="fv-row mb-7">
             <label class=" fw-bold fs-6 mb-2">Job Title</label>
             <input type="text"  name="job" class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Please Enter your Job Title here." />

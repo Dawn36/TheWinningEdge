@@ -87,13 +87,13 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $userId=Auth::user()->id;
 
         $company=Company::where('user_id',$userId)->get();
-
-        return view('contact/contact_create',compact('company'));
+        $companyId=$request->company_id;
+        return view('contact/contact_create',compact('company','companyId'));
     }
 
     /**
