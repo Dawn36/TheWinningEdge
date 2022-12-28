@@ -27,11 +27,9 @@ trait Logs {
         $to_email=$toEmail;
         $from_email = env('MAIL_FROM_ADDRESS');
         $subject = $subject;
-        $cc = env('CCEMAIL');
-            Mail::send("mail-template/$fileName", ['data' => $data], function ($message) use ($to_email, $from_email, $subject, $cc) {
+            Mail::send("mail-template/$fileName", ['data' => $data], function ($message) use ($to_email, $from_email, $subject) {
                 $message->to($to_email)
-                    ->subject($subject)
-                    ->cc($cc);
+                    ->subject($subject);
                 $message->from($from_email);
         }); 
 		return true;
