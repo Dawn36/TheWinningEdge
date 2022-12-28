@@ -224,7 +224,7 @@
                                                 <a href="#"
                                                     class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ ucfirst($task[$i]->description) }}
                                                     <span class="fw-normal"> {{ isset($task[$i]->first_name) ? '-' : '' }}
-                                                        {{ $task[$i]->first_name }} {{ $task[$i]->last_name }}</span>
+                                                        {{ $task[$i]->first_name }} {{ $task[$i]->last_name }} {{ $task[$i]->phone_number }} {{ $task[$i]->email }} {{ $task[$i]->company_name }}</span>
                                                 </a>
                                                 <span
                                                     class="text-muted fw-bold d-block">{{ Date('m/d/Y', strtotime($task[$i]->task_date)) }}</span>
