@@ -104,9 +104,9 @@ class DashboardController extends Controller
         $emailArr=json_encode(array_values($emailArr));
         $meetingArr=json_encode(array_values($meetingArr));
         // $task=Task::where('user_id',$userId)->where('task_status','open')->whereDate('task_date',date('Y-m-d'))->get();
-        // AND t.task_date='$date'
+        // AND date(t.task_date) <= '$date'
         $date=date('Y-m-d');
-        $task=DB::select(DB::raw("SELECT t.*,cc.`company_name`,c.`first_name`,c.`last_name`,c.`job`,c.`email`,c.`phone_number`,c.`mobile_phone`,c.`status` AS contact_status,c.`id` AS contact_id FROM `tasks` t LEFT JOIN `contacts` c ON t.`contact_id`=c.`id` LEFT JOIN `companies` cc ON cc.`id`=c.`companies_id` where t.user_id='$userId' AND t.task_status = 'open'  Order by t.`task_date` ASC"));
+        $task=DB::select(DB::raw("SELECT t.*,cc.`company_name`,c.`first_name`,c.`last_name`,c.`job`,c.`email`,c.`phone_number`,c.`mobile_phone`,c.`status` AS contact_status,c.`id` AS contact_id FROM `tasks` t LEFT JOIN `contacts` c ON t.`contact_id`=c.`id` LEFT JOIN `companies` cc ON cc.`id`=c.`companies_id` where t.user_id='$userId' AND t.task_status = 'open' AND date(t.task_date) <= '$date'  Order by t.`task_date` ASC"));
         return view('dashboard',compact('phoneCallArr','liveConversationArr','task','voiceMailArr','emailArr','meetingArr','userCount','contactCount','opportunitiesCount','emailTemplateCount','opportunitiesTarget','percentage','rpaPercentage','amount','phoneCallMonth','liveConversationMonth','voiceMailCount','emailCount','meetingCount','amountAllOver'));
     }
     public function rpaTarget()
