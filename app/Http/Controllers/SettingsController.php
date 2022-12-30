@@ -158,7 +158,7 @@ class SettingsController extends Controller
 
         $this->validate($request, [
             'old_password' => 'required',
-            'password' => 'confirmed|max:8|different:old_password',
+            'password' => 'confirmed|min:8|different:old_password',
         ]);
 
         if (Hash::check($request->old_password, $user->password)) {
