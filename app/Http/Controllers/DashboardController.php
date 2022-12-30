@@ -30,7 +30,7 @@ class DashboardController extends Controller
         $emailCount= DB::table('contact_history')->where('user_id',$userId)->where('status','email')->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->count();
         $meetingCount= DB::table('contact_history')->where('user_id',$userId)->where('status','meeting')->whereMonth('created_at', '=', $month)->whereYear('created_at', '=', $year)->count();
 
-        $emailTemplateCount=EmailTemplate::count();
+        $emailTemplateCount=EmailTemplate::where('user_id',$userId)->count();
         $opportunitiesCount=Opportunities::whereYear('created_at', '=', $year)->where('user_id',$userId)->count();
         $opportunitiesTarget= DB::table('opportunities_target')->where('user_id',$userId)->whereYear('created_at', '=', $year)->get();
         $amount=DB::select(DB::raw("SELECT SUM(contract_amount) AS amount FROM `opportunities` WHERE user_id='$userId' AND `status`='closed' AND YEAR(created_at)='$year'"));
