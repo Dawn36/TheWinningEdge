@@ -90,7 +90,7 @@
                         <tbody>
                             <tr>
                                 <td style="text-align: center; padding-bottom:25px">
-                                    <a href="https://thewinningedgeenterprises.com/"><img style="height: 110px" src="{{ asset('theme/assets/email_images/logo.png')}}" alt="logo"></a>
+                                    <a href="https://thewinningedgeenterprises.com/"><img style="height: 110px" src="{{ asset('theme/assets/email_images/logo.png')}}" alt=""></a>
                                 </td>
                             </tr>
                         </tbody>
