@@ -77,9 +77,6 @@
         img {
             -ms-interpolation-mode: bicubic;
         }
-        p{
-            color: #f5f6fa
-        }
     </style>
 
 </head>
@@ -102,21 +99,25 @@
                         <tbody style="text-align: center;">
                             <tr>
                                 <td style="padding: 30px 30px 15px 30px;">
-                                    <h2 style="font-size: 18px; color: #b79c52; font-weight: 600; margin: 0;">Reset Password
+                                    <h2 style="font-size: 18px; color: #b79c52; font-weight: 600; margin: 0;">TWE Password Reset Request
                                     </h2>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding: 0 30px 20px">
-                                    <p style="margin-bottom: 10px; margin-top: 1rem;">Hi {{ucwords($data['full_name'])}},</p>
-                                    <p style="margin-bottom: 10px;">A password reset has been requested from your email address <span style="color: #b79c52; text-decoration:none;word-break: break-all;">{{$data['email']}}</span>
+                                    <p style="margin-bottom: 10px; margin-top: 1rem;">{{ucwords($data['full_name'])}},</p>
+                                    <p style="margin-bottom: 10px;">A password reset has been requested from your email address: <span style="color: #b79c52; text-decoration:none;word-break: break-all;">{{$data['email']}}</span> and this new password has been created for you:
+                                        <span style="color: #b79c52; text-decoration:none;word-break: break-all;">{{$data['new_password']}}</span>
                                     </p>
-                                    <p style="margin-bottom: 10px;">A new password has been created for you <span style="color: #b79c52; text-decoration:none;word-break: break-all;">{{$data['new_password']}}</span>
-                                    </p>
-                                    <p style="margin-bottom: 10px;">You are requested to sign in again with the above password and from your settings change the password.</p>
-                                    <a href="https://app.thewinningedgeenterprises.com/login" style="margin-top: 1rem;background-color:#b79c52;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 30px">Reset
-                                        Password</a>
-                                    <p style="margin-top: 1.5rem;">Make sure not to share your Password with anyone for the safety of your privacy.</p>
+                                    <p style="margin-bottom: 10px;">Please access the CRM and use your new password to log in and update your Account Settings.</p>
+                                    <a href="https://app.thewinningedgeenterprises.com/login" style="margin-top: 1rem;background-color:#b79c52;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 30px">Access CRM</a>
+                                    <p style="margin-top: 1.5rem;">Make sure you do not share your Password with anyone for the safety of your data.</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px 30px 0;">
+                                    <p style="margin-bottom: 10px;">Happy Selling!</p>
+                                    <p style="margin-bottom: 10px;">The Winning Edge Team</p>
                                 </td>
                             </tr>
                             <tr>

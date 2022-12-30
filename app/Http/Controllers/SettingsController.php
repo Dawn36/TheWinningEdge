@@ -169,7 +169,7 @@ class SettingsController extends Controller
 
             $request->session()->flash('success', 'Password changed');
             $data['full_name']=$user->first_name." ".$user->last_name;
-            $subject='Change Password';
+            $subject='TWE Password Reset';
             $fileName='password-reset-success';
             $toEmail = $user->email;
             $this->SendEmail($toEmail,$subject,$fileName,$data);

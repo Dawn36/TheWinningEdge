@@ -108,11 +108,8 @@
                             <tr>
                                 <td style="padding: 0 30px 20px">
                                     <p style="margin-bottom: 10px; margin-top: 1rem;">Hi {{ucwords($data['full_name'])}},</p>
-                                    <p style="margin-bottom: 10px;">You are receiving this email because you have registered on our Platform.</p>
+                                    <p style="margin-bottom: 10px;">Thanks for registering for TWE, we’re excited to simplify your sales process and help you close more business!</p>
                                     <p style="margin-bottom: 10px;">Click the link below to access your account.</p>
-                                    <p style="margin-bottom: 10px; margin-top: 1.5rem;">Your Login details are:</p>
-                                    <p style="margin-bottom: 10px; font-weight: 600;">Email: <span style="color:#b79c52; font-weight: 100; ">{{$data['email']}}</span></p>
-                                    <p style="margin-bottom: 10px; font-weight: 600;">Password: <span style="color:#b79c52; font-weight: 100; ">{{$data['password']}}</span></p>
                                     <a href="https://app.thewinningedgeenterprises.com/login" style="margin-top: 1rem;background-color:#b79c52;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 30px">Access
                                         CRM</a>
                                 </td>
@@ -121,8 +118,15 @@
                                 <td style="padding: 0 30px">
                                     <h4 style="font-size: 15px; color: #b79c52; font-weight: 600; margin: 0; text-transform: uppercase; margin-bottom: 10px">
                                         or</h4>
-                                    <p style="margin-bottom: 10px;">If the button above does not work, paste this link into your web browser:</p>
+                                    <p>If the button above does not work, paste this link into your web browser:</p>
                                     <a href="https://app.thewinningedgeenterprises.com/login" style="color: #b79c52; text-decoration:none;word-break: break-all;">https://app.thewinningedgeenterprises.com/login</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 20px 30px 0;">
+                                    <p style="margin-bottom: 10px;">Don’t forget to follow us on LinkedIn & Subscribe to our Youtube Channel for actionable Sales Strategies using the links below!</p>
+                                    <p style="margin-bottom: 10px;">Happy Selling!</p>
+                                    <p style="margin-bottom: 10px;">The Winning Edge Team</p>
                                 </td>
                             </tr>
                             <tr>

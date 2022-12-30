@@ -71,7 +71,7 @@ class AuthenticatedSessionController extends Controller
             $userData=User::where('email', $request->email)->get();
             $userData=User::find($userData[0]->id);
             $toEmail = $request->email;
-              $subject = 'REQUEST FOR PASSWORD RESET';
+              $subject = 'TWE Password Reset Request';
               $newPassword=$this->randomPassword();
          
               $userData->fill([

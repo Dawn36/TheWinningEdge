@@ -69,7 +69,7 @@ class RegisteredUserController extends Controller
         $data['full_name']=$request->first_name." ".$request->last_name;
         $data['password']=$request->password;
         $data['email']=$request->email;
-        $subject='Welcome To The Winning Edge Enterprises';
+        $subject=$data['full_name'].', Welcome to TWE!';
         $fileName='email-confirm';
         $toEmail = $request->email;
         $this->SendEmail($toEmail,$subject,$fileName,$data);

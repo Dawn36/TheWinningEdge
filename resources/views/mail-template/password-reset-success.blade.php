@@ -77,9 +77,6 @@
         img {
             -ms-interpolation-mode: bicubic;
         }
-        p{
-            color: #f5f6fa
-        }
     </style>
 
 </head>
@@ -102,14 +99,14 @@
                         <tbody style="text-align: center;">
                             <tr>
                                 <td style="padding: 30px 30px 15px 30px;">
-                                    <h2 style="font-size: 18px; color: #b79c52; font-weight: 600; margin: 0;">Password Reseted
+                                    <h2 style="font-size: 18px; color: #b79c52; font-weight: 600; margin: 0;">TWE Password Reset
                                     </h2>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding: 0 30px 20px">
                                     <p style="margin-bottom: 10px; margin-top: 1rem;">Hi {{ucwords($data['full_name'])}},</p>
-                                    <p style="margin-bottom: 10px;">You Successfully Reseted Your Password. Thanks For being with Us.</p>
+                                    <p style="margin-bottom: 10px;">Your password has been successfully reset.</p>
                                 </td>
                             </tr>
                             <tr>
@@ -151,3 +148,10 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
