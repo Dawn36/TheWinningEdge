@@ -211,7 +211,7 @@
                             <div class="card-body pt-2">
                                 {{-- <div class="pe-3" style="height: 239px; overflow: auto;"> --}}
                                 {{-- <div class="pe-3 h-lg-239px" style="overflow: auto;"> --}}
-                                <div class="pe-3 h-lg-420px h-xxl-239px" style="overflow: auto;">
+                                <div class="pe-3 h-lg-410px h-xxl-233px" style="overflow: auto;">
                                     @for ($i = 0; $i < count($task); $i++)
                                         <div class="d-flex align-items-center mb-6">
                                             <span class="bullet bullet-vertical h-40px"
