@@ -224,7 +224,9 @@
                                                 <a href="#"
                                                     class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ ucfirst($task[$i]->description) }}
                                                     <span class="fw-normal"> {{ isset($task[$i]->first_name) ? '-' : '' }}
-                                                        {{ $task[$i]->first_name }} {{ $task[$i]->last_name }} {{ $task[$i]->phone_number }} {{ $task[$i]->email }} {{ $task[$i]->company_name }}</span>
+                                                        {{ $task[$i]->first_name }} {{ $task[$i]->last_name }}
+                                                        {{ $task[$i]->phone_number }} {{ $task[$i]->email }}
+                                                        {{ $task[$i]->company_name }}</span>
                                                 </a>
                                                 <span
                                                     class="text-muted fw-bold d-block">{{ Date('m/d/Y', strtotime($task[$i]->task_date)) }}</span>
@@ -452,6 +454,162 @@
     <script>
         $(document).ready(function() {
             // dashboard_chart_1
+            // var element = document.getElementById("dashboard_chart_1");
+
+            // var height = parseInt(KTUtil.css(element, "height"));
+            // var labelColor = KTUtil.getCssVariableValue("--bs-gray-500");
+            // var borderColor = KTUtil.getCssVariableValue("--bs-gray-200");
+            // var primaryColor = KTUtil.getCssVariableValue("--bs-primary");
+            // var secondaryColor = KTUtil.getCssVariableValue("--bs-gray-400");
+            // var warningColor = KTUtil.getCssVariableValue("--bs-warning");
+            // var infoColor = KTUtil.getCssVariableValue("--bs-info");
+            // var successColor = KTUtil.getCssVariableValue("--bs-success");
+
+            // if (!element) {
+            //     return;
+            // }
+
+            // var options = {
+            //     series: [{
+            //             name: "# Of Phone Calls",
+            //             data: <?php echo $phoneCallArr; ?>,
+            //         },
+            //         {
+            //             name: "# Of Live Conversations",
+            //             data: <?php echo $liveConversationArr; ?>,
+            //         },
+            //         {
+            //             name: "# Of Voicemails",
+            //             data: <?php echo $voiceMailArr; ?>,
+            //         },
+            //         {
+            //             name: "# Of Emails",
+            //             data: <?php echo $emailArr; ?>,
+            //         },
+            //         {
+            //             name: "# Of Meetings",
+            //             data: <?php echo $meetingArr; ?>,
+            //         },
+            //     ],
+            //     chart: {
+            //         fontFamily: "inherit",
+            //         type: "bar",
+            //         height: height,
+            //         toolbar: {
+            //             show: false,
+            //         },
+            //     },
+            //     plotOptions: {
+            //         bar: {
+            //             horizontal: false,
+            //             columnWidth: ["75%"],
+            //             endingShape: "rounded",
+            //             borderRadius: 5,
+            //         },
+            //     },
+            //     legend: {
+            //         // show: false
+            //     },
+            //     dataLabels: {
+            //         enabled: false,
+            //     },
+            //     stroke: {
+            //         show: true,
+            //         width: 1,
+            //         // colors: ['transparent']
+            //     },
+            //     xaxis: {
+            //         categories: [
+            //             "Jan",
+            //             "Feb",
+            //             "Mar",
+            //             "Apr",
+            //             "May",
+            //             "Jun",
+            //             "Jul",
+            //             "Aug",
+            //             "Sep",
+            //             "Oct",
+            //             "Nov",
+            //             "Dec",
+            //         ],
+            //         axisBorder: {
+            //             show: false,
+            //         },
+            //         axisTicks: {
+            //             show: false,
+            //         },
+            //         labels: {
+            //             style: {
+            //                 colors: labelColor,
+            //                 fontSize: "12px",
+            //             },
+            //         },
+            //     },
+            //     yaxis: {
+            //         labels: {
+            //             style: {
+            //                 colors: labelColor,
+            //                 fontSize: "12px",
+            //             },
+            //         },
+            //     },
+            //     fill: {
+            //         opacity: 0.6,
+            //     },
+            //     states: {
+            //         normal: {
+            //             filter: {
+            //                 type: "none",
+            //                 value: 0,
+            //             },
+            //         },
+            //         hover: {
+            //             filter: {
+            //                 type: "none",
+            //                 value: 0,
+            //             },
+            //         },
+            //         active: {
+            //             allowMultipleDataPointsSelection: false,
+            //             filter: {
+            //                 type: "none",
+            //                 value: 0,
+            //             },
+            //         },
+            //     },
+            //     tooltip: {
+            //         style: {
+            //             fontSize: "12px",
+            //         },
+            //         y: {
+            //             formatter: function(val) {
+            //                 return val;
+            //             },
+            //         },
+            //     },
+            //     colors: [
+            //         primaryColor,
+            //         secondaryColor,
+            //         warningColor,
+            //         infoColor,
+            //         successColor,
+            //     ],
+            //     grid: {
+            //         borderColor: borderColor,
+            //         strokeDashArray: 4,
+            //         yaxis: {
+            //             lines: {
+            //                 show: true,
+            //             },
+            //         },
+            //     },
+            // };
+
+            // var chart = new ApexCharts(element, options);
+            // chart.render();
+
+            // dashboard_chart_1 -- DUMMY DATA
             var element = document.getElementById("dashboard_chart_1");
 
             var height = parseInt(KTUtil.css(element, "height"));
@@ -470,23 +628,23 @@
             var options = {
                 series: [{
                         name: "# Of Phone Calls",
-                        data: <?php echo $phoneCallArr; ?>,
+                        data: ["76", "85", "101", "58", "76", "85", "101", "98", "57", "56", "61", "58"],
                     },
                     {
                         name: "# Of Live Conversations",
-                        data: <?php echo $liveConversationArr; ?>,
+                        data: [44, 55, 57, 56, 61, 58, 56, 85, 101, 98, 87, 105],
                     },
                     {
                         name: "# Of Voicemails",
-                        data: <?php echo $voiceMailArr; ?>,
+                        data: [44, 55, 57, 56, 21, 58, 66, 85, 101, 56, 61, 58],
                     },
                     {
                         name: "# Of Emails",
-                        data: <?php echo $emailArr; ?>,
+                        data: [44, 55, 57, 56, 41, 58, 96, 85, 101, 98, 87, 105],
                     },
                     {
                         name: "# Of Meetings",
-                        data: <?php echo $meetingArr; ?>,
+                        data: [44, 55, 57, 56, 31, 58, 86, 56, 61, 58, 87, 105],
                     },
                 ],
                 chart: {
@@ -582,7 +740,7 @@
                     },
                     y: {
                         formatter: function(val) {
-                            return val;
+                            return "$" + val + " thousands";
                         },
                     },
                 },
@@ -606,8 +764,6 @@
 
             var chart = new ApexCharts(element, options);
             chart.render();
-
-
         });
         var quill = new Quill("#kt_forms_widget_1_editor", {
             modules: {
