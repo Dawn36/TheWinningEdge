@@ -10,7 +10,7 @@ background-image: url('{{ asset('theme/assets/media/logos/bg5.jpg')}}');backgrou
 background-attachment: fixed;  
 background-size: cover;">
     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse;margin:0 auto; padding:0; max-width:600px">
-        <tbody>
+        <tbody style="color: white;">
             <tr>
                 <td align="center" valign="center" style="text-align:center; padding: 40px">
                     <a href="{{env('URL')}}" rel="noopener" target="_blank">

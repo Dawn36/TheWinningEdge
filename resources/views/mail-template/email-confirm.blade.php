@@ -99,7 +99,7 @@
                         </tbody>
                     </table>
                     <table style="width:100%;max-width:620px;margin:0 auto;background-color:#00000036;">
-                        <tbody>
+                        <tbody style="color: white;">
                             <tr>
                                 <td style="padding: 30px 30px 15px 30px;">
                                     <h2 style="font-size: 18px; color: #b79c52; font-weight: 600; margin: 0;">Welcome To The Winning Edge Enterprises</h2>
@@ -138,7 +138,7 @@
                         </tbody>
                     </table>
                     <table style="width:100%;max-width:620px;margin:0 auto;">
-                        <tbody>
+                        <tbody style="color: white;">
                             <tr>
                                 <td style="text-align: center; padding:25px 20px 0;">
                                     <p style="font-size: 13px;">Copyright © 2022 The Winning Edge Enterprises. All rights reserved. <br> Made By <a style="color: #b79c52; text-decoration:none;" href="https://softixs.com/">Softixs</a>.</p>
