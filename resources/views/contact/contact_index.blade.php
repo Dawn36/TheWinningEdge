@@ -473,22 +473,22 @@ dt =  $('#contactTable').DataTable({
                                             <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">Update Contact Status</div>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Current Client',${row.id})">Current Client</a>
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Current Client',${row.id},this)">Current Client</a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Active Discussion',${row.id})">Active Discussion</a>
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Active Discussion',${row.id},this)">Active Discussion</a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Not Interested',${row.id})">Not Interested</a>
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Not Interested',${row.id},this)">Not Interested</a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Unsubscribed',${row.id})">Unsubscribed</a>
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Unsubscribed',${row.id},this)">Unsubscribed</a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Prospect',${row.id})">Prospect</a>
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('Prospect',${row.id},this)">Prospect</a>
                                         </div>
                                         <div class="menu-item px-3">
-                                            <a class="menu-link px-3" onclick="contactStatusUpdate('User',${row.id})">User</a>
+                                            <a class="menu-link px-3" onclick="contactStatusUpdate('User',${row.id},this)">User</a>
                                         </div>
                                     </div>
                                 </td>`;
@@ -929,8 +929,10 @@ function contactStatusAndOutreachUpdate()
         }
     });
 }
-function contactStatusUpdate(status,id)
+function contactStatusUpdate(status,id,obj)
 {
+    obj.parentElement.parentElement.parentElement.children[0].textContent=status;
+    obj.parentElement.parentElement.parentElement.children[1].classList.remove('show');
     var value = {
             status: status,
             contacts_id:id,
@@ -948,7 +950,7 @@ function contactStatusUpdate(status,id)
             //  contactArray = [];
             // console.log(result);
             // updateText2(result);
-            dt.draw();
+            // dt.draw();
 
         }
     });
