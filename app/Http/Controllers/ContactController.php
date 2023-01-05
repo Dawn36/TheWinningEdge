@@ -28,12 +28,12 @@ class ContactController extends Controller
     public function index()
     {
         $userId=Auth::user()->id;
-        $this->raw('phone_call','phone_call_count','phone_call_date');
-        $this->raw('live_conversation','live_conversation_count','live_conversation_date');
-        $this->raw('voice_mail','voice_mail_count','voice_mail_date');
-        $this->raw('email','email_count','email_date');
-        $this->raw('meeting','meeting_scheduled_count','meeting_scheduled_date');
-        dd('-- Updating ---');
+        // $this->raw('phone_call','phone_call_count','phone_call_date');
+        // $this->raw('live_conversation','live_conversation_count','live_conversation_date');
+        // $this->raw('voice_mail','voice_mail_count','voice_mail_date');
+        // $this->raw('email','email_count','email_date');
+        // $this->raw('meeting','meeting_scheduled_count','meeting_scheduled_date');
+        // dd('-- Updating ---');
         $tagsArr=DB::select(DB::raw("SELECT DISTINCT(t.`id`),t.`name` FROM `tags` t INNER JOIN `tags_contact` tc ON t.`id`=tc.`tags_id`"));
         return view('contact/contact_index',compact('tagsArr'));
     }
