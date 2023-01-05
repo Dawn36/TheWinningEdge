@@ -860,8 +860,11 @@ function Check(obj) {
         addContactCounter(status,contactsId,obj);
     }
     function addContactCounter(status,contactsId,obj) {
+        valueCount=obj.children[0].children[0].children[0].textContent;
+        valueCount++;
         var value = {
             status: status,
+            value: valueCount,
             contacts_id:contactsId
         };
         $.ajax({

@@ -17,7 +17,6 @@ use App\Jobs\ContactJob;
 use Carbon;
 use Datatables;
 use App\Exports\ExportContact;
-use SebastianBergmann\Template\Template;
 
 class ContactController extends Controller
 {
@@ -29,6 +28,12 @@ class ContactController extends Controller
     public function index()
     {
         $userId=Auth::user()->id;
+        // $this->raw('phone_call','phone_call_count','phone_call_date');
+        // $this->raw('live_conversation','live_conversation_count','live_conversation_date');
+        // $this->raw('voice_mail','voice_mail_count','voice_mail_date');
+        // $this->raw('email','email_count','email_date');
+        // $this->raw('meeting','meeting_scheduled_count','meeting_scheduled_date');
+        // dd('-- Updating ---');
         $tagsArr=DB::select(DB::raw("SELECT DISTINCT(t.`id`),t.`name` FROM `tags` t INNER JOIN `tags_contact` tc ON t.`id`=tc.`tags_id`"));
         return view('contact/contact_index',compact('tagsArr'));
     }
@@ -60,19 +65,9 @@ class ContactController extends Controller
         }
         $userId=Auth::user()->id;
        $contact= DB::select(DB::raw("SELECT DISTINCT(c.id),c.first_name,c.last_name,c.job,c.phone_number,c.mobile_phone,c.status,c.email as email_address,cc.company_name,
-        (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='email' AND contacts_id = c.id ) AS email,
-        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %h:%i:%s %p') as created_at FROM `contact_history` WHERE `status`='email' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_email,
-        (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='live_conversation' AND contacts_id = c.id ) AS live_conversation,
-        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %h:%i:%s %p') as created_at FROM `contact_history` WHERE `status`='live_conversation' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_live_conversation,
-        (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='voice_mail' AND contacts_id = c.id ) AS voic_mail,
-        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %h:%i:%s %p') as created_at FROM `contact_history` WHERE `status`='voice_mail' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_voic_mail,
-        
-        (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='phone_call' AND contacts_id = c.id ) AS phone_call,
-        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %h:%i:%s %p') as created_at FROM `contact_history` WHERE `status`='phone_call' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_phone_call,
-        
-        (SELECT COUNT(`status`) FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ) AS meeting,
-        (SELECT DATE_FORMAT(created_at, '%c/%d/%Y %h:%i:%s %p') as created_at FROM `contact_history` WHERE `status`='meeting' AND contacts_id = c.id ORDER BY id DESC LIMIT 1 ) AS last_meeting
-         
+       c.email_count AS email,DATE_FORMAT(c.email_date, '%c/%d/%Y %h:%i:%s %p') AS last_email,c.live_conversation_count AS live_conversation ,DATE_FORMAT(c.live_conversation_date, '%c/%d/%Y %h:%i:%s %p') AS last_live_conversation,
+       c.voice_mail_count AS voic_mail,DATE_FORMAT(c.voice_mail_date, '%c/%d/%Y %h:%i:%s %p') AS last_voic_mail,c.phone_call_count AS phone_call ,DATE_FORMAT(c.phone_call_date, '%c/%d/%Y %h:%i:%s %p') AS last_phone_call,
+       c.meeting_scheduled_count AS meeting,DATE_FORMAT(c.meeting_scheduled_date, '%c/%d/%Y %h:%i:%s %p') AS last_meeting
          FROM `contacts` c left join companies cc on cc.id=c.companies_id $dbWhere1
          WHERE c.user_id='$userId' $dbWhere  $dbWhere2 $dbWhere3 order by c.id desc
         "));
@@ -376,21 +371,31 @@ class ContactController extends Controller
             DB::table('tags_contact')->where('contact_id',$contactId[$i])->delete();
             DB::table('contact_note')->where('contact_id',$contactId[$i])->delete();
             Opportunities::where('contact_id',$contactId[$i])->delete();
+            Task::where('contact_id',$contactId[$i])->delete();
             $data->delete();
         }
         return redirect()->back();
     }
     public function destroy(int $id,Request $request)
     {
+        $url=explode("/",url()->previous());
         $data = Contact::find($id);
         DB::table('contact_history')->where('contacts_id',$id)->delete();
         DB::table('contact_note')->where('contact_id',$id)->delete();
         DB::table('tags_contact')->where('contact_id',$id)->delete();
+        Task::where('contact_id',$id)->delete();
         Opportunities::where('contact_id',$id)->delete();
         $data->delete();
         if(!$request->ajax())
          {
-             return redirect()->back();
+            if($url[3] == "company")
+            {
+                return redirect()->back();
+            }
+            else
+            {
+                return redirect()->route('contact.index');
+            }
          }
         return true;
     }
@@ -398,11 +403,38 @@ class ContactController extends Controller
     {
         $userId=Auth::user()->id;
         $status=$request->status;
+       
         // $mytime = Carbon\Carbon::now();
         // $date=$mytime->toDateTimeString();
         $date=Date("Y-m-d H:i:s");
         $contactsId=$request->contacts_id;
+        $count=$request->value;
+        $this->contactCountUpdate($status,$contactsId,$count,$date);
         DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$userId,$contactsId,$status,$date]);
+        return true;
+    }
+    public function contactCountUpdate($status,$contactsId,$count,$date)
+    {
+        if($status == 'phone_call')
+        {
+            contact::where('id', $contactsId)->update(['phone_call_count' => $count,'phone_call_date'=>$date]);
+        }
+        elseif($status == 'live_conversation')
+        {
+            contact::where('id', $contactsId)->update(['live_conversation_count' => $count,'live_conversation_date'=>$date]);
+        }
+        elseif($status == 'voice_mail')
+        {
+            contact::where('id', $contactsId)->update(['voice_mail_count' => $count,'voice_mail_date'=>$date]);
+        }
+        elseif($status == 'email')
+        {
+            contact::where('id', $contactsId)->update(['email_count' => $count,'email_date'=>$date]);
+        }
+        elseif($status == 'meeting')
+        {
+            contact::where('id', $contactsId)->update(['meeting_scheduled_count' => $count,'meeting_scheduled_date'=>$date]);
+        }
         return true;
     }
     public function contactCounterDelete($id)
@@ -512,6 +544,33 @@ class ContactController extends Controller
                 // $date=$mytime->toDateTimeString();
                 $date=Date("Y-m-d H:i:s");
                 $contactsId=$contactId[$i];
+                if($status == 'phone_call')
+                {
+                    $contact=contact::find($contactsId);
+                    $count=$contact->phone_call_count;
+                }
+                elseif($status == 'live_conversation')
+                {
+                    $contact=contact::find($contactsId);
+                    $count=$contact->live_conversation_count;
+                }
+                elseif($status == 'voice_mail')
+                {
+                    $contact=contact::find($contactsId);
+                    $count=$contact->voice_mail_count;
+                }
+                elseif($status == 'email')
+                {
+                    $contact=contact::find($contactsId);
+                    $count=$contact->email_count;
+                }
+                elseif($status == 'meeting')
+                {
+                    $contact=contact::find($contactsId);
+                    $count=$contact->meeting_scheduled_count;
+                }
+                $count++;
+                $this->contactCountUpdate($status,$contactsId,$count,$date);
                 DB::insert('insert into contact_history (user_id,contacts_id,status,created_at) values(?,?,?,?)',[$userId,$contactsId,$status,$date]);
             }
             
@@ -563,6 +622,25 @@ class ContactController extends Controller
         $conatact->status=$request->status;
         $conatact->save();
         return true;
-
+    }
+    public function raw($status,$statusCount,$statusDate)
+    {
+        $contact=DB::select(DB::raw("SELECT 
+        id,
+          (SELECT 
+            COUNT(contacts_id) 
+          FROM
+            `contact_history` 
+          WHERE STATUS = '$status' AND contacts_id = c.id) AS contact_count, 
+          (SELECT 
+            created_at
+          FROM
+            `contact_history` 
+          WHERE STATUS = '$status' AND contacts_id = c.id ORDER BY id DESC LIMIT 1) AS contact_date
+        FROM
+          `contacts` c HAVING contact_count != '0'"));
+          for ($i=0; $i < count($contact) ; $i++) { 
+              $new=contact::where('id', $contact[$i]->id)->update([$statusCount => $contact[$i]->contact_count,$statusDate=>$contact[$i]->contact_date]);
+            }
     }
 }

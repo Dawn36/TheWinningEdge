@@ -67,9 +67,40 @@ class ContactImport implements ToModel, WithHeadingRow
             "linked_in_url" => $row['linkedin_contact_profile_url'],
             "user_id" => $userId,
         ]);
+        $contactId=$contact->id;
+        $this->tags($tags,$contactId,$userId);
+        return $contact;
+    }
+    elseif($row['email_address'] == null)
+    {
+        $contact=Contact::create([
+            "last_name" => $row['last_name'],
+            "first_name" => $row['first_name'],
+            "job" => $row['job_title'],
+            "phone_number" => $row['direct_phone_number'],
+            "mobile_phone" => $row['mobile_phone'],
+            "status"=>$status,
+            "companies_id" => $companyId,
+            "linked_in_url" => $row['linkedin_contact_profile_url'],
+            "user_id" => $userId,
+        ]);
+        $contactId=$contact->id;
+        $this->tags($tags,$contactId,$userId);
+        return $contact;
+    }
+        
+    }
+    public function rules(): array
+    {
+        return [
+            '1' => 'unique:users,email',
+        ];
+    }
+    public function tags($tags,$contactId,$userId)
+    {
         if(isset($tags))
         {
-            DB::table('tags_contact')->where('contact_id',$contact->id)->delete();
+            DB::table('tags_contact')->where('contact_id',$contactId)->delete();
             for ($i=0; $i < count($tags); $i++) { 
                 $tagsData=DB::table('tags')->where('user_id',$userId)->where('name',strtolower($tags[$i]->value))->get();
                 if(count($tagsData) == 0)
@@ -80,29 +111,19 @@ class ContactImport implements ToModel, WithHeadingRow
                         'created_at' => Date("Y-m-d"),
                     ]);
                     DB::table('tags_contact')->insertGetId([
-                        'contact_id' => $contact->id,
+                        'contact_id' => $contactId,
                         'tags_id' => $newTagId,
                     ]);
                 }
                 else
                 {
                     DB::table('tags_contact')->insertGetId([
-                        'contact_id' => $contact->id,
+                        'contact_id' => $contactId,
                         'tags_id' => $tagsData[0]->id,
                     ]);
                 }
             }
         }
-
-        return $contact;
-
-    }
-        
-    }
-    public function rules(): array
-    {
-        return [
-            '1' => 'unique:users,email',
-        ];
+        return true;
     }
 }

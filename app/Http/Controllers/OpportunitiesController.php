@@ -29,7 +29,8 @@ class OpportunitiesController extends Controller
          FROM `opportunities` o 
         LEFT JOIN `contacts` c ON o.`contact_id` = c.`id`
         LEFT JOIN `companies` cc ON cc.`id`=o.`company_id` 
-        WHERE YEAR(o.created_at) = '$year' AND o.`user_id` = $userId"));
+        WHERE  o.`user_id` = $userId"));
+        // YEAR(o.created_at) = '$year' AND
         $opportunitiesTarget= DB::table('opportunities_target')->where('user_id',$userId)->whereYear('created_at', '=', $year)->get();
         $amount=DB::select(DB::raw("SELECT SUM(contract_amount) AS amount FROM `opportunities` WHERE user_id='$userId' AND `status`='closed' AND YEAR(created_at)='$year'"));
         if(count($opportunitiesTarget) > 0)

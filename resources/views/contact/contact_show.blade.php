@@ -55,10 +55,32 @@
                                             <!--end::Svg Icon-->
                                         </span>
                                     </div>
-                                    <span data-bs-toggle="tooltip" data-bs-trigger="hover" title="Edit customer details">
-                                        <button class="btn btn-sm btn-light-primary"
+                                    <span data-bs-toggle="tooltip"  >
+                                        <button class="btn btn-sm btn-light-primary"  data-bs-toggle="tooltip" data-bs-original-title="Edit customer details"
                                             onclick="editContactNot('{{ $contact->id }}')">Edit</button>
+                                            <form  style="display: inline-block" method="POST" action="{{ route('contact.destroy', $contact->id) }}">
+                                                @method('DELETE')
+                                                @csrf
+                                            <button type="submit" class="btn btn-icon btn-sm btn-color-gray-400 btn-active-icon-danger me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete Customer">
+                                                <span class="svg-icon svg-icon-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                        height="24" viewBox="0 0 24 24"
+                                                        fill="none">
+                                                        <path
+                                                            d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z"
+                                                            fill="black"></path>
+                                                        <path opacity="0.5"
+                                                            d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z"
+                                                            fill="black"></path>
+                                                        <path opacity="0.5"
+                                                            d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z"
+                                                            fill="black"></path>
+                                                    </svg>
+                                                </span>
+                                            </button>
+                                            </form>
                                     </span>
+                                    
                                 </div>
                                 <!--end::Details toggle-->
                                 <div class="separator"></div>
@@ -1025,8 +1047,11 @@
         }
 
         function addContactCounter(status, contactsId, obj) {
+            valueCount = obj.children[0].children[0].children[0].textContent;
+            valueCount++;
             var value = {
                 status: status,
+                value: valueCount,
                 contacts_id: contactsId
             };
             $.ajax({
