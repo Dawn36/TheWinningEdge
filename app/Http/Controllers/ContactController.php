@@ -125,7 +125,7 @@ class ContactController extends Controller
             $data = Company::create([
                 'company_name' => $request->company_id,
                 'user_id'=>Auth::user()->id,
-                'created_at' => date("Y-m-d h:i:s"),
+                'created_at' => date("Y-m-d H:i:s"),
                 'created_by' => Auth::user()->id,
             ]);
             $companyId=$data->id;
@@ -143,7 +143,7 @@ class ContactController extends Controller
             'companies_id'=>$companyId,
             'linked_in_url'=>$request->linked_in_url,
             'user_id'=>$userId,
-            'created_at' => date("Y-m-d h:i:s"),
+            'created_at' => date("Y-m-d H:i:s"),
             'created_by' => Auth::user()->id,
         ]);
         if(isset($request->tags))
