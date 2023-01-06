@@ -30,7 +30,7 @@ trait Logs {
             Mail::send("mail-template/$fileName", ['data' => $data], function ($message) use ($to_email, $from_email, $subject) {
                 $message->to($to_email)
                     ->subject($subject);
-                $message->from($from_email);
+                $message->from($from_email,'TWE Sales CRM');
         }); 
 		return true;
 
